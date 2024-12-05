@@ -2,6 +2,9 @@ using _1___Entities;
 using _2___Servicios.Interfaces;
 using _3___Data;
 using _3___Repository;
+using CortezosWorkshop.Configuracion;
+using CortezosWorkshop.Maps;
+using CortezosWorkshop.Precios;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
@@ -39,6 +42,9 @@ namespace CortezosWorkshop
 
             // INYECCIÓN DE FORMULARIOS.
             services.AddTransient<FormMain>();
+            services.AddTransient<FormMapsMain>();
+            services.AddTransient<FormPreciosMain>();
+            services.AddTransient<FormConfigMain>();
         }
 
     }
