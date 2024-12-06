@@ -2,21 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>_2___Servicios</RootNamespace>
+    <RootNamespace>_3_Presenters</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\1-Entities\1-Entities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\OreMapServices\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <ProjectReference Include="..\2-Services\2-Services.csproj" />
   </ItemGroup>
 
 </Project>

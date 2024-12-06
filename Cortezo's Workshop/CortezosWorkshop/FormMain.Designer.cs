@@ -31,7 +31,10 @@
             btn_precios = new Button();
             btn_mapas = new Button();
             btn_config = new Button();
-            label1 = new Label();
+            lbl_Titulo = new Label();
+            lbl_Tesoreria = new Label();
+            lbl_Oro = new Label();
+            btn_addFunds = new Button();
             SuspendLayout();
             // 
             // btn_precios
@@ -64,21 +67,51 @@
             btn_config.UseVisualStyleBackColor = true;
             btn_config.Click += btn_config_Click;
             // 
-            // label1
+            // lbl_Titulo
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(332, 39);
-            label1.Name = "label1";
-            label1.Size = new Size(135, 15);
-            label1.TabIndex = 3;
-            label1.Text = "CORTEZO'S WORKSHOP";
+            lbl_Titulo.AutoSize = true;
+            lbl_Titulo.Location = new Point(332, 39);
+            lbl_Titulo.Name = "lbl_Titulo";
+            lbl_Titulo.Size = new Size(135, 15);
+            lbl_Titulo.TabIndex = 3;
+            lbl_Titulo.Text = "CORTEZO'S WORKSHOP";
+            // 
+            // lbl_Tesoreria
+            // 
+            lbl_Tesoreria.AutoSize = true;
+            lbl_Tesoreria.Location = new Point(245, 390);
+            lbl_Tesoreria.Name = "lbl_Tesoreria";
+            lbl_Tesoreria.Size = new Size(56, 15);
+            lbl_Tesoreria.TabIndex = 4;
+            lbl_Tesoreria.Text = "Tesorería:";
+            // 
+            // lbl_Oro
+            // 
+            lbl_Oro.AutoSize = true;
+            lbl_Oro.Location = new Point(357, 390);
+            lbl_Oro.Name = "lbl_Oro";
+            lbl_Oro.Size = new Size(0, 15);
+            lbl_Oro.TabIndex = 5;
+            // 
+            // btn_addFunds
+            // 
+            btn_addFunds.Location = new Point(461, 383);
+            btn_addFunds.Name = "btn_addFunds";
+            btn_addFunds.Size = new Size(92, 22);
+            btn_addFunds.TabIndex = 6;
+            btn_addFunds.Text = "Editar fondos";
+            btn_addFunds.UseVisualStyleBackColor = true;
+            btn_addFunds.Click += btn_addFunds_Click;
             // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(label1);
+            Controls.Add(btn_addFunds);
+            Controls.Add(lbl_Oro);
+            Controls.Add(lbl_Tesoreria);
+            Controls.Add(lbl_Titulo);
             Controls.Add(btn_config);
             Controls.Add(btn_mapas);
             Controls.Add(btn_precios);
@@ -87,6 +120,7 @@
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cortezo's Workshop";
+            Load += FormMain_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -96,6 +130,9 @@
         private Button btn_precios;
         private Button btn_mapas;
         private Button btn_config;
-        private Label label1;
+        private Label lbl_Titulo;
+        private Label lbl_Tesoreria;
+        private Label lbl_Oro;
+        private Button btn_addFunds;
     }
 }

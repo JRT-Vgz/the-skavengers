@@ -11,8 +11,8 @@ using _3___Data;
 namespace _3___Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241204182544_InitDB2")]
-    partial class InitDB2
+    [Migration("20241206105816_InitDB")]
+    partial class InitDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,31 +23,6 @@ namespace _3___Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("_3___Data.Models.CraftingStatsModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("IdMaterial")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdMaterial");
-
-                    b.ToTable("CraftingStats");
-                });
 
             modelBuilder.Entity("_3___Data.Models.MaterialModel", b =>
                 {
@@ -89,15 +64,24 @@ namespace _3___Data.Migrations
                     b.ToTable("OreMaps");
                 });
 
-            modelBuilder.Entity("_3___Data.Models.CraftingStatsModel", b =>
+            modelBuilder.Entity("_3___Data.Models.ShopStatsModel", b =>
                 {
-                    b.HasOne("_3___Data.Models.MaterialModel", "Material")
-                        .WithMany()
-                        .HasForeignKey("IdMaterial")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("Material");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShopStats");
                 });
 #pragma warning restore 612, 618
         }

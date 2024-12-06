@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace _3___Repository
 {
-    public class OreMapRepository : IRepository<OreMap>
+    public class OreMapsRepository : IRepository<OreMap>
     {
         private readonly AppDbContext _context;
-        public OreMapRepository(AppDbContext context)
+        public OreMapsRepository(AppDbContext context)
         {
             _context = context;
         }
@@ -20,5 +20,15 @@ namespace _3___Repository
                 Quantity = o.Quantity,
                 TotalOre = o.TotalOre
             }).ToListAsync();
+
+        public Task<OreMap> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(OreMap entity, int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -28,22 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            btn_menu_principal = new Button();
             SuspendLayout();
+            // 
+            // btn_menu_principal
+            // 
+            btn_menu_principal.Location = new Point(12, 12);
+            btn_menu_principal.Name = "btn_menu_principal";
+            btn_menu_principal.Size = new Size(99, 23);
+            btn_menu_principal.TabIndex = 1;
+            btn_menu_principal.Text = "Menú principal";
+            btn_menu_principal.UseVisualStyleBackColor = true;
+            btn_menu_principal.Click += btn_menu_principal_Click;
             // 
             // FormPreciosMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btn_menu_principal);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "FormPreciosMain";
-            ShowInTaskbar = false;
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.Manual;
             Text = "Precios";
+            FormClosing += Form_Closing;
             ResumeLayout(false);
         }
 
         #endregion
+
+        private Button btn_menu_principal;
     }
 }

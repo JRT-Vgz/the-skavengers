@@ -13,9 +13,30 @@ namespace CortezosWorkshop.Configuracion
 {
     public partial class FormConfigMain : Form
     {
-        public FormConfigMain()
+        private readonly IServiceProvider _serviceProvider;
+        public FormConfigMain(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            _serviceProvider = serviceProvider;
+        }
+
+        // -------------------------------------------------------------------------------------------------------
+        // --------------------------------------------- NAVEGACIÓN ----------------------------------------------
+        // -------------------------------------------------------------------------------------------------------
+        private void Form_Closing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void btn_menu_principal_Click(object sender, EventArgs e)
+        {
+            var frmMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
+            frmMain.Location = new Point(this.Location.X, this.Location.Y); ;
+
+            this.Hide();
         }
     }
 }

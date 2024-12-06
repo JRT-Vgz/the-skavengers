@@ -21,31 +21,6 @@ namespace _3___Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("_3___Data.Models.CraftingStatsModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("IdMaterial")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdMaterial");
-
-                    b.ToTable("CraftingStats");
-                });
-
             modelBuilder.Entity("_3___Data.Models.MaterialModel", b =>
                 {
                     b.Property<int>("Id")
@@ -86,15 +61,24 @@ namespace _3___Data.Migrations
                     b.ToTable("OreMaps");
                 });
 
-            modelBuilder.Entity("_3___Data.Models.CraftingStatsModel", b =>
+            modelBuilder.Entity("_3___Data.Models.ShopStatsModel", b =>
                 {
-                    b.HasOne("_3___Data.Models.MaterialModel", "Material")
-                        .WithMany()
-                        .HasForeignKey("IdMaterial")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("Material");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShopStats");
                 });
 #pragma warning restore 612, 618
         }

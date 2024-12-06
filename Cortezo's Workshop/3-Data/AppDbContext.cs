@@ -9,6 +9,6 @@ namespace _3___Data
 
         public DbSet<OreMapModel> OreMaps { get; set; }
         public DbSet<MaterialModel> Materials { get; set; }
-        public DbSet<CraftingStatsModel> CraftingStats { get; set; }
+        public DbSet<ShopStatsModel> ShopStats { get; set; }
     }
 }
