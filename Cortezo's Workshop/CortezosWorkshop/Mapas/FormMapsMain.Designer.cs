@@ -36,6 +36,9 @@
             txt_materialRecogido = new TextBox();
             btn_addMap = new Button();
             cbo_mapQuantity = new ComboBox();
+            lbl_preciosRecomendados = new Label();
+            cbo_oreMapsPrices = new ComboBox();
+            txt_oreMapPrice = new TextBox();
             SuspendLayout();
             // 
             // btn_menu_principal
@@ -51,7 +54,7 @@
             // lbl_addMap
             // 
             lbl_addMap.AutoSize = true;
-            lbl_addMap.Location = new Point(93, 89);
+            lbl_addMap.Location = new Point(123, 57);
             lbl_addMap.Name = "lbl_addMap";
             lbl_addMap.Size = new Size(78, 15);
             lbl_addMap.TabIndex = 1;
@@ -60,7 +63,7 @@
             // lbl_x
             // 
             lbl_x.AutoSize = true;
-            lbl_x.Location = new Point(236, 94);
+            lbl_x.Location = new Point(266, 62);
             lbl_x.Name = "lbl_x";
             lbl_x.Size = new Size(13, 15);
             lbl_x.TabIndex = 3;
@@ -68,8 +71,9 @@
             // 
             // cbo_oreMaps
             // 
+            cbo_oreMaps.DropDownStyle = ComboBoxStyle.DropDownList;
             cbo_oreMaps.FormattingEnabled = true;
-            cbo_oreMaps.Location = new Point(264, 86);
+            cbo_oreMaps.Location = new Point(294, 54);
             cbo_oreMaps.Name = "cbo_oreMaps";
             cbo_oreMaps.Size = new Size(150, 23);
             cbo_oreMaps.TabIndex = 2;
@@ -77,7 +81,7 @@
             // lbl_materialRecogido
             // 
             lbl_materialRecogido.AutoSize = true;
-            lbl_materialRecogido.Location = new Point(420, 89);
+            lbl_materialRecogido.Location = new Point(450, 57);
             lbl_materialRecogido.Name = "lbl_materialRecogido";
             lbl_materialRecogido.Size = new Size(103, 15);
             lbl_materialRecogido.TabIndex = 5;
@@ -85,7 +89,7 @@
             // 
             // txt_materialRecogido
             // 
-            txt_materialRecogido.Location = new Point(529, 86);
+            txt_materialRecogido.Location = new Point(559, 54);
             txt_materialRecogido.Name = "txt_materialRecogido";
             txt_materialRecogido.Size = new Size(100, 23);
             txt_materialRecogido.TabIndex = 3;
@@ -95,7 +99,7 @@
             // 
             // btn_addMap
             // 
-            btn_addMap.Location = new Point(673, 86);
+            btn_addMap.Location = new Point(703, 54);
             btn_addMap.Name = "btn_addMap";
             btn_addMap.Size = new Size(75, 23);
             btn_addMap.TabIndex = 4;
@@ -105,17 +109,50 @@
             // 
             // cbo_mapQuantity
             // 
+            cbo_mapQuantity.DropDownStyle = ComboBoxStyle.DropDownList;
             cbo_mapQuantity.FormattingEnabled = true;
-            cbo_mapQuantity.Location = new Point(177, 86);
+            cbo_mapQuantity.Location = new Point(207, 54);
             cbo_mapQuantity.Name = "cbo_mapQuantity";
             cbo_mapQuantity.Size = new Size(53, 23);
             cbo_mapQuantity.TabIndex = 1;
+            // 
+            // lbl_preciosRecomendados
+            // 
+            lbl_preciosRecomendados.AutoSize = true;
+            lbl_preciosRecomendados.Location = new Point(529, 185);
+            lbl_preciosRecomendados.Name = "lbl_preciosRecomendados";
+            lbl_preciosRecomendados.Size = new Size(130, 15);
+            lbl_preciosRecomendados.TabIndex = 6;
+            lbl_preciosRecomendados.Text = "Precios recomendados:";
+            // 
+            // cbo_oreMapsPrices
+            // 
+            cbo_oreMapsPrices.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbo_oreMapsPrices.FormattingEnabled = true;
+            cbo_oreMapsPrices.Location = new Point(466, 213);
+            cbo_oreMapsPrices.Name = "cbo_oreMapsPrices";
+            cbo_oreMapsPrices.Size = new Size(150, 23);
+            cbo_oreMapsPrices.TabIndex = 25;
+            cbo_oreMapsPrices.SelectedIndexChanged += cbo_oreMapsPrices_SelectedIndexChanged;
+            // 
+            // txt_oreMapPrice
+            // 
+            txt_oreMapPrice.Location = new Point(637, 213);
+            txt_oreMapPrice.Name = "txt_oreMapPrice";
+            txt_oreMapPrice.Size = new Size(103, 23);
+            txt_oreMapPrice.TabIndex = 26;
+            txt_oreMapPrice.TextAlign = HorizontalAlignment.Center;
+            txt_oreMapPrice.KeyPress += txt_oreMapPrice_KeyPress;
+            txt_oreMapPrice.Leave += txt_oreMapPrice_Leave;
             // 
             // FormMapsMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(txt_oreMapPrice);
+            Controls.Add(cbo_oreMapsPrices);
+            Controls.Add(lbl_preciosRecomendados);
             Controls.Add(cbo_mapQuantity);
             Controls.Add(btn_addMap);
             Controls.Add(txt_materialRecogido);
@@ -145,5 +182,8 @@
         private TextBox txt_materialRecogido;
         private Button btn_addMap;
         private ComboBox cbo_mapQuantity;
+        private Label lbl_preciosRecomendados;
+        private ComboBox cbo_oreMapsPrices;
+        private TextBox txt_oreMapPrice;
     }
 }

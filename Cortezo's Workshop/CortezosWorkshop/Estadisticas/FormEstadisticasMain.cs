@@ -8,18 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CortezosWorkshop.Configuracion
+namespace CortezosWorkshop.Estadisticas
 {
-    public partial class FormConfigMain : Form
+    public partial class FormEstadisticasMain : Form
     {
-        public FormConfigMain()
+        public FormEstadisticasMain()
         {
             InitializeComponent();
         }
 
-        // -------------------------------------------------------------------------------------------------------
-        // --------------------------------------- VOLVER A MENU PRINCIPAL ---------------------------------------
-        // -------------------------------------------------------------------------------------------------------
         private void Form_Closing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)

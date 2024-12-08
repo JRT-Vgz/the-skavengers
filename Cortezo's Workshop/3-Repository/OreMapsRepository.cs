@@ -18,12 +18,7 @@ namespace _3___Repository
         }
 
         public async Task<IEnumerable<OreMap>> GetAllAsync()
-            => await _context.OreMaps.Select(o => new OreMap
-            {
-                Name = o.Name,
-                Quantity = o.Quantity,
-                TotalOre = o.TotalOre
-            }).ToListAsync();
+            => await _context.OreMaps.Select(o => _mapper.Map<OreMap>(o)).ToListAsync();
 
         public async Task<OreMap> GetByIdAsync(int id)
         {
@@ -43,13 +38,14 @@ namespace _3___Repository
         {
             var oreMapModel = await _context.OreMaps.FindAsync(oreMap.Id);
 
-            oreMapModel.Name = oreMap.Name;
-            oreMapModel.Quantity = oreMap.Quantity;
-            oreMapModel.TotalOre = oreMap.TotalOre;
-            oreMapModel.RecommendedPrice = oreMap.RecommendedPrice;
+            _mapper.Map(oreMap, oreMapModel);
 
             _context.OreMaps.Attach(oreMapModel);
             _context.OreMaps.Entry(oreMapModel).State = EntityState.Modified;
+        }
+
+        public async Task SaveChanges()
+        {
             await _context.SaveChangesAsync();
         }
     }

@@ -4,12 +4,12 @@ using _2___Servicios.Interfaces;
 
 namespace _2___Servicios.Services.ShopStatServices
 {
-    public class SumToBeneficio
+    public class SumToBeneficioService
     {
         private readonly IRepository<ShopStat> _shopStatsRepository;
         private readonly ConfigurationService _configurationService;
 
-        public SumToBeneficio(IRepository<ShopStat> shopStatsRepository,
+        public SumToBeneficioService(IRepository<ShopStat> shopStatsRepository,
             ConfigurationService configurationService)
         {
             _shopStatsRepository = shopStatsRepository;
@@ -20,10 +20,17 @@ namespace _2___Servicios.Services.ShopStatServices
         {
             var shopStatBeneficio = await _shopStatsRepository.GetByNameAsync(
                 _configurationService.Configuration["Constants:_SHOPSTAT_BENEFICIO"]);
-            
-            shopStatBeneficio.Quantity += quantity;
 
+            shopStatBeneficio.Quantity += quantity;
             await _shopStatsRepository.UpdateAsync(shopStatBeneficio);
+
+            var shopStatOroTotal = await _shopStatsRepository.GetByNameAsync(
+                _configurationService.Configuration["Constants:_SHOPSTAT_ORO_TOTAL"]);
+
+            shopStatOroTotal.Quantity += quantity;
+            await _shopStatsRepository.UpdateAsync(shopStatOroTotal);
+
+            await _shopStatsRepository.SaveChanges();
         }
     }
 }

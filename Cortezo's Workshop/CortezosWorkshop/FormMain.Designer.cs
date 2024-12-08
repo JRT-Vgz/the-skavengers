@@ -36,11 +36,13 @@
             lbl_Oro = new Label();
             btn_addFunds = new Button();
             btn_beneficio = new Button();
+            btn_portapapeles = new Button();
+            btn_estadisticas = new Button();
             SuspendLayout();
             // 
             // btn_precios
             // 
-            btn_precios.Location = new Point(280, 156);
+            btn_precios.Location = new Point(282, 106);
             btn_precios.Name = "btn_precios";
             btn_precios.Size = new Size(238, 33);
             btn_precios.TabIndex = 0;
@@ -50,7 +52,7 @@
             // 
             // btn_mapas
             // 
-            btn_mapas.Location = new Point(280, 222);
+            btn_mapas.Location = new Point(282, 172);
             btn_mapas.Name = "btn_mapas";
             btn_mapas.Size = new Size(238, 33);
             btn_mapas.TabIndex = 1;
@@ -60,7 +62,7 @@
             // 
             // btn_config
             // 
-            btn_config.Location = new Point(280, 287);
+            btn_config.Location = new Point(282, 237);
             btn_config.Name = "btn_config";
             btn_config.Size = new Size(238, 33);
             btn_config.TabIndex = 2;
@@ -114,11 +116,33 @@
             btn_beneficio.UseVisualStyleBackColor = true;
             btn_beneficio.Click += btn_beneficio_Click;
             // 
+            // btn_portapapeles
+            // 
+            btn_portapapeles.Location = new Point(12, 12);
+            btn_portapapeles.Name = "btn_portapapeles";
+            btn_portapapeles.Size = new Size(75, 23);
+            btn_portapapeles.TabIndex = 8;
+            btn_portapapeles.Text = "Copia!";
+            btn_portapapeles.UseVisualStyleBackColor = true;
+            btn_portapapeles.Click += btn_portapapeles_Click;
+            // 
+            // btn_estadisticas
+            // 
+            btn_estadisticas.Location = new Point(282, 303);
+            btn_estadisticas.Name = "btn_estadisticas";
+            btn_estadisticas.Size = new Size(238, 33);
+            btn_estadisticas.TabIndex = 9;
+            btn_estadisticas.Text = "ESTADÍSTICAS";
+            btn_estadisticas.UseVisualStyleBackColor = true;
+            btn_estadisticas.Click += btn_estadisticas_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btn_estadisticas);
+            Controls.Add(btn_portapapeles);
             Controls.Add(btn_beneficio);
             Controls.Add(btn_addFunds);
             Controls.Add(lbl_Oro);
@@ -147,5 +171,7 @@
         private Label lbl_Oro;
         private Button btn_addFunds;
         private Button btn_beneficio;
+        private Button btn_portapapeles;
+        private Button btn_estadisticas;
     }
 }

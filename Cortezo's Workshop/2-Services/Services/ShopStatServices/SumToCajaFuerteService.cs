@@ -4,12 +4,12 @@ using _2___Servicios.Interfaces;
 
 namespace _2___Servicios.Services.ShopStatServices
 {
-    public class SumToCajaFuerte
+    public class SumToCajaFuerteService
     {
         private readonly IRepository<ShopStat> _shopStatsRepository;
         private readonly ConfigurationService _configurationService;
 
-        public SumToCajaFuerte(IRepository<ShopStat> shopStatsRepository, 
+        public SumToCajaFuerteService(IRepository<ShopStat> shopStatsRepository, 
             ConfigurationService configurationService)
         {
             _shopStatsRepository = shopStatsRepository;
@@ -24,6 +24,18 @@ namespace _2___Servicios.Services.ShopStatServices
             shopStatCajaFuerte.Quantity += quantity;
 
             await _shopStatsRepository.UpdateAsync(shopStatCajaFuerte);
+
+            if (quantity > 0)
+            {
+                var shopStatOroTotal = await _shopStatsRepository.GetByNameAsync(
+                    _configurationService.Configuration["Constants:_SHOPSTAT_ORO_TOTAL"]);
+
+                shopStatOroTotal.Quantity += quantity;
+
+                await _shopStatsRepository.UpdateAsync(shopStatOroTotal);
+            }
+
+            await _shopStatsRepository.SaveChanges();
         }
     }
 }

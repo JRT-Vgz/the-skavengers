@@ -11,21 +11,18 @@ namespace CortezosWorkshop
         private ConfigurationService _configuration;
         private readonly IRepository<ShopStat> _shopStatsRepository;
         private readonly IPresenter<ShopStat, FundsViewModel> _presenter;
-        private readonly SumToBeneficio _sumToBeneficio;
-        private readonly SumToOroTotal _sumToOroTotal;
+        private readonly SumToBeneficioService _sumToBeneficioService;
 
         public FormMainBeneficio(ConfigurationService configuration,
             IRepository<ShopStat> shopStatsRepository,
             IPresenter<ShopStat, FundsViewModel> presenter,
-            SumToBeneficio sumToBeneficio,
-            SumToOroTotal sumToOroTotal)
+            SumToBeneficioService sumToBeneficioService)
         {
             InitializeComponent();
             _configuration = configuration;
             _shopStatsRepository = shopStatsRepository;
             _presenter = presenter;
-            _sumToBeneficio = sumToBeneficio;
-            _sumToOroTotal = sumToOroTotal;
+            _sumToBeneficioService = sumToBeneficioService;
         }
 
         // -------------------------------------------------------------------------------------------------------
@@ -38,7 +35,8 @@ namespace CortezosWorkshop
         }
         private async Task Load_Beneficio()
         {
-            var shopStatBeneficio = await _shopStatsRepository.GetByNameAsync(_configuration.Configuration["Constants:_SHOPSTAT_BENEFICIO"]);
+            var shopStatBeneficio = await _shopStatsRepository.GetByNameAsync(
+                _configuration.Configuration["Constants:_SHOPSTAT_BENEFICIO"]);
             var fundsViewModel = _presenter.Present(shopStatBeneficio);
             lbl_Oro.Text = fundsViewModel.Funds;
         }
@@ -93,8 +91,7 @@ namespace CortezosWorkshop
 
             var txtBoxQuantity = int.Parse(txtBox.Text);
 
-            await _sumToBeneficio.ExecuteAsync(txtBoxQuantity);
-            await _sumToOroTotal.ExecuteAsync(txtBoxQuantity);
+            await _sumToBeneficioService.ExecuteAsync(txtBoxQuantity);
 
             Reset_TextBox();
             await Load_Beneficio();

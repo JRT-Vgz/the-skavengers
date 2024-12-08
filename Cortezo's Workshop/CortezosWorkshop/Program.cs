@@ -2,6 +2,7 @@ using _1___Entities;
 using _2___Servicios;
 using _2___Servicios.Interfaces;
 using _2___Servicios.Services;
+using _2___Servicios.Services.OreMapServices;
 using _2___Servicios.Services.ShopStatServices;
 using _3___Data;
 using _3___Repository;
@@ -9,6 +10,7 @@ using _3_Mappers.MappingProfiles;
 using _3_Presenters.Presenters;
 using _3_Presenters.ViewModels;
 using CortezosWorkshop.Configuracion;
+using CortezosWorkshop.Estadisticas;
 using CortezosWorkshop.Maps;
 using CortezosWorkshop.Precios;
 using Microsoft.EntityFrameworkCore;
@@ -54,9 +56,10 @@ namespace CortezosWorkshop
 
             services.AddAutoMapper(typeof(ShopStatMappingProfile));
 
-            services.AddTransient<SumToCajaFuerte>();
-            services.AddTransient<SumToBeneficio>();
-            services.AddTransient<SumToOroTotal>();
+            services.AddTransient<SumToCajaFuerteService>();
+            services.AddTransient<SumToBeneficioService>();
+            services.AddTransient<AddCompletedMapData>();
+            services.AddTransient<UpdateRecommendedPrice>();
 
 
             // INYECCIÓN DE FORMULARIOS.
@@ -66,6 +69,7 @@ namespace CortezosWorkshop
             services.AddTransient<FormConfigMain>();
             services.AddTransient<FormMainEditFunds>();
             services.AddTransient<FormMainBeneficio>();
+            services.AddTransient<FormEstadisticasMain>();
         }
 
     }

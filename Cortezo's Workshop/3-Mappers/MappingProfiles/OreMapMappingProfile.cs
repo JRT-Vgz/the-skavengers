@@ -10,6 +10,7 @@ namespace _3_Mappers.MappingProfiles
         public OreMapMappingProfile()
         {
             CreateMap<OreMapModel, OreMap>();
+            CreateMap<OreMap, OreMapModel>();
         }
     }
 }

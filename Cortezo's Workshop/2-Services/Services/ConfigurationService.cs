@@ -8,7 +8,7 @@ namespace _2___Servicios.Services
         public ConfigurationService()
         {
             Configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory()) // o especifica la ruta si es diferente
+                .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.constants.json", optional: false, reloadOnChange: true)
                 .Build();
         }

@@ -11,21 +11,18 @@ namespace CortezosWorkshop
         private readonly ConfigurationService _configuration;
         private readonly IRepository<ShopStat> _shopStatsRepository;
         private readonly IPresenter<ShopStat, FundsViewModel> _presenter;
-        private readonly SumToCajaFuerte _sumToCajaFuerte;
-        private readonly SumToOroTotal _sumToOroTotal;
+        private readonly SumToCajaFuerteService _sumToCajaFuerteService;
 
         public FormMainEditFunds(ConfigurationService configuration,
             IRepository<ShopStat> shopStatsRepository,
             IPresenter<ShopStat, FundsViewModel> presenter,
-            SumToCajaFuerte sumToCajaFuerte,
-            SumToOroTotal sumToOroTotal)
+            SumToCajaFuerteService sumToCajaFuerteService)
         {
             InitializeComponent();
             _configuration = configuration;
             _shopStatsRepository = shopStatsRepository;
             _presenter = presenter;
-            _sumToCajaFuerte = sumToCajaFuerte;
-            _sumToOroTotal = sumToOroTotal;
+            _sumToCajaFuerteService = sumToCajaFuerteService;
         }
 
         // -------------------------------------------------------------------------------------------------------
@@ -38,7 +35,8 @@ namespace CortezosWorkshop
         }
         private async Task Load_Funds()
         {
-            var shopStatCajaFuerte = await _shopStatsRepository.GetByNameAsync(_configuration.Configuration["Constants:_SHOPSTAT_CAJA_FUERTE"]);
+            var shopStatCajaFuerte = await _shopStatsRepository.GetByNameAsync(
+                _configuration.Configuration["Constants:_SHOPSTAT_CAJA_FUERTE"]);
             var fundsViewModel = _presenter.Present(shopStatCajaFuerte);
             lbl_Oro.Text = fundsViewModel.Funds;
         }
@@ -92,8 +90,7 @@ namespace CortezosWorkshop
 
             var txtBoxQuantity = int.Parse(txtBox.Text);  
             
-            await _sumToCajaFuerte.ExecuteAsync(txtBoxQuantity);
-            if (txtBoxQuantity > 0) { await _sumToOroTotal.ExecuteAsync(txtBoxQuantity); }
+            await _sumToCajaFuerteService.ExecuteAsync(txtBoxQuantity);
 
             Reset_TextBox();
             await Load_Funds();

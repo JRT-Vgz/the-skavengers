@@ -10,6 +10,7 @@ namespace _3_Mappers.MappingProfiles
         public ShopStatMappingProfile() 
         {
             CreateMap<ShopStatsModel, ShopStat>();
+            CreateMap<ShopStat, ShopStatsModel>();
         }
     }
 }

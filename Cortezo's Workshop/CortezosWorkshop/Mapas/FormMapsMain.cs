@@ -1,17 +1,26 @@
 ﻿using _1___Entities;
 using _2___Servicios.Interfaces;
+using _2___Servicios.Services.OreMapServices;
 
 namespace CortezosWorkshop.Maps
 {
     public partial class FormMapsMain : Form
     {
         private readonly IRepository<OreMap> _oreMapsRepository;
+        private readonly AddCompletedMapData _addCompletedMapData;
+        private readonly UpdateRecommendedPrice _updateRecommendedPrice;
 
+        private IEnumerable<OreMap> _oreMaps;
+        private string _actualRecommendedPrice;
         private bool _txt_materialRecogidoClick = false;
-        public FormMapsMain(IRepository<OreMap> oreMapsRepository)
+        public FormMapsMain(IRepository<OreMap> oreMapsRepository,
+            AddCompletedMapData addCompletedMapData,
+            UpdateRecommendedPrice updateRecommendedPrice)
         {
             InitializeComponent();
             _oreMapsRepository = oreMapsRepository;
+            _addCompletedMapData = addCompletedMapData;
+            _updateRecommendedPrice = updateRecommendedPrice;
         }
 
         // -------------------------------------------------------------------------------------------------------
@@ -19,20 +28,40 @@ namespace CortezosWorkshop.Maps
         // -------------------------------------------------------------------------------------------------------
         private async void FormMapsMain_Load(object sender, EventArgs e)
         {
-            await ChargeData();
+            await Load_OreMaps();
+            await Load_AddMapDefaultData();
+            await Load_RecommendedPricesDefaultData();            
         }
 
-        private async Task ChargeData()
+        private async Task Load_OreMaps() { _oreMaps = await _oreMapsRepository.GetAllAsync(); }
+        private async Task Load_AddMapDefaultData()
         {
             for (int i = 1; i <= 20; i++) { cbo_mapQuantity.Items.Add(i); }
             cbo_mapQuantity.SelectedIndex = 0;
 
-            cbo_oreMaps.DataSource = await _oreMapsRepository.GetAllAsync();
+            cbo_oreMaps.DataSource = _oreMaps;
             cbo_oreMaps.DisplayMember = "Name";
+            cbo_oreMaps.ValueMember = "Name";
             cbo_oreMaps.SelectedIndex = 0;
 
             txt_materialRecogido.Text = "0";
             _txt_materialRecogidoClick = false;
+        }
+
+        private async Task Load_RecommendedPricesDefaultData()
+        {
+            cbo_oreMapsPrices.DataSource = _oreMaps;
+            cbo_oreMapsPrices.DisplayMember = "Name";
+            cbo_oreMapsPrices.ValueMember = "Name";
+            cbo_oreMapsPrices.SelectedIndex = 0;
+
+            Load_RecommendedPrice();
+        }
+
+        private void Load_RecommendedPrice()
+        {
+            txt_oreMapPrice.Text = _oreMaps.ElementAt(cbo_oreMapsPrices.SelectedIndex).RecommendedPrice;
+            _actualRecommendedPrice = txt_oreMapPrice.Text;
         }
 
         // -------------------------------------------------------------------------------------------------------
@@ -65,22 +94,48 @@ namespace CortezosWorkshop.Maps
                 return;
             }
 
-            var txtBoxQuantity = (int)cbo_mapQuantity.SelectedItem;
-            var materialRecogido = int.Parse(txt_materialRecogido.Text);
-            await Update_Ore_Map_Data(txtBoxQuantity, materialRecogido);
-            await ChargeData();
+            var oreMapName = cbo_oreMaps.SelectedValue.ToString();
+            var mapQuantity = (int)cbo_mapQuantity.SelectedItem;
+            var resourcesQuantity = int.Parse(txt_materialRecogido.Text);
+
+            await _addCompletedMapData.ExecuteAsync(oreMapName, mapQuantity, resourcesQuantity);
+
+            await Load_AddMapDefaultData();
         }
 
-        private async Task Update_Ore_Map_Data(int txtBoxQuantity, int txtBoxMaterialRecogido)
+        // -------------------------------------------------------------------------------------------------------
+        // ------------------------------------ CAMBIAR PRECIOS RECOMENDADOS -------------------------------------
+        // -------------------------------------------------------------------------------------------------------
+        private void cbo_oreMapsPrices_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedOreMap = (OreMap)cbo_oreMaps.SelectedItem;
-            var oreMap = await _oreMapsRepository.GetByNameAsync(selectedOreMap.Name);
-
-            oreMap.Quantity = oreMap.Quantity + txtBoxQuantity;
-            oreMap.TotalOre = oreMap.TotalOre + txtBoxMaterialRecogido;
-
-            await _oreMapsRepository.UpdateAsync(oreMap);
+            Load_RecommendedPrice();
         }
+        private void txt_oreMapPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var textBox = (sender as TextBox);
+            if (e.KeyChar == (char)13) 
+            { 
+                Save_New_Recommended_Price();
+                btn_menu_principal.Focus();
+            }
+
+            if (textBox.Text.Length == 11 && !char.IsControl(e.KeyChar)) { e.Handled = true; }
+        }
+
+        private void txt_oreMapPrice_Leave(object sender, EventArgs e) { Save_New_Recommended_Price(); }
+
+        private async Task Save_New_Recommended_Price()
+        {
+            var newRecommendedPrice = txt_oreMapPrice.Text;
+            if (newRecommendedPrice != _actualRecommendedPrice)
+            {
+                var oreMap = _oreMaps.ElementAt(cbo_oreMapsPrices.SelectedIndex);
+                await _updateRecommendedPrice.ExecuteAsync(oreMap, newRecommendedPrice);
+
+                Load_RecommendedPrice();
+            }
+        }
+
 
         // -------------------------------------------------------------------------------------------------------
         // --------------------------------------- VOLVER A MENU PRINCIPAL ---------------------------------------
@@ -100,7 +155,6 @@ namespace CortezosWorkshop.Maps
 
             this.Hide();
         }
-
-        
+      
     }
 }

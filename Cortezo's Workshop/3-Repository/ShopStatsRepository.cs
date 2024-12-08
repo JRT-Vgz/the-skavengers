@@ -41,11 +41,14 @@ namespace _3___Repository
         {
             var shopStatModel = await _context.ShopStats.FindAsync(shopStat.Id);
 
-            shopStatModel.Name = shopStat.Name;
-            shopStatModel.Quantity = shopStat.Quantity;
+            _mapper.Map(shopStat, shopStatModel);
 
             _context.ShopStats.Attach(shopStatModel);
             _context.ShopStats.Entry(shopStatModel).State = EntityState.Modified;
+        }
+
+        public async Task SaveChanges()
+        {
             await _context.SaveChangesAsync();
         }
     }

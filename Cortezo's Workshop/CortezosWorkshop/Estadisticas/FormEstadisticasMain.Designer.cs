@@ -1,6 +1,6 @@
-﻿namespace CortezosWorkshop.Configuracion
+﻿namespace CortezosWorkshop.Estadisticas
 {
-    partial class FormConfigMain
+    partial class FormEstadisticasMain
     {
         /// <summary>
         /// Required designer variable.
@@ -36,12 +36,12 @@
             btn_menu_principal.Location = new Point(12, 12);
             btn_menu_principal.Name = "btn_menu_principal";
             btn_menu_principal.Size = new Size(99, 23);
-            btn_menu_principal.TabIndex = 1;
+            btn_menu_principal.TabIndex = 2;
             btn_menu_principal.Text = "Menú principal";
             btn_menu_principal.UseVisualStyleBackColor = true;
             btn_menu_principal.Click += btn_menu_principal_Click;
             // 
-            // FormConfigMain
+            // FormEstadisticasMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -50,9 +50,9 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "FormConfigMain";
+            Name = "FormEstadisticasMain";
             StartPosition = FormStartPosition.Manual;
-            Text = "FormConfigMain";
+            Text = "Estadísticas";
             FormClosing += Form_Closing;
             ResumeLayout(false);
         }

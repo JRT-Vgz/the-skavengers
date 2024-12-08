@@ -2,6 +2,7 @@ using _1___Entities;
 using _2___Servicios.Interfaces;
 using _3_Presenters.ViewModels;
 using CortezosWorkshop.Configuracion;
+using CortezosWorkshop.Estadisticas;
 using CortezosWorkshop.Maps;
 using CortezosWorkshop.Precios;
 using Microsoft.Extensions.DependencyInjection;
@@ -80,6 +81,17 @@ namespace CortezosWorkshop
             this.Show();
         }
 
+        private void btn_estadisticas_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            var frm = _serviceProvider.GetRequiredService<FormEstadisticasMain>();
+            frm.Location = new Point(this.Location.X, this.Location.Y);
+            frm.ShowDialog();
+
+            this.Show();
+        }
+
         private void btn_addFunds_Click(object sender, EventArgs e)
         {
             var frm = _serviceProvider.GetRequiredService<FormMainEditFunds>();
@@ -93,6 +105,11 @@ namespace CortezosWorkshop
         {
             var frm = _serviceProvider.GetRequiredService<FormMainBeneficio>();
             frm.ShowDialog();
+        }             
+
+        private void btn_portapapeles_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText("Cortezo's cheap Tools & Armor");
         }
     }
 }
