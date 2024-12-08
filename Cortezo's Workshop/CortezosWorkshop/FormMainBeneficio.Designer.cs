@@ -1,6 +1,6 @@
 ﻿namespace CortezosWorkshop
 {
-    partial class FormMainEditFunds
+    partial class FormMainBeneficio
     {
         /// <summary>
         /// Required designer variable.
@@ -58,30 +58,30 @@
             // lbl_Funds
             // 
             lbl_Funds.AutoSize = true;
-            lbl_Funds.Location = new Point(96, 26);
+            lbl_Funds.Location = new Point(44, 23);
             lbl_Funds.Name = "lbl_Funds";
-            lbl_Funds.Size = new Size(49, 15);
+            lbl_Funds.Size = new Size(165, 15);
             lbl_Funds.TabIndex = 2;
-            lbl_Funds.Text = "Fondos:";
+            lbl_Funds.Text = "Total retirado a nuestras arcas:";
             // 
             // lbl_Oro
             // 
             lbl_Oro.AutoSize = true;
-            lbl_Oro.Location = new Point(107, 51);
+            lbl_Oro.Location = new Point(107, 49);
             lbl_Oro.Name = "lbl_Oro";
             lbl_Oro.Size = new Size(0, 15);
             lbl_Oro.TabIndex = 6;
             // 
             // txtBox
             // 
-            txtBox.Location = new Point(56, 83);
+            txtBox.Location = new Point(58, 83);
             txtBox.Name = "txtBox";
             txtBox.Size = new Size(130, 23);
             txtBox.TabIndex = 7;
             txtBox.TextAlign = HorizontalAlignment.Center;
             txtBox.KeyPress += txtBox_KeyPress;
             // 
-            // FormMainEditFunds
+            // FormMainBeneficio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -95,11 +95,11 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "FormMainEditFunds";
+            Name = "FormMainBeneficio";
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Caja fuerte";
+            Text = "Beneficio";
             Load += FormMainEditFunds_Load;
             Shown += FormMainEditFunds_Shown;
             ResumeLayout(false);

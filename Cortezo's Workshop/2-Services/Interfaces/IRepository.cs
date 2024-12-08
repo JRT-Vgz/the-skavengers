@@ -5,6 +5,7 @@ namespace _2___Servicios.Interfaces
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync(int id);
-        Task UpdateAsync(TEntity entity, int id);
+        Task<TEntity> GetByNameAsync(string name);
+        Task UpdateAsync(TEntity entity);
     }
 }

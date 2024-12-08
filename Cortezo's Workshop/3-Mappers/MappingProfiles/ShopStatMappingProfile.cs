@@ -1,6 +1,6 @@
 
 using _1___Entities;
-using _3_Mappers.Dtos.ShopStatDtos;
+using _3___Data.Models;
 using AutoMapper;
 
 namespace _3_Mappers.MappingProfiles
@@ -9,7 +9,7 @@ namespace _3_Mappers.MappingProfiles
     {
         public ShopStatMappingProfile() 
         {
-            CreateMap<ShopStatUpdateDto, ShopStat>();
+            CreateMap<ShopStatsModel, ShopStat>();
         }
     }
 }

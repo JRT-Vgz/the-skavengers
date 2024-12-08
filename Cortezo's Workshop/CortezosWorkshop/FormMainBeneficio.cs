@@ -6,25 +6,25 @@ using _3_Presenters.ViewModels;
 
 namespace CortezosWorkshop
 {
-    public partial class FormMainEditFunds : Form
+    public partial class FormMainBeneficio : Form
     {
-        private readonly ConfigurationService _configuration;
+        private ConfigurationService _configuration;
         private readonly IRepository<ShopStat> _shopStatsRepository;
         private readonly IPresenter<ShopStat, FundsViewModel> _presenter;
-        private readonly SumToCajaFuerte _sumToCajaFuerte;
+        private readonly SumToBeneficio _sumToBeneficio;
         private readonly SumToOroTotal _sumToOroTotal;
 
-        public FormMainEditFunds(ConfigurationService configuration,
+        public FormMainBeneficio(ConfigurationService configuration,
             IRepository<ShopStat> shopStatsRepository,
             IPresenter<ShopStat, FundsViewModel> presenter,
-            SumToCajaFuerte sumToCajaFuerte,
+            SumToBeneficio sumToBeneficio,
             SumToOroTotal sumToOroTotal)
         {
             InitializeComponent();
             _configuration = configuration;
             _shopStatsRepository = shopStatsRepository;
             _presenter = presenter;
-            _sumToCajaFuerte = sumToCajaFuerte;
+            _sumToBeneficio = sumToBeneficio;
             _sumToOroTotal = sumToOroTotal;
         }
 
@@ -33,13 +33,13 @@ namespace CortezosWorkshop
         // -------------------------------------------------------------------------------------------------------
         private async void FormMainEditFunds_Load(object sender, EventArgs e)
         {
-            this.Location = new Point(this.Location.X + 350, this.Location.Y + 165);
-            await Load_Funds();
+            this.Location = new Point(this.Location.X - 350, this.Location.Y + 165);
+            await Load_Beneficio();
         }
-        private async Task Load_Funds()
+        private async Task Load_Beneficio()
         {
-            var shopStatCajaFuerte = await _shopStatsRepository.GetByNameAsync(_configuration.Configuration["Constants:_SHOPSTAT_CAJA_FUERTE"]);
-            var fundsViewModel = _presenter.Present(shopStatCajaFuerte);
+            var shopStatBeneficio = await _shopStatsRepository.GetByNameAsync(_configuration.Configuration["Constants:_SHOPSTAT_BENEFICIO"]);
+            var fundsViewModel = _presenter.Present(shopStatBeneficio);
             lbl_Oro.Text = fundsViewModel.Funds;
         }
 
@@ -77,6 +77,7 @@ namespace CortezosWorkshop
             {
                 e.Handled = true;
             }
+
         }
 
         // -------------------------------------------------------------------------------------------------------
@@ -90,13 +91,13 @@ namespace CortezosWorkshop
                 return;
             }
 
-            var txtBoxQuantity = int.Parse(txtBox.Text);  
-            
-            await _sumToCajaFuerte.ExecuteAsync(txtBoxQuantity);
-            if (txtBoxQuantity > 0) { await _sumToOroTotal.ExecuteAsync(txtBoxQuantity); }
+            var txtBoxQuantity = int.Parse(txtBox.Text);
+
+            await _sumToBeneficio.ExecuteAsync(txtBoxQuantity);
+            await _sumToOroTotal.ExecuteAsync(txtBoxQuantity);
 
             Reset_TextBox();
-            await Load_Funds();
+            await Load_Beneficio();
         }
 
         // -------------------------------------------------------------------------------------------------------

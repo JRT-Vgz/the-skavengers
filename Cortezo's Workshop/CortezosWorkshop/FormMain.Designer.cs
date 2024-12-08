@@ -35,6 +35,7 @@
             lbl_Tesoreria = new Label();
             lbl_Oro = new Label();
             btn_addFunds = new Button();
+            btn_beneficio = new Button();
             SuspendLayout();
             // 
             // btn_precios
@@ -79,7 +80,7 @@
             // lbl_Tesoreria
             // 
             lbl_Tesoreria.AutoSize = true;
-            lbl_Tesoreria.Location = new Point(245, 390);
+            lbl_Tesoreria.Location = new Point(368, 359);
             lbl_Tesoreria.Name = "lbl_Tesoreria";
             lbl_Tesoreria.Size = new Size(56, 15);
             lbl_Tesoreria.TabIndex = 4;
@@ -88,26 +89,37 @@
             // lbl_Oro
             // 
             lbl_Oro.AutoSize = true;
-            lbl_Oro.Location = new Point(357, 390);
+            lbl_Oro.Location = new Point(380, 387);
             lbl_Oro.Name = "lbl_Oro";
             lbl_Oro.Size = new Size(0, 15);
             lbl_Oro.TabIndex = 5;
             // 
             // btn_addFunds
             // 
-            btn_addFunds.Location = new Point(461, 383);
+            btn_addFunds.Location = new Point(494, 383);
             btn_addFunds.Name = "btn_addFunds";
             btn_addFunds.Size = new Size(92, 22);
             btn_addFunds.TabIndex = 6;
-            btn_addFunds.Text = "Editar fondos";
+            btn_addFunds.Text = "Caja fuerte";
             btn_addFunds.UseVisualStyleBackColor = true;
             btn_addFunds.Click += btn_addFunds_Click;
+            // 
+            // btn_beneficio
+            // 
+            btn_beneficio.Location = new Point(215, 383);
+            btn_beneficio.Name = "btn_beneficio";
+            btn_beneficio.Size = new Size(92, 22);
+            btn_beneficio.TabIndex = 7;
+            btn_beneficio.Text = "Beneficio";
+            btn_beneficio.UseVisualStyleBackColor = true;
+            btn_beneficio.Click += btn_beneficio_Click;
             // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btn_beneficio);
             Controls.Add(btn_addFunds);
             Controls.Add(lbl_Oro);
             Controls.Add(lbl_Tesoreria);
@@ -134,5 +146,6 @@
         private Label lbl_Tesoreria;
         private Label lbl_Oro;
         private Button btn_addFunds;
+        private Button btn_beneficio;
     }
 }

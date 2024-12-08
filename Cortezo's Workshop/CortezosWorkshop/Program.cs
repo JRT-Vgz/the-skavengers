@@ -1,9 +1,10 @@
 using _1___Entities;
+using _2___Servicios;
 using _2___Servicios.Interfaces;
+using _2___Servicios.Services;
 using _2___Servicios.Services.ShopStatServices;
 using _3___Data;
 using _3___Repository;
-using _3_Mappers.Dtos.ShopStatDtos;
 using _3_Mappers.MappingProfiles;
 using _3_Presenters.Presenters;
 using _3_Presenters.ViewModels;
@@ -42,17 +43,20 @@ namespace CortezosWorkshop
                 .Build();
 
             // INYECCION DE DEPENDENCIAS.
+            services.AddSingleton<ConfigurationService>();
+
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DB")));
 
-            //services.AddTransient<IRepository<OreMap>, OreMapsRepository>();
+            services.AddTransient<IRepository<OreMap>, OreMapsRepository>();
             services.AddTransient<IRepository<ShopStat>, ShopStatsRepository>();
             services.AddTransient<IPresenter<ShopStat, FundsViewModel>, FundsPresenter>();
 
             services.AddAutoMapper(typeof(ShopStatMappingProfile));
 
-            services.AddTransient<UpdateShopStat<ShopStatUpdateDto>>();
-            
+            services.AddTransient<SumToCajaFuerte>();
+            services.AddTransient<SumToBeneficio>();
+            services.AddTransient<SumToOroTotal>();
 
 
             // INYECCIÓN DE FORMULARIOS.
@@ -61,6 +65,7 @@ namespace CortezosWorkshop
             services.AddTransient<FormPreciosMain>();
             services.AddTransient<FormConfigMain>();
             services.AddTransient<FormMainEditFunds>();
+            services.AddTransient<FormMainBeneficio>();
         }
 
     }

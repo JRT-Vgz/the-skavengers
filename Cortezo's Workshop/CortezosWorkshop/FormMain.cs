@@ -38,10 +38,10 @@ namespace CortezosWorkshop
 
         private async Task Load_Funds()
         {
-            int idOro = 1;
-            var shopStatOro = await _shopStatsRepository.GetByIdAsync(idOro);
-            var shopStatOroViewModel = _presenter.Present(shopStatOro);
-            lbl_Oro.Text = shopStatOroViewModel.Funds;
+            int idCajaFuerte = 1;
+            var shopStatCajaFuerte = await _shopStatsRepository.GetByIdAsync(idCajaFuerte);
+            var fundsViewModel = _presenter.Present(shopStatCajaFuerte);
+            lbl_Oro.Text = fundsViewModel.Funds;
         }
 
         // -------------------------------------------------------------------------------------------------------
@@ -87,6 +87,12 @@ namespace CortezosWorkshop
             frm.ShowDialog();
 
             Load_Funds();
+        }
+
+        private void btn_beneficio_Click(object sender, EventArgs e)
+        {
+            var frm = _serviceProvider.GetRequiredService<FormMainBeneficio>();
+            frm.ShowDialog();
         }
     }
 }
