@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _3___Data;
 
@@ -10,9 +11,11 @@ using _3___Data;
 namespace _3___Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241209233052_GenericProduct")]
+    partial class GenericProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +46,7 @@ namespace _3___Data.Migrations
 
                     b.HasIndex("IdMaterial");
 
-                    b.ToTable("GenericProducts");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("_3___Data.Models.MaterialModel", b =>

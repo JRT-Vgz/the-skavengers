@@ -1,4 +1,5 @@
 ﻿using _3___Data.Models;
+using _3___Data.Models.ProductModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace _3___Data
@@ -10,6 +11,8 @@ namespace _3___Data
         public DbSet<OreMapModel> OreMaps { get; set; }
         public DbSet<MaterialModel> Materials { get; set; }
         public DbSet<ShopStatsModel> ShopStats { get; set; }
-        public DbSet<ProductModel> Products { get; set; }
+        public DbSet<GenericProductModel> GenericProducts { get; set; }
+        public DbSet<FullPlateModel> FullPlates { get; set; }
+        public DbSet<ToolModel> Tools { get; set; }
     }
 }

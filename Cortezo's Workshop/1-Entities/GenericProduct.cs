@@ -1,7 +1,7 @@
 
 namespace _1___Entities
 {
-    public class Product
+    public class GenericProduct
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace _3___Data.Models
 {
-    public class ProductModel
+    public class GenericProductModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

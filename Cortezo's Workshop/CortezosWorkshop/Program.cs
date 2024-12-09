@@ -1,4 +1,5 @@
 using _1___Entities;
+using _1___Entities.ProductEntities;
 using _2___Servicios;
 using _2___Servicios.Interfaces;
 using _2___Servicios.Services;
@@ -54,7 +55,9 @@ namespace CortezosWorkshop
 
             services.AddTransient<IRepository<OreMap>, OreMapsRepository>();
             services.AddTransient<IRepository<ShopStat>, ShopStatsRepository>();
-            services.AddTransient<IRepository<Product>, ProductsRepository>();
+            services.AddTransient<IRepository<GenericProduct>, GenericProductsRepository>();
+            services.AddTransient<IRepository<FullPlate>, FullPlatesRepository>();
+            services.AddTransient<IRepository<Tool>, ToolsRepository>();
             services.AddTransient<IPresenter<ShopStat, FundsViewModel>, FundsPresenter>();
             services.AddTransient<IPresenter<Statistics, StatisticsViewModel>, StatisticsPresenter>();
 
@@ -67,6 +70,8 @@ namespace CortezosWorkshop
             services.AddTransient<CreateStatisticsService<StatisticsViewModel>>();
             services.AddTransient<GetFundsByNameService<FundsViewModel>>();
             services.AddTransient<UpdateConfiguredResources>();
+            services.AddTransient<UpdateFullPlatePriceService>();
+            services.AddTransient<UpdateToolPriceService>();
 
 
             // INYECCIÓN DE FORMULARIOS.

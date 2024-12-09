@@ -120,6 +120,7 @@
             cbo_matArCompleta.Name = "cbo_matArCompleta";
             cbo_matArCompleta.Size = new Size(117, 23);
             cbo_matArCompleta.TabIndex = 8;
+            cbo_matArCompleta.SelectedIndexChanged += cbo_matArCompleta_SelectedIndexChanged;
             // 
             // txt_precioArCompleta
             // 
@@ -128,6 +129,8 @@
             txt_precioArCompleta.Size = new Size(100, 23);
             txt_precioArCompleta.TabIndex = 9;
             txt_precioArCompleta.TextAlign = HorizontalAlignment.Center;
+            txt_precioArCompleta.KeyPress += txt_precioArCompleta_KeyPress;
+            txt_precioArCompleta.Leave += txt_precioArCompleta_Leave;
             // 
             // lbl_flecha1
             // 
@@ -172,6 +175,8 @@
             txt_precioHerramienta.Size = new Size(100, 23);
             txt_precioHerramienta.TabIndex = 14;
             txt_precioHerramienta.TextAlign = HorizontalAlignment.Center;
+            txt_precioHerramienta.KeyPress += txt_precioHerramienta_KeyPress;
+            txt_precioHerramienta.Leave += txt_precioHerramienta_Leave;
             // 
             // cbo_matHerramienta
             // 
@@ -181,6 +186,7 @@
             cbo_matHerramienta.Name = "cbo_matHerramienta";
             cbo_matHerramienta.Size = new Size(117, 23);
             cbo_matHerramienta.TabIndex = 13;
+            cbo_matHerramienta.SelectedIndexChanged += cbo_matHerramienta_SelectedIndexChanged;
             // 
             // lbl_herramienta
             // 

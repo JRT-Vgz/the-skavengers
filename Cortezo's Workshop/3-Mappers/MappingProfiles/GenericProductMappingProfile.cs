@@ -5,14 +5,14 @@ using AutoMapper;
 
 namespace _3_Mappers.MappingProfiles
 {
-    public class ProductMappingProfile : Profile
+    public class GenericProductMappingProfile : Profile
     {
-        public ProductMappingProfile() 
+        public GenericProductMappingProfile() 
         {
-            CreateMap<ProductModel, Product>()
+            CreateMap<GenericProductModel, GenericProduct>()
                 .ForMember(dest => dest.MaterialName, opt => opt.MapFrom(src => src.Material.Name));
 
-            CreateMap<Product, ProductModel>();
+            CreateMap<GenericProduct, GenericProductModel>();
         }
     }
 }
