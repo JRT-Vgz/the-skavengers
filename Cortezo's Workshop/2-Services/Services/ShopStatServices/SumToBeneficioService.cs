@@ -1,5 +1,6 @@
 
 using _1___Entities;
+using _2___Servicios.Exceptions;
 using _2___Servicios.Interfaces;
 
 namespace _2___Servicios.Services.ShopStatServices
@@ -18,17 +19,19 @@ namespace _2___Servicios.Services.ShopStatServices
 
         public async Task ExecuteAsync(int quantity)
         {
+            var shopStatCajaFuerte = await _shopStatsRepository.GetByNameAsync(
+                _configurationService.Configuration["Constants:_SHOPSTAT_CAJA_FUERTE"]);
+
+            if (quantity > shopStatCajaFuerte.Quantity) { throw new NotEnoughFundsException(); }
+
             var shopStatBeneficio = await _shopStatsRepository.GetByNameAsync(
                 _configurationService.Configuration["Constants:_SHOPSTAT_BENEFICIO"]);
 
             shopStatBeneficio.Quantity += quantity;
             await _shopStatsRepository.UpdateAsync(shopStatBeneficio);
 
-            var shopStatOroTotal = await _shopStatsRepository.GetByNameAsync(
-                _configurationService.Configuration["Constants:_SHOPSTAT_ORO_TOTAL"]);
-
-            shopStatOroTotal.Quantity += quantity;
-            await _shopStatsRepository.UpdateAsync(shopStatOroTotal);
+            shopStatCajaFuerte.Quantity -= quantity;
+            await _shopStatsRepository.UpdateAsync(shopStatCajaFuerte);
 
             await _shopStatsRepository.SaveChanges();
         }

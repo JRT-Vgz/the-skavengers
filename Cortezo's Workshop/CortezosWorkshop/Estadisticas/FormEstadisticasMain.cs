@@ -1,9 +1,15 @@
-﻿using System;
+﻿using _1___Entities;
+using _2___Servicios.Interfaces;
+using _2___Servicios.Services;
+using _2___Servicios.Services.StatisticsServices;
+using _3_Presenters.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,11 +18,29 @@ namespace CortezosWorkshop.Estadisticas
 {
     public partial class FormEstadisticasMain : Form
     {
-        public FormEstadisticasMain()
+        private readonly CreateStatisticsService<StatisticsViewModel> _createStatisticsService;
+        public FormEstadisticasMain(CreateStatisticsService<StatisticsViewModel> createStatisticsService)
         {
             InitializeComponent();
+            _createStatisticsService = createStatisticsService;
         }
 
+        // -------------------------------------------------------------------------------------------------------
+        // ----------------------------------------- CARGAR ESTADISTICAS -----------------------------------------
+        // -------------------------------------------------------------------------------------------------------
+        private async void FormEstadisticasMain_Load(object sender, EventArgs e)
+        {
+            var statisticsViewModel = await _createStatisticsService.ExecuteAsync();
+
+            lbl_oroTotal.Text = statisticsViewModel.OroTotal;
+            lbl_cajafuerte.Text = statisticsViewModel.CajaFuerte;
+            lbl_beneficio.Text = statisticsViewModel.Beneficio;
+            lbl_oroGastado.Text = statisticsViewModel.OroGastado;
+        }
+
+        // -------------------------------------------------------------------------------------------------------
+        // --------------------------------------- VOLVER A MENU PRINCIPAL ---------------------------------------
+        // -------------------------------------------------------------------------------------------------------
         private void Form_Closing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -31,6 +55,6 @@ namespace CortezosWorkshop.Estadisticas
             frmMain.Location = new Point(this.Location.X, this.Location.Y); ;
 
             this.Hide();
-        }
+        }       
     }
 }

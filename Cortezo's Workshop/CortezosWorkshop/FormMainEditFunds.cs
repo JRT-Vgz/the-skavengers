@@ -1,4 +1,5 @@
 ﻿using _1___Entities;
+using _2___Servicios.Exceptions;
 using _2___Servicios.Interfaces;
 using _2___Servicios.Services;
 using _2___Servicios.Services.ShopStatServices;
@@ -9,19 +10,18 @@ namespace CortezosWorkshop
     public partial class FormMainEditFunds : Form
     {
         private readonly ConfigurationService _configuration;
-        private readonly IRepository<ShopStat> _shopStatsRepository;
-        private readonly IPresenter<ShopStat, FundsViewModel> _presenter;
+        private readonly GetFundsByNameService<FundsViewModel> _getFundsByNameService;
         private readonly SumToCajaFuerteService _sumToCajaFuerteService;
 
+        private const int _MAX_LENGTH_TEXTBOX = 8;
+
         public FormMainEditFunds(ConfigurationService configuration,
-            IRepository<ShopStat> shopStatsRepository,
-            IPresenter<ShopStat, FundsViewModel> presenter,
+            GetFundsByNameService<FundsViewModel> getFundsByNameService,
             SumToCajaFuerteService sumToCajaFuerteService)
         {
             InitializeComponent();
             _configuration = configuration;
-            _shopStatsRepository = shopStatsRepository;
-            _presenter = presenter;
+            _getFundsByNameService = getFundsByNameService;
             _sumToCajaFuerteService = sumToCajaFuerteService;
         }
 
@@ -35,9 +35,8 @@ namespace CortezosWorkshop
         }
         private async Task Load_Funds()
         {
-            var shopStatCajaFuerte = await _shopStatsRepository.GetByNameAsync(
+            var fundsViewModel = await _getFundsByNameService.ExecuteAsync(
                 _configuration.Configuration["Constants:_SHOPSTAT_CAJA_FUERTE"]);
-            var fundsViewModel = _presenter.Present(shopStatCajaFuerte);
             lbl_Oro.Text = fundsViewModel.Funds;
         }
 
@@ -71,7 +70,7 @@ namespace CortezosWorkshop
                 e.Handled = true;
             }
 
-            if (textBox.Text.Length == 9 && !char.IsControl(e.KeyChar))
+            if (textBox.Text.Length > _MAX_LENGTH_TEXTBOX && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
@@ -81,16 +80,13 @@ namespace CortezosWorkshop
         // -------------------------------------- GUARDAR EN BASE DE DATOS ---------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private async void btn_Save_Click(object sender, EventArgs e)
-        {
-            if (txtBox.Text.Length == 0 || (txtBox.Text.Length == 1 && txtBox.Text == "-"))
+        {         
+            try
             {
-                Reset_TextBox();
-                return;
+                var txtBoxQuantity = int.Parse(txtBox.Text);
+                await _sumToCajaFuerteService.ExecuteAsync(txtBoxQuantity);
             }
-
-            var txtBoxQuantity = int.Parse(txtBox.Text);  
-            
-            await _sumToCajaFuerteService.ExecuteAsync(txtBoxQuantity);
+            catch (Exception) { }
 
             Reset_TextBox();
             await Load_Funds();

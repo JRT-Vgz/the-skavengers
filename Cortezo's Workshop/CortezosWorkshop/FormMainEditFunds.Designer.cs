@@ -37,7 +37,7 @@
             // 
             // btn_Save
             // 
-            btn_Save.Location = new Point(32, 138);
+            btn_Save.Location = new Point(26, 135);
             btn_Save.Name = "btn_Save";
             btn_Save.Size = new Size(75, 23);
             btn_Save.TabIndex = 0;
@@ -47,7 +47,7 @@
             // 
             // btn_Back
             // 
-            btn_Back.Location = new Point(156, 138);
+            btn_Back.Location = new Point(150, 135);
             btn_Back.Name = "btn_Back";
             btn_Back.Size = new Size(75, 23);
             btn_Back.TabIndex = 1;
@@ -74,7 +74,7 @@
             // 
             // txtBox
             // 
-            txtBox.Location = new Point(56, 83);
+            txtBox.Location = new Point(61, 90);
             txtBox.Name = "txtBox";
             txtBox.Size = new Size(130, 23);
             txtBox.TabIndex = 7;
@@ -85,7 +85,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(249, 169);
+            ClientSize = new Size(253, 179);
             ControlBox = false;
             Controls.Add(txtBox);
             Controls.Add(lbl_Oro);

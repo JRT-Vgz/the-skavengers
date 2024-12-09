@@ -33,21 +33,22 @@
             lbl_Funds = new Label();
             lbl_Oro = new Label();
             txtBox = new TextBox();
+            label1 = new Label();
             SuspendLayout();
             // 
             // btn_Save
             // 
-            btn_Save.Location = new Point(32, 138);
+            btn_Save.Location = new Point(26, 135);
             btn_Save.Name = "btn_Save";
             btn_Save.Size = new Size(75, 23);
             btn_Save.TabIndex = 0;
-            btn_Save.Text = "Guardar";
+            btn_Save.Text = "Retirar";
             btn_Save.UseVisualStyleBackColor = true;
             btn_Save.Click += btn_Save_Click;
             // 
             // btn_Back
             // 
-            btn_Back.Location = new Point(156, 138);
+            btn_Back.Location = new Point(150, 135);
             btn_Back.Name = "btn_Back";
             btn_Back.Size = new Size(75, 23);
             btn_Back.TabIndex = 1;
@@ -58,35 +59,45 @@
             // lbl_Funds
             // 
             lbl_Funds.AutoSize = true;
-            lbl_Funds.Location = new Point(44, 23);
+            lbl_Funds.Location = new Point(67, 9);
             lbl_Funds.Name = "lbl_Funds";
-            lbl_Funds.Size = new Size(165, 15);
+            lbl_Funds.Size = new Size(112, 15);
             lbl_Funds.TabIndex = 2;
-            lbl_Funds.Text = "Total retirado a nuestras arcas:";
+            lbl_Funds.Text = "Fondos disponibles:";
             // 
             // lbl_Oro
             // 
             lbl_Oro.AutoSize = true;
-            lbl_Oro.Location = new Point(107, 49);
+            lbl_Oro.Location = new Point(107, 33);
             lbl_Oro.Name = "lbl_Oro";
             lbl_Oro.Size = new Size(0, 15);
             lbl_Oro.TabIndex = 6;
             // 
             // txtBox
             // 
-            txtBox.Location = new Point(58, 83);
+            txtBox.Location = new Point(61, 90);
             txtBox.Name = "txtBox";
             txtBox.Size = new Size(130, 23);
             txtBox.TabIndex = 7;
             txtBox.TextAlign = HorizontalAlignment.Center;
             txtBox.KeyPress += txtBox_KeyPress;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(51, 66);
+            label1.Name = "label1";
+            label1.Size = new Size(152, 15);
+            label1.TabIndex = 8;
+            label1.Text = "¿Cuánto oro quieres retirar?";
+            // 
             // FormMainBeneficio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(249, 169);
+            ClientSize = new Size(249, 175);
             ControlBox = false;
+            Controls.Add(label1);
             Controls.Add(txtBox);
             Controls.Add(lbl_Oro);
             Controls.Add(lbl_Funds);
@@ -113,5 +124,6 @@
         private Label lbl_Funds;
         private Label lbl_Oro;
         private TextBox txtBox;
+        private Label label1;
     }
 }

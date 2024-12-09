@@ -42,7 +42,7 @@
             // 
             // btn_precios
             // 
-            btn_precios.Location = new Point(282, 106);
+            btn_precios.Location = new Point(282, 96);
             btn_precios.Name = "btn_precios";
             btn_precios.Size = new Size(238, 33);
             btn_precios.TabIndex = 0;
@@ -52,7 +52,7 @@
             // 
             // btn_mapas
             // 
-            btn_mapas.Location = new Point(282, 172);
+            btn_mapas.Location = new Point(282, 162);
             btn_mapas.Name = "btn_mapas";
             btn_mapas.Size = new Size(238, 33);
             btn_mapas.TabIndex = 1;
@@ -62,7 +62,7 @@
             // 
             // btn_config
             // 
-            btn_config.Location = new Point(282, 237);
+            btn_config.Location = new Point(282, 227);
             btn_config.Name = "btn_config";
             btn_config.Size = new Size(238, 33);
             btn_config.TabIndex = 2;
@@ -112,7 +112,7 @@
             btn_beneficio.Name = "btn_beneficio";
             btn_beneficio.Size = new Size(92, 22);
             btn_beneficio.TabIndex = 7;
-            btn_beneficio.Text = "Beneficio";
+            btn_beneficio.Text = "Retirar fondos";
             btn_beneficio.UseVisualStyleBackColor = true;
             btn_beneficio.Click += btn_beneficio_Click;
             // 
@@ -128,7 +128,7 @@
             // 
             // btn_estadisticas
             // 
-            btn_estadisticas.Location = new Point(282, 303);
+            btn_estadisticas.Location = new Point(282, 293);
             btn_estadisticas.Name = "btn_estadisticas";
             btn_estadisticas.Size = new Size(238, 33);
             btn_estadisticas.TabIndex = 9;

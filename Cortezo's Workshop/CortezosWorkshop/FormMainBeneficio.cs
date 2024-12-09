@@ -1,4 +1,5 @@
 ﻿using _1___Entities;
+using _2___Servicios.Exceptions;
 using _2___Servicios.Interfaces;
 using _2___Servicios.Services;
 using _2___Servicios.Services.ShopStatServices;
@@ -9,19 +10,18 @@ namespace CortezosWorkshop
     public partial class FormMainBeneficio : Form
     {
         private ConfigurationService _configuration;
-        private readonly IRepository<ShopStat> _shopStatsRepository;
-        private readonly IPresenter<ShopStat, FundsViewModel> _presenter;
+        private readonly GetFundsByNameService<FundsViewModel> _getFundsByNameService;
         private readonly SumToBeneficioService _sumToBeneficioService;
 
+        private const int _MAX_LENGTH_TEXTBOX = 8;
+
         public FormMainBeneficio(ConfigurationService configuration,
-            IRepository<ShopStat> shopStatsRepository,
-            IPresenter<ShopStat, FundsViewModel> presenter,
+            GetFundsByNameService<FundsViewModel> getFundsByNameService,
             SumToBeneficioService sumToBeneficioService)
         {
             InitializeComponent();
             _configuration = configuration;
-            _shopStatsRepository = shopStatsRepository;
-            _presenter = presenter;
+            _getFundsByNameService = getFundsByNameService;
             _sumToBeneficioService = sumToBeneficioService;
         }
 
@@ -31,13 +31,12 @@ namespace CortezosWorkshop
         private async void FormMainEditFunds_Load(object sender, EventArgs e)
         {
             this.Location = new Point(this.Location.X - 350, this.Location.Y + 165);
-            await Load_Beneficio();
+            await Load_CajaFuerte();
         }
-        private async Task Load_Beneficio()
+        private async Task Load_CajaFuerte()
         {
-            var shopStatBeneficio = await _shopStatsRepository.GetByNameAsync(
-                _configuration.Configuration["Constants:_SHOPSTAT_BENEFICIO"]);
-            var fundsViewModel = _presenter.Present(shopStatBeneficio);
+            var fundsViewModel = await _getFundsByNameService.ExecuteAsync(
+                _configuration.Configuration["Constants:_SHOPSTAT_CAJA_FUERTE"]);
             lbl_Oro.Text = fundsViewModel.Funds;
         }
 
@@ -58,20 +57,18 @@ namespace CortezosWorkshop
         private void txtBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             var textBox = (sender as TextBox);
-            if (e.KeyChar == (char)13) 
-            { 
-                if (textBox.Text.Length == 0) { btn_Back_Click(sender, e); }
-                btn_Save_Click(sender, e); 
-            }
-           
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (e.KeyChar == (char)13)
             {
-                if (e.KeyChar == '-' && textBox.SelectionStart == 0) { return; }
+                if (textBox.Text.Length == 0) { btn_Back_Click(sender, e); }
+                btn_Save_Click(sender, e);
+            }
 
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            { 
                 e.Handled = true;
             }
 
-            if (textBox.Text.Length == 9 && !char.IsControl(e.KeyChar))
+            if (textBox.Text.Length > _MAX_LENGTH_TEXTBOX && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
@@ -83,18 +80,22 @@ namespace CortezosWorkshop
         // -------------------------------------------------------------------------------------------------------
         private async void btn_Save_Click(object sender, EventArgs e)
         {
-            if (txtBox.Text.Length == 0 || (txtBox.Text.Length == 1 && txtBox.Text == "-"))
+            if (txtBox.Text.Contains('-'))
             {
                 Reset_TextBox();
                 return;
             }
-
-            var txtBoxQuantity = int.Parse(txtBox.Text);
-
-            await _sumToBeneficioService.ExecuteAsync(txtBoxQuantity);
+        
+            try 
+            {
+                var txtBoxQuantity = int.Parse(txtBox.Text);
+                await _sumToBeneficioService.ExecuteAsync(txtBoxQuantity); 
+            }
+            catch (NotEnoughFundsException ex) { MessageBox.Show(ex.Message); }
+            catch (Exception) { }
 
             Reset_TextBox();
-            await Load_Beneficio();
+            await Load_CajaFuerte();
         }
 
         // -------------------------------------------------------------------------------------------------------

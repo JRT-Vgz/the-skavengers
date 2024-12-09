@@ -104,7 +104,10 @@ namespace CortezosWorkshop
         private void btn_beneficio_Click(object sender, EventArgs e)
         {
             var frm = _serviceProvider.GetRequiredService<FormMainBeneficio>();
+            lbl_Oro.Text = "???";
             frm.ShowDialog();
+
+            Load_Funds();
         }             
 
         private void btn_portapapeles_Click(object sender, EventArgs e)

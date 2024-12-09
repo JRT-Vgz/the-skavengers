@@ -34,6 +34,15 @@ namespace _2___Servicios.Services.ShopStatServices
 
                 await _shopStatsRepository.UpdateAsync(shopStatOroTotal);
             }
+            else if (quantity < 0)
+            {
+                var shopStatOroGastado = await _shopStatsRepository.GetByNameAsync(
+                    _configurationService.Configuration["Constants:_SHOPSTAT_ORO_GASTADO"]);
+
+                shopStatOroGastado.Quantity -= quantity;
+
+                await _shopStatsRepository.UpdateAsync(shopStatOroGastado);
+            }
 
             await _shopStatsRepository.SaveChanges();
         }
