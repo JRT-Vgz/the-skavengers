@@ -7,5 +7,7 @@ namespace _1___Entities
         public int CajaFuerte { get; set; }
         public int Beneficio { get; set; }
         public int OroGastado { get; set; }
+        public int MapasCompletados { get; set; }
+        public int RecursosExtraidos { get; set; }
     }
 }

@@ -10,10 +10,12 @@ namespace _3_Presenters.Presenters
         public StatisticsViewModel Present(Statistics statistics)
             => new StatisticsViewModel
             {
-                OroTotal = $"- Oro total vendido en la tienda:     {FormatQuantity(statistics.OroTotal)} gp.",
-                CajaFuerte = $"- Fondos almacenados en la caja fuerte:     {FormatQuantity(statistics.CajaFuerte)} gp.",
-                Beneficio = $"- Beneficio retirado:     {FormatQuantity(statistics.Beneficio)} gp.",
-                OroGastado = $"- Oro gastado en comprar mapas y materiales:     {FormatQuantity(statistics.OroGastado)} gp."
+                OroTotal = $"- Oro total vendido en la tienda:     {FormatQuantity(statistics.OroTotal)} gp",
+                CajaFuerte = $"- Fondos almacenados en la caja fuerte:     {FormatQuantity(statistics.CajaFuerte)} gp",
+                Beneficio = $"- Beneficio retirado para nuestro disfrute:     {FormatQuantity(statistics.Beneficio)} gp",
+                OroGastado = $"- Oro gastado en comprar mapas y materiales:     {FormatQuantity(statistics.OroGastado)} gp",
+                MapasCompletados = $"- Mapas completdos: {FormatQuantity(statistics.MapasCompletados)}",
+                RecursosExtraidos = $"- Total de recursos extraídos: {FormatQuantity(statistics.RecursosExtraidos)}"
             };
 
         private static string FormatQuantity(int quantity)

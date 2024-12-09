@@ -36,6 +36,8 @@ namespace CortezosWorkshop.Estadisticas
             lbl_cajafuerte.Text = statisticsViewModel.CajaFuerte;
             lbl_beneficio.Text = statisticsViewModel.Beneficio;
             lbl_oroGastado.Text = statisticsViewModel.OroGastado;
+            lbl_mapasCompletados.Text = statisticsViewModel.MapasCompletados;
+            lbl_recursosExtraidos.Text = statisticsViewModel.RecursosExtraidos;
         }
 
         // -------------------------------------------------------------------------------------------------------

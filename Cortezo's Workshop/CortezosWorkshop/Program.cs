@@ -3,6 +3,7 @@ using _2___Servicios;
 using _2___Servicios.Interfaces;
 using _2___Servicios.Services;
 using _2___Servicios.Services.OreMapServices;
+using _2___Servicios.Services.ProductServices;
 using _2___Servicios.Services.ShopStatServices;
 using _2___Servicios.Services.StatisticsServices;
 using _3___Data;
@@ -53,6 +54,7 @@ namespace CortezosWorkshop
 
             services.AddTransient<IRepository<OreMap>, OreMapsRepository>();
             services.AddTransient<IRepository<ShopStat>, ShopStatsRepository>();
+            services.AddTransient<IRepository<Product>, ProductsRepository>();
             services.AddTransient<IPresenter<ShopStat, FundsViewModel>, FundsPresenter>();
             services.AddTransient<IPresenter<Statistics, StatisticsViewModel>, StatisticsPresenter>();
 
@@ -64,6 +66,7 @@ namespace CortezosWorkshop
             services.AddTransient<UpdateRecommendedPrice>();
             services.AddTransient<CreateStatisticsService<StatisticsViewModel>>();
             services.AddTransient<GetFundsByNameService<FundsViewModel>>();
+            services.AddTransient<UpdateConfiguredResources>();
 
 
             // INYECCIÓN DE FORMULARIOS.

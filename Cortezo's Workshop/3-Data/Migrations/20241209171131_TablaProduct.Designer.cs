@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _3___Data;
 
@@ -10,9 +11,11 @@ using _3___Data;
 namespace _3___Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241209171131_TablaProduct")]
+    partial class TablaProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,31 +68,6 @@ namespace _3___Data.Migrations
                     b.ToTable("OreMaps");
                 });
 
-            modelBuilder.Entity("_3___Data.Models.ProductModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("IdMaterial")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Resources")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdMaterial");
-
-                    b.ToTable("Products");
-                });
-
             modelBuilder.Entity("_3___Data.Models.ShopStatsModel", b =>
                 {
                     b.Property<int>("Id")
@@ -108,17 +86,6 @@ namespace _3___Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ShopStats");
-                });
-
-            modelBuilder.Entity("_3___Data.Models.ProductModel", b =>
-                {
-                    b.HasOne("_3___Data.Models.MaterialModel", "Material")
-                        .WithMany()
-                        .HasForeignKey("IdMaterial")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Material");
                 });
 #pragma warning restore 612, 618
         }

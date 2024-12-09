@@ -34,6 +34,8 @@
             lbl_cajafuerte = new Label();
             lbl_beneficio = new Label();
             lbl_oroGastado = new Label();
+            lbl_mapasCompletados = new Label();
+            lbl_recursosExtraidos = new Label();
             SuspendLayout();
             // 
             // btn_menu_principal
@@ -78,9 +80,9 @@
             lbl_beneficio.AutoSize = true;
             lbl_beneficio.Location = new Point(263, 216);
             lbl_beneficio.Name = "lbl_beneficio";
-            lbl_beneficio.Size = new Size(111, 15);
+            lbl_beneficio.Size = new Size(223, 15);
             lbl_beneficio.TabIndex = 6;
-            lbl_beneficio.Text = "- Beneficio retirado:";
+            lbl_beneficio.Text = "- Beneficio retirado para nuestro disfrute:";
             // 
             // lbl_oroGastado
             // 
@@ -91,11 +93,31 @@
             lbl_oroGastado.TabIndex = 7;
             lbl_oroGastado.Text = "- Oro gastado en comprar mapas y materiales:";
             // 
+            // lbl_mapasCompletados
+            // 
+            lbl_mapasCompletados.AutoSize = true;
+            lbl_mapasCompletados.Location = new Point(263, 252);
+            lbl_mapasCompletados.Name = "lbl_mapasCompletados";
+            lbl_mapasCompletados.Size = new Size(125, 15);
+            lbl_mapasCompletados.TabIndex = 8;
+            lbl_mapasCompletados.Text = "- Mapas completados:";
+            // 
+            // lbl_recursosExtraidos
+            // 
+            lbl_recursosExtraidos.AutoSize = true;
+            lbl_recursosExtraidos.Location = new Point(263, 287);
+            lbl_recursosExtraidos.Name = "lbl_recursosExtraidos";
+            lbl_recursosExtraidos.Size = new Size(160, 15);
+            lbl_recursosExtraidos.TabIndex = 9;
+            lbl_recursosExtraidos.Text = "- Total de recursos extraídos::";
+            // 
             // FormEstadisticasMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lbl_recursosExtraidos);
+            Controls.Add(lbl_mapasCompletados);
             Controls.Add(lbl_oroGastado);
             Controls.Add(lbl_beneficio);
             Controls.Add(lbl_cajafuerte);
@@ -122,5 +144,7 @@
         private Label lbl_cajafuerte;
         private Label lbl_beneficio;
         private Label lbl_oroGastado;
+        private Label lbl_mapasCompletados;
+        private Label lbl_recursosExtraidos;
     }
 }

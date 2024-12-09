@@ -149,7 +149,7 @@ namespace CortezosWorkshop.Maps
             if (newRecommendedPrice != _actualRecommendedPrice)
             {
                 try
-                {
+                {                  
                     var oreMap = _oreMaps.ElementAt(cbo_oreMapsPrices.SelectedIndex);
                     await _updateRecommendedPrice.ExecuteAsync(oreMap, newRecommendedPrice);
                 }
