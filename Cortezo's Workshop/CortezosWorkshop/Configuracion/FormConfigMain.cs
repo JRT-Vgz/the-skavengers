@@ -153,7 +153,7 @@ namespace CortezosWorkshop.Configuracion
                     var product = _genericProducts.ElementAt(cbo_productos.SelectedIndex);
                     await _updateConfiguredResourcesService.ExecuteAsync(product, int.Parse(newConfiguratedResourcesText));
                 }
-                catch (Exception) { }
+                catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 
                 Load_ConfiguredResources();
             }
@@ -200,7 +200,7 @@ namespace CortezosWorkshop.Configuracion
                     var fullPlate = _fullPlates.ElementAt(cbo_matArCompleta.SelectedIndex);
                     await _updateFullPlatePriceService.ExecuteAsync(fullPlate, int.Parse(newFullPlatePriceText));
                 }
-                catch (Exception) { }
+                catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 
                 Load_FullPlatePrice();
             }
@@ -247,7 +247,7 @@ namespace CortezosWorkshop.Configuracion
                     var tool = _tools.ElementAt(cbo_matHerramienta.SelectedIndex);
                     await _updateToolPriceService.ExecuteAsync(tool, int.Parse(newToolPriceText));
                 }
-                catch (Exception) { }
+                catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 
                 Load_ToolPrice();
             }

@@ -86,7 +86,7 @@ namespace CortezosWorkshop
                 var txtBoxQuantity = int.Parse(txtBox.Text);
                 await _sumToCajaFuerteService.ExecuteAsync(txtBoxQuantity);
             }
-            catch (Exception) { }
+            catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 
             Reset_TextBox();
             await Load_Funds();

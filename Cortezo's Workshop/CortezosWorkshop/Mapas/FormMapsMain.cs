@@ -34,11 +34,11 @@ namespace CortezosWorkshop.Maps
         {
             await Load_OreMaps();
             await Load_AddMapDefaultData();
-            await Load_RecommendedPricesDefaultData();            
+            await Load_RecommendedPricesDefaultData();
         }
 
         private async Task Load_OreMaps() { _oreMaps = await _oreMapsRepository.GetAllAsync(); }
-        private async Task Load_AddMapDefaultData()
+            private async Task Load_AddMapDefaultData()
         {
             for (int i = 1; i <= 20; i++) { cbo_mapQuantity.Items.Add(i); }
             cbo_mapQuantity.SelectedIndex = 0;
@@ -54,6 +54,7 @@ namespace CortezosWorkshop.Maps
 
         private async Task Load_RecommendedPricesDefaultData()
         {
+            cbo_oreMapsPrices.BindingContext = new BindingContext();
             cbo_oreMapsPrices.DataSource = _oreMaps;
             cbo_oreMapsPrices.DisplayMember = "Name";
             cbo_oreMapsPrices.ValueMember = "Name";
@@ -97,7 +98,7 @@ namespace CortezosWorkshop.Maps
                 MessageBox.Show("Escribe cuánto material has recogido en el mapa.");
                 return;
             }
-            else if (txt_materialRecogido.Text.Contains('-')) 
+            else if (txt_materialRecogido.Text.Contains('-'))
             {
                 MessageBox.Show("Los recursos no pueden ser negativos.");
                 await Load_AddMapDefaultData();
@@ -111,9 +112,9 @@ namespace CortezosWorkshop.Maps
                 var resourcesQuantity = int.Parse(txt_materialRecogido.Text);
 
                 await _addCompletedMapData.ExecuteAsync(oreMapName, mapQuantity, resourcesQuantity);
+                await Load_OreMaps();
             }
-            catch (Exception) { }       
-            
+            catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }           
             await Load_AddMapDefaultData();
         }
 
@@ -127,8 +128,8 @@ namespace CortezosWorkshop.Maps
         private void txt_oreMapPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
             var textBox = (sender as TextBox);
-            if (e.KeyChar == (char)13) 
-            { 
+            if (e.KeyChar == (char)13)
+            {
                 Save_New_Recommended_Price();
                 btn_menu_principal.Focus();
             }
@@ -141,7 +142,7 @@ namespace CortezosWorkshop.Maps
         private async Task Save_New_Recommended_Price()
         {
             var newRecommendedPrice = txt_oreMapPrice.Text;
-            if (newRecommendedPrice.Length > _MAX_LENGTH_PRECIO_RECOMENDADO_TEXTBOX) 
+            if (newRecommendedPrice.Length > _MAX_LENGTH_PRECIO_RECOMENDADO_TEXTBOX)
             {
                 Load_RecommendedPrice();
                 return;
@@ -149,12 +150,12 @@ namespace CortezosWorkshop.Maps
             if (newRecommendedPrice != _actualRecommendedPrice)
             {
                 try
-                {                  
+                {
                     var oreMap = _oreMaps.ElementAt(cbo_oreMapsPrices.SelectedIndex);
                     await _updateRecommendedPrice.ExecuteAsync(oreMap, newRecommendedPrice);
+                    await Load_OreMaps();
                 }
-                catch (Exception) { }
-
+                catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }               
                 Load_RecommendedPrice();
             }
         }
@@ -178,6 +179,5 @@ namespace CortezosWorkshop.Maps
 
             this.Hide();
         }
-      
     }
 }

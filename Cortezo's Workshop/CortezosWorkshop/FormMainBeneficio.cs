@@ -92,7 +92,7 @@ namespace CortezosWorkshop
                 await _sumToBeneficioService.ExecuteAsync(txtBoxQuantity); 
             }
             catch (NotEnoughFundsException ex) { MessageBox.Show(ex.Message); }
-            catch (Exception) { }
+            catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 
             Reset_TextBox();
             await Load_CajaFuerte();
