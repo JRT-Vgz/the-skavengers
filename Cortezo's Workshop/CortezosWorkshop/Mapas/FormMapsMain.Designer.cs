@@ -39,6 +39,18 @@
             lbl_preciosRecomendados = new Label();
             cbo_oreMapsPrices = new ComboBox();
             txt_oreMapPrice = new TextBox();
+            label2 = new Label();
+            txt_buyResourcesPrice = new TextBox();
+            cbo_buyResources = new ComboBox();
+            lbl_precioPorLingote = new Label();
+            lbl_costePorArmadura = new Label();
+            lbl_precioVentaArmadura = new Label();
+            lbl_mediaLingotes = new Label();
+            lbl_precioVentaHerramienta = new Label();
+            lbl_costePorHerramienta = new Label();
+            rb_map = new RadioButton();
+            rb_commodity = new RadioButton();
+            rb_ingots = new RadioButton();
             SuspendLayout();
             // 
             // btn_menu_principal
@@ -119,7 +131,7 @@
             // lbl_preciosRecomendados
             // 
             lbl_preciosRecomendados.AutoSize = true;
-            lbl_preciosRecomendados.Location = new Point(529, 185);
+            lbl_preciosRecomendados.Location = new Point(542, 160);
             lbl_preciosRecomendados.Name = "lbl_preciosRecomendados";
             lbl_preciosRecomendados.Size = new Size(130, 15);
             lbl_preciosRecomendados.TabIndex = 6;
@@ -129,7 +141,7 @@
             // 
             cbo_oreMapsPrices.DropDownStyle = ComboBoxStyle.DropDownList;
             cbo_oreMapsPrices.FormattingEnabled = true;
-            cbo_oreMapsPrices.Location = new Point(466, 213);
+            cbo_oreMapsPrices.Location = new Point(479, 188);
             cbo_oreMapsPrices.Name = "cbo_oreMapsPrices";
             cbo_oreMapsPrices.Size = new Size(150, 23);
             cbo_oreMapsPrices.TabIndex = 25;
@@ -137,7 +149,7 @@
             // 
             // txt_oreMapPrice
             // 
-            txt_oreMapPrice.Location = new Point(637, 213);
+            txt_oreMapPrice.Location = new Point(650, 188);
             txt_oreMapPrice.Name = "txt_oreMapPrice";
             txt_oreMapPrice.Size = new Size(103, 23);
             txt_oreMapPrice.TabIndex = 26;
@@ -145,11 +157,139 @@
             txt_oreMapPrice.KeyPress += txt_oreMapPrice_KeyPress;
             txt_oreMapPrice.Leave += txt_oreMapPrice_Leave;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(221, 183);
+            label2.Name = "label2";
+            label2.Size = new Size(40, 15);
+            label2.TabIndex = 28;
+            label2.Text = "Precio";
+            // 
+            // txt_buyResourcesPrice
+            // 
+            txt_buyResourcesPrice.Location = new Point(193, 201);
+            txt_buyResourcesPrice.Name = "txt_buyResourcesPrice";
+            txt_buyResourcesPrice.Size = new Size(100, 23);
+            txt_buyResourcesPrice.TabIndex = 29;
+            txt_buyResourcesPrice.TextAlign = HorizontalAlignment.Center;
+            txt_buyResourcesPrice.Enter += txt_buyResourcesPrice_Enter;
+            txt_buyResourcesPrice.KeyPress += txt_oreMapCompra_KeyPress;
+            txt_buyResourcesPrice.Leave += txt_buyResourcesPrice_Leave;
+            // 
+            // cbo_buyResources
+            // 
+            cbo_buyResources.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbo_buyResources.FormattingEnabled = true;
+            cbo_buyResources.Location = new Point(37, 201);
+            cbo_buyResources.Name = "cbo_buyResources";
+            cbo_buyResources.Size = new Size(150, 23);
+            cbo_buyResources.TabIndex = 30;
+            // 
+            // lbl_precioPorLingote
+            // 
+            lbl_precioPorLingote.AutoSize = true;
+            lbl_precioPorLingote.Location = new Point(70, 263);
+            lbl_precioPorLingote.Name = "lbl_precioPorLingote";
+            lbl_precioPorLingote.Size = new Size(153, 15);
+            lbl_precioPorLingote.TabIndex = 31;
+            lbl_precioPorLingote.Text = "- Precio por lingote :     0 gp";
+            // 
+            // lbl_costePorArmadura
+            // 
+            lbl_costePorArmadura.AutoSize = true;
+            lbl_costePorArmadura.Location = new Point(70, 299);
+            lbl_costePorArmadura.Name = "lbl_costePorArmadura";
+            lbl_costePorArmadura.Size = new Size(161, 15);
+            lbl_costePorArmadura.TabIndex = 32;
+            lbl_costePorArmadura.Text = "- Coste por armadura:     0 gp";
+            // 
+            // lbl_precioVentaArmadura
+            // 
+            lbl_precioVentaArmadura.AutoSize = true;
+            lbl_precioVentaArmadura.Location = new Point(70, 323);
+            lbl_precioVentaArmadura.Name = "lbl_precioVentaArmadura";
+            lbl_precioVentaArmadura.Size = new Size(178, 15);
+            lbl_precioVentaArmadura.TabIndex = 33;
+            lbl_precioVentaArmadura.Text = "- Precio venta armadura :     0 gp";
+            // 
+            // lbl_mediaLingotes
+            // 
+            lbl_mediaLingotes.AutoSize = true;
+            lbl_mediaLingotes.Location = new Point(70, 239);
+            lbl_mediaLingotes.Name = "lbl_mediaLingotes";
+            lbl_mediaLingotes.Size = new Size(187, 15);
+            lbl_mediaLingotes.TabIndex = 34;
+            lbl_mediaLingotes.Text = "- Cantidad media de lingotes :     0";
+            // 
+            // lbl_precioVentaHerramienta
+            // 
+            lbl_precioVentaHerramienta.AutoSize = true;
+            lbl_precioVentaHerramienta.Location = new Point(70, 383);
+            lbl_precioVentaHerramienta.Name = "lbl_precioVentaHerramienta";
+            lbl_precioVentaHerramienta.Size = new Size(191, 15);
+            lbl_precioVentaHerramienta.TabIndex = 36;
+            lbl_precioVentaHerramienta.Text = "- Precio venta herramienta :     0 gp";
+            // 
+            // lbl_costePorHerramienta
+            // 
+            lbl_costePorHerramienta.AutoSize = true;
+            lbl_costePorHerramienta.Location = new Point(70, 359);
+            lbl_costePorHerramienta.Name = "lbl_costePorHerramienta";
+            lbl_costePorHerramienta.Size = new Size(174, 15);
+            lbl_costePorHerramienta.TabIndex = 35;
+            lbl_costePorHerramienta.Text = "- Coste por herramienta:     0 gp";
+            // 
+            // rb_map
+            // 
+            rb_map.AutoSize = true;
+            rb_map.Location = new Point(37, 160);
+            rb_map.Name = "rb_map";
+            rb_map.Size = new Size(60, 19);
+            rb_map.TabIndex = 37;
+            rb_map.TabStop = true;
+            rb_map.Text = "Mapas";
+            rb_map.UseVisualStyleBackColor = true;
+            // 
+            // rb_commodity
+            // 
+            rb_commodity.AutoSize = true;
+            rb_commodity.Location = new Point(114, 160);
+            rb_commodity.Name = "rb_commodity";
+            rb_commodity.Size = new Size(89, 19);
+            rb_commodity.TabIndex = 38;
+            rb_commodity.TabStop = true;
+            rb_commodity.Text = "Commodity";
+            rb_commodity.UseVisualStyleBackColor = true;
+            // 
+            // rb_ingots
+            // 
+            rb_ingots.AutoSize = true;
+            rb_ingots.Location = new Point(221, 161);
+            rb_ingots.Name = "rb_ingots";
+            rb_ingots.Size = new Size(70, 19);
+            rb_ingots.TabIndex = 39;
+            rb_ingots.TabStop = true;
+            rb_ingots.Text = "Lingotes";
+            rb_ingots.UseVisualStyleBackColor = true;
+            // 
             // FormMapsMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(rb_ingots);
+            Controls.Add(rb_commodity);
+            Controls.Add(rb_map);
+            Controls.Add(lbl_precioVentaHerramienta);
+            Controls.Add(lbl_costePorHerramienta);
+            Controls.Add(lbl_mediaLingotes);
+            Controls.Add(lbl_precioVentaArmadura);
+            Controls.Add(lbl_costePorArmadura);
+            Controls.Add(lbl_precioPorLingote);
+            Controls.Add(cbo_buyResources);
+            Controls.Add(txt_buyResourcesPrice);
+            Controls.Add(label2);
             Controls.Add(txt_oreMapPrice);
             Controls.Add(cbo_oreMapsPrices);
             Controls.Add(lbl_preciosRecomendados);
@@ -185,5 +325,17 @@
         private Label lbl_preciosRecomendados;
         private ComboBox cbo_oreMapsPrices;
         private TextBox txt_oreMapPrice;
+        private Label label2;
+        private TextBox txt_buyResourcesPrice;
+        private ComboBox cbo_buyResources;
+        private Label lbl_precioPorLingote;
+        private Label lbl_costePorArmadura;
+        private Label lbl_precioVentaArmadura;
+        private Label lbl_mediaLingotes;
+        private Label lbl_precioVentaHerramienta;
+        private Label lbl_costePorHerramienta;
+        private RadioButton rb_map;
+        private RadioButton rb_commodity;
+        private RadioButton rb_ingots;
     }
 }

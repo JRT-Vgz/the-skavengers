@@ -25,9 +25,11 @@ namespace _3___Repository
             throw new NotImplementedException();
         }
 
-        public async Task<Tool> GetByNameAsync(string name)
+        public async Task<Tool> GetByNameAsync(string material)
         {
-            throw new NotImplementedException();
+            var toolModel = await _context.Tools.FirstOrDefaultAsync(o => o.Material == material);
+
+            return _mapper.Map<Tool>(toolModel);
         }
 
         public async Task SaveChanges()

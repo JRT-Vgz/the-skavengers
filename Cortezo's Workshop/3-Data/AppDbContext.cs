@@ -14,5 +14,7 @@ namespace _3___Data
         public DbSet<GenericProductModel> GenericProducts { get; set; }
         public DbSet<FullPlateModel> FullPlates { get; set; }
         public DbSet<ToolModel> Tools { get; set; }
+        public DbSet<CommodityModel> Commodities { get; set; }
+        public DbSet<IngotModel> Ingots { get; set; }
     }
 }

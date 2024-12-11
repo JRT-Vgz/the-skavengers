@@ -1,30 +1,56 @@
 ﻿using _1___Entities;
 using _2___Servicios.Interfaces;
 using _2___Servicios.Services.OreMapServices;
+using _2___Servicios.Services.ResourcesBuyServices;
+using _3_Presenters.ViewModels;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CortezosWorkshop.Maps
 {
     public partial class FormMapsMain : Form
     {
         private readonly IRepository<OreMap> _oreMapsRepository;
+        private readonly IRepository<Commodity> _commoditiesRepository;
+        private readonly IRepository<Ingot> _ingotsRepository;
         private readonly AddCompletedMapData _addCompletedMapData;
         private readonly UpdateRecommendedPrice _updateRecommendedPrice;
+        private readonly MapBuyService<BuyResourceViewModel> _mapBuyService;
+        private readonly CommodityBuyService<BuyResourceViewModel> _commodityBuyService;
+        private readonly IngotBuyService<BuyResourceViewModel> _ingotBuyService;
 
         private IEnumerable<OreMap> _oreMaps;
+        private IEnumerable<Commodity> _commodities;
+        private IEnumerable<Ingot> _ingots;
         private string _actualRecommendedPrice;
         private bool _txt_materialRecogidoClick = false;
+        private bool _txt_buyResourcesPriceClick = false;
 
         private const int _MAX_LENGTH_RECURSOS_AÑADIDOS_TEXTBOX = 5;
         private const int _MAX_LENGTH_PRECIO_RECOMENDADO_TEXTBOX = 11;
+        private const int _MAX_LENGTH_COMPRAR_RECURSO_TEXTBOX = 8;
 
         public FormMapsMain(IRepository<OreMap> oreMapsRepository,
+            IRepository<Commodity> commoditiesRepository,
+            IRepository<Ingot> ingotsRepository,
             AddCompletedMapData addCompletedMapData,
-            UpdateRecommendedPrice updateRecommendedPrice)
+            UpdateRecommendedPrice updateRecommendedPrice,
+            MapBuyService<BuyResourceViewModel> mapBuyService,
+            CommodityBuyService<BuyResourceViewModel> commodityBuyService,
+            IngotBuyService<BuyResourceViewModel> ingotBuyService)
         {
             InitializeComponent();
             _oreMapsRepository = oreMapsRepository;
+            _commoditiesRepository = commoditiesRepository;
+            _ingotsRepository = ingotsRepository;
             _addCompletedMapData = addCompletedMapData;
             _updateRecommendedPrice = updateRecommendedPrice;
+            _mapBuyService = mapBuyService;
+            _commodityBuyService = commodityBuyService;
+
+            rb_map.CheckedChanged += RB_CheckedChanged;
+            rb_commodity.CheckedChanged += RB_CheckedChanged;
+            rb_ingots.CheckedChanged += RB_CheckedChanged;
+            _ingotBuyService = ingotBuyService;
         }
 
         // -------------------------------------------------------------------------------------------------------
@@ -33,12 +59,17 @@ namespace CortezosWorkshop.Maps
         private async void FormMapsMain_Load(object sender, EventArgs e)
         {
             await Load_OreMaps();
-            await Load_AddMapDefaultData();
-            await Load_RecommendedPricesDefaultData();
+            await Load_Commodities();
+            await Load_Ingots();
+            Load_AddMapDefaultData();
+            Load_RecommendedPricesDefaultData();
+            Load_BuyResourcesDefaultCheckButton();
         }
 
         private async Task Load_OreMaps() { _oreMaps = await _oreMapsRepository.GetAllAsync(); }
-            private async Task Load_AddMapDefaultData()
+        private async Task Load_Commodities() { _commodities = await _commoditiesRepository.GetAllAsync(); }
+        private async Task Load_Ingots() { _ingots = await _ingotsRepository.GetAllAsync(); }
+        private void Load_AddMapDefaultData()
         {
             for (int i = 1; i <= 20; i++) { cbo_mapQuantity.Items.Add(i); }
             cbo_mapQuantity.SelectedIndex = 0;
@@ -52,7 +83,7 @@ namespace CortezosWorkshop.Maps
             _txt_materialRecogidoClick = false;
         }
 
-        private async Task Load_RecommendedPricesDefaultData()
+        private void Load_RecommendedPricesDefaultData()
         {
             cbo_oreMapsPrices.BindingContext = new BindingContext();
             cbo_oreMapsPrices.DataSource = _oreMaps;
@@ -67,6 +98,27 @@ namespace CortezosWorkshop.Maps
         {
             txt_oreMapPrice.Text = _oreMaps.ElementAt(cbo_oreMapsPrices.SelectedIndex).RecommendedPrice;
             _actualRecommendedPrice = txt_oreMapPrice.Text;
+        }
+
+        private void Load_BuyResourcesDefaultCheckButton()
+            => rb_map.Checked = true;
+        private void Load_BuyResourcesDefaultData(IEnumerable<object> datos)
+        {
+            cbo_buyResources.BindingContext = new BindingContext();
+            cbo_buyResources.DataSource = datos;
+            cbo_buyResources.DisplayMember = "Name";
+            cbo_buyResources.ValueMember = "Name";
+            cbo_buyResources.SelectedIndex = 0;
+
+            lbl_mediaLingotes.Text = "- Cantidad media de lingotes :     0";
+            lbl_precioPorLingote.Text = "- Precio por lingote :     0 gp";
+            lbl_costePorArmadura.Text = "- Coste por armadura:     0 gp";
+            lbl_precioVentaArmadura.Text = "- Precio venta armadura :     0 gp";
+            lbl_costePorHerramienta.Text = "- Coste por herramienta:     0 gp";
+            lbl_precioVentaHerramienta.Text = "- Precio venta herramienta :     0 gp";
+
+            txt_buyResourcesPrice.Text = "0";
+            _txt_buyResourcesPriceClick = false;
         }
 
         // -------------------------------------------------------------------------------------------------------
@@ -84,7 +136,11 @@ namespace CortezosWorkshop.Maps
         private void txt_materialRecogido_KeyPress(object sender, KeyPressEventArgs e)
         {
             var textBox = (sender as TextBox);
-            if (e.KeyChar == (char)13) { btn_addMap_Click(sender, e); }
+            if (e.KeyChar == (char)13)
+            {
+                btn_addMap_Click(sender, e);
+                return;
+            }
 
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) { e.Handled = true; }
 
@@ -101,7 +157,7 @@ namespace CortezosWorkshop.Maps
             else if (txt_materialRecogido.Text.Contains('-'))
             {
                 MessageBox.Show("Los recursos no pueden ser negativos.");
-                await Load_AddMapDefaultData();
+                Load_AddMapDefaultData();
                 return;
             }
 
@@ -114,30 +170,28 @@ namespace CortezosWorkshop.Maps
                 await _addCompletedMapData.ExecuteAsync(oreMapName, mapQuantity, resourcesQuantity);
                 await Load_OreMaps();
             }
-            catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }           
-            await Load_AddMapDefaultData();
+            catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
+            Load_AddMapDefaultData();
         }
 
         // -------------------------------------------------------------------------------------------------------
         // ------------------------------------ CAMBIAR PRECIOS RECOMENDADOS -------------------------------------
         // -------------------------------------------------------------------------------------------------------
-        private void cbo_oreMapsPrices_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Load_RecommendedPrice();
-        }
-        private void txt_oreMapPrice_KeyPress(object sender, KeyPressEventArgs e)
+        private void cbo_oreMapsPrices_SelectedIndexChanged(object sender, EventArgs e) { Load_RecommendedPrice(); }
+        private async void txt_oreMapPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
             var textBox = (sender as TextBox);
             if (e.KeyChar == (char)13)
             {
-                Save_New_Recommended_Price();
+                await Save_New_Recommended_Price();
                 btn_menu_principal.Focus();
+                return;
             }
 
             if (textBox.Text.Length == _MAX_LENGTH_PRECIO_RECOMENDADO_TEXTBOX && !char.IsControl(e.KeyChar)) { e.Handled = true; }
         }
 
-        private void txt_oreMapPrice_Leave(object sender, EventArgs e) { Save_New_Recommended_Price(); }
+        private async void txt_oreMapPrice_Leave(object sender, EventArgs e) { await Save_New_Recommended_Price(); }
 
         private async Task Save_New_Recommended_Price()
         {
@@ -155,10 +209,84 @@ namespace CortezosWorkshop.Maps
                     await _updateRecommendedPrice.ExecuteAsync(oreMap, newRecommendedPrice);
                     await Load_OreMaps();
                 }
-                catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }               
+                catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
                 Load_RecommendedPrice();
             }
         }
+
+        // -------------------------------------------------------------------------------------------------------
+        // ------------------------------------------ COMPRAR RECURSOS -------------------------------------------
+        // -------------------------------------------------------------------------------------------------------
+        private void RB_CheckedChanged(object sender, EventArgs e) 
+        {
+            if (!((RadioButton)sender).Checked) { return; }
+
+            if (sender == rb_map)
+            {
+                Load_BuyResourcesDefaultData(_oreMaps);
+            }
+            else if (sender == rb_commodity)
+            {
+                Load_BuyResourcesDefaultData(_commodities);
+            }
+            else if (sender == rb_ingots)
+            {
+                Load_BuyResourcesDefaultData(_ingots);
+            }
+        }
+
+        private void txt_buyResourcesPrice_Enter(object sender, EventArgs e)
+        {
+            if (!_txt_buyResourcesPriceClick)
+            {
+                _txt_buyResourcesPriceClick = true;
+                txt_buyResourcesPrice.Text = "";
+            }
+        }
+
+        private async void txt_oreMapCompra_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var textBox = (sender as TextBox);
+            if (e.KeyChar == (char)13)
+            {
+                await Show_Info_For_Buy_Resources();
+                btn_menu_principal.Focus();
+                return;
+            }
+
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) { e.Handled = true; }
+
+            if (textBox.Text.Length == _MAX_LENGTH_COMPRAR_RECURSO_TEXTBOX && !char.IsControl(e.KeyChar)) { e.Handled = true; }
+        }
+
+        private async void txt_buyResourcesPrice_Leave(object sender, EventArgs e) { await Show_Info_For_Buy_Resources(); }
+        private async Task Show_Info_For_Buy_Resources()
+        {
+            try
+            {
+                var buyResourcesName = cbo_buyResources.Text;
+                var buyPrice = int.Parse(txt_buyResourcesPrice.Text);
+
+                var buyResourceViewModel = new BuyResourceViewModel();
+                if (rb_map.Checked == true) 
+                    { buyResourceViewModel = await _mapBuyService.ExecuteAsync(buyResourcesName, buyPrice); }
+                else if (rb_commodity.Checked == true)
+                    { buyResourceViewModel = await _commodityBuyService.ExecuteAsync(buyResourcesName, buyPrice); }
+                else if (rb_ingots.Checked == true)
+                    { buyResourceViewModel = await _ingotBuyService.ExecuteAsync(buyResourcesName, buyPrice); }
+
+                lbl_mediaLingotes.Text = buyResourceViewModel.ResourceQuantity;
+                lbl_precioPorLingote.Text = buyResourceViewModel.PricePerResource;
+                lbl_costePorArmadura.Text = buyResourceViewModel.FullPlateGoldCost;
+                lbl_precioVentaArmadura.Text = buyResourceViewModel.FullPlateSellPrice;
+                lbl_costePorHerramienta.Text = buyResourceViewModel.ToolGoldCost;
+                lbl_precioVentaHerramienta.Text = buyResourceViewModel.ToolSellPrice;
+            }
+            catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
+
+            _txt_buyResourcesPriceClick = false;
+        }
+
 
 
         // -------------------------------------------------------------------------------------------------------
@@ -179,5 +307,6 @@ namespace CortezosWorkshop.Maps
 
             this.Hide();
         }
+
     }
 }

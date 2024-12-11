@@ -30,7 +30,7 @@ namespace CortezosWorkshop
         // -------------------------------------------------------------------------------------------------------
         private async void FormMainEditFunds_Load(object sender, EventArgs e)
         {
-            this.Location = new Point(this.Location.X + 350, this.Location.Y + 165);
+            this.Location = new Point(this.Location.X - 350, this.Location.Y + 165);
             await Load_Funds();
         }
         private async Task Load_Funds()

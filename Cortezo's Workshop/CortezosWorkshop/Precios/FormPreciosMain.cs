@@ -1,6 +1,7 @@
 ﻿using _1___Entities;
 using _1___Entities.ProductEntities;
 using _2___Servicios.Interfaces;
+using _2___Servicios.Services;
 using _3___Repository;
 using System;
 using System.Collections;
@@ -18,6 +19,7 @@ namespace CortezosWorkshop.Precios
 {
     public partial class FormPreciosMain : Form
     {
+        private readonly ConfigurationService _configuration;
         private readonly IRepository<GenericProduct> _genericProductsRepository;
         private readonly IRepository<FullPlate> _fullPlatesRepository;
         private readonly IRepository<Tool> _toolsRepository;
@@ -26,11 +28,13 @@ namespace CortezosWorkshop.Precios
         private IEnumerable<Tool> _tools;
         private IEnumerable<GenericProduct> _genericProducts;
 
-        public FormPreciosMain(IRepository<GenericProduct> genericProductsRepository,
+        public FormPreciosMain(ConfigurationService configuration,
+            IRepository<GenericProduct> genericProductsRepository,
             IRepository<FullPlate> fullPlatesRepository,
             IRepository<Tool> toolsRepository)
         {
             InitializeComponent();
+            _configuration = configuration;
             _genericProductsRepository = genericProductsRepository;
             _fullPlatesRepository = fullPlatesRepository;
             _toolsRepository = toolsRepository;
@@ -45,7 +49,6 @@ namespace CortezosWorkshop.Precios
             await Load_Tools();
             await Load_Generic_Products();
             await Load_ToolsPrices();
-            //await Load_FullPlatesPrices();
         }
 
         private async Task Load_FullPlates() { _fullPlates = await _fullPlatesRepository.GetAllAsync(); }
@@ -113,9 +116,11 @@ namespace CortezosWorkshop.Precios
         private async void cbo_producto_SelectedIndexChanged(object sender, EventArgs e)
         {
             var genericProductText = _genericProducts.ElementAt(cbo_producto.SelectedIndex).Name;
-            //MessageBox.Show(genericProductText);
-            if (genericProductText == "Armadura completa") { await Load_FullPlatesPrices(); }
-            else if (genericProductText == "Herramientas") { await Load_ToolsPrices(); }
+
+            if (genericProductText == _configuration.Configuration["Constants:_GENERICPROD_FULL_PLATE"]) 
+                { await Load_FullPlatesPrices(); }
+            else if (genericProductText == _configuration.Configuration["Constants:_GENERICPROD_TOOLS"]) 
+                { await Load_ToolsPrices(); }
         }
 
 

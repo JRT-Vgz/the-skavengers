@@ -27,9 +27,11 @@ namespace _3___Repository
             throw new NotImplementedException();
         }
 
-        public async Task<FullPlate> GetByNameAsync(string name)
+        public async Task<FullPlate> GetByNameAsync(string material)
         {
-            throw new NotImplementedException();
+            var fullPlateModel = await _context.FullPlates.FirstOrDefaultAsync(o => o.Material == material);
+
+            return _mapper.Map<FullPlate>(fullPlateModel);
         }
 
         public async Task SaveChanges()

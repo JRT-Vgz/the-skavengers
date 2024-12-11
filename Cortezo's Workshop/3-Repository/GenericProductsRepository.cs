@@ -25,9 +25,11 @@ namespace _3___Repository
             throw new NotImplementedException();
         }
 
-        public Task<GenericProduct> GetByNameAsync(string name)
+        public async Task<GenericProduct> GetByNameAsync(string name)
         {
-            throw new NotImplementedException();
+            var genericProductModel = await _context.GenericProducts.FirstOrDefaultAsync(o => o.Name == name);
+
+            return _mapper.Map<GenericProduct>(genericProductModel);
         }
 
         public async Task SaveChanges()

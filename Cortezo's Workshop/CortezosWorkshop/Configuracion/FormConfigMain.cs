@@ -58,15 +58,15 @@ namespace CortezosWorkshop.Configuracion
             await Load_Products();
             await Load_FullPlates();
             await Load_Tools();
-            await Load_ConfigResourcesDefaultData();
-            await Load_FullPlatePricesDefaultData();
-            await Load_ToolPricesDefaultData();
+            Load_ConfigResourcesDefaultData();
+            Load_FullPlatePricesDefaultData();
+            Load_ToolPricesDefaultData();
         }
 
         private async Task Load_Products() { _genericProducts = await _genericProductsRepository.GetAllAsync(); }
         private async Task Load_FullPlates() { _fullPlates = await _fullPlatesRepository.GetAllAsync(); }
         private async Task Load_Tools() { _tools = await _toolsRepository.GetAllAsync(); }
-        private async Task Load_ConfigResourcesDefaultData()
+        private void Load_ConfigResourcesDefaultData()
         {
             cbo_productos.DataSource = _genericProducts;
             cbo_productos.DisplayMember = "Name";
@@ -82,7 +82,7 @@ namespace CortezosWorkshop.Configuracion
             _actualConfiguredResources = txt_configResources.Text;
         }
 
-        private async Task Load_FullPlatePricesDefaultData()
+        private void Load_FullPlatePricesDefaultData()
         {
             cbo_matArCompleta.DataSource = _fullPlates;
             cbo_matArCompleta.DisplayMember = "Material";
@@ -97,7 +97,7 @@ namespace CortezosWorkshop.Configuracion
             _actualFullPlatePrice = txt_precioArCompleta.Text;
         }
 
-        private async Task Load_ToolPricesDefaultData()
+        private void Load_ToolPricesDefaultData()
         {
             cbo_matHerramienta.DataSource = _tools;
             cbo_matHerramienta.DisplayMember = "Material";
@@ -117,19 +117,19 @@ namespace CortezosWorkshop.Configuracion
         // -------------------------------------------------------------------------------------------------------
         private void cbo_productos_SelectedIndexChanged(object sender, EventArgs e) { Load_ConfiguredResources(); }
 
-        private void txt_precioProductos_KeyPress(object sender, KeyPressEventArgs e)
+        private async void txt_precioProductos_KeyPress(object sender, KeyPressEventArgs e)
         {
             var textBox = (sender as TextBox);
             if (e.KeyChar == (char)13)
             {
-                Save_New_Configurated_Resources();
+                await Save_New_Configurated_Resources();
                 btn_menu_principal.Focus();
             }
 
             if (textBox.Text.Length == _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX && !char.IsControl(e.KeyChar)) { e.Handled = true; }
         }
 
-        private void txt_precioProductos_Leave(object sender, EventArgs e) { Save_New_Configurated_Resources(); }
+        private async void txt_precioProductos_Leave(object sender, EventArgs e) { await Save_New_Configurated_Resources(); }
 
         private async Task Save_New_Configurated_Resources()
         {
@@ -164,19 +164,19 @@ namespace CortezosWorkshop.Configuracion
         // -------------------------------------------------------------------------------------------------------
         private void cbo_matArCompleta_SelectedIndexChanged(object sender, EventArgs e) { Load_FullPlatePrice(); }
 
-        private void txt_precioArCompleta_KeyPress(object sender, KeyPressEventArgs e)
+        private async void txt_precioArCompleta_KeyPress(object sender, KeyPressEventArgs e)
         {
             var textBox = (sender as TextBox);
             if (e.KeyChar == (char)13)
             {
-                Save_New_FullPlate_Price();
+                await Save_New_FullPlate_Price();
                 btn_menu_principal.Focus();
             }
 
             if (textBox.Text.Length == _MAX_LENGTH_PRICE_PRODUCT && !char.IsControl(e.KeyChar)) { e.Handled = true; }
         }
 
-        private void txt_precioArCompleta_Leave(object sender, EventArgs e) { Save_New_FullPlate_Price(); }
+        private async void txt_precioArCompleta_Leave(object sender, EventArgs e) { await Save_New_FullPlate_Price(); }
 
         private async Task Save_New_FullPlate_Price()
         {
@@ -211,19 +211,19 @@ namespace CortezosWorkshop.Configuracion
         // -------------------------------------------------------------------------------------------------------
         private void cbo_matHerramienta_SelectedIndexChanged(object sender, EventArgs e) { Load_ToolPrice(); }       
 
-        private void txt_precioHerramienta_KeyPress(object sender, KeyPressEventArgs e)
+        private async void txt_precioHerramienta_KeyPress(object sender, KeyPressEventArgs e)
         {
             var textBox = (sender as TextBox);
             if (e.KeyChar == (char)13)
             {
-                Save_New_Tool_Price();
+                await Save_New_Tool_Price();
                 btn_menu_principal.Focus();
             }
 
             if (textBox.Text.Length == _MAX_LENGTH_PRICE_PRODUCT && !char.IsControl(e.KeyChar)) { e.Handled = true; }
         }
 
-        private void txt_precioHerramienta_Leave(object sender, EventArgs e) { Save_New_Tool_Price(); }
+        private async void txt_precioHerramienta_Leave(object sender, EventArgs e) { await Save_New_Tool_Price(); }
 
         private async Task Save_New_Tool_Price()
         {

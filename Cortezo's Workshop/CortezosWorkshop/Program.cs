@@ -1,10 +1,12 @@
 using _1___Entities;
 using _1___Entities.ProductEntities;
+using _1___Entities.ResourcesBuyEntities;
 using _2___Servicios;
 using _2___Servicios.Interfaces;
 using _2___Servicios.Services;
 using _2___Servicios.Services.OreMapServices;
 using _2___Servicios.Services.ProductServices;
+using _2___Servicios.Services.ResourcesBuyServices;
 using _2___Servicios.Services.ShopStatServices;
 using _2___Servicios.Services.StatisticsServices;
 using _3___Data;
@@ -58,8 +60,12 @@ namespace CortezosWorkshop
             services.AddTransient<IRepository<GenericProduct>, GenericProductsRepository>();
             services.AddTransient<IRepository<FullPlate>, FullPlatesRepository>();
             services.AddTransient<IRepository<Tool>, ToolsRepository>();
+            services.AddTransient<IRepository<Commodity>, CommoditiesRepository>();
+            services.AddTransient<IRepository<Ingot>, IngotsRepository>();
+
             services.AddTransient<IPresenter<ShopStat, FundsViewModel>, FundsPresenter>();
             services.AddTransient<IPresenter<Statistics, StatisticsViewModel>, StatisticsPresenter>();
+            services.AddTransient<IPresenter<BuyResourceEntity, BuyResourceViewModel>, BuyResourcePresenter>();
 
             services.AddAutoMapper(typeof(ShopStatMappingProfile));
 
@@ -72,6 +78,9 @@ namespace CortezosWorkshop
             services.AddTransient<UpdateConfiguredResources>();
             services.AddTransient<UpdateFullPlatePriceService>();
             services.AddTransient<UpdateToolPriceService>();
+            services.AddTransient<MapBuyService<BuyResourceViewModel>>();
+            services.AddTransient<CommodityBuyService<BuyResourceViewModel>>();
+            services.AddTransient<IngotBuyService<BuyResourceViewModel>>();
 
 
             // INYECCIÓN DE FORMULARIOS.

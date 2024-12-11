@@ -98,7 +98,7 @@
             // 
             // btn_addFunds
             // 
-            btn_addFunds.Location = new Point(494, 383);
+            btn_addFunds.Location = new Point(215, 387);
             btn_addFunds.Name = "btn_addFunds";
             btn_addFunds.Size = new Size(92, 22);
             btn_addFunds.TabIndex = 6;
@@ -108,7 +108,7 @@
             // 
             // btn_beneficio
             // 
-            btn_beneficio.Location = new Point(215, 383);
+            btn_beneficio.Location = new Point(489, 387);
             btn_beneficio.Name = "btn_beneficio";
             btn_beneficio.Size = new Size(92, 22);
             btn_beneficio.TabIndex = 7;

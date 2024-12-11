@@ -61,15 +61,15 @@
             lbl_configRecursos.AutoSize = true;
             lbl_configRecursos.Location = new Point(40, 74);
             lbl_configRecursos.Name = "lbl_configRecursos";
-            lbl_configRecursos.Size = new Size(149, 15);
+            lbl_configRecursos.Size = new Size(114, 15);
             lbl_configRecursos.TabIndex = 2;
-            lbl_configRecursos.Text = "Configuración de recursos:";
+            lbl_configRecursos.Text = "Configurar recursos:";
             // 
             // cbo_productos
             // 
             cbo_productos.DropDownStyle = ComboBoxStyle.DropDownList;
             cbo_productos.FormattingEnabled = true;
-            cbo_productos.Location = new Point(207, 71);
+            cbo_productos.Location = new Point(170, 71);
             cbo_productos.Name = "cbo_productos";
             cbo_productos.Size = new Size(155, 23);
             cbo_productos.TabIndex = 3;
@@ -77,7 +77,7 @@
             // 
             // txt_configResources
             // 
-            txt_configResources.Location = new Point(383, 71);
+            txt_configResources.Location = new Point(346, 71);
             txt_configResources.Name = "txt_configResources";
             txt_configResources.Size = new Size(100, 23);
             txt_configResources.TabIndex = 4;
@@ -88,7 +88,7 @@
             // lbl_material
             // 
             lbl_material.AutoSize = true;
-            lbl_material.Location = new Point(500, 74);
+            lbl_material.Location = new Point(463, 74);
             lbl_material.Name = "lbl_material";
             lbl_material.Size = new Size(50, 15);
             lbl_material.TabIndex = 5;
@@ -99,9 +99,9 @@
             lbl_configPrecios.AutoSize = true;
             lbl_configPrecios.Location = new Point(40, 165);
             lbl_configPrecios.Name = "lbl_configPrecios";
-            lbl_configPrecios.Size = new Size(143, 15);
+            lbl_configPrecios.Size = new Size(156, 15);
             lbl_configPrecios.TabIndex = 6;
-            lbl_configPrecios.Text = "Configuración de precios:";
+            lbl_configPrecios.Text = "Configurar precios de venta:";
             // 
             // lbl_armaduraCompleta
             // 
