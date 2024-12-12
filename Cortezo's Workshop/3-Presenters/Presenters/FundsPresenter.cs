@@ -2,7 +2,6 @@
 using _1___Entities;
 using _2___Servicios.Interfaces;
 using _3_Presenters.ViewModels;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace _3_Presenters.Presenters
 {

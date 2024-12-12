@@ -1,7 +1,5 @@
 using _1___Entities;
-using _1___Entities.ProductEntities;
 using _1___Entities.ResourcesBuyEntities;
-using _2___Servicios;
 using _2___Servicios.Interfaces;
 using _2___Servicios.Services;
 using _2___Servicios.Services.OreMapServices;
@@ -19,10 +17,8 @@ using CortezosWorkshop.Estadisticas;
 using CortezosWorkshop.Maps;
 using CortezosWorkshop.Precios;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Identity.Client;
 
 namespace CortezosWorkshop
 {
@@ -55,13 +51,9 @@ namespace CortezosWorkshop
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DB")));
 
-            services.AddTransient<IRepository<OreMap>, OreMapsRepository>();
             services.AddTransient<IRepository<ShopStat>, ShopStatsRepository>();
             services.AddTransient<IRepository<GenericProduct>, GenericProductsRepository>();
-            services.AddTransient<IRepository<FullPlate>, FullPlatesRepository>();
-            services.AddTransient<IRepository<Tool>, ToolsRepository>();
-            services.AddTransient<IRepository<Commodity>, CommoditiesRepository>();
-            services.AddTransient<IRepository<Ingot>, IngotsRepository>();
+            services.AddTransient<IRepository<IngotResource>, IngotResourcesRepository>();
 
             services.AddTransient<IPresenter<ShopStat, FundsViewModel>, FundsPresenter>();
             services.AddTransient<IPresenter<Statistics, StatisticsViewModel>, StatisticsPresenter>();

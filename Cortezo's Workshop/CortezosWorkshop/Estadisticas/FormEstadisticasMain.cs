@@ -1,18 +1,7 @@
-﻿using _1___Entities;
-using _2___Servicios.Interfaces;
-using _2___Servicios.Services;
+﻿
 using _2___Servicios.Services.StatisticsServices;
 using _3_Presenters.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace CortezosWorkshop.Estadisticas
 {

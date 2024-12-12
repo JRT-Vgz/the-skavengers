@@ -1,6 +1,5 @@
-﻿using _1___Entities;
+﻿
 using _2___Servicios.Exceptions;
-using _2___Servicios.Interfaces;
 using _2___Servicios.Services;
 using _2___Servicios.Services.ShopStatServices;
 using _3_Presenters.ViewModels;

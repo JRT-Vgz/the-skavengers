@@ -8,17 +8,17 @@ namespace _2___Servicios.Services.StatisticsServices
     {
         private readonly ConfigurationService _configurationService;
         private readonly IRepository<ShopStat> _shopStatsRepository;
-        private readonly IRepository<OreMap> _oreMapRepository;
+        private readonly IRepository<IngotResource> _ingotResourcesRepository;
         private readonly IPresenter<Statistics, TViewModel> _presenter;
 
         public CreateStatisticsService(ConfigurationService configurationService,
             IRepository<ShopStat> shopStatsRepository,
-            IRepository<OreMap> oreMapRepository,
+            IRepository<IngotResource> ingotResourcesRepository,
             IPresenter<Statistics, TViewModel> presenter)
         {
             _configurationService = configurationService;
             _shopStatsRepository = shopStatsRepository;
-            _oreMapRepository = oreMapRepository;
+            _ingotResourcesRepository = ingotResourcesRepository;
             _presenter = presenter;
         }
 
@@ -32,7 +32,7 @@ namespace _2___Servicios.Services.StatisticsServices
                 _configurationService.Configuration["Constants:_SHOPSTAT_BENEFICIO"]);
             var oroGastado = await _shopStatsRepository.GetByNameAsync(
                 _configurationService.Configuration["Constants:_SHOPSTAT_ORO_GASTADO"]);
-            var oreMaps = await _oreMapRepository.GetAllAsync();
+            var ingotResources = await _ingotResourcesRepository.GetAllAsync();
 
             var statistics = new Statistics
             {
@@ -40,8 +40,8 @@ namespace _2___Servicios.Services.StatisticsServices
                 CajaFuerte = cajaFuerte.Quantity,
                 Beneficio = beneficio.Quantity,
                 OroGastado = oroGastado.Quantity,
-                MapasCompletados = oreMaps.Sum(o => o.Quantity),
-                RecursosExtraidos = oreMaps.Sum(o => o.TotalOre)
+                MapasCompletados = ingotResources.Sum(o => o.MapQuantity),
+                RecursosExtraidos = ingotResources.Sum(o => o.MapTotalOre)
             };
 
             return _presenter.Present(statistics);

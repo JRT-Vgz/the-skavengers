@@ -6,22 +6,20 @@ namespace _2___Servicios.Services.OreMapServices
 {
     public class AddCompletedMapData
     {
-        private readonly IRepository<OreMap> _oreMapsRepository;
+        private readonly IRepository<IngotResource> _ingotResourcesRepository;
 
-        public AddCompletedMapData(IRepository<OreMap> oreMapsRepository)
+        public AddCompletedMapData(IRepository<IngotResource> ingotResourcesRepository)
         {
-            _oreMapsRepository = oreMapsRepository;
+            _ingotResourcesRepository = ingotResourcesRepository;
         }
 
-        public async Task ExecuteAsync(string oreMapName, int mapQuantity, int resourcesQuantity)
+        public async Task ExecuteAsync(IngotResource ingotResource, int mapQuantity, int resourcesQuantity)
         {
-            var oreMap = await _oreMapsRepository.GetByNameAsync(oreMapName);
-            oreMap.Quantity += mapQuantity;
-            oreMap.TotalOre += resourcesQuantity;
+            ingotResource.MapQuantity += mapQuantity;
+            ingotResource.MapTotalOre += resourcesQuantity;
 
-            await _oreMapsRepository.UpdateAsync(oreMap);
-
-            await _oreMapsRepository.SaveChanges();
+            await _ingotResourcesRepository.UpdateAsync(ingotResource);
+            await _ingotResourcesRepository.SaveChanges();
         }
     }
 }

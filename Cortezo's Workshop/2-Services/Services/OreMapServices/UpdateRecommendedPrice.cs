@@ -6,19 +6,19 @@ namespace _2___Servicios.Services.OreMapServices
 {
     public class UpdateRecommendedPrice
     {
-        private readonly IRepository<OreMap> _oreMapRepository;
+        private readonly IRepository<IngotResource> _ingotResourcesRepository;
 
-        public UpdateRecommendedPrice(IRepository<OreMap> oreMapRepository)
+        public UpdateRecommendedPrice(IRepository<IngotResource> ingotResourcesRepository)
         {
-            _oreMapRepository = oreMapRepository;
+            _ingotResourcesRepository = ingotResourcesRepository;
         }
 
-        public async Task ExecuteAsync(OreMap oreMap, string newRecommendedPrice)
+        public async Task ExecuteAsync(IngotResource ingotResource, string newRecommendedPrice)
         {
-            oreMap.RecommendedPrice = newRecommendedPrice;
-            await _oreMapRepository.UpdateAsync(oreMap);
+            ingotResource.MapRecommendedPrice = newRecommendedPrice;
 
-            await _oreMapRepository.SaveChanges();
+            await _ingotResourcesRepository.UpdateAsync(ingotResource);
+            await _ingotResourcesRepository.SaveChanges();
         }
     }
 }

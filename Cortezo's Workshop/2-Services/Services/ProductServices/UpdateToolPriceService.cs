@@ -1,23 +1,23 @@
 
-using _1___Entities.ProductEntities;
+using _1___Entities;
 using _2___Servicios.Interfaces;
 
 namespace _2___Servicios.Services.ProductServices
 {
     public class UpdateToolPriceService
     {
-        private readonly IRepository<Tool> _toolRepository;
-        public UpdateToolPriceService(IRepository<Tool> toolRepository)
+        private readonly IRepository<IngotResource> _ingotResourceRepository;
+        public UpdateToolPriceService(IRepository<IngotResource> ingotResourceRepository)
         {
-            _toolRepository = toolRepository;
+            _ingotResourceRepository = ingotResourceRepository;
         }
 
-        public async Task ExecuteAsync(Tool tool, int newToolPrice)
+        public async Task ExecuteAsync(IngotResource ingotResource, int newToolPrice)
         {
-            tool.Price = newToolPrice;
-            await _toolRepository.UpdateAsync(tool);
+            ingotResource.ToolPrice = newToolPrice;
+            await _ingotResourceRepository.UpdateAsync(ingotResource);
 
-            await _toolRepository.SaveChanges();
+            await _ingotResourceRepository.SaveChanges();
         }
     }
 }

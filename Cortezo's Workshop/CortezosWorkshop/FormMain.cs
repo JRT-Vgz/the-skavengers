@@ -6,11 +6,6 @@ using CortezosWorkshop.Estadisticas;
 using CortezosWorkshop.Maps;
 using CortezosWorkshop.Precios;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualBasic.ApplicationServices;
-using System;
-using System.Data.SqlClient;
-using System.Windows.Forms;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace CortezosWorkshop
 {

@@ -1,33 +1,19 @@
 ﻿using _1___Entities;
-using _1___Entities.ProductEntities;
 using _2___Servicios.Interfaces;
-using _2___Servicios.Services.OreMapServices;
 using _2___Servicios.Services.ProductServices;
-using _3___Repository;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CortezosWorkshop.Configuracion
 {
     public partial class FormConfigMain : Form
     {
         private readonly IRepository<GenericProduct> _genericProductsRepository;
-        private readonly IRepository<FullPlate> _fullPlatesRepository;
-        private readonly IRepository<Tool> _toolsRepository;
+        private readonly IRepository<IngotResource> _ingotResourceRepository;
         private readonly UpdateConfiguredResources _updateConfiguredResourcesService;
         private readonly UpdateFullPlatePriceService _updateFullPlatePriceService;
         private readonly UpdateToolPriceService _updateToolPriceService;
 
         private IEnumerable<GenericProduct> _genericProducts;
-        private IEnumerable<FullPlate> _fullPlates;
-        private IEnumerable<Tool> _tools;
+        private IEnumerable<IngotResource> _ingotResources;
         private string _actualConfiguredResources;
         private string _actualFullPlatePrice;
         private string _actualToolPrice;
@@ -35,16 +21,14 @@ namespace CortezosWorkshop.Configuracion
         private const int _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX = 5;
         private const int _MAX_LENGTH_PRICE_PRODUCT = 7;
         public FormConfigMain(IRepository<GenericProduct> genericProductsRepository,
-            IRepository<FullPlate> fullPlatesRepository,
-            IRepository<Tool> toolsRepository,
+            IRepository<IngotResource> ingotResourceRepository,
             UpdateConfiguredResources updateConfiguredResourcesService,
             UpdateFullPlatePriceService updateFullPlatePriceService,
             UpdateToolPriceService updateToolPriceService)
         {
             InitializeComponent();
             _genericProductsRepository = genericProductsRepository;
-            _fullPlatesRepository = fullPlatesRepository;
-            _toolsRepository = toolsRepository;
+            _ingotResourceRepository = ingotResourceRepository;
             _updateConfiguredResourcesService = updateConfiguredResourcesService;
             _updateFullPlatePriceService = updateFullPlatePriceService;
             _updateToolPriceService = updateToolPriceService;
@@ -56,16 +40,14 @@ namespace CortezosWorkshop.Configuracion
         private async void FormConfigMain_Load(object sender, EventArgs e)
         {
             await Load_Products();
-            await Load_FullPlates();
-            await Load_Tools();
+            await Load_IngotResources();
             Load_ConfigResourcesDefaultData();
             Load_FullPlatePricesDefaultData();
             Load_ToolPricesDefaultData();
         }
 
         private async Task Load_Products() { _genericProducts = await _genericProductsRepository.GetAllAsync(); }
-        private async Task Load_FullPlates() { _fullPlates = await _fullPlatesRepository.GetAllAsync(); }
-        private async Task Load_Tools() { _tools = await _toolsRepository.GetAllAsync(); }
+        private async Task Load_IngotResources() { _ingotResources = await _ingotResourceRepository.GetAllAsync(); }
         private void Load_ConfigResourcesDefaultData()
         {
             cbo_productos.DataSource = _genericProducts;
@@ -84,8 +66,8 @@ namespace CortezosWorkshop.Configuracion
 
         private void Load_FullPlatePricesDefaultData()
         {
-            cbo_matArCompleta.DataSource = _fullPlates;
-            cbo_matArCompleta.DisplayMember = "Material";
+            cbo_matArCompleta.DataSource = _ingotResources;
+            cbo_matArCompleta.DisplayMember = "IngotName";
             cbo_matArCompleta.SelectedIndex = 0;
 
             Load_FullPlatePrice();
@@ -93,14 +75,15 @@ namespace CortezosWorkshop.Configuracion
 
         private void Load_FullPlatePrice()
         {
-            txt_precioArCompleta.Text = _fullPlates.ElementAt(cbo_matArCompleta.SelectedIndex).Price.ToString();
+            txt_precioArCompleta.Text = _ingotResources.ElementAt(cbo_matArCompleta.SelectedIndex).FullPlatePrice.ToString();
             _actualFullPlatePrice = txt_precioArCompleta.Text;
         }
 
         private void Load_ToolPricesDefaultData()
         {
-            cbo_matHerramienta.DataSource = _tools;
-            cbo_matHerramienta.DisplayMember = "Material";
+            cbo_matHerramienta.BindingContext = new BindingContext();
+            cbo_matHerramienta.DataSource = _ingotResources;
+            cbo_matHerramienta.DisplayMember = "IngotName";
             cbo_matHerramienta.SelectedIndex = 0;
 
             Load_ToolPrice();
@@ -108,7 +91,7 @@ namespace CortezosWorkshop.Configuracion
 
         private void Load_ToolPrice()
         {
-            txt_precioHerramienta.Text = _tools.ElementAt(cbo_matHerramienta.SelectedIndex).Price.ToString();
+            txt_precioHerramienta.Text = _ingotResources.ElementAt(cbo_matHerramienta.SelectedIndex).ToolPrice.ToString();
             _actualToolPrice = txt_precioHerramienta.Text;
         }
 
@@ -197,8 +180,9 @@ namespace CortezosWorkshop.Configuracion
             {
                 try
                 {
-                    var fullPlate = _fullPlates.ElementAt(cbo_matArCompleta.SelectedIndex);
-                    await _updateFullPlatePriceService.ExecuteAsync(fullPlate, int.Parse(newFullPlatePriceText));
+                    var ingotResource = _ingotResources.ElementAt(cbo_matArCompleta.SelectedIndex);
+                    await _updateFullPlatePriceService.ExecuteAsync(ingotResource, int.Parse(newFullPlatePriceText));
+                    await Load_IngotResources();
                 }
                 catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 
@@ -244,8 +228,9 @@ namespace CortezosWorkshop.Configuracion
             {
                 try
                 {
-                    var tool = _tools.ElementAt(cbo_matHerramienta.SelectedIndex);
-                    await _updateToolPriceService.ExecuteAsync(tool, int.Parse(newToolPriceText));
+                    var ingotResource = _ingotResources.ElementAt(cbo_matHerramienta.SelectedIndex);
+                    await _updateToolPriceService.ExecuteAsync(ingotResource, int.Parse(newToolPriceText));
+                    await Load_IngotResources();
                 }
                 catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 

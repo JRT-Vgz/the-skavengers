@@ -1,19 +1,6 @@
 ﻿using _1___Entities;
-using _1___Entities.ProductEntities;
 using _2___Servicios.Interfaces;
 using _2___Servicios.Services;
-using _3___Repository;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CortezosWorkshop.Precios
 {
@@ -21,23 +8,19 @@ namespace CortezosWorkshop.Precios
     {
         private readonly ConfigurationService _configuration;
         private readonly IRepository<GenericProduct> _genericProductsRepository;
-        private readonly IRepository<FullPlate> _fullPlatesRepository;
-        private readonly IRepository<Tool> _toolsRepository;
+        private readonly IRepository<IngotResource> _ingotResourceRepository;
 
-        private IEnumerable<FullPlate> _fullPlates;
-        private IEnumerable<Tool> _tools;
+        private IEnumerable<IngotResource> _ingotResources;
         private IEnumerable<GenericProduct> _genericProducts;
 
         public FormPreciosMain(ConfigurationService configuration,
             IRepository<GenericProduct> genericProductsRepository,
-            IRepository<FullPlate> fullPlatesRepository,
-            IRepository<Tool> toolsRepository)
+            IRepository<IngotResource> ingotResourceRepository)
         {
             InitializeComponent();
             _configuration = configuration;
             _genericProductsRepository = genericProductsRepository;
-            _fullPlatesRepository = fullPlatesRepository;
-            _toolsRepository = toolsRepository;
+            _ingotResourceRepository = ingotResourceRepository;
         }
 
         // -------------------------------------------------------------------------------------------------------
@@ -45,14 +28,12 @@ namespace CortezosWorkshop.Precios
         // -------------------------------------------------------------------------------------------------------
         private async void FormPreciosMain_Load(object sender, EventArgs e)
         {
-            await Load_FullPlates();
-            await Load_Tools();
+            await Load_IngotResources();
             await Load_Generic_Products();
             await Load_ToolsPrices();
         }
 
-        private async Task Load_FullPlates() { _fullPlates = await _fullPlatesRepository.GetAllAsync(); }
-        private async Task Load_Tools() { _tools = await _toolsRepository.GetAllAsync(); }
+        private async Task Load_IngotResources() { _ingotResources = await _ingotResourceRepository.GetAllAsync(); }
 
         private async Task Load_Generic_Products()
         {
@@ -60,13 +41,12 @@ namespace CortezosWorkshop.Precios
 
             cbo_producto.DataSource = _genericProducts;
             cbo_producto.DisplayMember = "Name";
-            cbo_producto.ValueMember = "Name";
             cbo_producto.SelectedIndex = 1;
         }
 
         private async Task Load_FullPlatesPrices()
         {
-            var fullPlatesList = _fullPlates.ToList();
+            var ingotResourcesList = _ingotResources.ToList();
 
             var materialLabelsList = new List<Label>()
             {
@@ -80,16 +60,16 @@ namespace CortezosWorkshop.Precios
                 lbl_precio6, lbl_precio7, lbl_precio8, lbl_precio9
             };
 
-            for (int i = 0; i < fullPlatesList.Count; i++)
+            for (int i = 0; i < ingotResourcesList.Count; i++)
             {
-                materialLabelsList[i].Text = fullPlatesList[i].Material;
-                priceLabelsList[i].Text = fullPlatesList[i].Price.ToString();
+                materialLabelsList[i].Text = ingotResourcesList[i].IngotName;
+                priceLabelsList[i].Text = ingotResourcesList[i].FullPlatePrice.ToString();
             }
         }
 
         private async Task Load_ToolsPrices()
         {
-            var toolsList = _tools.ToList();
+            var ingotResourcesList = _ingotResources.ToList();
 
             var materialLabelsList = new List<Label>()
             {
@@ -103,10 +83,10 @@ namespace CortezosWorkshop.Precios
                 lbl_precio6, lbl_precio7, lbl_precio8, lbl_precio9
             };
 
-            for (int i = 0; i < toolsList.Count; i++)
+            for (int i = 0; i < ingotResourcesList.Count; i++)
             {
-                materialLabelsList[i].Text = toolsList[i].Material;
-                priceLabelsList[i].Text = toolsList[i].Price.ToString();
+                materialLabelsList[i].Text = ingotResourcesList[i].IngotName;
+                priceLabelsList[i].Text = ingotResourcesList[i].ToolPrice.ToString();
             }
         }
 

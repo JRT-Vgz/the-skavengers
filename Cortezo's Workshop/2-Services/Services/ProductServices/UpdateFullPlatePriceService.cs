@@ -1,23 +1,23 @@
 
-using _1___Entities.ProductEntities;
+using _1___Entities;
 using _2___Servicios.Interfaces;
 
 namespace _2___Servicios.Services.ProductServices
 {
     public class UpdateFullPlatePriceService
     {
-        private readonly IRepository<FullPlate> _fullPlateRepository;
-        public UpdateFullPlatePriceService(IRepository<FullPlate> fullPlateRepository)
+        private readonly IRepository<IngotResource> _ingotResourceRepository;
+        public UpdateFullPlatePriceService(IRepository<IngotResource> ingotResourceRepository)
         {
-            _fullPlateRepository = fullPlateRepository;
+            _ingotResourceRepository = ingotResourceRepository;
         }
 
-        public async Task ExecuteAsync(FullPlate fullPlate, int newFullPlatePrice)
+        public async Task ExecuteAsync(IngotResource ingotResource, int newFullPlatePrice)
         {
-            fullPlate.Price = newFullPlatePrice;
-            await _fullPlateRepository.UpdateAsync(fullPlate);
+            ingotResource.FullPlatePrice = newFullPlatePrice;
+            await _ingotResourceRepository.UpdateAsync(ingotResource);
 
-            await _fullPlateRepository.SaveChanges();
+            await _ingotResourceRepository.SaveChanges();
         }
     }
 }
