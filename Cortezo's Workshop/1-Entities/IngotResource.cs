@@ -4,7 +4,7 @@ namespace _1___Entities
     public class IngotResource
     {
         public int Id { get; set; }
-        public string IngotName { get; set; }
+        public string ResourceName { get; set; }
         public string MaterialType { get; set; }
         public string MapName { get; set; }
         public int MapQuantity { get; set; }

@@ -21,16 +21,9 @@ namespace _3___Repository
         public async Task<IEnumerable<IngotResource>> GetAllAsync()
             => await _context.IngotResources.Include("Material").Select(i => _mapper.Map<IngotResource>(i)).ToListAsync();
 
-        public async Task<IngotResource> GetByIdAsync(int id)
-        {
-            var ingotResourceModel = await _context.IngotResources.FirstOrDefaultAsync(o => o.Id == id);
-
-            return _mapper.Map<IngotResource>(ingotResourceModel);
-        }
-
         public async Task<IngotResource> GetByNameAsync(string ingotName)
         {
-            var ingotResourceModel = await _context.IngotResources.FirstOrDefaultAsync(o => o.IngotName == ingotName);
+            var ingotResourceModel = await _context.IngotResources.FirstOrDefaultAsync(o => o.ResourceName == ingotName);
 
             return _mapper.Map<IngotResource>(ingotResourceModel);
         }

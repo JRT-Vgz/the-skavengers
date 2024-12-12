@@ -19,16 +19,7 @@ namespace _3___Repository
         }
 
         public async Task<IEnumerable<ShopStat>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<ShopStat> GetByIdAsync(int id)
-        {
-            var shopStatModel = await _context.ShopStats.FindAsync(id);
-
-            return _mapper.Map<ShopStat>(shopStatModel);
-        }
+            => await _context.ShopStats.Select(s => _mapper.Map<ShopStat>(s)).ToListAsync();
 
         public async Task<ShopStat> GetByNameAsync(string name)
         {

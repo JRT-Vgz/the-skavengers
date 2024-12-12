@@ -20,11 +20,6 @@ namespace _3___Repository
         public async Task<IEnumerable<GenericProduct>> GetAllAsync()
             => await _context.GenericProducts.Include("Material").Select(p => _mapper.Map<GenericProduct>(p)).ToListAsync();
 
-        public Task<GenericProduct> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<GenericProduct> GetByNameAsync(string name)
         {
             var genericProductModel = await _context.GenericProducts.FirstOrDefaultAsync(o => o.Name == name);

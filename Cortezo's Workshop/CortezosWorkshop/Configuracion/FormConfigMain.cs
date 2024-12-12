@@ -76,7 +76,7 @@ namespace CortezosWorkshop.Configuracion
         private void Load_FullPlatePricesDefaultData()
         {
             cbo_matArCompleta.DataSource = _ingotResources;
-            cbo_matArCompleta.DisplayMember = "IngotName";
+            cbo_matArCompleta.DisplayMember = "ResourceName";
             cbo_matArCompleta.SelectedIndex = 0;
 
             Load_FullPlatePrice();
@@ -92,7 +92,7 @@ namespace CortezosWorkshop.Configuracion
         {
             cbo_matHerramienta.BindingContext = new BindingContext();
             cbo_matHerramienta.DataSource = _ingotResources;
-            cbo_matHerramienta.DisplayMember = "IngotName";
+            cbo_matHerramienta.DisplayMember = "ResourceName";
             cbo_matHerramienta.SelectedIndex = 0;
 
             Load_ToolPrice();

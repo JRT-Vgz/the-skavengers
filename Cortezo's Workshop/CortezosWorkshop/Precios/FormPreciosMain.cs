@@ -59,7 +59,7 @@ namespace CortezosWorkshop.Precios
 
             for (int i = 0; i < ingotResourcesArray.Length; i++)
             {
-                materialLabelsArray[i].Text = ingotResourcesArray[i].IngotName;
+                materialLabelsArray[i].Text = ingotResourcesArray[i].ResourceName;
                 priceLabelsArray[i].Text = propertySelector(ingotResourcesArray[i]).ToString();
             }
         }

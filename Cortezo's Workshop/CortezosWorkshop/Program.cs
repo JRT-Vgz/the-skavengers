@@ -45,22 +45,28 @@ namespace CortezosWorkshop
                 .AddJsonFile(DATABASE_JSON_FILE, optional: false, reloadOnChange: true)
                 .Build();
 
-            // INYECCION DE DEPENDENCIAS.
-            services.AddSingleton<ConfigurationService>();
-
+            // INYECCION DE DEPENDENCIAS.          
+            //ENTITY FRAMEWORK
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DB")));
 
+            // REPOSITORIOS
             services.AddTransient<IRepository<ShopStat>, ShopStatsRepository>();
             services.AddTransient<IRepository<GenericProduct>, GenericProductsRepository>();
             services.AddTransient<IRepository<IngotResource>, IngotResourcesRepository>();
 
+            // PRESENTERS
             services.AddTransient<IPresenter<ShopStat, FundsViewModel>, FundsPresenter>();
             services.AddTransient<IPresenter<Statistics, StatisticsViewModel>, StatisticsPresenter>();
             services.AddTransient<IPresenter<BuyResourceEntity, BuyResourceViewModel>, BuyResourcePresenter>();
 
+            // MAPPERS
             services.AddAutoMapper(typeof(ShopStatMappingProfile));
 
+            // INYECCION DE ARCHIVO DE CONSTANTES
+            services.AddSingleton<ConfigurationService>();
+
+            // INYECCIÓN DE SERVICIOS
             services.AddTransient<SumToCajaFuerteService>();
             services.AddTransient<SumToBeneficioService>();
             services.AddTransient<AddCompletedMapData>();
@@ -74,8 +80,7 @@ namespace CortezosWorkshop
             services.AddTransient<CommodityBuyService<BuyResourceViewModel>>();
             services.AddTransient<IngotBuyService<BuyResourceViewModel>>();
 
-
-            // INYECCIÓN DE FORMULARIOS.
+            // INYECCIÓN DE FORMULARIOS
             services.AddTransient<FormMain>();
             services.AddTransient<FormMapsMain>();
             services.AddTransient<FormPreciosMain>();

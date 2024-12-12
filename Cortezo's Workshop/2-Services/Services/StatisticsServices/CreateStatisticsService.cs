@@ -24,15 +24,13 @@ namespace _2___Servicios.Services.StatisticsServices
 
         public async Task<TViewModel> ExecuteAsync()
         {
-            var oroTotal = await _shopStatsRepository.GetByNameAsync(
-                _configurationService.Configuration["Constants:_SHOPSTAT_ORO_TOTAL"]);
-            var cajaFuerte = await _shopStatsRepository.GetByNameAsync(
-                _configurationService.Configuration["Constants:_SHOPSTAT_CAJA_FUERTE"]);
-            var beneficio = await _shopStatsRepository.GetByNameAsync(
-                _configurationService.Configuration["Constants:_SHOPSTAT_BENEFICIO"]);
-            var oroGastado = await _shopStatsRepository.GetByNameAsync(
-                _configurationService.Configuration["Constants:_SHOPSTAT_ORO_GASTADO"]);
+            var shopStats = await _shopStatsRepository.GetAllAsync();
             var ingotResources = await _ingotResourcesRepository.GetAllAsync();
+
+            var oroTotal = shopStats.FirstOrDefault(s => s.Name == _configurationService.Configuration["Constants:_SHOPSTAT_ORO_TOTAL"]);
+            var cajaFuerte = shopStats.FirstOrDefault(s => s.Name == _configurationService.Configuration["Constants:_SHOPSTAT_CAJA_FUERTE"]);
+            var beneficio = shopStats.FirstOrDefault(s => s.Name == _configurationService.Configuration["Constants:_SHOPSTAT_BENEFICIO"]);
+            var oroGastado = shopStats.FirstOrDefault(s => s.Name == _configurationService.Configuration["Constants:_SHOPSTAT_ORO_GASTADO"]);
 
             var statistics = new Statistics
             {
