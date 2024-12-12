@@ -7,6 +7,7 @@ namespace CortezosWorkshop
 {
     public partial class FormMainEditFunds : Form
     {
+        #region Constructor
         private readonly ConfigurationService _configuration;
         private readonly GetFundsByNameService<FundsViewModel> _getFundsByNameService;
         private readonly SumToCajaFuerteService _sumToCajaFuerteService;
@@ -22,6 +23,9 @@ namespace CortezosWorkshop
             _getFundsByNameService = getFundsByNameService;
             _sumToCajaFuerteService = sumToCajaFuerteService;
         }
+        #endregion
+
+        #region CargarDatos
 
         // -------------------------------------------------------------------------------------------------------
         // -------------------------------------------- CARGAR DATOS ---------------------------------------------
@@ -39,15 +43,16 @@ namespace CortezosWorkshop
         }
 
         private void FormMainEditFunds_Shown(object sender, EventArgs e)
-        {
-            Reset_TextBox();
-        }
-
+            => Reset_TextBox();
+        
         private void Reset_TextBox()
         {
             txtBox.Text = "";
             txtBox.Focus();
         }
+        #endregion
+
+        #region RellenarTextboxNumerico
 
         // -------------------------------------------------------------------------------------------------------
         // ------------------------------------- RELLENAR TEXTBOX NUMERICO ---------------------------------------
@@ -73,6 +78,9 @@ namespace CortezosWorkshop
                 e.Handled = true;
             }
         }
+        #endregion
+
+        #region GuardarDatos
 
         // -------------------------------------------------------------------------------------------------------
         // -------------------------------------- GUARDAR EN BASE DE DATOS ---------------------------------------
@@ -89,13 +97,12 @@ namespace CortezosWorkshop
             Reset_TextBox();
             await Load_Funds();
         }
+        #endregion
 
         // -------------------------------------------------------------------------------------------------------
         // ----------------------------------------------- CERRAR ------------------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private void btn_Back_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+            => this.Close();
     }
 }

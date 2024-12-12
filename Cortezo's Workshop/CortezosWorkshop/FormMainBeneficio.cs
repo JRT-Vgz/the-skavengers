@@ -8,6 +8,8 @@ namespace CortezosWorkshop
 {
     public partial class FormMainBeneficio : Form
     {
+        #region Constructor
+
         private ConfigurationService _configuration;
         private readonly GetFundsByNameService<FundsViewModel> _getFundsByNameService;
         private readonly SumToBeneficioService _sumToBeneficioService;
@@ -23,7 +25,9 @@ namespace CortezosWorkshop
             _getFundsByNameService = getFundsByNameService;
             _sumToBeneficioService = sumToBeneficioService;
         }
+        #endregion
 
+        #region CargarDatos
         // -------------------------------------------------------------------------------------------------------
         // -------------------------------------------- CARGAR DATOS ---------------------------------------------
         // -------------------------------------------------------------------------------------------------------
@@ -40,15 +44,16 @@ namespace CortezosWorkshop
         }
 
         private void FormMainEditFunds_Shown(object sender, EventArgs e)
-        {
-            Reset_TextBox();
-        }
+            => Reset_TextBox();
 
         private void Reset_TextBox()
         {
             txtBox.Text = "";
             txtBox.Focus();
         }
+        #endregion
+
+        #region RellenarTextboxNumerico
 
         // -------------------------------------------------------------------------------------------------------
         // ------------------------------------- RELLENAR TEXTBOX NUMERICO ---------------------------------------
@@ -62,17 +67,14 @@ namespace CortezosWorkshop
                 btn_Save_Click(sender, e);
             }
 
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            { 
-                e.Handled = true;
-            }
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) { e.Handled = true; }
 
-            if (textBox.Text.Length > _MAX_LENGTH_TEXTBOX && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            if (textBox.Text.Length > _MAX_LENGTH_TEXTBOX && !char.IsControl(e.KeyChar)) { e.Handled = true; }
 
         }
+        #endregion
+
+        #region GuardarDatos
 
         // -------------------------------------------------------------------------------------------------------
         // -------------------------------------- GUARDAR EN BASE DE DATOS ---------------------------------------
@@ -96,13 +98,12 @@ namespace CortezosWorkshop
             Reset_TextBox();
             await Load_CajaFuerte();
         }
+        #endregion
 
         // -------------------------------------------------------------------------------------------------------
         // ----------------------------------------------- CERRAR ------------------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private void btn_Back_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+            => this.Close();
     }
 }

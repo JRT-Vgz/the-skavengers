@@ -67,7 +67,7 @@ namespace CortezosWorkshop
             services.AddTransient<UpdateRecommendedPrice>();
             services.AddTransient<CreateStatisticsService<StatisticsViewModel>>();
             services.AddTransient<GetFundsByNameService<FundsViewModel>>();
-            services.AddTransient<UpdateConfiguredResources>();
+            services.AddTransient<UpdateConfiguredResourcesService>();
             services.AddTransient<UpdateFullPlatePriceService>();
             services.AddTransient<UpdateToolPriceService>();
             services.AddTransient<MapBuyService<BuyResourceViewModel>>();

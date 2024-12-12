@@ -1,5 +1,6 @@
 ﻿using _1___Entities;
 using _2___Servicios.Interfaces;
+using _2___Servicios.Services;
 using _2___Servicios.Services.OreMapServices;
 using _2___Servicios.Services.ResourcesBuyServices;
 using _3_Presenters.ViewModels;
@@ -8,6 +9,9 @@ namespace CortezosWorkshop.Maps
 {
     public partial class FormMapsMain : Form
     {
+        #region Constructor
+
+        private readonly ConfigurationService _configuration;
         private readonly IRepository<IngotResource> _ingotResourcesRepository;
         private readonly AddCompletedMapData _addCompletedMapData;
         private readonly UpdateRecommendedPrice _updateRecommendedPrice;
@@ -24,7 +28,8 @@ namespace CortezosWorkshop.Maps
         private const int _MAX_LENGTH_PRECIO_RECOMENDADO_TEXTBOX = 11;
         private const int _MAX_LENGTH_COMPRAR_RECURSO_TEXTBOX = 8;
 
-        public FormMapsMain(IRepository<IngotResource> ingotResourcesRepository,
+        public FormMapsMain(ConfigurationService configuration,
+            IRepository<IngotResource> ingotResourcesRepository,
             AddCompletedMapData addCompletedMapData,
             UpdateRecommendedPrice updateRecommendedPrice,
             MapBuyService<BuyResourceViewModel> mapBuyService,
@@ -32,17 +37,21 @@ namespace CortezosWorkshop.Maps
             IngotBuyService<BuyResourceViewModel> ingotBuyService)
         {
             InitializeComponent();
+            _configuration = configuration;
             _ingotResourcesRepository = ingotResourcesRepository;
             _addCompletedMapData = addCompletedMapData;
             _updateRecommendedPrice = updateRecommendedPrice;
             _mapBuyService = mapBuyService;
             _commodityBuyService = commodityBuyService;
+            _ingotBuyService = ingotBuyService;
 
             rb_map.CheckedChanged += RB_CheckedChanged;
             rb_commodity.CheckedChanged += RB_CheckedChanged;
-            rb_ingots.CheckedChanged += RB_CheckedChanged;
-            _ingotBuyService = ingotBuyService;
+            rb_ingots.CheckedChanged += RB_CheckedChanged;          
         }
+        #endregion
+
+        #region CargarDatos
 
         // -------------------------------------------------------------------------------------------------------
         // -------------------------------------------- CARGAR DATOS ---------------------------------------------
@@ -93,7 +102,7 @@ namespace CortezosWorkshop.Maps
             cbo_buyResources.DataSource = _ingotResources;
             cbo_buyResources.DisplayMember = displayName;
             cbo_buyResources.SelectedIndex = 0;
-
+        
             lbl_mediaLingotes.Text = "- Cantidad media de lingotes :     0";
             lbl_precioPorLingote.Text = "- Precio por lingote :     0 gp";
             lbl_costePorArmadura.Text = "- Coste por armadura:     0 gp";
@@ -104,6 +113,9 @@ namespace CortezosWorkshop.Maps
             txt_buyResourcesPrice.Text = "0";
             _txt_buyResourcesPriceClick = false;
         }
+        #endregion
+
+        #region AñadirMapa
 
         // -------------------------------------------------------------------------------------------------------
         // --------------------------------------------- AÑADIR MAPA ---------------------------------------------
@@ -148,7 +160,6 @@ namespace CortezosWorkshop.Maps
             try
             {
                 var ingotResource = _ingotResources.ElementAt(cbo_oreMaps.SelectedIndex);
-                //var oreMapName = cbo_oreMaps.SelectedValue.ToString();
                 var mapQuantity = (int)cbo_mapQuantity.SelectedItem;
                 var resourcesQuantity = int.Parse(txt_materialRecogido.Text);
 
@@ -158,6 +169,9 @@ namespace CortezosWorkshop.Maps
             catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
             Load_AddMapDefaultData();
         }
+        #endregion
+
+        #region CambiarPreciosRecomendados
 
         // -------------------------------------------------------------------------------------------------------
         // ------------------------------------ CAMBIAR PRECIOS RECOMENDADOS -------------------------------------
@@ -198,6 +212,9 @@ namespace CortezosWorkshop.Maps
                 Load_RecommendedPrice();
             }
         }
+        #endregion
+
+        #region ComprarRecursos
 
         // -------------------------------------------------------------------------------------------------------
         // ------------------------------------------ COMPRAR RECURSOS -------------------------------------------
@@ -206,18 +223,12 @@ namespace CortezosWorkshop.Maps
         {
             if (!((RadioButton)sender).Checked) { return; }
 
-            if (sender == rb_map)
-            {
-                Load_BuyResourcesDefaultData("MapName");
-            }
-            else if (sender == rb_commodity)
-            {
-                Load_BuyResourcesDefaultData("CommodityName");
-            }
-            else if (sender == rb_ingots)
-            {
-                Load_BuyResourcesDefaultData("IngotName");
-            }
+            if (sender == rb_map) { Load_BuyResourcesDefaultData
+                    (_configuration.Configuration["Constants:_RESOURCE_MAP_NAME_COLUMN"]); }
+            else if (sender == rb_commodity) { Load_BuyResourcesDefaultData
+                    (_configuration.Configuration["Constants:_RESOURCE_COMMODITY_NAME_COLUMN"]); }
+            else if (sender == rb_ingots) { Load_BuyResourcesDefaultData
+                    (_configuration.Configuration["Constants:_RESOURCE_NAME_COLUMN"]); }
         }
 
         private void txt_buyResourcesPrice_Enter(object sender, EventArgs e)
@@ -274,8 +285,9 @@ namespace CortezosWorkshop.Maps
 
             _txt_buyResourcesPriceClick = false;
         }
+        #endregion
 
-
+        #region VolverAlMenuPrincipal
 
         // -------------------------------------------------------------------------------------------------------
         // --------------------------------------- VOLVER A MENU PRINCIPAL ---------------------------------------
@@ -295,6 +307,6 @@ namespace CortezosWorkshop.Maps
 
             this.Hide();
         }
-
+        #endregion
     }
 }

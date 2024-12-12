@@ -1,5 +1,7 @@
 using _1___Entities;
 using _2___Servicios.Interfaces;
+using _2___Servicios.Services;
+using _2___Servicios.Services.ShopStatServices;
 using _3_Presenters.ViewModels;
 using CortezosWorkshop.Configuracion;
 using CortezosWorkshop.Estadisticas;
@@ -11,34 +13,39 @@ namespace CortezosWorkshop
 {
     public partial class FormMain : Form
     {
+        #region Constructor
+
         private readonly IServiceProvider _serviceProvider;
-        private readonly IRepository<ShopStat> _shopStatsRepository;
-        private readonly IPresenter<ShopStat, FundsViewModel> _presenter;
+        private readonly ConfigurationService _configuration;
+        private readonly GetFundsByNameService<FundsViewModel> _getFundsByNameService;
         public FormMain(IServiceProvider serviceProvider,
-            IRepository<ShopStat> shopStatsRepository,
-            IPresenter<ShopStat, FundsViewModel> presenter)
+            ConfigurationService configuration,
+            GetFundsByNameService<FundsViewModel> getFundsByNameService)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
-            _shopStatsRepository = shopStatsRepository;
-            _presenter = presenter;
+            _configuration = configuration;
+            _getFundsByNameService = getFundsByNameService;
         }
+        #endregion
+
+        #region CargarDatos
 
         // -------------------------------------------------------------------------------------------------------
-        // ---------------------------------------------- TESORERIA ----------------------------------------------
+        // --------------------------------------------- CARGAR DATOS --------------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private async void FormMain_Load(object sender, EventArgs e)
-        {
-            await Load_Funds();
-        }
+            => await Load_Funds();
 
         private async Task Load_Funds()
         {
-            int idCajaFuerte = 1;
-            var shopStatCajaFuerte = await _shopStatsRepository.GetByIdAsync(idCajaFuerte);
-            var fundsViewModel = _presenter.Present(shopStatCajaFuerte);
+            var fundsViewModel = await _getFundsByNameService.ExecuteAsync(
+                _configuration.Configuration["Constants:_SHOPSTAT_CAJA_FUERTE"]);
             lbl_Oro.Text = fundsViewModel.Funds;
         }
+        #endregion
+
+        #region NavegacionBotones
 
         // -------------------------------------------------------------------------------------------------------
         // ----------------------------------------------- BOTONES -----------------------------------------------
@@ -103,11 +110,12 @@ namespace CortezosWorkshop
             frm.ShowDialog();
 
             Load_Funds();
-        }             
+        }
+        #endregion
 
         private void btn_portapapeles_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText("Cortezo's cheap Tools & Armor");
+            Clipboard.SetText(_configuration.Configuration["Constants:_NOMBRE_RUNA_TIENDA"]);
         }
     }
 }

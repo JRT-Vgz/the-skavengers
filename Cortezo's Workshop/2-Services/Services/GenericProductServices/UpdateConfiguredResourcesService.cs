@@ -4,10 +4,10 @@ using _2___Servicios.Interfaces;
 
 namespace _2___Servicios.Services.ProductServices
 {
-    public class UpdateConfiguredResources
+    public class UpdateConfiguredResourcesService
     {
         private readonly IRepository<GenericProduct> _genericProductsRepository;
-        public UpdateConfiguredResources(IRepository<GenericProduct> genericProductsRepository)
+        public UpdateConfiguredResourcesService(IRepository<GenericProduct> genericProductsRepository)
         {
             _genericProductsRepository = genericProductsRepository;
         }

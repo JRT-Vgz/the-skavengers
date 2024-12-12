@@ -82,8 +82,8 @@
             txt_configResources.Size = new Size(100, 23);
             txt_configResources.TabIndex = 4;
             txt_configResources.TextAlign = HorizontalAlignment.Center;
-            txt_configResources.KeyPress += txt_precioProductos_KeyPress;
-            txt_configResources.Leave += txt_precioProductos_Leave;
+            txt_configResources.KeyPress += txt_configResources_KeyPress;
+            txt_configResources.Leave += txt_configResources_Leave;
             // 
             // lbl_material
             // 
