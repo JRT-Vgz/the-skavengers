@@ -161,12 +161,12 @@ namespace CortezosWorkshop.Maps
 
             try
             {
+                await Load_IngotResources();
                 var ingotResource = _ingotResources.ElementAt(cbo_oreMaps.SelectedIndex);
                 var mapQuantity = (int)cbo_mapQuantity.SelectedItem;
                 var resourcesQuantity = int.Parse(txt_materialRecogido.Text);
 
                 await _addCompletedMapData.ExecuteAsync(ingotResource, mapQuantity, resourcesQuantity);
-                await Load_IngotResources();
             }
             catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
             Load_AddMapDefaultData();
@@ -206,9 +206,9 @@ namespace CortezosWorkshop.Maps
             {
                 try
                 {
+                    await Load_IngotResources();
                     var ingotResource = _ingotResources.ElementAt(cbo_oreMapsPrices.SelectedIndex);
                     await _updateRecommendedPrice.ExecuteAsync(ingotResource, newRecommendedPrice);
-                    await Load_IngotResources();
                 }
                 catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
                 Load_RecommendedPrice();
@@ -265,6 +265,7 @@ namespace CortezosWorkshop.Maps
         {
             try
             {
+                await Load_IngotResources();
                 var ingotResource = _ingotResources.ElementAt(cbo_buyResources.SelectedIndex);
                 var buyPrice = int.Parse(txt_buyResourcesPrice.Text);
 

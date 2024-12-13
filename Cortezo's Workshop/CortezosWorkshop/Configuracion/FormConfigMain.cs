@@ -1,6 +1,7 @@
 ﻿using _1___Entities;
 using _2___Servicios.Interfaces;
 using _2___Servicios.Services.ProductServices;
+using System.ComponentModel.Design;
 
 namespace CortezosWorkshop.Configuracion
 {
@@ -55,15 +56,14 @@ namespace CortezosWorkshop.Configuracion
             InitializePriceChangeHandlers();
 
             Load_ConfigResourcesDefaultData();
-            Load_ProductPricesDefaultData(cbo_matArCompleta, Load_FullPlatePrice);
-            Load_ProductPricesDefaultData(cbo_matHerramienta, Load_ToolPrice);
-            Load_ProductPricesDefaultData(cbo_matLockpicks, Load_LockpicksPrice);
-
-
+            Load_ConfigProductDefaultData(cbo_matArCompleta, Load_FullPlatePrice);
+            Load_ConfigProductDefaultData(cbo_matHerramienta, Load_ToolPrice);
+            Load_ConfigProductDefaultData(cbo_matLockpicks, Load_LockpicksPrice);
         }
 
         private async Task Load_Products() { _genericProducts = await _genericProductsRepository.GetAllAsync(); }
         private async Task Load_IngotResources() { _ingotResources = await _ingotResourceRepository.GetAllAsync(); }
+ 
         private void Load_ConfigResourcesDefaultData()
         {
             cbo_productos.DataSource = _genericProducts;
@@ -73,21 +73,29 @@ namespace CortezosWorkshop.Configuracion
             Load_ConfiguredResources();
         }
 
-        private void Load_ConfiguredResources()
-        {
-            txt_configResources.Text = _genericProducts.ElementAt(cbo_productos.SelectedIndex).Resources.ToString();
-            lbl_material.Text = _genericProducts.ElementAt(cbo_productos.SelectedIndex).MaterialName;
-            _actualConfiguredResources = txt_configResources.Text;
-        }
-
-        private void Load_ProductPricesDefaultData(ComboBox cbo_matProduct, Action load_productPrice)
+        private void Load_ConfigProductDefaultData(ComboBox cbo_matProduct, Action loadProductData)
         {
             cbo_matProduct.BindingContext = new BindingContext();
             cbo_matProduct.DataSource = _ingotResources;
             cbo_matProduct.DisplayMember = "ResourceName";
             cbo_matProduct.SelectedIndex = 0;
 
-            load_productPrice();
+            loadProductData();
+        }
+
+        private async Task Reload_All_Data()
+        {
+            await Load_IngotResources();
+            Load_FullPlatePrice();
+            Load_ToolPrice();
+            Load_LockpicksPrice();
+        }
+
+        private void Load_ConfiguredResources()
+        {
+            txt_configResources.Text = _genericProducts.ElementAt(cbo_productos.SelectedIndex).Resources.ToString();
+            lbl_material.Text = _genericProducts.ElementAt(cbo_productos.SelectedIndex).MaterialName;
+            _actualConfiguredResources = txt_configResources.Text;
         }
 
         private void Load_FullPlatePrice()
@@ -114,7 +122,7 @@ namespace CortezosWorkshop.Configuracion
         // -------------------------------------------------------------------------------------------------------
         // ------------------------------------ CONFIGURAR RECURSOS PRODUCTO -------------------------------------
         // -------------------------------------------------------------------------------------------------------
-        private void cbo_productos_SelectedIndexChanged(object sender, EventArgs e) { Load_ConfiguredResources(); }
+        private async void cbo_productos_SelectedIndexChanged(object sender, EventArgs e) { Load_ConfiguredResources(); }
 
         private async void txt_configResources_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -136,8 +144,7 @@ namespace CortezosWorkshop.Configuracion
         private async Task Save_New_Configurated_Resources()
         {
             var newConfiguratedResourcesText = txt_configResources.Text;
-            var validationResult = ValidateTextBoxData(newConfiguratedResourcesText, _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX,
-                Load_ConfiguredResources);
+            var validationResult = ValidateTextBoxData(newConfiguratedResourcesText, _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX);
             if (!validationResult) { return; }
 
             if (newConfiguratedResourcesText != _actualConfiguredResources)
@@ -202,21 +209,21 @@ namespace CortezosWorkshop.Configuracion
             async Task SaveNewPrice()
             {
                 var newPriceText = txt_productPrice.Text;
-                var validationResult = ValidateTextBoxData(newPriceText, _MAX_LENGTH_PRICE_PRODUCT, load_productPrice);
-                if (!validationResult) { return; }
+                var validationResult = ValidateTextBoxData(newPriceText, _MAX_LENGTH_PRICE_PRODUCT);
+                if (!validationResult) { await Reload_All_Data();  return; }
 
                 if (newPriceText != currentPrice)
                 {
                     try
                     {
+                        await Load_IngotResources();
                         var selectedResource = _ingotResources.ElementAt(cbo_product.SelectedIndex);
                         await updatePriceServiceMethod(selectedResource, int.Parse(newPriceText));
-                        await Load_IngotResources();
                     }
                     catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
-
-                    load_productPrice();
                 }
+
+                await Reload_All_Data();
             }
         }       
         #endregion
@@ -225,25 +232,22 @@ namespace CortezosWorkshop.Configuracion
         // -------------------------------------------------------------------------------------------------------
         // -------------------------------------------- VALIDACIONES ---------------------------------------------
         // -------------------------------------------------------------------------------------------------------
-        private bool ValidateTextBoxData(string textBoxData, int textMaxLength, Action loadFunction)
+        private bool ValidateTextBoxData(string textBoxData, int textMaxLength)
         {
             var validationResult = false;
 
             if (textBoxData.Length > textMaxLength)
             {
-                loadFunction();
                 return validationResult;
             }
             else if (textBoxData == "0" || textBoxData == "")
             {
                 MessageBox.Show("La cantidad no puede ser 0.");
-                loadFunction();
                 return validationResult;
             }
             else if (textBoxData.Contains('-'))
             {
                 MessageBox.Show("La cantidad no puede ser negativa.");
-                loadFunction();
                 return validationResult;
             }
 

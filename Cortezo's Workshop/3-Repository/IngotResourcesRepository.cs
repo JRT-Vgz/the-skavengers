@@ -19,11 +19,12 @@ namespace _3___Repository
         }
 
         public async Task<IEnumerable<IngotResource>> GetAllAsync()
-            => await _context.IngotResources.Include("Material").Select(i => _mapper.Map<IngotResource>(i)).ToListAsync();
+            => await _context.IngotResources.Include("Material").Select(i => _mapper.Map<IngotResource>(i))
+            .AsNoTracking().ToListAsync();
 
         public async Task<IngotResource> GetByNameAsync(string ingotName)
         {
-            var ingotResourceModel = await _context.IngotResources.FirstOrDefaultAsync(o => o.ResourceName == ingotName);
+            var ingotResourceModel = await _context.IngotResources.AsNoTracking().FirstOrDefaultAsync(o => o.ResourceName == ingotName);
 
             return _mapper.Map<IngotResource>(ingotResourceModel);
         }
@@ -33,12 +34,14 @@ namespace _3___Repository
             var ingotResourceModel = await _context.IngotResources.FindAsync(ingotResource.Id);
 
             _mapper.Map(ingotResource, ingotResourceModel);
-
+           
             _context.IngotResources.Attach(ingotResourceModel);
             _context.IngotResources.Entry(ingotResourceModel).State = EntityState.Modified;
         }
 
         public async Task SaveChanges()
-            => await _context.SaveChangesAsync();
+        { 
+            await _context.SaveChangesAsync();
+        }
     }
 }

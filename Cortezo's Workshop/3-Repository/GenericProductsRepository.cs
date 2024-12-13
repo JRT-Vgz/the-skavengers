@@ -18,11 +18,12 @@ namespace _3___Repository
             _mapper = mapper;
         }
         public async Task<IEnumerable<GenericProduct>> GetAllAsync()
-            => await _context.GenericProducts.Include("Material").Select(p => _mapper.Map<GenericProduct>(p)).ToListAsync();
+            => await _context.GenericProducts.Include("Material").Select(p => _mapper.Map<GenericProduct>(p))
+            .AsNoTracking().ToListAsync();
 
         public async Task<GenericProduct> GetByNameAsync(string name)
         {
-            var genericProductModel = await _context.GenericProducts.FirstOrDefaultAsync(o => o.Name == name);
+            var genericProductModel = await _context.GenericProducts.AsNoTracking().FirstOrDefaultAsync(o => o.Name == name);
 
             return _mapper.Map<GenericProduct>(genericProductModel);
         }

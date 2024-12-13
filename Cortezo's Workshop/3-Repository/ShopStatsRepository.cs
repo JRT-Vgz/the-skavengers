@@ -19,11 +19,11 @@ namespace _3___Repository
         }
 
         public async Task<IEnumerable<ShopStat>> GetAllAsync()
-            => await _context.ShopStats.Select(s => _mapper.Map<ShopStat>(s)).ToListAsync();
+            => await _context.ShopStats.Select(s => _mapper.Map<ShopStat>(s)).AsNoTracking().ToListAsync();
 
         public async Task<ShopStat> GetByNameAsync(string name)
         {
-            var shopStatsModel = await _context.ShopStats.FirstOrDefaultAsync(s => s.Name == name);
+            var shopStatsModel = await _context.ShopStats.AsNoTracking().FirstOrDefaultAsync(s => s.Name == name);
 
             return _mapper.Map<ShopStat>(shopStatsModel);
         }

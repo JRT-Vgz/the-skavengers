@@ -155,7 +155,7 @@
             MaximizeBox = false;
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Cortezo's Workshop";
+            Text = "Cortezo's Workshop v1.0";
             Load += FormMain_Load;
             ResumeLayout(false);
             PerformLayout();

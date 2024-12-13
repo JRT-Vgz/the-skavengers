@@ -50,7 +50,7 @@ namespace CortezosWorkshop
         // -------------------------------------------------------------------------------------------------------
         // ----------------------------------------------- BOTONES -----------------------------------------------
         // -------------------------------------------------------------------------------------------------------
-        private void btn_mapas_Click(object sender, EventArgs e)
+        private async void btn_mapas_Click(object sender, EventArgs e)
         {
             this.Hide();
 
@@ -58,10 +58,11 @@ namespace CortezosWorkshop
             frm.Location = new Point(this.Location.X, this.Location.Y);
             frm.ShowDialog();
 
+            await Load_Funds();
             this.Show();
         }
 
-        private void btn_precios_Click(object sender, EventArgs e)
+        private async void btn_precios_Click(object sender, EventArgs e)
         {
             this.Hide();
 
@@ -69,10 +70,11 @@ namespace CortezosWorkshop
             frm.Location = new Point(this.Location.X, this.Location.Y);
             frm.ShowDialog();
 
+            await Load_Funds();
             this.Show();
         }
 
-        private void btn_config_Click(object sender, EventArgs e)
+        private async void btn_config_Click(object sender, EventArgs e)
         {
             this.Hide();
 
@@ -80,10 +82,11 @@ namespace CortezosWorkshop
             frm.Location = new Point(this.Location.X, this.Location.Y);
             frm.ShowDialog();
 
+            await Load_Funds();
             this.Show();
         }
 
-        private void btn_estadisticas_Click(object sender, EventArgs e)
+        private async void btn_estadisticas_Click(object sender, EventArgs e)
         {
             this.Hide();
 
@@ -91,6 +94,7 @@ namespace CortezosWorkshop
             frm.Location = new Point(this.Location.X, this.Location.Y);
             frm.ShowDialog();
 
+            await Load_Funds();
             this.Show();
         }
 
