@@ -11,5 +11,8 @@ namespace _3_Presenters.ViewModels
         public string ToolSellPrice { get; set; }
         public string LockpicksGoldCost { get; set; }
         public string LockpicksSellPrice { get; set; }
+        public string FullPlateBenefit { get; set; }
+        public string ToolBenefit { get; set; }
+        public string LockpicksBenefit { get; set; }
     }
 }

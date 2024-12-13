@@ -284,6 +284,9 @@ namespace CortezosWorkshop.Maps
                 lbl_precioVentaHerramienta.Text = buyResourceViewModel.ToolSellPrice;
                 lbl_costePorLockpicks.Text = buyResourceViewModel.LockpicksGoldCost;
                 lbl_precioVentaLockpicks.Text = buyResourceViewModel.LockpicksSellPrice;
+                lbl_beneficioArmadura.Text = buyResourceViewModel.FullPlateBenefit;
+                lbl_beneficioHerramienta.Text = buyResourceViewModel.ToolBenefit;
+                lbl_beneficioLockpicks.Text = buyResourceViewModel.LockpicksBenefit;
             }
             catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 

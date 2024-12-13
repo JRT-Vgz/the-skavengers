@@ -14,10 +14,13 @@ namespace _3_Presenters.Presenters
                 PricePerResource = $"- Precio por lingote:     {FormatQuantity(mapBuyEntity.PricePerResource)} gp",
                 FullPlateGoldCost = $"- Coste por armadura:     {FormatQuantity(mapBuyEntity.FullPlateGoldCost)} gp",
                 FullPlateSellPrice = $"- Precio venta armadura:     {FormatQuantity(mapBuyEntity.FullPlateSellPrice)} gp",
-                ToolGoldCost = $"- Coste por herramienta:     {FormatQuantity(mapBuyEntity.ToolGoldCost)}",
-                ToolSellPrice = $"- Precio venta herramienta:     {FormatQuantity(mapBuyEntity.ToolSellPrice)}",
-                LockpicksGoldCost = $"- Coste por lockpicks:     {FormatQuantity(mapBuyEntity.LockpicksGoldCost)}",
-                LockpicksSellPrice = $"- Precio venta lockpicks:     {FormatQuantity(mapBuyEntity.LockpicksSellPrice)}"
+                ToolGoldCost = $"- Coste por herramienta:     {FormatQuantity(mapBuyEntity.ToolGoldCost)} gp",
+                ToolSellPrice = $"- Precio venta herramienta:     {FormatQuantity(mapBuyEntity.ToolSellPrice)} gp",
+                LockpicksGoldCost = $"- Coste por lockpicks:     {FormatQuantity(mapBuyEntity.LockpicksGoldCost)} gp",
+                LockpicksSellPrice = $"- Precio venta lockpicks:     {FormatQuantity(mapBuyEntity.LockpicksSellPrice)} gp",
+                FullPlateBenefit = $"- Beneficio por armadura:     {mapBuyEntity.FullPlateBenefit.ToString()}%",
+                ToolBenefit = $"- Beneficio por herramienta:     {mapBuyEntity.ToolBenefit.ToString()}%",
+                LockpicksBenefit = $"- Beneficio por lockpicks:     {mapBuyEntity.LockpicksBenefit.ToString()}%"
             };
 
         private string FormatQuantity(int quantity)

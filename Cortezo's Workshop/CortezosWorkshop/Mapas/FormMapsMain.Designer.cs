@@ -53,6 +53,9 @@
             rb_ingots = new RadioButton();
             lbl_precioVentaLockpicks = new Label();
             lbl_costePorLockpicks = new Label();
+            lbl_beneficioLockpicks = new Label();
+            lbl_beneficioArmadura = new Label();
+            lbl_beneficioHerramienta = new Label();
             SuspendLayout();
             // 
             // btn_menu_principal
@@ -293,11 +296,41 @@
             lbl_costePorLockpicks.TabIndex = 40;
             lbl_costePorLockpicks.Text = "- Coste por lockpicks:     0 gp";
             // 
+            // lbl_beneficioLockpicks
+            // 
+            lbl_beneficioLockpicks.AutoSize = true;
+            lbl_beneficioLockpicks.Location = new Point(264, 391);
+            lbl_beneficioLockpicks.Name = "lbl_beneficioLockpicks";
+            lbl_beneficioLockpicks.Size = new Size(171, 15);
+            lbl_beneficioLockpicks.TabIndex = 45;
+            lbl_beneficioLockpicks.Text = "- Beneficio por lockpicks:     0%";
+            // 
+            // lbl_beneficioArmadura
+            // 
+            lbl_beneficioArmadura.AutoSize = true;
+            lbl_beneficioArmadura.Location = new Point(264, 357);
+            lbl_beneficioArmadura.Name = "lbl_beneficioArmadura";
+            lbl_beneficioArmadura.Size = new Size(176, 15);
+            lbl_beneficioArmadura.TabIndex = 43;
+            lbl_beneficioArmadura.Text = "- Beneficio por armadura:     0 %";
+            // 
+            // lbl_beneficioHerramienta
+            // 
+            lbl_beneficioHerramienta.AutoSize = true;
+            lbl_beneficioHerramienta.Location = new Point(264, 374);
+            lbl_beneficioHerramienta.Name = "lbl_beneficioHerramienta";
+            lbl_beneficioHerramienta.Size = new Size(189, 15);
+            lbl_beneficioHerramienta.TabIndex = 44;
+            lbl_beneficioHerramienta.Text = "- Beneficio por herramienta:     0 %";
+            // 
             // FormMapsMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lbl_beneficioHerramienta);
+            Controls.Add(lbl_beneficioArmadura);
+            Controls.Add(lbl_beneficioLockpicks);
             Controls.Add(lbl_precioVentaLockpicks);
             Controls.Add(lbl_costePorLockpicks);
             Controls.Add(rb_ingots);
@@ -361,5 +394,8 @@
         private RadioButton rb_ingots;
         private Label lbl_precioVentaLockpicks;
         private Label lbl_costePorLockpicks;
+        private Label lbl_beneficioLockpicks;
+        private Label lbl_beneficioArmadura;
+        private Label lbl_beneficioHerramienta;
     }
 }

@@ -3,50 +3,48 @@ namespace _1___Entities.ResourcesBuyEntities
 {
     public class BuyResourceEntity
     {
-        public int BuyPrice { get; set; }
         public int ResourceQuantity { get; set; }
         public int PricePerResource { get; set; }
-        public int FullPlateResourceCost { get; set; }
         public int FullPlateGoldCost { get; set; }
         public int FullPlateSellPrice { get; set; }
-        public int ToolResourceCost { get; set; }
         public int ToolGoldCost { get; set; }
         public int ToolSellPrice { get; set; }
-        public int LockpicksResourceCost { get; set; }
         public int LockpicksGoldCost { get; set; }
         public int LockpicksSellPrice { get; set; }
+        public double FullPlateBenefit { get; set; }
+        public double ToolBenefit { get; set; }
+        public double LockpicksBenefit { get; set; }
 
         public BuyResourceEntity(int buyPrice, int resourceQuantity, 
             int fullPlateResourceCost, int fullPlateSellPrice, 
             int toolResourceCost, int toolSellPrice,
             int lockpicksResourceCost, int lockpicksSellPrice) 
         {
-            BuyPrice = buyPrice;
             ResourceQuantity = resourceQuantity;
-            PricePerResource = Calculate_PricePerResource();
-            FullPlateResourceCost = fullPlateResourceCost;
-            FullPlateGoldCost = Calculate_FullPlateGoldCost();
+            PricePerResource = Calculate_PricePerResource(buyPrice);
+            FullPlateGoldCost = Calculate_ProductGoldCost(fullPlateResourceCost);
             FullPlateSellPrice = fullPlateSellPrice;
-            ToolResourceCost = toolResourceCost;
-            ToolGoldCost = Calculate_ToolGoldCost();
+            ToolGoldCost = Calculate_ProductGoldCost(toolResourceCost);
             ToolSellPrice = toolSellPrice;
-            LockpicksResourceCost = lockpicksResourceCost;
-            LockpicksGoldCost = Calculate_LockpicksGoldCost();
+            LockpicksGoldCost = Calculate_ProductGoldCost(lockpicksResourceCost);
             LockpicksSellPrice = lockpicksSellPrice;
+            FullPlateBenefit = Calculate_ProductBenefit(FullPlateGoldCost, FullPlateSellPrice);
+            ToolBenefit = Calculate_ProductBenefit(ToolGoldCost, ToolSellPrice);
+            LockpicksBenefit = Calculate_ProductBenefit(LockpicksGoldCost, LockpicksSellPrice);
         }
-        private int Calculate_PricePerResource()
+        private int Calculate_PricePerResource(int buyPrice)
         {
-            if (ResourceQuantity == 0) { return BuyPrice; }
-            else { return (int)Math.Ceiling((double)BuyPrice / ResourceQuantity); }
+            if (ResourceQuantity == 0) { return buyPrice; }
+            else { return (int)Math.Ceiling((double)buyPrice / ResourceQuantity); }
         }
 
-        private int Calculate_FullPlateGoldCost()
-            => PricePerResource * FullPlateResourceCost;
+        private int Calculate_ProductGoldCost(int resourceCost)
+            => PricePerResource * resourceCost;
 
-        private int Calculate_ToolGoldCost()
-            => PricePerResource * ToolResourceCost;
-
-        private int Calculate_LockpicksGoldCost()
-            => PricePerResource * LockpicksResourceCost;
+        private double Calculate_ProductBenefit(double cost, double sellPrice)
+        {
+            double benefit = ((sellPrice - cost) / cost) * 100;
+            return Math.Round(benefit, 2);
+        }
     }
 }
