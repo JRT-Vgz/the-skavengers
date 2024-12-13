@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _3___Data;
 
@@ -10,9 +11,11 @@ using _3___Data;
 namespace _3___Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241212235356_LockpickPriceAdded")]
+    partial class LockpickPriceAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,7 +67,7 @@ namespace _3___Data.Migrations
                     b.Property<int>("IdMaterial")
                         .HasColumnType("int");
 
-                    b.Property<int>("LockpicksPrice")
+                    b.Property<int>("LockpickPrice")
                         .HasColumnType("int");
 
                     b.Property<string>("MapName")

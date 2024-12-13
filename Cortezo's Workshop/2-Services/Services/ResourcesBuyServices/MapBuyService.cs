@@ -35,8 +35,14 @@ namespace _2___Servicios.Services.ResourcesBuyServices
 
             var toolSellPrice = ingotResource.ToolPrice;
 
+            var lockpicksGenericProduct = await _genericProductsRepository
+                .GetByNameAsync(_configuration.Configuration["Constants:_GENERICPROD_LOCKPICKS"]);
+            var lockpicksResourceCost = lockpicksGenericProduct.Resources;
+
+            var lockpicksSellPrice = ingotResource.LockpicksPrice;
+
             var buyResourceEntity = new BuyResourceEntity(buyPrice, resourceQuantity, fullPlateResourceCost, fullPlateSellPrice,
-                toolResourceCost, toolSellPrice);
+                toolResourceCost, toolSellPrice, lockpicksResourceCost, lockpicksSellPrice);
 
             return _presenter.Present(buyResourceEntity);
         }

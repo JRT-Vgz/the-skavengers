@@ -15,6 +15,7 @@ namespace CortezosWorkshop.Configuracion
         private readonly UpdateConfiguredResourcesService _updateConfiguredResourcesService;
         private readonly UpdateFullPlatePriceService _updateFullPlatePriceService;
         private readonly UpdateToolPriceService _updateToolPriceService;
+        private readonly UpdateLockpicksPriceService _updateLockpicksPriceService;
 
         private IEnumerable<GenericProduct> _genericProducts;
         private IEnumerable<IngotResource> _ingotResources;
@@ -22,6 +23,7 @@ namespace CortezosWorkshop.Configuracion
         private string _actualConfiguredResources;
         private string _actualFullPlatePrice;
         private string _actualToolPrice;
+        private string _actualLockpicksPrice;
 
         private const int _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX = 5;
         private const int _MAX_LENGTH_PRICE_PRODUCT = 7;
@@ -30,7 +32,8 @@ namespace CortezosWorkshop.Configuracion
             IRepository<IngotResource> ingotResourceRepository,
             UpdateConfiguredResourcesService updateConfiguredResourcesService,
             UpdateFullPlatePriceService updateFullPlatePriceService,
-            UpdateToolPriceService updateToolPriceService)
+            UpdateToolPriceService updateToolPriceService,
+            UpdateLockpicksPriceService updateLockpicksPriceService)
         {
             InitializeComponent();
             _genericProductsRepository = genericProductsRepository;
@@ -38,6 +41,7 @@ namespace CortezosWorkshop.Configuracion
             _updateConfiguredResourcesService = updateConfiguredResourcesService;
             _updateFullPlatePriceService = updateFullPlatePriceService;
             _updateToolPriceService = updateToolPriceService;
+            _updateLockpicksPriceService = updateLockpicksPriceService;
         }
         #endregion
 
@@ -53,6 +57,7 @@ namespace CortezosWorkshop.Configuracion
             Load_ConfigResourcesDefaultData();
             Load_FullPlatePricesDefaultData();
             Load_ToolPricesDefaultData();
+            Load_LockpicksPricesDefaultData();
         }
 
         private async Task Load_Products() { _genericProducts = await _genericProductsRepository.GetAllAsync(); }
@@ -102,6 +107,22 @@ namespace CortezosWorkshop.Configuracion
         {
             txt_precioHerramienta.Text = _ingotResources.ElementAt(cbo_matHerramienta.SelectedIndex).ToolPrice.ToString();
             _actualToolPrice = txt_precioHerramienta.Text;
+        }
+
+        private void Load_LockpicksPricesDefaultData()
+        {
+            cbo_matLockpicks.BindingContext = new BindingContext();
+            cbo_matLockpicks.DataSource = _ingotResources;
+            cbo_matLockpicks.DisplayMember = "ResourceName";
+            cbo_matLockpicks.SelectedIndex = 0;
+
+            Load_LockpicksPrice();
+        }
+
+        private void Load_LockpicksPrice()
+        {
+            txt_precioLockpicks.Text = _ingotResources.ElementAt(cbo_matLockpicks.SelectedIndex).LockpicksPrice.ToString();
+            _actualLockpicksPrice = txt_precioLockpicks.Text;
         }
         #endregion
 
@@ -235,6 +256,50 @@ namespace CortezosWorkshop.Configuracion
                 catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 
                 Load_ToolPrice();
+            }
+        }
+        #endregion
+
+        #region CambiarPrecioDeLockpicks
+        // -------------------------------------------------------------------------------------------------------
+        // ------------------------------------ CAMBIAR PRECIO DE LOCKPICKS --------------------------------------
+        // -------------------------------------------------------------------------------------------------------
+        private void cbo_matLockpicks_SelectedIndexChanged(object sender, EventArgs e) { Load_LockpicksPrice(); }
+
+        private async void txt_precioLockpicks_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var textBox = (sender as TextBox);
+            if (e.KeyChar == (char)13)
+            {
+                await Save_New_Lockpicks_Price();
+                btn_menu_principal.Focus();
+            }
+
+            if (textBox.Text.Length == _MAX_LENGTH_PRICE_PRODUCT && !char.IsControl(e.KeyChar)) { e.Handled = true; }
+        }
+
+        private async void txt_precioLockpicks_Leave(object sender, EventArgs e)
+        {
+            if (txt_precioLockpicks.Text != "") { await Save_New_Lockpicks_Price(); }
+        }
+
+        private async Task Save_New_Lockpicks_Price()
+        {
+            var newLockpicksPriceText = txt_precioLockpicks.Text;
+            var validationResult = ValidateTextBoxData(newLockpicksPriceText, _MAX_LENGTH_PRICE_PRODUCT, Load_LockpicksPrice);
+            if (!validationResult) { return; }
+
+            if (newLockpicksPriceText != _actualLockpicksPrice)
+            {
+                try
+                {
+                    var ingotResource = _ingotResources.ElementAt(cbo_matLockpicks.SelectedIndex);
+                    await _updateLockpicksPriceService.ExecuteAsync(ingotResource, int.Parse(newLockpicksPriceText));
+                    await Load_IngotResources();
+                }
+                catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
+
+                Load_LockpicksPrice();
             }
         }
         #endregion

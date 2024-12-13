@@ -103,12 +103,14 @@ namespace CortezosWorkshop.Maps
             cbo_buyResources.DisplayMember = displayName;
             cbo_buyResources.SelectedIndex = 0;
         
-            lbl_mediaLingotes.Text = "- Cantidad media de lingotes :     0";
-            lbl_precioPorLingote.Text = "- Precio por lingote :     0 gp";
+            lbl_mediaLingotes.Text = "- Cantidad media de lingotes:     0";
+            lbl_precioPorLingote.Text = "- Precio por lingote:     0 gp";
             lbl_costePorArmadura.Text = "- Coste por armadura:     0 gp";
-            lbl_precioVentaArmadura.Text = "- Precio venta armadura :     0 gp";
+            lbl_precioVentaArmadura.Text = "- Precio venta armadura:     0 gp";
             lbl_costePorHerramienta.Text = "- Coste por herramienta:     0 gp";
-            lbl_precioVentaHerramienta.Text = "- Precio venta herramienta :     0 gp";
+            lbl_precioVentaHerramienta.Text = "- Precio venta herramienta:     0 gp";
+            lbl_costePorLockpicks.Text = "- Coste por lockpicks:     0 gp";
+            lbl_precioVentaLockpicks.Text = "- Precio venta lockpicks:     0 gp";
 
             txt_buyResourcesPrice.Text = "0";
             _txt_buyResourcesPriceClick = false;
@@ -280,6 +282,8 @@ namespace CortezosWorkshop.Maps
                 lbl_precioVentaArmadura.Text = buyResourceViewModel.FullPlateSellPrice;
                 lbl_costePorHerramienta.Text = buyResourceViewModel.ToolGoldCost;
                 lbl_precioVentaHerramienta.Text = buyResourceViewModel.ToolSellPrice;
+                lbl_costePorLockpicks.Text = buyResourceViewModel.LockpicksGoldCost;
+                lbl_precioVentaLockpicks.Text = buyResourceViewModel.LockpicksSellPrice;
             }
             catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 

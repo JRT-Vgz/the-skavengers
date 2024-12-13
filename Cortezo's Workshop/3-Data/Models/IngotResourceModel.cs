@@ -18,6 +18,7 @@ namespace _3___Data.Models
         public string CommodityName { get; set; }
         public int FullPlatePrice { get; set; }
         public int ToolPrice { get; set; }
+        public int LockpicksPrice { get; set; }
         [ForeignKey("IdMaterial")]
         public MaterialModel Material { get; set; }
     }

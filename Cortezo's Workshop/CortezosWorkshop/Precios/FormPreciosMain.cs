@@ -31,12 +31,13 @@ namespace CortezosWorkshop.Precios
 
         private async Task Load_IngotResources() { _ingotResources = await _ingotResourceRepository.GetAllAsync(); }
 
-        private enum ProductType { FullPlate, Tools }
+        private enum ProductType { FullPlate, Tools, Lockpicks }
 
         private void Load_Generic_Products()
         {
             cbo_producto.Items.Add(new { Text = "Armadura completa", Value = ProductType.FullPlate });
             cbo_producto.Items.Add(new { Text = "Herramientas", Value = ProductType.Tools });
+            cbo_producto.Items.Add(new { Text = "Lockpicks", Value = ProductType.Lockpicks });
             cbo_producto.DisplayMember = "Text";
             cbo_producto.SelectedIndex = 1;
         }
@@ -76,6 +77,7 @@ namespace CortezosWorkshop.Precios
 
             if (selectedProductType == ProductType.FullPlate) { await Load_Prices(i => i.FullPlatePrice); }
             else if (selectedProductType == ProductType.Tools) { await Load_Prices(i => i.ToolPrice); }
+            else if (selectedProductType == ProductType.Lockpicks) { await Load_Prices(i => i.LockpicksPrice); }
         }
         #endregion
 

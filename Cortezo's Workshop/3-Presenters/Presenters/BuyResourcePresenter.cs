@@ -15,7 +15,9 @@ namespace _3_Presenters.Presenters
                 FullPlateGoldCost = $"- Coste por armadura:     {FormatQuantity(mapBuyEntity.FullPlateGoldCost)} gp",
                 FullPlateSellPrice = $"- Precio venta armadura:     {FormatQuantity(mapBuyEntity.FullPlateSellPrice)} gp",
                 ToolGoldCost = $"- Coste por herramienta:     {FormatQuantity(mapBuyEntity.ToolGoldCost)}",
-                ToolSellPrice = $"- Precio venta herramienta:     {FormatQuantity(mapBuyEntity.ToolSellPrice)}"
+                ToolSellPrice = $"- Precio venta herramienta:     {FormatQuantity(mapBuyEntity.ToolSellPrice)}",
+                LockpicksGoldCost = $"- Coste por lockpicks:     {FormatQuantity(mapBuyEntity.LockpicksGoldCost)}",
+                LockpicksSellPrice = $"- Precio venta lockpicks:     {FormatQuantity(mapBuyEntity.LockpicksSellPrice)}"
             };
 
         private string FormatQuantity(int quantity)

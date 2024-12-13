@@ -51,6 +51,8 @@
             rb_map = new RadioButton();
             rb_commodity = new RadioButton();
             rb_ingots = new RadioButton();
+            lbl_precioVentaLockpicks = new Label();
+            lbl_costePorLockpicks = new Label();
             SuspendLayout();
             // 
             // btn_menu_principal
@@ -160,7 +162,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(221, 183);
+            label2.Location = new Point(292, 185);
             label2.Name = "label2";
             label2.Size = new Size(40, 15);
             label2.TabIndex = 28;
@@ -168,7 +170,7 @@
             // 
             // txt_buyResourcesPrice
             // 
-            txt_buyResourcesPrice.Location = new Point(193, 201);
+            txt_buyResourcesPrice.Location = new Point(264, 203);
             txt_buyResourcesPrice.Name = "txt_buyResourcesPrice";
             txt_buyResourcesPrice.Size = new Size(100, 23);
             txt_buyResourcesPrice.TabIndex = 29;
@@ -181,7 +183,7 @@
             // 
             cbo_buyResources.DropDownStyle = ComboBoxStyle.DropDownList;
             cbo_buyResources.FormattingEnabled = true;
-            cbo_buyResources.Location = new Point(37, 201);
+            cbo_buyResources.Location = new Point(108, 203);
             cbo_buyResources.Name = "cbo_buyResources";
             cbo_buyResources.Size = new Size(150, 23);
             cbo_buyResources.TabIndex = 30;
@@ -189,7 +191,7 @@
             // lbl_precioPorLingote
             // 
             lbl_precioPorLingote.AutoSize = true;
-            lbl_precioPorLingote.Location = new Point(70, 263);
+            lbl_precioPorLingote.Location = new Point(145, 262);
             lbl_precioPorLingote.Name = "lbl_precioPorLingote";
             lbl_precioPorLingote.Size = new Size(153, 15);
             lbl_precioPorLingote.TabIndex = 31;
@@ -198,7 +200,7 @@
             // lbl_costePorArmadura
             // 
             lbl_costePorArmadura.AutoSize = true;
-            lbl_costePorArmadura.Location = new Point(70, 299);
+            lbl_costePorArmadura.Location = new Point(40, 299);
             lbl_costePorArmadura.Name = "lbl_costePorArmadura";
             lbl_costePorArmadura.Size = new Size(161, 15);
             lbl_costePorArmadura.TabIndex = 32;
@@ -207,7 +209,7 @@
             // lbl_precioVentaArmadura
             // 
             lbl_precioVentaArmadura.AutoSize = true;
-            lbl_precioVentaArmadura.Location = new Point(70, 323);
+            lbl_precioVentaArmadura.Location = new Point(40, 323);
             lbl_precioVentaArmadura.Name = "lbl_precioVentaArmadura";
             lbl_precioVentaArmadura.Size = new Size(178, 15);
             lbl_precioVentaArmadura.TabIndex = 33;
@@ -216,7 +218,7 @@
             // lbl_mediaLingotes
             // 
             lbl_mediaLingotes.AutoSize = true;
-            lbl_mediaLingotes.Location = new Point(70, 239);
+            lbl_mediaLingotes.Location = new Point(145, 238);
             lbl_mediaLingotes.Name = "lbl_mediaLingotes";
             lbl_mediaLingotes.Size = new Size(187, 15);
             lbl_mediaLingotes.TabIndex = 34;
@@ -225,7 +227,7 @@
             // lbl_precioVentaHerramienta
             // 
             lbl_precioVentaHerramienta.AutoSize = true;
-            lbl_precioVentaHerramienta.Location = new Point(70, 383);
+            lbl_precioVentaHerramienta.Location = new Point(40, 383);
             lbl_precioVentaHerramienta.Name = "lbl_precioVentaHerramienta";
             lbl_precioVentaHerramienta.Size = new Size(191, 15);
             lbl_precioVentaHerramienta.TabIndex = 36;
@@ -234,7 +236,7 @@
             // lbl_costePorHerramienta
             // 
             lbl_costePorHerramienta.AutoSize = true;
-            lbl_costePorHerramienta.Location = new Point(70, 359);
+            lbl_costePorHerramienta.Location = new Point(40, 359);
             lbl_costePorHerramienta.Name = "lbl_costePorHerramienta";
             lbl_costePorHerramienta.Size = new Size(174, 15);
             lbl_costePorHerramienta.TabIndex = 35;
@@ -243,7 +245,7 @@
             // rb_map
             // 
             rb_map.AutoSize = true;
-            rb_map.Location = new Point(37, 160);
+            rb_map.Location = new Point(108, 162);
             rb_map.Name = "rb_map";
             rb_map.Size = new Size(60, 19);
             rb_map.TabIndex = 37;
@@ -254,7 +256,7 @@
             // rb_commodity
             // 
             rb_commodity.AutoSize = true;
-            rb_commodity.Location = new Point(114, 160);
+            rb_commodity.Location = new Point(185, 162);
             rb_commodity.Name = "rb_commodity";
             rb_commodity.Size = new Size(89, 19);
             rb_commodity.TabIndex = 38;
@@ -265,7 +267,7 @@
             // rb_ingots
             // 
             rb_ingots.AutoSize = true;
-            rb_ingots.Location = new Point(221, 161);
+            rb_ingots.Location = new Point(292, 163);
             rb_ingots.Name = "rb_ingots";
             rb_ingots.Size = new Size(70, 19);
             rb_ingots.TabIndex = 39;
@@ -273,11 +275,31 @@
             rb_ingots.Text = "Lingotes";
             rb_ingots.UseVisualStyleBackColor = true;
             // 
+            // lbl_precioVentaLockpicks
+            // 
+            lbl_precioVentaLockpicks.AutoSize = true;
+            lbl_precioVentaLockpicks.Location = new Point(264, 323);
+            lbl_precioVentaLockpicks.Name = "lbl_precioVentaLockpicks";
+            lbl_precioVentaLockpicks.Size = new Size(176, 15);
+            lbl_precioVentaLockpicks.TabIndex = 41;
+            lbl_precioVentaLockpicks.Text = "- Precio venta lockpicks :     0 gp";
+            // 
+            // lbl_costePorLockpicks
+            // 
+            lbl_costePorLockpicks.AutoSize = true;
+            lbl_costePorLockpicks.Location = new Point(264, 299);
+            lbl_costePorLockpicks.Name = "lbl_costePorLockpicks";
+            lbl_costePorLockpicks.Size = new Size(159, 15);
+            lbl_costePorLockpicks.TabIndex = 40;
+            lbl_costePorLockpicks.Text = "- Coste por lockpicks:     0 gp";
+            // 
             // FormMapsMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lbl_precioVentaLockpicks);
+            Controls.Add(lbl_costePorLockpicks);
             Controls.Add(rb_ingots);
             Controls.Add(rb_commodity);
             Controls.Add(rb_map);
@@ -337,5 +359,7 @@
         private RadioButton rb_map;
         private RadioButton rb_commodity;
         private RadioButton rb_ingots;
+        private Label lbl_precioVentaLockpicks;
+        private Label lbl_costePorLockpicks;
     }
 }

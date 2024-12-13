@@ -51,7 +51,7 @@
             // lbl_estadisticas
             // 
             lbl_estadisticas.AutoSize = true;
-            lbl_estadisticas.Location = new Point(339, 59);
+            lbl_estadisticas.Location = new Point(330, 75);
             lbl_estadisticas.Name = "lbl_estadisticas";
             lbl_estadisticas.Size = new Size(80, 15);
             lbl_estadisticas.TabIndex = 3;
@@ -60,7 +60,7 @@
             // lbl_oroTotal
             // 
             lbl_oroTotal.AutoSize = true;
-            lbl_oroTotal.Location = new Point(263, 110);
+            lbl_oroTotal.Location = new Point(254, 126);
             lbl_oroTotal.Name = "lbl_oroTotal";
             lbl_oroTotal.Size = new Size(190, 15);
             lbl_oroTotal.TabIndex = 4;
@@ -69,7 +69,7 @@
             // lbl_cajafuerte
             // 
             lbl_cajafuerte.AutoSize = true;
-            lbl_cajafuerte.Location = new Point(263, 145);
+            lbl_cajafuerte.Location = new Point(254, 161);
             lbl_cajafuerte.Name = "lbl_cajafuerte";
             lbl_cajafuerte.Size = new Size(216, 15);
             lbl_cajafuerte.TabIndex = 5;
@@ -78,7 +78,7 @@
             // lbl_beneficio
             // 
             lbl_beneficio.AutoSize = true;
-            lbl_beneficio.Location = new Point(263, 216);
+            lbl_beneficio.Location = new Point(254, 232);
             lbl_beneficio.Name = "lbl_beneficio";
             lbl_beneficio.Size = new Size(223, 15);
             lbl_beneficio.TabIndex = 6;
@@ -87,7 +87,7 @@
             // lbl_oroGastado
             // 
             lbl_oroGastado.AutoSize = true;
-            lbl_oroGastado.Location = new Point(263, 181);
+            lbl_oroGastado.Location = new Point(254, 197);
             lbl_oroGastado.Name = "lbl_oroGastado";
             lbl_oroGastado.Size = new Size(251, 15);
             lbl_oroGastado.TabIndex = 7;
@@ -96,7 +96,7 @@
             // lbl_mapasCompletados
             // 
             lbl_mapasCompletados.AutoSize = true;
-            lbl_mapasCompletados.Location = new Point(263, 252);
+            lbl_mapasCompletados.Location = new Point(254, 268);
             lbl_mapasCompletados.Name = "lbl_mapasCompletados";
             lbl_mapasCompletados.Size = new Size(125, 15);
             lbl_mapasCompletados.TabIndex = 8;
@@ -105,7 +105,7 @@
             // lbl_recursosExtraidos
             // 
             lbl_recursosExtraidos.AutoSize = true;
-            lbl_recursosExtraidos.Location = new Point(263, 287);
+            lbl_recursosExtraidos.Location = new Point(254, 303);
             lbl_recursosExtraidos.Name = "lbl_recursosExtraidos";
             lbl_recursosExtraidos.Size = new Size(160, 15);
             lbl_recursosExtraidos.TabIndex = 9;

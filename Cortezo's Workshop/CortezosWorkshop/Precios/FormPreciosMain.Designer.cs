@@ -73,7 +73,7 @@
             // 
             cbo_producto.DropDownStyle = ComboBoxStyle.DropDownList;
             cbo_producto.FormattingEnabled = true;
-            cbo_producto.Location = new Point(156, 40);
+            cbo_producto.Location = new Point(268, 47);
             cbo_producto.Name = "cbo_producto";
             cbo_producto.Size = new Size(148, 23);
             cbo_producto.TabIndex = 2;
@@ -82,7 +82,7 @@
             // lbl_material1
             // 
             lbl_material1.AutoSize = true;
-            lbl_material1.Location = new Point(156, 82);
+            lbl_material1.Location = new Point(268, 89);
             lbl_material1.Name = "lbl_material1";
             lbl_material1.Size = new Size(59, 15);
             lbl_material1.TabIndex = 3;
@@ -91,7 +91,7 @@
             // lbl_material2
             // 
             lbl_material2.AutoSize = true;
-            lbl_material2.Location = new Point(156, 117);
+            lbl_material2.Location = new Point(268, 124);
             lbl_material2.Name = "lbl_material2";
             lbl_material2.Size = new Size(59, 15);
             lbl_material2.TabIndex = 4;
@@ -100,7 +100,7 @@
             // lbl_material4
             // 
             lbl_material4.AutoSize = true;
-            lbl_material4.Location = new Point(156, 192);
+            lbl_material4.Location = new Point(268, 199);
             lbl_material4.Name = "lbl_material4";
             lbl_material4.Size = new Size(59, 15);
             lbl_material4.TabIndex = 6;
@@ -109,7 +109,7 @@
             // lbl_material3
             // 
             lbl_material3.AutoSize = true;
-            lbl_material3.Location = new Point(156, 154);
+            lbl_material3.Location = new Point(268, 161);
             lbl_material3.Name = "lbl_material3";
             lbl_material3.Size = new Size(59, 15);
             lbl_material3.TabIndex = 5;
@@ -118,7 +118,7 @@
             // lbl_material8
             // 
             lbl_material8.AutoSize = true;
-            lbl_material8.Location = new Point(156, 339);
+            lbl_material8.Location = new Point(268, 346);
             lbl_material8.Name = "lbl_material8";
             lbl_material8.Size = new Size(59, 15);
             lbl_material8.TabIndex = 10;
@@ -127,7 +127,7 @@
             // lbl_material7
             // 
             lbl_material7.AutoSize = true;
-            lbl_material7.Location = new Point(156, 301);
+            lbl_material7.Location = new Point(268, 308);
             lbl_material7.Name = "lbl_material7";
             lbl_material7.Size = new Size(59, 15);
             lbl_material7.TabIndex = 9;
@@ -136,7 +136,7 @@
             // lbl_material6
             // 
             lbl_material6.AutoSize = true;
-            lbl_material6.Location = new Point(156, 264);
+            lbl_material6.Location = new Point(268, 271);
             lbl_material6.Name = "lbl_material6";
             lbl_material6.Size = new Size(59, 15);
             lbl_material6.TabIndex = 8;
@@ -145,7 +145,7 @@
             // lbl_material5
             // 
             lbl_material5.AutoSize = true;
-            lbl_material5.Location = new Point(156, 229);
+            lbl_material5.Location = new Point(268, 236);
             lbl_material5.Name = "lbl_material5";
             lbl_material5.Size = new Size(59, 15);
             lbl_material5.TabIndex = 7;
@@ -154,7 +154,7 @@
             // lbl_material9
             // 
             lbl_material9.AutoSize = true;
-            lbl_material9.Location = new Point(156, 381);
+            lbl_material9.Location = new Point(268, 388);
             lbl_material9.Name = "lbl_material9";
             lbl_material9.Size = new Size(59, 15);
             lbl_material9.TabIndex = 11;
@@ -163,7 +163,7 @@
             // lbl_precio9
             // 
             lbl_precio9.AutoSize = true;
-            lbl_precio9.Location = new Point(245, 381);
+            lbl_precio9.Location = new Point(357, 388);
             lbl_precio9.Name = "lbl_precio9";
             lbl_precio9.Size = new Size(49, 15);
             lbl_precio9.TabIndex = 20;
@@ -172,7 +172,7 @@
             // lbl_precio8
             // 
             lbl_precio8.AutoSize = true;
-            lbl_precio8.Location = new Point(245, 339);
+            lbl_precio8.Location = new Point(357, 346);
             lbl_precio8.Name = "lbl_precio8";
             lbl_precio8.Size = new Size(49, 15);
             lbl_precio8.TabIndex = 19;
@@ -181,7 +181,7 @@
             // lbl_precio7
             // 
             lbl_precio7.AutoSize = true;
-            lbl_precio7.Location = new Point(245, 301);
+            lbl_precio7.Location = new Point(357, 308);
             lbl_precio7.Name = "lbl_precio7";
             lbl_precio7.Size = new Size(49, 15);
             lbl_precio7.TabIndex = 18;
@@ -190,7 +190,7 @@
             // lbl_precio6
             // 
             lbl_precio6.AutoSize = true;
-            lbl_precio6.Location = new Point(245, 264);
+            lbl_precio6.Location = new Point(357, 271);
             lbl_precio6.Name = "lbl_precio6";
             lbl_precio6.Size = new Size(49, 15);
             lbl_precio6.TabIndex = 17;
@@ -199,7 +199,7 @@
             // lbl_precio5
             // 
             lbl_precio5.AutoSize = true;
-            lbl_precio5.Location = new Point(245, 229);
+            lbl_precio5.Location = new Point(357, 236);
             lbl_precio5.Name = "lbl_precio5";
             lbl_precio5.Size = new Size(49, 15);
             lbl_precio5.TabIndex = 16;
@@ -208,7 +208,7 @@
             // lbl_precio4
             // 
             lbl_precio4.AutoSize = true;
-            lbl_precio4.Location = new Point(245, 192);
+            lbl_precio4.Location = new Point(357, 199);
             lbl_precio4.Name = "lbl_precio4";
             lbl_precio4.Size = new Size(49, 15);
             lbl_precio4.TabIndex = 15;
@@ -217,7 +217,7 @@
             // lbl_precio3
             // 
             lbl_precio3.AutoSize = true;
-            lbl_precio3.Location = new Point(245, 154);
+            lbl_precio3.Location = new Point(357, 161);
             lbl_precio3.Name = "lbl_precio3";
             lbl_precio3.Size = new Size(49, 15);
             lbl_precio3.TabIndex = 14;
@@ -226,7 +226,7 @@
             // lbl_precio2
             // 
             lbl_precio2.AutoSize = true;
-            lbl_precio2.Location = new Point(245, 117);
+            lbl_precio2.Location = new Point(357, 124);
             lbl_precio2.Name = "lbl_precio2";
             lbl_precio2.Size = new Size(49, 15);
             lbl_precio2.TabIndex = 13;
@@ -235,7 +235,7 @@
             // lbl_precio1
             // 
             lbl_precio1.AutoSize = true;
-            lbl_precio1.Location = new Point(245, 82);
+            lbl_precio1.Location = new Point(357, 89);
             lbl_precio1.Name = "lbl_precio1";
             lbl_precio1.Size = new Size(49, 15);
             lbl_precio1.TabIndex = 12;
@@ -243,7 +243,7 @@
             // 
             // btn_copiar1
             // 
-            btn_copiar1.Location = new Point(317, 78);
+            btn_copiar1.Location = new Point(429, 85);
             btn_copiar1.Name = "btn_copiar1";
             btn_copiar1.Size = new Size(75, 23);
             btn_copiar1.TabIndex = 21;
@@ -253,7 +253,7 @@
             // 
             // btn_copiar2
             // 
-            btn_copiar2.Location = new Point(317, 113);
+            btn_copiar2.Location = new Point(429, 120);
             btn_copiar2.Name = "btn_copiar2";
             btn_copiar2.Size = new Size(75, 23);
             btn_copiar2.TabIndex = 22;
@@ -263,7 +263,7 @@
             // 
             // btn_copiar3
             // 
-            btn_copiar3.Location = new Point(317, 150);
+            btn_copiar3.Location = new Point(429, 157);
             btn_copiar3.Name = "btn_copiar3";
             btn_copiar3.Size = new Size(75, 23);
             btn_copiar3.TabIndex = 23;
@@ -273,7 +273,7 @@
             // 
             // btn_copiar4
             // 
-            btn_copiar4.Location = new Point(317, 188);
+            btn_copiar4.Location = new Point(429, 195);
             btn_copiar4.Name = "btn_copiar4";
             btn_copiar4.Size = new Size(75, 23);
             btn_copiar4.TabIndex = 24;
@@ -283,7 +283,7 @@
             // 
             // btn_copiar5
             // 
-            btn_copiar5.Location = new Point(317, 225);
+            btn_copiar5.Location = new Point(429, 232);
             btn_copiar5.Name = "btn_copiar5";
             btn_copiar5.Size = new Size(75, 23);
             btn_copiar5.TabIndex = 25;
@@ -293,7 +293,7 @@
             // 
             // btn_copiar6
             // 
-            btn_copiar6.Location = new Point(317, 260);
+            btn_copiar6.Location = new Point(429, 267);
             btn_copiar6.Name = "btn_copiar6";
             btn_copiar6.Size = new Size(75, 23);
             btn_copiar6.TabIndex = 26;
@@ -303,7 +303,7 @@
             // 
             // btn_copiar7
             // 
-            btn_copiar7.Location = new Point(317, 297);
+            btn_copiar7.Location = new Point(429, 304);
             btn_copiar7.Name = "btn_copiar7";
             btn_copiar7.Size = new Size(75, 23);
             btn_copiar7.TabIndex = 27;
@@ -313,7 +313,7 @@
             // 
             // btn_copiar8
             // 
-            btn_copiar8.Location = new Point(317, 335);
+            btn_copiar8.Location = new Point(429, 342);
             btn_copiar8.Name = "btn_copiar8";
             btn_copiar8.Size = new Size(75, 23);
             btn_copiar8.TabIndex = 28;
@@ -323,7 +323,7 @@
             // 
             // btn_copiar9
             // 
-            btn_copiar9.Location = new Point(317, 377);
+            btn_copiar9.Location = new Point(429, 384);
             btn_copiar9.Name = "btn_copiar9";
             btn_copiar9.Size = new Size(75, 23);
             btn_copiar9.TabIndex = 29;

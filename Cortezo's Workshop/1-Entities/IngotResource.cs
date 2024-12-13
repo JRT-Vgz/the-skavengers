@@ -13,5 +13,6 @@ namespace _1___Entities
         public string CommodityName { get; set; }
         public int FullPlatePrice { get; set; }
         public int ToolPrice { get; set; }
+        public int LockpicksPrice { get; set; }
     }
 }
