@@ -1,0 +1,30 @@
+﻿INSERT INTO ShopStats (Name, Quantity)
+VALUES
+('CajaFuerte', 0),
+('Beneficio', 0),
+('OroTotal', 0),
+('OroGastado', 0);
+
+INSERT INTO Materials (Name)
+VALUES
+('Lingotes'),
+('Tablones'),
+('Cueros');
+
+INSERT INTO GenericProducts (Name, IdMaterial, Resources)
+VALUES
+('Armadura Completa', 1, 116),
+('Herramientas', 1, 6),
+('Lockpicks', 1, 8);
+
+INSERT INTO IngotResources (ResourceName, IdMaterial, MapName, MapQuantity, MapTotalOre, MapRecommendedPrice, CommodityName, FullPlatePrice, ToolPrice, LockpicksPrice)
+VALUES
+('Dull Copper', 1, 'Dull Copper Ore Map', 0, 0, '5k - 6k', 'Dull Copper Commodity', 100, 10, 15),
+('Shadow Iron', 1, 'Shadow Iron Ore Map', 0, 0, '6k - 8k', 'Shadow Iron Commodity', 200, 20, 25),
+('Copper', 1, 'Copper Ore Map', 0, 0, '6k - 8k', 'Copper Commodity', 300, 30, 35),
+('Bronze', 1, 'Bronze Ore Map', 0, 0, '9k - 12k', 'Bronze Commodity', 400, 40, 45),
+('Gold', 1, 'Gold Ore Map', 0, 0, '25k - 28k', 'Gold Commodity', 500, 50, 55),
+('Agapite', 1, 'Agapite Ore Map', 0, 0, '30k - 33k', 'Agapite Commodity', 600, 60, 65),
+('Verite', 1, 'Verite Ore Map', 0, 0, '50k - 55k', 'Verite Commodity', 700, 70, 76),
+('Valorite', 1, 'Valorite Ore Map', 0, 0, '65k - 70k', 'Valorite Commodity', 800, 80, 85),
+('Avarite', 1, 'Avarite Ore Map', 0, 0, '100k - 115k', 'Avarite Commodity', 900, 90, 95);

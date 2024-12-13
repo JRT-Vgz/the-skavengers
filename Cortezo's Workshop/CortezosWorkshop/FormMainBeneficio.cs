@@ -63,7 +63,7 @@ namespace CortezosWorkshop
             var textBox = (sender as TextBox);
             if (e.KeyChar == (char)13)
             {
-                if (textBox.Text.Length == 0) { btn_Back_Click(sender, e); }
+                if (textBox.Text.Length == 0) { btn_Back_Click(sender, e); return; }
                 btn_Save_Click(sender, e);
             }
 
