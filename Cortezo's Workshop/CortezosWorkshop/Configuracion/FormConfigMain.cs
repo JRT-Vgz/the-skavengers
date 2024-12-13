@@ -1,8 +1,6 @@
 ﻿using _1___Entities;
 using _2___Servicios.Interfaces;
 using _2___Servicios.Services.ProductServices;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations;
 
 namespace CortezosWorkshop.Configuracion
 {
@@ -51,13 +49,17 @@ namespace CortezosWorkshop.Configuracion
         // -------------------------------------------- CARGAR DATOS ---------------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private async void FormConfigMain_Load(object sender, EventArgs e)
-        {
+        {           
             await Load_Products();
             await Load_IngotResources();
+            InitializePriceChangeHandlers();
+
             Load_ConfigResourcesDefaultData();
-            Load_FullPlatePricesDefaultData();
-            Load_ToolPricesDefaultData();
-            Load_LockpicksPricesDefaultData();
+            Load_ProductPricesDefaultData(cbo_matArCompleta, Load_FullPlatePrice);
+            Load_ProductPricesDefaultData(cbo_matHerramienta, Load_ToolPrice);
+            Load_ProductPricesDefaultData(cbo_matLockpicks, Load_LockpicksPrice);
+
+
         }
 
         private async Task Load_Products() { _genericProducts = await _genericProductsRepository.GetAllAsync(); }
@@ -78,13 +80,14 @@ namespace CortezosWorkshop.Configuracion
             _actualConfiguredResources = txt_configResources.Text;
         }
 
-        private void Load_FullPlatePricesDefaultData()
+        private void Load_ProductPricesDefaultData(ComboBox cbo_matProduct, Action load_productPrice)
         {
-            cbo_matArCompleta.DataSource = _ingotResources;
-            cbo_matArCompleta.DisplayMember = "ResourceName";
-            cbo_matArCompleta.SelectedIndex = 0;
+            cbo_matProduct.BindingContext = new BindingContext();
+            cbo_matProduct.DataSource = _ingotResources;
+            cbo_matProduct.DisplayMember = "ResourceName";
+            cbo_matProduct.SelectedIndex = 0;
 
-            Load_FullPlatePrice();
+            load_productPrice();
         }
 
         private void Load_FullPlatePrice()
@@ -93,30 +96,10 @@ namespace CortezosWorkshop.Configuracion
             _actualFullPlatePrice = txt_precioArCompleta.Text;
         }
 
-        private void Load_ToolPricesDefaultData()
-        {
-            cbo_matHerramienta.BindingContext = new BindingContext();
-            cbo_matHerramienta.DataSource = _ingotResources;
-            cbo_matHerramienta.DisplayMember = "ResourceName";
-            cbo_matHerramienta.SelectedIndex = 0;
-
-            Load_ToolPrice();
-        }
-
         private void Load_ToolPrice()
         {
             txt_precioHerramienta.Text = _ingotResources.ElementAt(cbo_matHerramienta.SelectedIndex).ToolPrice.ToString();
             _actualToolPrice = txt_precioHerramienta.Text;
-        }
-
-        private void Load_LockpicksPricesDefaultData()
-        {
-            cbo_matLockpicks.BindingContext = new BindingContext();
-            cbo_matLockpicks.DataSource = _ingotResources;
-            cbo_matLockpicks.DisplayMember = "ResourceName";
-            cbo_matLockpicks.SelectedIndex = 0;
-
-            Load_LockpicksPrice();
         }
 
         private void Load_LockpicksPrice()
@@ -153,7 +136,7 @@ namespace CortezosWorkshop.Configuracion
         private async Task Save_New_Configurated_Resources()
         {
             var newConfiguratedResourcesText = txt_configResources.Text;
-            var validationResult = ValidateTextBoxData(newConfiguratedResourcesText, _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX, 
+            var validationResult = ValidateTextBoxData(newConfiguratedResourcesText, _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX,
                 Load_ConfiguredResources);
             if (!validationResult) { return; }
 
@@ -171,137 +154,71 @@ namespace CortezosWorkshop.Configuracion
         }
         #endregion
 
-        #region CambiarPrecioDeArmaduraCompleta
-
+        #region CambiarPrecioDeProductos-Generico
         // -------------------------------------------------------------------------------------------------------
-        // -------------------------------- CAMBIAR PRECIO DE ARMADURA COMPLETA ----------------------------------
+        // ------------------------------- CAMBIAR PRECIO DE PRODUCTOS - GENÉRICO --------------------------------
         // -------------------------------------------------------------------------------------------------------
-        private void cbo_matArCompleta_SelectedIndexChanged(object sender, EventArgs e) { Load_FullPlatePrice(); }
-
-        private async void txt_precioArCompleta_KeyPress(object sender, KeyPressEventArgs e)
+        private void InitializePriceChangeHandlers()
         {
-            var textBox = (sender as TextBox);
-            if (e.KeyChar == (char)13)
-            {
-                await Save_New_FullPlate_Price();
-                btn_menu_principal.Focus();
-            }
+            // Armadura completa
+            ChangeProductPrice(cbo_matArCompleta, txt_precioArCompleta, _actualFullPlatePrice,
+                Load_FullPlatePrice, _updateFullPlatePriceService.ExecuteAsync);
 
-            if (textBox.Text.Length == _MAX_LENGTH_PRICE_PRODUCT && !char.IsControl(e.KeyChar)) { e.Handled = true; }
+            // Herramientas
+            ChangeProductPrice(cbo_matHerramienta, txt_precioHerramienta, _actualToolPrice,
+                Load_ToolPrice, _updateToolPriceService.ExecuteAsync);
+
+            // Lockpicks
+            ChangeProductPrice(cbo_matLockpicks, txt_precioLockpicks, _actualLockpicksPrice,
+                Load_LockpicksPrice, _updateLockpicksPriceService.ExecuteAsync);
         }
 
-        private async void txt_precioArCompleta_Leave(object sender, EventArgs e) 
+        private async Task ChangeProductPrice(ComboBox cbo_product, TextBox txt_productPrice, string currentPrice,
+            Action load_productPrice, Func<IngotResource, int, Task> updatePriceServiceMethod)
         {
-            if (txt_precioArCompleta.Text != "") { await Save_New_FullPlate_Price(); }
-        }
+            // Configuración de SelectedIndexChanged del ComboBox: Cargar el precio inicial del producto.
+            cbo_product.SelectedIndexChanged += (sender, e) => load_productPrice();
 
-        private async Task Save_New_FullPlate_Price()
-        {
-            var newFullPlatePriceText = txt_precioArCompleta.Text;
-            var validationResult = ValidateTextBoxData(newFullPlatePriceText, _MAX_LENGTH_PRICE_PRODUCT, Load_FullPlatePrice);
-            if (!validationResult) { return; }
-
-            if (newFullPlatePriceText != _actualFullPlatePrice)
+            // Configuración de KeyPress del TextBox: Control de digitos y ejecutar guardado con Enter.
+            txt_productPrice.KeyPress += async (sender, e) =>
             {
-                try
+                if (e.KeyChar == (char)13)
                 {
-                    var ingotResource = _ingotResources.ElementAt(cbo_matArCompleta.SelectedIndex);
-                    await _updateFullPlatePriceService.ExecuteAsync(ingotResource, int.Parse(newFullPlatePriceText));
-                    await Load_IngotResources();
+                    await SaveNewPrice();
+                    btn_menu_principal.Focus();
                 }
-                catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
-
-                Load_FullPlatePrice();
-            }
-        }
-        #endregion
-
-        #region CambiarPrecioDeHerramientas
-        // -------------------------------------------------------------------------------------------------------
-        // ----------------------------------- CAMBIAR PRECIO DE HERRAMIENTAS ------------------------------------
-        // -------------------------------------------------------------------------------------------------------
-        private void cbo_matHerramienta_SelectedIndexChanged(object sender, EventArgs e) { Load_ToolPrice(); }
-
-        private async void txt_precioHerramienta_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            var textBox = (sender as TextBox);
-            if (e.KeyChar == (char)13)
-            {
-                await Save_New_Tool_Price();
-                btn_menu_principal.Focus();
-            }
-
-            if (textBox.Text.Length == _MAX_LENGTH_PRICE_PRODUCT && !char.IsControl(e.KeyChar)) { e.Handled = true; }
-        }
-
-        private async void txt_precioHerramienta_Leave(object sender, EventArgs e)
-        {
-            if (txt_precioHerramienta.Text != "") { await Save_New_Tool_Price(); }
-        }
-
-        private async Task Save_New_Tool_Price()
-        {
-            var newToolPriceText = txt_precioHerramienta.Text;
-            var validationResult = ValidateTextBoxData(newToolPriceText, _MAX_LENGTH_PRICE_PRODUCT, Load_ToolPrice);
-            if (!validationResult) { return; }
-
-            if (newToolPriceText != _actualToolPrice)
-            {
-                try
+                if (txt_productPrice.Text.Length == _MAX_LENGTH_PRICE_PRODUCT && !char.IsControl(e.KeyChar))
                 {
-                    var ingotResource = _ingotResources.ElementAt(cbo_matHerramienta.SelectedIndex);
-                    await _updateToolPriceService.ExecuteAsync(ingotResource, int.Parse(newToolPriceText));
-                    await Load_IngotResources();
+                    e.Handled = true;
                 }
-                catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
+            };
 
-                Load_ToolPrice();
-            }
-        }
-        #endregion
+            // Configuración de Leave del TextBox: Dispara el guardado si el texto no está vacío.
+            txt_productPrice.Leave += async (sender, e) => 
+            { 
+                if (txt_productPrice.Text != "") { await SaveNewPrice();} 
+            };
 
-        #region CambiarPrecioDeLockpicks
-        // -------------------------------------------------------------------------------------------------------
-        // ------------------------------------ CAMBIAR PRECIO DE LOCKPICKS --------------------------------------
-        // -------------------------------------------------------------------------------------------------------
-        private void cbo_matLockpicks_SelectedIndexChanged(object sender, EventArgs e) { Load_LockpicksPrice(); }
-
-        private async void txt_precioLockpicks_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            var textBox = (sender as TextBox);
-            if (e.KeyChar == (char)13)
+            async Task SaveNewPrice()
             {
-                await Save_New_Lockpicks_Price();
-                btn_menu_principal.Focus();
-            }
+                var newPriceText = txt_productPrice.Text;
+                var validationResult = ValidateTextBoxData(newPriceText, _MAX_LENGTH_PRICE_PRODUCT, load_productPrice);
+                if (!validationResult) { return; }
 
-            if (textBox.Text.Length == _MAX_LENGTH_PRICE_PRODUCT && !char.IsControl(e.KeyChar)) { e.Handled = true; }
-        }
-
-        private async void txt_precioLockpicks_Leave(object sender, EventArgs e)
-        {
-            if (txt_precioLockpicks.Text != "") { await Save_New_Lockpicks_Price(); }
-        }
-
-        private async Task Save_New_Lockpicks_Price()
-        {
-            var newLockpicksPriceText = txt_precioLockpicks.Text;
-            var validationResult = ValidateTextBoxData(newLockpicksPriceText, _MAX_LENGTH_PRICE_PRODUCT, Load_LockpicksPrice);
-            if (!validationResult) { return; }
-
-            if (newLockpicksPriceText != _actualLockpicksPrice)
-            {
-                try
+                if (newPriceText != currentPrice)
                 {
-                    var ingotResource = _ingotResources.ElementAt(cbo_matLockpicks.SelectedIndex);
-                    await _updateLockpicksPriceService.ExecuteAsync(ingotResource, int.Parse(newLockpicksPriceText));
-                    await Load_IngotResources();
-                }
-                catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
+                    try
+                    {
+                        var selectedResource = _ingotResources.ElementAt(cbo_product.SelectedIndex);
+                        await updatePriceServiceMethod(selectedResource, int.Parse(newPriceText));
+                        await Load_IngotResources();
+                    }
+                    catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 
-                Load_LockpicksPrice();
+                    load_productPrice();
+                }
             }
-        }
+        }       
         #endregion
 
         #region Validaciones
@@ -355,5 +272,6 @@ namespace CortezosWorkshop.Configuracion
             this.Hide();
         }
         #endregion
+
     }
 }
