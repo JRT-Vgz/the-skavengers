@@ -10,7 +10,7 @@ namespace _3___Data
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
-            optionsBuilder.UseSqlServer("Server=localhost; Database=CortezosWorkshop; Trusted_Connection=True; MultipleActiveResultSets=true; TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Connection String");
 
 
             return new AppDbContext(optionsBuilder.Options);
