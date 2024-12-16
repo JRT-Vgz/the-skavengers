@@ -79,6 +79,7 @@
             txtBox.Size = new Size(130, 23);
             txtBox.TabIndex = 7;
             txtBox.TextAlign = HorizontalAlignment.Center;
+            txtBox.KeyDown += txtBox_KeyDown;
             txtBox.KeyPress += txtBox_KeyPress;
             // 
             // FormMainEditFunds
@@ -94,7 +95,9 @@
             Controls.Add(btn_Save);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
+            MaximumSize = new Size(269, 218);
             MinimizeBox = false;
+            MinimumSize = new Size(269, 218);
             Name = "FormMainEditFunds";
             ShowIcon = false;
             ShowInTaskbar = false;

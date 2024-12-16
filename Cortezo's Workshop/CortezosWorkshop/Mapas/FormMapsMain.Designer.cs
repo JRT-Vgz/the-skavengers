@@ -112,6 +112,7 @@
             txt_materialRecogido.TabIndex = 3;
             txt_materialRecogido.TextAlign = HorizontalAlignment.Center;
             txt_materialRecogido.Enter += txt_materialRecogido_Enter;
+            txt_materialRecogido.KeyDown += txt_materialRecogido_KeyDown;
             txt_materialRecogido.KeyPress += txt_materialRecogido_KeyPress;
             // 
             // btn_addMap
@@ -159,6 +160,7 @@
             txt_oreMapPrice.Size = new Size(103, 23);
             txt_oreMapPrice.TabIndex = 26;
             txt_oreMapPrice.TextAlign = HorizontalAlignment.Center;
+            txt_oreMapPrice.KeyDown += txt_oreMapPrice_KeyDown;
             txt_oreMapPrice.KeyPress += txt_oreMapPrice_KeyPress;
             txt_oreMapPrice.Leave += txt_oreMapPrice_Leave;
             // 
@@ -179,6 +181,7 @@
             txt_buyResourcesPrice.TabIndex = 29;
             txt_buyResourcesPrice.TextAlign = HorizontalAlignment.Center;
             txt_buyResourcesPrice.Enter += txt_buyResourcesPrice_Enter;
+            txt_buyResourcesPrice.KeyDown += txt_buyResourcesPrice_KeyDown;
             txt_buyResourcesPrice.KeyPress += txt_oreMapCompra_KeyPress;
             txt_buyResourcesPrice.Leave += txt_buyResourcesPrice_Leave;
             // 

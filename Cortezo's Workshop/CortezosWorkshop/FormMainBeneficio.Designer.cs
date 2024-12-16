@@ -80,6 +80,7 @@
             txtBox.Size = new Size(130, 23);
             txtBox.TabIndex = 7;
             txtBox.TextAlign = HorizontalAlignment.Center;
+            txtBox.KeyDown += txtBox_KeyDown;
             txtBox.KeyPress += txtBox_KeyPress;
             // 
             // label1
@@ -95,7 +96,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(249, 175);
+            ClientSize = new Size(253, 179);
             ControlBox = false;
             Controls.Add(label1);
             Controls.Add(txtBox);
@@ -105,7 +106,9 @@
             Controls.Add(btn_Save);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
+            MaximumSize = new Size(269, 218);
             MinimizeBox = false;
+            MinimumSize = new Size(269, 218);
             Name = "FormMainBeneficio";
             ShowIcon = false;
             ShowInTaskbar = false;

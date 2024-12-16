@@ -47,7 +47,7 @@ namespace CortezosWorkshop.Maps
 
             rb_map.CheckedChanged += RB_CheckedChanged;
             rb_commodity.CheckedChanged += RB_CheckedChanged;
-            rb_ingots.CheckedChanged += RB_CheckedChanged;          
+            rb_ingots.CheckedChanged += RB_CheckedChanged;
         }
         #endregion
 
@@ -102,7 +102,7 @@ namespace CortezosWorkshop.Maps
             cbo_buyResources.DataSource = _ingotResources;
             cbo_buyResources.DisplayMember = displayName;
             cbo_buyResources.SelectedIndex = 0;
-        
+
             lbl_mediaLingotes.Text = "- Cantidad media de lingotes:     0";
             lbl_precioPorLingote.Text = "- Precio por lingote:     0 gp";
             lbl_costePorArmadura.Text = "- Coste por armadura:     0 gp";
@@ -131,15 +131,18 @@ namespace CortezosWorkshop.Maps
             }
         }
 
+        private void txt_materialRecogido_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn_addMap_Click(sender, e);
+                e.SuppressKeyPress = true;
+            }
+        }
+
         private void txt_materialRecogido_KeyPress(object sender, KeyPressEventArgs e)
         {
             var textBox = (sender as TextBox);
-            if (e.KeyChar == (char)13)
-            {
-                btn_addMap_Click(sender, e);
-                return;
-            }
-
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) { e.Handled = true; }
 
             if (textBox.Text.Length == _MAX_LENGTH_RECURSOS_AÑADIDOS_TEXTBOX && !char.IsControl(e.KeyChar)) { e.Handled = true; }
@@ -179,16 +182,20 @@ namespace CortezosWorkshop.Maps
         // ------------------------------------ CAMBIAR PRECIOS RECOMENDADOS -------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private void cbo_oreMapsPrices_SelectedIndexChanged(object sender, EventArgs e) { Load_RecommendedPrice(); }
+
+        private async void txt_oreMapPrice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                await Save_New_Recommended_Price();
+                btn_menu_principal.Focus();
+            }
+        }
+
         private async void txt_oreMapPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
             var textBox = (sender as TextBox);
-            if (e.KeyChar == (char)13)
-            {
-                await Save_New_Recommended_Price();
-                btn_menu_principal.Focus();
-                return;
-            }
-
             if (textBox.Text.Length == _MAX_LENGTH_PRECIO_RECOMENDADO_TEXTBOX && !char.IsControl(e.KeyChar)) { e.Handled = true; }
         }
 
@@ -221,16 +228,25 @@ namespace CortezosWorkshop.Maps
         // -------------------------------------------------------------------------------------------------------
         // ------------------------------------------ COMPRAR RECURSOS -------------------------------------------
         // -------------------------------------------------------------------------------------------------------
-        private void RB_CheckedChanged(object sender, EventArgs e) 
+        private void RB_CheckedChanged(object sender, EventArgs e)
         {
             if (!((RadioButton)sender).Checked) { return; }
 
-            if (sender == rb_map) { Load_BuyResourcesDefaultData
-                    (_configuration.Configuration["Constants:_RESOURCE_MAP_NAME_COLUMN"]); }
-            else if (sender == rb_commodity) { Load_BuyResourcesDefaultData
-                    (_configuration.Configuration["Constants:_RESOURCE_COMMODITY_NAME_COLUMN"]); }
-            else if (sender == rb_ingots) { Load_BuyResourcesDefaultData
-                    (_configuration.Configuration["Constants:_RESOURCE_NAME_COLUMN"]); }
+            if (sender == rb_map)
+            {
+                Load_BuyResourcesDefaultData
+                    (_configuration.Configuration["Constants:_RESOURCE_MAP_NAME_COLUMN"]);
+            }
+            else if (sender == rb_commodity)
+            {
+                Load_BuyResourcesDefaultData
+                    (_configuration.Configuration["Constants:_RESOURCE_COMMODITY_NAME_COLUMN"]);
+            }
+            else if (sender == rb_ingots)
+            {
+                Load_BuyResourcesDefaultData
+                    (_configuration.Configuration["Constants:_RESOURCE_NAME_COLUMN"]);
+            }
         }
 
         private void txt_buyResourcesPrice_Enter(object sender, EventArgs e)
@@ -242,24 +258,28 @@ namespace CortezosWorkshop.Maps
             }
         }
 
+        private async void txt_buyResourcesPrice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                await Show_Info_For_Buy_Resources();
+                btn_menu_principal.Focus();
+            }
+        }
+
         private async void txt_oreMapCompra_KeyPress(object sender, KeyPressEventArgs e)
         {
             var textBox = (sender as TextBox);
-            if (e.KeyChar == (char)13)
-            {
-                await Show_Info_For_Buy_Resources();
-                btn_menu_principal.Focus();
-                return;
-            }
 
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) { e.Handled = true; }
 
             if (textBox.Text.Length == _MAX_LENGTH_COMPRAR_RECURSO_TEXTBOX && !char.IsControl(e.KeyChar)) { e.Handled = true; }
         }
 
-        private async void txt_buyResourcesPrice_Leave(object sender, EventArgs e) 
-        { 
-            if (txt_buyResourcesPrice.Text != "") { await Show_Info_For_Buy_Resources(); }            
+        private async void txt_buyResourcesPrice_Leave(object sender, EventArgs e)
+        {
+            if (txt_buyResourcesPrice.Text != "") { await Show_Info_For_Buy_Resources(); }
         }
         private async Task Show_Info_For_Buy_Resources()
         {
@@ -270,12 +290,12 @@ namespace CortezosWorkshop.Maps
                 var buyPrice = int.Parse(txt_buyResourcesPrice.Text);
 
                 var buyResourceViewModel = new BuyResourceViewModel();
-                if (rb_map.Checked == true) 
-                    { buyResourceViewModel = await _mapBuyService.ExecuteAsync(ingotResource, buyPrice); }
+                if (rb_map.Checked == true)
+                { buyResourceViewModel = await _mapBuyService.ExecuteAsync(ingotResource, buyPrice); }
                 else if (rb_commodity.Checked == true)
-                    { buyResourceViewModel = await _commodityBuyService.ExecuteAsync(ingotResource, buyPrice); }
+                { buyResourceViewModel = await _commodityBuyService.ExecuteAsync(ingotResource, buyPrice); }
                 else if (rb_ingots.Checked == true)
-                    { buyResourceViewModel = await _ingotBuyService.ExecuteAsync(ingotResource, buyPrice); }
+                { buyResourceViewModel = await _ingotBuyService.ExecuteAsync(ingotResource, buyPrice); }
 
                 lbl_mediaLingotes.Text = buyResourceViewModel.ResourceQuantity;
                 lbl_precioPorLingote.Text = buyResourceViewModel.PricePerResource;
@@ -289,7 +309,11 @@ namespace CortezosWorkshop.Maps
                 lbl_beneficioHerramienta.Text = buyResourceViewModel.ToolBenefit;
                 lbl_beneficioLockpicks.Text = buyResourceViewModel.LockpicksBenefit;
             }
-            catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
+            catch (Exception) 
+            {
+                System.Media.SystemSounds.Beep.Play();
+                MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); 
+            }
 
             _txt_buyResourcesPriceClick = false;
         }

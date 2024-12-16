@@ -50,7 +50,7 @@ namespace CortezosWorkshop.Configuracion
         // -------------------------------------------- CARGAR DATOS ---------------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private async void FormConfigMain_Load(object sender, EventArgs e)
-        {           
+        {
             await Load_Products();
             await Load_IngotResources();
             InitializePriceChangeHandlers();
@@ -63,7 +63,7 @@ namespace CortezosWorkshop.Configuracion
 
         private async Task Load_Products() { _genericProducts = await _genericProductsRepository.GetAllAsync(); }
         private async Task Load_IngotResources() { _ingotResources = await _ingotResourceRepository.GetAllAsync(); }
- 
+
         private void Load_ConfigResourcesDefaultData()
         {
             cbo_productos.DataSource = _genericProducts;
@@ -124,15 +124,19 @@ namespace CortezosWorkshop.Configuracion
         // -------------------------------------------------------------------------------------------------------
         private async void cbo_productos_SelectedIndexChanged(object sender, EventArgs e) { Load_ConfiguredResources(); }
 
-        private async void txt_configResources_KeyPress(object sender, KeyPressEventArgs e)
+        private async void txt_configResources_KeyDown(object sender, KeyEventArgs e)
         {
-            var textBox = (sender as TextBox);
-            if (e.KeyChar == (char)13)
+            if (e.KeyCode == Keys.Enter)
             {
+                e.SuppressKeyPress = true;
                 await Save_New_Configurated_Resources();
                 btn_menu_principal.Focus();
             }
+        }
 
+        private async void txt_configResources_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var textBox = (sender as TextBox);
             if (textBox.Text.Length == _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX && !char.IsControl(e.KeyChar)) { e.Handled = true; }
         }
 
@@ -144,8 +148,8 @@ namespace CortezosWorkshop.Configuracion
         private async Task Save_New_Configurated_Resources()
         {
             var newConfiguratedResourcesText = txt_configResources.Text;
-            var validationResult = ValidateTextBoxData(newConfiguratedResourcesText, _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX);
-            if (!validationResult) { return; }
+            var validationResult = ValidateResourcesTextBoxData(newConfiguratedResourcesText, _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX);
+            if (!validationResult) { Load_ConfiguredResources(); return; }
 
             if (newConfiguratedResourcesText != _actualConfiguredResources)
             {
@@ -186,14 +190,20 @@ namespace CortezosWorkshop.Configuracion
             // Configuración de SelectedIndexChanged del ComboBox: Cargar el precio inicial del producto.
             cbo_product.SelectedIndexChanged += (sender, e) => load_productPrice();
 
-            // Configuración de KeyPress del TextBox: Control de digitos y ejecutar guardado con Enter.
-            txt_productPrice.KeyPress += async (sender, e) =>
+            // Configuración de KeyDown del TextBox: Ejecutar guardado con Enter.
+            txt_productPrice.KeyDown += async (sender, e) =>
             {
-                if (e.KeyChar == (char)13)
+                if (e.KeyCode == Keys.Enter)
                 {
+                    e.SuppressKeyPress = true;
                     await SaveNewPrice();
                     btn_menu_principal.Focus();
                 }
+            };
+
+            // Configuración de KeyPress del TextBox: Control de digitos.
+            txt_productPrice.KeyPress += async (sender, e) =>
+            {
                 if (txt_productPrice.Text.Length == _MAX_LENGTH_PRICE_PRODUCT && !char.IsControl(e.KeyChar))
                 {
                     e.Handled = true;
@@ -201,16 +211,15 @@ namespace CortezosWorkshop.Configuracion
             };
 
             // Configuración de Leave del TextBox: Dispara el guardado si el texto no está vacío.
-            txt_productPrice.Leave += async (sender, e) => 
-            { 
-                if (txt_productPrice.Text != "") { await SaveNewPrice();} 
-            };
+            txt_productPrice.Leave += async (sender, e) => { await SaveNewPrice(); };
 
             async Task SaveNewPrice()
             {
                 var newPriceText = txt_productPrice.Text;
-                var validationResult = ValidateTextBoxData(newPriceText, _MAX_LENGTH_PRICE_PRODUCT);
-                if (!validationResult) { await Reload_All_Data();  return; }
+                if (newPriceText == "") { newPriceText = "0"; }
+
+                var validationResult = ValidatePricesTextBoxData(newPriceText, _MAX_LENGTH_PRICE_PRODUCT);
+                if (!validationResult) { await Reload_All_Data(); return; }
 
                 if (newPriceText != currentPrice)
                 {
@@ -225,14 +234,19 @@ namespace CortezosWorkshop.Configuracion
 
                 await Reload_All_Data();
             }
-        }       
+        }
+
+        private void Txt_productPrice_KeyDown(object? sender, KeyEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region Validaciones
         // -------------------------------------------------------------------------------------------------------
         // -------------------------------------------- VALIDACIONES ---------------------------------------------
         // -------------------------------------------------------------------------------------------------------
-        private bool ValidateTextBoxData(string textBoxData, int textMaxLength)
+        private bool ValidateResourcesTextBoxData(string textBoxData, int textMaxLength)
         {
             var validationResult = false;
 
@@ -243,6 +257,24 @@ namespace CortezosWorkshop.Configuracion
             else if (textBoxData == "0" || textBoxData == "")
             {
                 MessageBox.Show("La cantidad no puede ser 0.");
+                return validationResult;
+            }
+            else if (textBoxData.Contains('-'))
+            {
+                MessageBox.Show("La cantidad no puede ser negativa.");
+                return validationResult;
+            }
+
+            validationResult = true;
+            return validationResult;
+        }
+
+        private bool ValidatePricesTextBoxData(string textBoxData, int textMaxLength)
+        {
+            var validationResult = false;
+
+            if (textBoxData.Length > textMaxLength)
+            {
                 return validationResult;
             }
             else if (textBoxData.Contains('-'))

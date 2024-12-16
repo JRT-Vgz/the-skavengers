@@ -58,15 +58,20 @@ namespace CortezosWorkshop
         // -------------------------------------------------------------------------------------------------------
         // ------------------------------------- RELLENAR TEXTBOX NUMERICO ---------------------------------------
         // -------------------------------------------------------------------------------------------------------
+        private void txtBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                var textBox = (sender as TextBox);
+                if (textBox.Text.Length == 0) { btn_Back_Click(sender, e); return; }
+                btn_Save_Click(sender, e);
+
+                e.SuppressKeyPress = true;
+            }
+        }
         private void txtBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             var textBox = (sender as TextBox);
-            if (e.KeyChar == (char)13)
-            {
-                if (textBox.Text.Length == 0) { btn_Back_Click(sender, e); return; }
-                btn_Save_Click(sender, e);
-            }
-
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) { e.Handled = true; }
 
             if (textBox.Text.Length > _MAX_LENGTH_TEXTBOX && !char.IsControl(e.KeyChar)) { e.Handled = true; }
@@ -86,11 +91,11 @@ namespace CortezosWorkshop
                 Reset_TextBox();
                 return;
             }
-        
-            try 
+
+            try
             {
                 var txtBoxQuantity = int.Parse(txtBox.Text);
-                await _sumToBeneficioService.ExecuteAsync(txtBoxQuantity); 
+                await _sumToBeneficioService.ExecuteAsync(txtBoxQuantity);
             }
             catch (NotEnoughFundsException ex) { MessageBox.Show(ex.Message); }
             catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
@@ -104,6 +109,6 @@ namespace CortezosWorkshop
         // ----------------------------------------------- CERRAR ------------------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private void btn_Back_Click(object sender, EventArgs e)
-            => this.Close();
+            => this.Close();  
     }
 }

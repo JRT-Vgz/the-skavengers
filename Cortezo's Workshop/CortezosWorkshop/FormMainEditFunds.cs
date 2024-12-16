@@ -44,7 +44,7 @@ namespace CortezosWorkshop
 
         private void FormMainEditFunds_Shown(object sender, EventArgs e)
             => Reset_TextBox();
-        
+
         private void Reset_TextBox()
         {
             txtBox.Text = "";
@@ -57,15 +57,20 @@ namespace CortezosWorkshop
         // -------------------------------------------------------------------------------------------------------
         // ------------------------------------- RELLENAR TEXTBOX NUMERICO ---------------------------------------
         // -------------------------------------------------------------------------------------------------------
+        private void txtBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                var textBox = (sender as TextBox);
+                if (textBox.Text.Length == 0) { btn_Back_Click(sender, e); return; }
+                btn_Save_Click(sender, e);
+
+                e.SuppressKeyPress = true;
+            }
+        }
         private void txtBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             var textBox = (sender as TextBox);
-            if (e.KeyChar == (char)13) 
-            { 
-                if (textBox.Text.Length == 0) { btn_Back_Click(sender, e); return; }
-                btn_Save_Click(sender, e); 
-            }
-           
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 if (e.KeyChar == '-' && textBox.SelectionStart == 0) { return; }
@@ -86,7 +91,7 @@ namespace CortezosWorkshop
         // -------------------------------------- GUARDAR EN BASE DE DATOS ---------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private async void btn_Save_Click(object sender, EventArgs e)
-        {         
+        {
             try
             {
                 var txtBoxQuantity = int.Parse(txtBox.Text);

@@ -14,7 +14,7 @@ namespace _3_Presenters.Presenters
                 CajaFuerte = $"- Fondos almacenados en la caja fuerte:     {FormatQuantity(statistics.CajaFuerte)} gp",
                 Beneficio = $"- Beneficio retirado para nuestro disfrute:     {FormatQuantity(statistics.Beneficio)} gp",
                 OroGastado = $"- Oro gastado en comprar mapas y materiales:     {FormatQuantity(statistics.OroGastado)} gp",
-                MapasCompletados = $"- Mapas completdos:     {FormatQuantity(statistics.MapasCompletados)}",
+                MapasCompletados = $"- Mapas completados:     {FormatQuantity(statistics.MapasCompletados)}",
                 RecursosExtraidos = $"- Total de recursos extraídos:     {FormatQuantity(statistics.RecursosExtraidos)}"
             };
 
