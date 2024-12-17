@@ -361,6 +361,8 @@
             Controls.Add(btn_menu_principal);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
+            MaximumSize = new Size(816, 489);
+            MinimumSize = new Size(816, 489);
             Name = "FormMapsMain";
             StartPosition = FormStartPosition.Manual;
             Text = "Mapas y materiales";

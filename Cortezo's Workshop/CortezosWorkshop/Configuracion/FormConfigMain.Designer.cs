@@ -269,7 +269,9 @@
             Controls.Add(btn_menu_principal);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
+            MaximumSize = new Size(816, 489);
             MinimizeBox = false;
+            MinimumSize = new Size(816, 489);
             Name = "FormConfigMain";
             StartPosition = FormStartPosition.Manual;
             Text = "Configuración";

@@ -24,6 +24,8 @@ namespace CortezosWorkshop.Configuracion
         private string _actualToolPrice;
         private string _actualLockpicksPrice;
 
+        private bool isTaskRunning = false;
+
         private const int _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX = 5;
         private const int _MAX_LENGTH_PRICE_PRODUCT = 7;
 
@@ -147,9 +149,11 @@ namespace CortezosWorkshop.Configuracion
 
         private async Task Save_New_Configurated_Resources()
         {
+            isTaskRunning = true;
+
             var newConfiguratedResourcesText = txt_configResources.Text;
             var validationResult = ValidateResourcesTextBoxData(newConfiguratedResourcesText, _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX);
-            if (!validationResult) { Load_ConfiguredResources(); return; }
+            if (!validationResult) { Load_ConfiguredResources(); isTaskRunning = false; return; }
 
             if (newConfiguratedResourcesText != _actualConfiguredResources)
             {
@@ -161,6 +165,7 @@ namespace CortezosWorkshop.Configuracion
                 catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 
                 Load_ConfiguredResources();
+                isTaskRunning = false;
             }
         }
         #endregion
@@ -215,11 +220,13 @@ namespace CortezosWorkshop.Configuracion
 
             async Task SaveNewPrice()
             {
+                isTaskRunning = true;
+
                 var newPriceText = txt_productPrice.Text;
                 if (newPriceText == "") { newPriceText = "0"; }
 
                 var validationResult = ValidatePricesTextBoxData(newPriceText, _MAX_LENGTH_PRICE_PRODUCT);
-                if (!validationResult) { await Reload_All_Data(); return; }
+                if (!validationResult) { await Reload_All_Data(); isTaskRunning = false; return; }
 
                 if (newPriceText != currentPrice)
                 {
@@ -231,8 +238,8 @@ namespace CortezosWorkshop.Configuracion
                     }
                     catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
                 }
-
                 await Reload_All_Data();
+                isTaskRunning = false;
             }
         }
 
@@ -300,8 +307,10 @@ namespace CortezosWorkshop.Configuracion
             }
         }
 
-        private void btn_menu_principal_Click(object sender, EventArgs e)
+        private async void btn_menu_principal_Click(object sender, EventArgs e)
         {
+            if (isTaskRunning) { while (isTaskRunning) { await Task.Delay(100); } }
+
             var frmMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
             frmMain.Location = new Point(this.Location.X, this.Location.Y); ;
 

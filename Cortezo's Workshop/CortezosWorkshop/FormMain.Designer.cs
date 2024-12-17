@@ -153,6 +153,8 @@
             Controls.Add(btn_precios);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
+            MaximumSize = new Size(816, 489);
+            MinimumSize = new Size(816, 489);
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cortezo's Workshop v1.0";
