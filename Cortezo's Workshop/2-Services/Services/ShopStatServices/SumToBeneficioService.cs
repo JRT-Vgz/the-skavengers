@@ -9,12 +9,17 @@ namespace _2___Servicios.Services.ShopStatServices
     {
         private readonly IRepository<ShopStat> _shopStatsRepository;
         private readonly ConfigurationService _configurationService;
+        private readonly ILogger _logger;
+
+        private string _logEntry;
 
         public SumToBeneficioService(IRepository<ShopStat> shopStatsRepository,
-            ConfigurationService configurationService)
+            ConfigurationService configurationService,
+            ILogger logger)
         {
             _shopStatsRepository = shopStatsRepository;
             _configurationService = configurationService;
+            _logger = logger;
         }
 
         public async Task ExecuteAsync(int quantity)
@@ -34,6 +39,12 @@ namespace _2___Servicios.Services.ShopStatServices
             await _shopStatsRepository.UpdateAsync(shopStatCajaFuerte);
 
             await _shopStatsRepository.SaveChanges();
+
+            _logEntry = $"Retirado {FormatQuantity(quantity)} de oro de la caja fuerte como beneficio.";
+            await _logger.WriteLogEntryAsync(_logEntry);
         }
+
+        private string FormatQuantity(int quantity)
+            => quantity.ToString("#,0").Replace(",", ".");
     }
 }

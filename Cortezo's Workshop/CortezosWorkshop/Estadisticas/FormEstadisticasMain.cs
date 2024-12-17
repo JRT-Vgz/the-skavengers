@@ -1,16 +1,20 @@
 ﻿
 using _2___Servicios.Services.StatisticsServices;
 using _3_Presenters.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace CortezosWorkshop.Estadisticas
 {
     public partial class FormEstadisticasMain : Form
     {
+        private readonly IServiceProvider _serviceProvider;
         private readonly CreateStatisticsService<StatisticsViewModel> _createStatisticsService;
-        public FormEstadisticasMain(CreateStatisticsService<StatisticsViewModel> createStatisticsService)
+        public FormEstadisticasMain(IServiceProvider serviceProvider,
+        CreateStatisticsService<StatisticsViewModel> createStatisticsService)
         {
             InitializeComponent();
+            _serviceProvider = serviceProvider;
             _createStatisticsService = createStatisticsService;
         }
 
@@ -30,6 +34,20 @@ namespace CortezosWorkshop.Estadisticas
         }
 
         // -------------------------------------------------------------------------------------------------------
+        // --------------------------------------- IR A FORMULARIO DE LOGS ---------------------------------------
+        // -------------------------------------------------------------------------------------------------------
+        private void btn_log_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            var frm = _serviceProvider.GetRequiredService<FormLog>();
+            frm.Location = new Point(this.Location.X, this.Location.Y);
+            frm.ShowDialog();
+
+            this.Show();
+        }
+
+        // -------------------------------------------------------------------------------------------------------
         // --------------------------------------- VOLVER A MENU PRINCIPAL ---------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private void Form_Closing(object sender, FormClosingEventArgs e)
@@ -46,6 +64,6 @@ namespace CortezosWorkshop.Estadisticas
             frmMain.Location = new Point(this.Location.X, this.Location.Y); ;
 
             this.Hide();
-        }       
+        }
     }
 }

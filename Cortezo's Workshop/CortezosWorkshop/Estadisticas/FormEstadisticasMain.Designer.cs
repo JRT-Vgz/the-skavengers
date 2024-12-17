@@ -36,6 +36,7 @@
             lbl_oroGastado = new Label();
             lbl_mapasCompletados = new Label();
             lbl_recursosExtraidos = new Label();
+            btn_log = new Button();
             SuspendLayout();
             // 
             // btn_menu_principal
@@ -111,11 +112,22 @@
             lbl_recursosExtraidos.TabIndex = 9;
             lbl_recursosExtraidos.Text = "- Total de recursos extraídos::";
             // 
+            // btn_log
+            // 
+            btn_log.Location = new Point(12, 415);
+            btn_log.Name = "btn_log";
+            btn_log.Size = new Size(64, 23);
+            btn_log.TabIndex = 10;
+            btn_log.Text = "Log";
+            btn_log.UseVisualStyleBackColor = true;
+            btn_log.Click += btn_log_Click;
+            // 
             // FormEstadisticasMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btn_log);
             Controls.Add(lbl_recursosExtraidos);
             Controls.Add(lbl_mapasCompletados);
             Controls.Add(lbl_oroGastado);
@@ -148,5 +160,6 @@
         private Label lbl_oroGastado;
         private Label lbl_mapasCompletados;
         private Label lbl_recursosExtraidos;
+        private Button btn_log;
     }
 }

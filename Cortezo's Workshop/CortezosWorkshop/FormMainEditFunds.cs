@@ -63,8 +63,14 @@ namespace CortezosWorkshop
             {
                 var textBox = (sender as TextBox);
                 if (textBox.Text.Length == 0) { btn_Back_Click(sender, e); return; }
-                btn_Save_Click(sender, e);
 
+                int parsedValue;
+                if (int.TryParse(textBox.Text, out parsedValue)) 
+                { 
+                    if (parsedValue == 0) { textBox.Text = ""; return; }
+                }
+
+                btn_Save_Click(sender, e);
                 e.SuppressKeyPress = true;
             }
         }

@@ -7,9 +7,15 @@ namespace _2___Servicios.Services.ProductServices
     public class UpdateFullPlatePriceService
     {
         private readonly IRepository<IngotResource> _ingotResourceRepository;
-        public UpdateFullPlatePriceService(IRepository<IngotResource> ingotResourceRepository)
+        private readonly ILogger _logger;
+
+        private string _logEntry;
+
+        public UpdateFullPlatePriceService(IRepository<IngotResource> ingotResourceRepository, 
+            ILogger logger)
         {
             _ingotResourceRepository = ingotResourceRepository;
+            _logger = logger;
         }
 
         public async Task ExecuteAsync(IngotResource ingotResource, int newFullPlatePrice)
@@ -18,6 +24,12 @@ namespace _2___Servicios.Services.ProductServices
             await _ingotResourceRepository.UpdateAsync(ingotResource);
 
             await _ingotResourceRepository.SaveChanges();
+
+            _logEntry = $"Configurada Armadura Completa de {ingotResource.ResourceName} a {FormatQuantity(newFullPlatePrice)} gp.";
+            await _logger.WriteLogEntryAsync(_logEntry);
         }
+
+        private string FormatQuantity(int quantity)
+            => quantity.ToString("#,0").Replace(",", ".");
     }
 }

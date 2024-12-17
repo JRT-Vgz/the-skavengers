@@ -11,5 +11,6 @@ namespace _3___Data
         public DbSet<ShopStatsModel> ShopStats { get; set; }
         public DbSet<GenericProductModel> GenericProducts { get; set; }
         public DbSet<IngotResourceModel> IngotResources { get; set; }
+        public DbSet<LogModel> Logs { get; set; }
     }
 }
