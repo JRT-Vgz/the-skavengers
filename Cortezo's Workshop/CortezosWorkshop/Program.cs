@@ -8,7 +8,6 @@ using _2___Servicios.Services.ResourcesBuyServices;
 using _2___Servicios.Services.ShopStatServices;
 using _2___Servicios.Services.StatisticsServices;
 using _3___Data;
-using _3___Data.Models;
 using _3___Repository;
 using _3___Repository.QueryObjects;
 using _3_Loggers;

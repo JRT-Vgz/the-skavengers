@@ -59,7 +59,7 @@
             // lbl_Funds
             // 
             lbl_Funds.AutoSize = true;
-            lbl_Funds.Location = new Point(67, 9);
+            lbl_Funds.Location = new Point(69, 9);
             lbl_Funds.Name = "lbl_Funds";
             lbl_Funds.Size = new Size(112, 15);
             lbl_Funds.TabIndex = 2;

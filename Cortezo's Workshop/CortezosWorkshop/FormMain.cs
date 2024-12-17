@@ -41,8 +41,15 @@ namespace CortezosWorkshop
         {
             var fundsViewModel = await _getFundsByNameService.ExecuteAsync(
                 _configuration.Configuration["Constants:_SHOPSTAT_CAJA_FUERTE"]);
-            lbl_Oro.Text = fundsViewModel.Funds;
+            UpdateLabelText(lbl_Oro, fundsViewModel.Funds, lbl_Tesoreria);
         }
+
+        private void UpdateLabelText(Label label, string funds, Label referenceLabel)
+        {
+            label.Text = funds;
+            label.Left = referenceLabel.Left + (referenceLabel.Width - label.Width) / 2;
+        }
+
         #endregion
 
         #region NavegacionBotones

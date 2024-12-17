@@ -91,10 +91,11 @@
             // lbl_Oro
             // 
             lbl_Oro.AutoSize = true;
-            lbl_Oro.Location = new Point(380, 387);
+            lbl_Oro.Location = new Point(395, 387);
             lbl_Oro.Name = "lbl_Oro";
             lbl_Oro.Size = new Size(0, 15);
             lbl_Oro.TabIndex = 5;
+            lbl_Oro.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btn_addFunds
             // 
@@ -157,7 +158,7 @@
             MinimumSize = new Size(816, 489);
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Cortezo's Workshop v1.0";
+            Text = "Cortezo's Workshop v1.1";
             Load += FormMain_Load;
             ResumeLayout(false);
             PerformLayout();
