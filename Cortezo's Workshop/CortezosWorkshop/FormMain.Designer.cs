@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             btn_precios = new Button();
             btn_mapas = new Button();
             btn_config = new Button();
@@ -42,7 +43,7 @@
             // 
             // btn_precios
             // 
-            btn_precios.Location = new Point(282, 96);
+            btn_precios.Location = new Point(283, 106);
             btn_precios.Name = "btn_precios";
             btn_precios.Size = new Size(238, 33);
             btn_precios.TabIndex = 0;
@@ -52,7 +53,7 @@
             // 
             // btn_mapas
             // 
-            btn_mapas.Location = new Point(282, 162);
+            btn_mapas.Location = new Point(283, 172);
             btn_mapas.Name = "btn_mapas";
             btn_mapas.Size = new Size(238, 33);
             btn_mapas.TabIndex = 1;
@@ -62,7 +63,7 @@
             // 
             // btn_config
             // 
-            btn_config.Location = new Point(282, 227);
+            btn_config.Location = new Point(283, 237);
             btn_config.Name = "btn_config";
             btn_config.Size = new Size(238, 33);
             btn_config.TabIndex = 2;
@@ -73,11 +74,13 @@
             // lbl_Titulo
             // 
             lbl_Titulo.AutoSize = true;
-            lbl_Titulo.Location = new Point(332, 39);
+            lbl_Titulo.Font = new Font("Jokerman", 20F);
+            lbl_Titulo.Location = new Point(229, 26);
             lbl_Titulo.Name = "lbl_Titulo";
-            lbl_Titulo.Size = new Size(135, 15);
+            lbl_Titulo.Size = new Size(343, 39);
             lbl_Titulo.TabIndex = 3;
             lbl_Titulo.Text = "CORTEZO'S WORKSHOP";
+            lbl_Titulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lbl_Tesoreria
             // 
@@ -119,17 +122,17 @@
             // 
             // btn_portapapeles
             // 
+            btn_portapapeles.Image = Properties.Resources.Rune;
             btn_portapapeles.Location = new Point(12, 12);
             btn_portapapeles.Name = "btn_portapapeles";
-            btn_portapapeles.Size = new Size(75, 23);
+            btn_portapapeles.Size = new Size(44, 42);
             btn_portapapeles.TabIndex = 8;
-            btn_portapapeles.Text = "Copia!";
             btn_portapapeles.UseVisualStyleBackColor = true;
             btn_portapapeles.Click += btn_portapapeles_Click;
             // 
             // btn_estadisticas
             // 
-            btn_estadisticas.Location = new Point(282, 293);
+            btn_estadisticas.Location = new Point(283, 303);
             btn_estadisticas.Name = "btn_estadisticas";
             btn_estadisticas.Size = new Size(238, 33);
             btn_estadisticas.TabIndex = 9;
@@ -153,12 +156,13 @@
             Controls.Add(btn_mapas);
             Controls.Add(btn_precios);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MaximumSize = new Size(816, 489);
             MinimumSize = new Size(816, 489);
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Cortezo's Workshop v1.1";
+            Text = "Cortezo's Workshop v1.2";
             Load += FormMain_Load;
             ResumeLayout(false);
             PerformLayout();

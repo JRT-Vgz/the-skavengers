@@ -31,6 +31,9 @@ namespace CortezosWorkshop.Estadisticas
             lbl_oroGastado.Text = statisticsViewModel.OroGastado;
             lbl_mapasCompletados.Text = statisticsViewModel.MapasCompletados;
             lbl_recursosExtraidos.Text = statisticsViewModel.RecursosExtraidos;
+            lbl_armadurasCrafteadas.Text = statisticsViewModel.ArmadurasCrafteadas;
+            lbl_herramientasCrafteadas.Text = statisticsViewModel.HerramientasCrafteadas;
+            lbl_lockpicksCrafteados.Text = statisticsViewModel.LockpicksCrafteados;
         }
 
         // -------------------------------------------------------------------------------------------------------

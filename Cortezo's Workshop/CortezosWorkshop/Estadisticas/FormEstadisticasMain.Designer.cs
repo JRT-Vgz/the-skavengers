@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEstadisticasMain));
             btn_menu_principal = new Button();
             lbl_estadisticas = new Label();
             lbl_oroTotal = new Label();
@@ -37,6 +38,9 @@
             lbl_mapasCompletados = new Label();
             lbl_recursosExtraidos = new Label();
             btn_log = new Button();
+            lbl_lockpicksCrafteados = new Label();
+            lbl_herramientasCrafteadas = new Label();
+            lbl_armadurasCrafteadas = new Label();
             SuspendLayout();
             // 
             // btn_menu_principal
@@ -52,7 +56,7 @@
             // lbl_estadisticas
             // 
             lbl_estadisticas.AutoSize = true;
-            lbl_estadisticas.Location = new Point(330, 75);
+            lbl_estadisticas.Location = new Point(325, 32);
             lbl_estadisticas.Name = "lbl_estadisticas";
             lbl_estadisticas.Size = new Size(80, 15);
             lbl_estadisticas.TabIndex = 3;
@@ -61,7 +65,7 @@
             // lbl_oroTotal
             // 
             lbl_oroTotal.AutoSize = true;
-            lbl_oroTotal.Location = new Point(254, 126);
+            lbl_oroTotal.Location = new Point(249, 83);
             lbl_oroTotal.Name = "lbl_oroTotal";
             lbl_oroTotal.Size = new Size(190, 15);
             lbl_oroTotal.TabIndex = 4;
@@ -70,7 +74,7 @@
             // lbl_cajafuerte
             // 
             lbl_cajafuerte.AutoSize = true;
-            lbl_cajafuerte.Location = new Point(254, 161);
+            lbl_cajafuerte.Location = new Point(249, 118);
             lbl_cajafuerte.Name = "lbl_cajafuerte";
             lbl_cajafuerte.Size = new Size(216, 15);
             lbl_cajafuerte.TabIndex = 5;
@@ -79,7 +83,7 @@
             // lbl_beneficio
             // 
             lbl_beneficio.AutoSize = true;
-            lbl_beneficio.Location = new Point(254, 232);
+            lbl_beneficio.Location = new Point(249, 189);
             lbl_beneficio.Name = "lbl_beneficio";
             lbl_beneficio.Size = new Size(223, 15);
             lbl_beneficio.TabIndex = 6;
@@ -88,7 +92,7 @@
             // lbl_oroGastado
             // 
             lbl_oroGastado.AutoSize = true;
-            lbl_oroGastado.Location = new Point(254, 197);
+            lbl_oroGastado.Location = new Point(249, 154);
             lbl_oroGastado.Name = "lbl_oroGastado";
             lbl_oroGastado.Size = new Size(251, 15);
             lbl_oroGastado.TabIndex = 7;
@@ -97,7 +101,7 @@
             // lbl_mapasCompletados
             // 
             lbl_mapasCompletados.AutoSize = true;
-            lbl_mapasCompletados.Location = new Point(254, 268);
+            lbl_mapasCompletados.Location = new Point(249, 225);
             lbl_mapasCompletados.Name = "lbl_mapasCompletados";
             lbl_mapasCompletados.Size = new Size(125, 15);
             lbl_mapasCompletados.TabIndex = 8;
@@ -106,7 +110,7 @@
             // lbl_recursosExtraidos
             // 
             lbl_recursosExtraidos.AutoSize = true;
-            lbl_recursosExtraidos.Location = new Point(254, 303);
+            lbl_recursosExtraidos.Location = new Point(249, 260);
             lbl_recursosExtraidos.Name = "lbl_recursosExtraidos";
             lbl_recursosExtraidos.Size = new Size(160, 15);
             lbl_recursosExtraidos.TabIndex = 9;
@@ -122,11 +126,41 @@
             btn_log.UseVisualStyleBackColor = true;
             btn_log.Click += btn_log_Click;
             // 
+            // lbl_lockpicksCrafteados
+            // 
+            lbl_lockpicksCrafteados.AutoSize = true;
+            lbl_lockpicksCrafteados.Location = new Point(249, 365);
+            lbl_lockpicksCrafteados.Name = "lbl_lockpicksCrafteados";
+            lbl_lockpicksCrafteados.Size = new Size(128, 15);
+            lbl_lockpicksCrafteados.TabIndex = 13;
+            lbl_lockpicksCrafteados.Text = "- Lockpicks crafteados:";
+            // 
+            // lbl_herramientasCrafteadas
+            // 
+            lbl_herramientasCrafteadas.AutoSize = true;
+            lbl_herramientasCrafteadas.Location = new Point(249, 330);
+            lbl_herramientasCrafteadas.Name = "lbl_herramientasCrafteadas";
+            lbl_herramientasCrafteadas.Size = new Size(146, 15);
+            lbl_herramientasCrafteadas.TabIndex = 12;
+            lbl_herramientasCrafteadas.Text = "- Herramientas crafteadas:";
+            // 
+            // lbl_armadurasCrafteadas
+            // 
+            lbl_armadurasCrafteadas.AutoSize = true;
+            lbl_armadurasCrafteadas.Location = new Point(249, 294);
+            lbl_armadurasCrafteadas.Name = "lbl_armadurasCrafteadas";
+            lbl_armadurasCrafteadas.Size = new Size(191, 15);
+            lbl_armadurasCrafteadas.TabIndex = 11;
+            lbl_armadurasCrafteadas.Text = "- Armaduras completas crafteadas:";
+            // 
             // FormEstadisticasMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lbl_lockpicksCrafteados);
+            Controls.Add(lbl_herramientasCrafteadas);
+            Controls.Add(lbl_armadurasCrafteadas);
             Controls.Add(btn_log);
             Controls.Add(lbl_recursosExtraidos);
             Controls.Add(lbl_mapasCompletados);
@@ -137,6 +171,7 @@
             Controls.Add(lbl_estadisticas);
             Controls.Add(btn_menu_principal);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MaximumSize = new Size(816, 489);
             MinimizeBox = false;
@@ -161,5 +196,8 @@
         private Label lbl_mapasCompletados;
         private Label lbl_recursosExtraidos;
         private Button btn_log;
+        private Label lbl_lockpicksCrafteados;
+        private Label lbl_herramientasCrafteadas;
+        private Label lbl_armadurasCrafteadas;
     }
 }

@@ -9,5 +9,8 @@ namespace _3_Presenters.ViewModels
         public string OroGastado { get; set; }
         public string MapasCompletados { get; set; }
         public string RecursosExtraidos { get; set; }
+        public string ArmadurasCrafteadas { get; set; }
+        public string HerramientasCrafteadas { get; set; }
+        public string LockpicksCrafteados { get; set; }
     }
 }

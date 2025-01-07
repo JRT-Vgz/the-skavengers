@@ -11,7 +11,9 @@ namespace _3___Data.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public int IdMaterial { get; set; }
-        public int Resources { get; set; }
+        public int QuantityCrafted { get; set; }
+        public int MaterialUsed { get; set; }
+
         [ForeignKey("IdMaterial")]
         public MaterialModel Material { get; set; }
     }

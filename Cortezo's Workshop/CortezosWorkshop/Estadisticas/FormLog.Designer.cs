@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLog));
             btn_volver = new Button();
             lbl_log10 = new Label();
             lbl_log9 = new Label();
@@ -267,6 +268,7 @@
             Controls.Add(lbl_log6);
             Controls.Add(lbl_log5);
             Controls.Add(btn_volver);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MaximumSize = new Size(816, 489);
             MinimizeBox = false;

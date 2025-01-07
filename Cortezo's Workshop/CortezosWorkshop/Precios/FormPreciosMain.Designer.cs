@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPreciosMain));
             btn_menu_principal = new Button();
             cbo_producto = new ComboBox();
             lbl_material1 = new Label();
@@ -366,6 +367,7 @@
             Controls.Add(cbo_producto);
             Controls.Add(btn_menu_principal);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "FormPreciosMain";
             StartPosition = FormStartPosition.Manual;

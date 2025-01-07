@@ -1,7 +1,6 @@
 ﻿using _1___Entities;
 using _2___Servicios.Interfaces;
 using _2___Servicios.Services.ProductServices;
-using System.ComponentModel.Design;
 
 namespace CortezosWorkshop.Configuracion
 {
@@ -19,15 +18,18 @@ namespace CortezosWorkshop.Configuracion
         private IEnumerable<GenericProduct> _genericProducts;
         private IEnumerable<IngotResource> _ingotResources;
 
-        private string _actualConfiguredResources;
         private string _actualFullPlatePrice;
         private string _actualToolPrice;
         private string _actualLockpicksPrice;
 
+        private bool _txt_quantityCraftedClick = false;
+        private bool _txt_materialGastadoClick = false;
+
         private bool _isTaskRunning = false;
         private bool _isSavingByKeyPress = false;
 
-        private const int _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX = 5;
+        private const int _MAX_LENGTH_QUANTITY_CRAFTED_TEXTBOX = 2;
+        private const int _MAX_LENGTH_MATERIAL_GASTADO_TEXTBOX = 5;
         private const int _MAX_LENGTH_PRICE_PRODUCT = 7;
 
         public FormConfigMain(IRepository<GenericProduct> genericProductsRepository,
@@ -55,7 +57,7 @@ namespace CortezosWorkshop.Configuracion
         private async void FormConfigMain_Load(object sender, EventArgs e)
         {
             await Load_Products();
-            await Load_IngotResources();            
+            await Load_IngotResources();
 
             Load_ConfigResourcesDefaultData();
             Load_ConfigProductDefaultData(cbo_matArCompleta, Load_FullPlatePrice);
@@ -70,11 +72,32 @@ namespace CortezosWorkshop.Configuracion
 
         private void Load_ConfigResourcesDefaultData()
         {
-            cbo_productos.DataSource = _genericProducts;
-            cbo_productos.DisplayMember = "Name";
-            cbo_productos.SelectedIndex = 0;
+            cbo_genericProduct.DataSource = _genericProducts;
+            cbo_genericProduct.DisplayMember = "Name";
+            cbo_genericProduct.SelectedIndex = 0;
+
+            txt_quantityCrafted.Text = "0";
+            txt_materialGastado.Text = "0";
+
+            _txt_quantityCraftedClick = false;
+            _txt_materialGastadoClick = false;
 
             Load_ConfiguredResources();
+        }
+
+        private void Load_ConfiguredResources()
+        {
+            var genericProductsArray = _genericProducts.ToArray();
+
+            var lblCfgArray = new Label[] { lbl_plateArCfg, lbl_toolCfg, lbl_lockpickCfg };
+            var lblMatsArray = new Label[] { lbl_plateArMats, lbl_toolMats, lbl_lockpickMats };
+
+            for (int i = 0; i < genericProductsArray.Length; i++)
+            {
+                lblCfgArray[i].Text = genericProductsArray[i].Resources.ToString();
+                lblMatsArray[i].Text = genericProductsArray[i].MaterialName;
+            }
+
         }
 
         private void Load_ConfigProductDefaultData(ComboBox cbo_matProduct, Action loadProductData)
@@ -93,13 +116,6 @@ namespace CortezosWorkshop.Configuracion
             Load_FullPlatePrice();
             Load_ToolPrice();
             Load_LockpicksPrice();
-        }
-
-        private void Load_ConfiguredResources()
-        {
-            txt_configResources.Text = _genericProducts.ElementAt(cbo_productos.SelectedIndex).Resources.ToString();
-            lbl_material.Text = _genericProducts.ElementAt(cbo_productos.SelectedIndex).MaterialName;
-            _actualConfiguredResources = txt_configResources.Text;
         }
 
         private void Load_FullPlatePrice()
@@ -121,56 +137,110 @@ namespace CortezosWorkshop.Configuracion
         }
         #endregion
 
-        #region ConfigurarRecursosProducto
+        #region AñadirCrafteos
 
-        // -------------------------------------------------------------------------------------------------------
-        // ------------------------------------ CONFIGURAR RECURSOS PRODUCTO -------------------------------------
-        // -------------------------------------------------------------------------------------------------------
-        private async void cbo_productos_SelectedIndexChanged(object sender, EventArgs e) { Load_ConfiguredResources(); }
+        // TXT_QUANTITY_CRAFTED TEXTBOX
+        private void txt_quantityCrafted_Enter(object sender, EventArgs e)
+        {
+            if (!_txt_quantityCraftedClick)
+            {
+                _txt_quantityCraftedClick = true;
+                txt_quantityCrafted.Text = "";
+            }
+        }
 
-        private async void txt_configResources_KeyDown(object sender, KeyEventArgs e)
+        private void txt_quantityCrafted_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
+                txt_materialGastado.Focus();
                 e.SuppressKeyPress = true;
-                await Save_New_Configurated_Resources();
-                btn_menu_principal.Focus();
             }
         }
 
-        private async void txt_configResources_KeyPress(object sender, KeyPressEventArgs e)
+        private void txt_quantityCrafted_KeyPress(object sender, KeyPressEventArgs e)
         {
             var textBox = (sender as TextBox);
-            if (textBox.Text.Length == _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX && !char.IsControl(e.KeyChar)) { e.Handled = true; }
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) { e.Handled = true; }
+
+            if (textBox.Text.Length > _MAX_LENGTH_QUANTITY_CRAFTED_TEXTBOX && !char.IsControl(e.KeyChar)) { e.Handled = true; }
         }
 
-        private async void txt_configResources_Leave(object sender, EventArgs e)
-        {            
-            if (txt_configResources.Text != "") { await Save_New_Configurated_Resources(); }
+
+        // TXT_MATERIAL_GASTADO TEXTBOX
+        private void txt_materialGastado_Enter(object sender, EventArgs e)
+        {
+            if (!_txt_materialGastadoClick)
+            {
+                _txt_materialGastadoClick = true;
+                txt_materialGastado.Text = "";
+            }
         }
 
-        private async Task Save_New_Configurated_Resources()
+        private void txt_materialGastado_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn_addCraft_Click(sender, e);
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void txt_materialGastado_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var textBox = (sender as TextBox);
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) { e.Handled = true; }
+
+            if (textBox.Text.Length > _MAX_LENGTH_MATERIAL_GASTADO_TEXTBOX && !char.IsControl(e.KeyChar)) { e.Handled = true; }
+        }
+
+
+        private async void btn_addCraft_Click(object sender, EventArgs e)
+        {
+            if (txt_quantityCrafted.Text == "0" || txt_quantityCrafted.Text == "")
+            {
+                MessageBox.Show("Escribe cuántos productos has crafteado.");
+                return;
+            }
+            else if (txt_quantityCrafted.Text.Contains('-'))
+            {
+                MessageBox.Show("Los productos no pueden ser negativos.");
+                return;
+            }
+            else if (txt_materialGastado.Text == "0" || txt_materialGastado.Text == "")
+            {
+                MessageBox.Show("Escribe cuánto material has gastado en el crafteo.");
+                return;
+            }
+            else if (txt_materialGastado.Text.Contains('-'))
+            {
+                MessageBox.Show("Los recursos no pueden ser negativos.");
+                return;
+            }
+
+            await AddCraftedResults();
+        }
+
+        private async Task AddCraftedResults()
         {
             _isTaskRunning = true;
 
-            var newConfiguratedResourcesText = txt_configResources.Text;
-            var validationResult = ValidateResourcesTextBoxData(newConfiguratedResourcesText, _MAX_LENGTH_CONFIG_RESOURCES_TEXTBOX);
-            if (!validationResult) { Load_ConfiguredResources(); _isTaskRunning = false; return; }
-
-            if (newConfiguratedResourcesText != _actualConfiguredResources)
+            try
             {
-                try
-                {
-                    var product = _genericProducts.ElementAt(cbo_productos.SelectedIndex);
-                    await _updateConfiguredResourcesService.ExecuteAsync(product, int.Parse(newConfiguratedResourcesText));
-                }
-                catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
+                var product = _genericProducts.ElementAt(cbo_genericProduct.SelectedIndex);
+                var quantityCrafted = int.Parse(txt_quantityCrafted.Text);
+                var materialGastado = int.Parse(txt_materialGastado.Text);
 
-                Load_ConfiguredResources();               
+                await _updateConfiguredResourcesService.ExecuteAsync(product, quantityCrafted, materialGastado);
             }
+            catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
+
+            await Load_Products();
+            Load_ConfigResourcesDefaultData();
 
             _isTaskRunning = false;
         }
+
         #endregion
 
         #region CambiarPrecioDeProductos-Generico
@@ -212,7 +282,7 @@ namespace CortezosWorkshop.Configuracion
                 if (e.KeyCode == Keys.Enter)
                 {
                     _isSavingByKeyPress = true;
-                    e.SuppressKeyPress = true;                   
+                    e.SuppressKeyPress = true;
                     await SaveNewPrice();
                     btn_menu_principal.Focus();
                 }
@@ -221,14 +291,12 @@ namespace CortezosWorkshop.Configuracion
             // Configuración de KeyPress del TextBox: Control de digitos.
             txt_productPrice.KeyPress += async (sender, e) =>
             {
-                if (txt_productPrice.Text.Length == _MAX_LENGTH_PRICE_PRODUCT && !char.IsControl(e.KeyChar))
-                {
-                    e.Handled = true;
-                }
+                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) { e.Handled = true; }
+                if (txt_productPrice.Text.Length == _MAX_LENGTH_PRICE_PRODUCT && !char.IsControl(e.KeyChar)) { e.Handled = true; }
             };
 
             // Configuración de Leave del TextBox: Dispara el guardado si el texto no está vacío.
-            txt_productPrice.Leave += async (sender, e) => 
+            txt_productPrice.Leave += async (sender, e) =>
             {
                 if (!_isSavingByKeyPress) { await SaveNewPrice(); }
                 else { _isSavingByKeyPress = false; }
@@ -262,32 +330,6 @@ namespace CortezosWorkshop.Configuracion
         #endregion
 
         #region Validaciones
-        // -------------------------------------------------------------------------------------------------------
-        // -------------------------------------------- VALIDACIONES ---------------------------------------------
-        // -------------------------------------------------------------------------------------------------------
-        private bool ValidateResourcesTextBoxData(string textBoxData, int textMaxLength)
-        {
-            var validationResult = false;
-
-            if (textBoxData.Length > textMaxLength)
-            {
-                return validationResult;
-            }
-            else if (textBoxData == "0" || textBoxData == "")
-            {
-                MessageBox.Show("La cantidad no puede ser 0.");
-                return validationResult;
-            }
-            else if (textBoxData.Contains('-'))
-            {
-                MessageBox.Show("La cantidad no puede ser negativa.");
-                return validationResult;
-            }
-
-            validationResult = true;
-            return validationResult;
-        }
-
         private bool ValidatePricesTextBoxData(string textBoxData, int textMaxLength)
         {
             var validationResult = false;

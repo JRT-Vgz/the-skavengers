@@ -17,14 +17,16 @@ namespace _2___Servicios.Services.ProductServices
             _logger = logger;
         }
 
-        public async Task ExecuteAsync(GenericProduct product, int newConfiguredResources)
+        public async Task ExecuteAsync(GenericProduct product, int quantityCrafted, int materialUsed)
         {
-            product.Resources = newConfiguredResources;
+            product.QuantityCrafted += quantityCrafted;
+            product.MaterialUsed += materialUsed;
+
             await _genericProductsRepository.UpdateAsync(product);
 
             await _genericProductsRepository.SaveChanges();
 
-            _logEntry = $"Fabricación de {product.Name} a {newConfiguredResources} {product.MaterialName}.";
+            _logEntry = $"Fabricación de {quantityCrafted} {product.Name} usando {materialUsed} {product.MaterialName}.";
             await _logger.WriteLogEntryAsync(_logEntry);
         }
     }

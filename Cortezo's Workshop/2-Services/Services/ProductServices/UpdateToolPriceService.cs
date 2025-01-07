@@ -19,12 +19,14 @@ namespace _2___Servicios.Services.ProductServices
 
         public async Task ExecuteAsync(IngotResource ingotResource, int newToolPrice)
         {
+            var oldPrice = ingotResource.ToolPrice;
+
             ingotResource.ToolPrice = newToolPrice;
             await _ingotResourceRepository.UpdateAsync(ingotResource);
 
             await _ingotResourceRepository.SaveChanges();
 
-            _logEntry = $"Configuradas Herramientas de {ingotResource.ResourceName} a {FormatQuantity(newToolPrice)} gp.";
+            _logEntry = $"Configuradas Herramientas de {ingotResource.ResourceName}. Antes: {FormatQuantity(oldPrice)} gp.";
             await _logger.WriteLogEntryAsync(_logEntry);
         }
 

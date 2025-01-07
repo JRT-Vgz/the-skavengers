@@ -9,8 +9,8 @@ namespace _3_Mappers.MappingProfiles
     {
         public GenericProductMappingProfile() 
         {
-            CreateMap<GenericProductModel, GenericProduct>()
-                .ForMember(dest => dest.MaterialName, opt => opt.MapFrom(src => src.Material.Name));
+            //CreateMap<GenericProductModel, GenericProduct>()
+            //    .ForMember(dest => dest.MaterialName, opt => opt.MapFrom(src => src.Material.Name));
 
             CreateMap<GenericProduct, GenericProductModel>();
         }

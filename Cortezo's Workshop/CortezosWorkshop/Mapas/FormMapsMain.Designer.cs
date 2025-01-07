@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMapsMain));
             btn_menu_principal = new Button();
             lbl_addMap = new Label();
             lbl_x = new Label();
@@ -360,6 +361,7 @@
             Controls.Add(lbl_addMap);
             Controls.Add(btn_menu_principal);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MaximumSize = new Size(816, 489);
             MinimumSize = new Size(816, 489);

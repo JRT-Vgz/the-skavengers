@@ -19,12 +19,14 @@ namespace _2___Servicios.Services.ProductServices
 
         public async Task ExecuteAsync(IngotResource ingotResource, int newLockpicksPrice)
         {
+            var oldPrice = ingotResource.LockpicksPrice;
+
             ingotResource.LockpicksPrice = newLockpicksPrice;
             await _ingotResourceRepository.UpdateAsync(ingotResource);
 
             await _ingotResourceRepository.SaveChanges();
 
-            _logEntry = $"Configurados Lockpicks de {ingotResource.ResourceName} a {FormatQuantity(newLockpicksPrice)} gp.";
+            _logEntry = $"Configurados Lockpicks de {ingotResource.ResourceName}. Antes: {FormatQuantity(oldPrice)} gp.";
             await _logger.WriteLogEntryAsync(_logEntry);
         }
 

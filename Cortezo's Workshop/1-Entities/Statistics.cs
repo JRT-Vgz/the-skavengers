@@ -9,5 +9,8 @@ namespace _1___Entities
         public int OroGastado { get; set; }
         public int MapasCompletados { get; set; }
         public int RecursosExtraidos { get; set; }
+        public int ArmadurasCrafteadas { get; set; }
+        public int HerramientasCrafteadas { get; set; }
+        public int LockpicksCrafteados { get; set; }
     }
 }

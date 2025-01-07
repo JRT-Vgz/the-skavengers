@@ -15,7 +15,10 @@ namespace _3_Presenters.Presenters
                 Beneficio = $"- Beneficio retirado para nuestro disfrute:     {FormatQuantity(statistics.Beneficio)} gp",
                 OroGastado = $"- Oro gastado en comprar mapas y materiales:     {FormatQuantity(statistics.OroGastado)} gp",
                 MapasCompletados = $"- Mapas completados:     {FormatQuantity(statistics.MapasCompletados)}",
-                RecursosExtraidos = $"- Total de recursos extraídos:     {FormatQuantity(statistics.RecursosExtraidos)}"
+                RecursosExtraidos = $"- Total de recursos extraídos:     {FormatQuantity(statistics.RecursosExtraidos)}",
+                ArmadurasCrafteadas = $"- Armaduras completas crafteadas:     {FormatQuantity(statistics.ArmadurasCrafteadas)}",
+                HerramientasCrafteadas = $"- Herramientas crafteadas:     {FormatQuantity(statistics.HerramientasCrafteadas)}",
+                LockpicksCrafteados = $"- Lockpicks crafteados:     {FormatQuantity(statistics.LockpicksCrafteados)}"
             };
 
         private static string FormatQuantity(int quantity)

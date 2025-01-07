@@ -86,6 +86,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(253, 179);
             ControlBox = false;
             Controls.Add(txtBox);
@@ -93,6 +94,7 @@
             Controls.Add(lbl_Funds);
             Controls.Add(btn_Back);
             Controls.Add(btn_Save);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MaximumSize = new Size(269, 218);

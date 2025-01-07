@@ -20,12 +20,14 @@ namespace _2___Servicios.Services.ProductServices
 
         public async Task ExecuteAsync(IngotResource ingotResource, int newFullPlatePrice)
         {
+            var oldPrice = ingotResource.FullPlatePrice;
+
             ingotResource.FullPlatePrice = newFullPlatePrice;
             await _ingotResourceRepository.UpdateAsync(ingotResource);
 
             await _ingotResourceRepository.SaveChanges();
 
-            _logEntry = $"Configurada Armadura Completa de {ingotResource.ResourceName} a {FormatQuantity(newFullPlatePrice)} gp.";
+            _logEntry = $"Config Armadura Completa de {ingotResource.ResourceName}. Antes: {FormatQuantity(oldPrice)} gp.";
             await _logger.WriteLogEntryAsync(_logEntry);
         }
 
