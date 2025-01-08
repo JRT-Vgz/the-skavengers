@@ -1,7 +1,9 @@
 ﻿
+using _2___Servicios.Interfaces;
 using _2___Servicios.Services;
 using _2___Servicios.Services.ShopStatServices;
 using _3_Presenters.ViewModels;
+using _3_SoundSystem;
 
 namespace CortezosWorkshop
 {
@@ -11,17 +13,20 @@ namespace CortezosWorkshop
         private readonly ConfigurationService _configuration;
         private readonly GetFundsByNameService<FundsViewModel> _getFundsByNameService;
         private readonly SumToCajaFuerteService _sumToCajaFuerteService;
+        private readonly ISoundSystem _soundSystem;
 
         private const int _MAX_LENGTH_TEXTBOX = 8;
 
         public FormMainEditFunds(ConfigurationService configuration,
             GetFundsByNameService<FundsViewModel> getFundsByNameService,
-            SumToCajaFuerteService sumToCajaFuerteService)
+            SumToCajaFuerteService sumToCajaFuerteService,
+            ISoundSystem soundSystem)
         {
             InitializeComponent();
             _configuration = configuration;
             _getFundsByNameService = getFundsByNameService;
             _sumToCajaFuerteService = sumToCajaFuerteService;
+            _soundSystem = soundSystem;
         }
         #endregion
 
@@ -31,8 +36,14 @@ namespace CortezosWorkshop
         // -------------------------------------------- CARGAR DATOS ---------------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private async void FormMainEditFunds_Load(object sender, EventArgs e)
-        {
+        {          
             this.Location = new Point(this.Location.X - 350, this.Location.Y + 165);
+
+            string soundFile = Path.Combine(Application.StartupPath, 
+                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                _configuration.Configuration["Constants:_SOUND_OPEN_CHEST"]);
+            _soundSystem.PlaySound(soundFile);
+
             await Load_Funds();
         }
         private async Task Load_Funds()
@@ -107,7 +118,14 @@ namespace CortezosWorkshop
             try
             {
                 var txtBoxQuantity = int.Parse(txtBox.Text);
-                await _sumToCajaFuerteService.ExecuteAsync(txtBoxQuantity);
+
+                string sound;
+                if (txtBoxQuantity > 0) { sound = _configuration.Configuration["Constants:_SOUND_ADD_FUNDS"]; }
+                else { sound = _configuration.Configuration["Constants:_SOUND_SPEND_FUNDS"]; }
+
+                string goldSoundFile = Path.Combine(Application.StartupPath, _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"], sound);
+
+                await _sumToCajaFuerteService.ExecuteAsync(txtBoxQuantity, goldSoundFile);
             }
             catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 
@@ -120,6 +138,13 @@ namespace CortezosWorkshop
         // ----------------------------------------------- CERRAR ------------------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private void btn_Back_Click(object sender, EventArgs e)
-            => this.Close();
+        {
+            string soundFile = Path.Combine(Application.StartupPath,
+                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                _configuration.Configuration["Constants:_SOUND_CLOSE_CHEST"]);
+            _soundSystem.PlaySound(soundFile);
+
+            this.Close();
+        }
     }
 }

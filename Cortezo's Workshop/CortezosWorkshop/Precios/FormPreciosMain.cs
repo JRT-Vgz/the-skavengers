@@ -7,14 +7,20 @@ namespace CortezosWorkshop.Precios
     public partial class FormPreciosMain : Form
     {
         #region Constructor
+        private readonly ConfigurationService _configuration;
         private readonly IRepository<IngotResource> _ingotResourceRepository;
+        private readonly ISoundSystem _soundSystem;
 
         private IEnumerable<IngotResource> _ingotResources;
 
-        public FormPreciosMain(IRepository<IngotResource> ingotResourceRepository)
+        public FormPreciosMain(ConfigurationService configuration,
+            IRepository<IngotResource> ingotResourceRepository,
+            ISoundSystem soundSystem)
         {
             InitializeComponent();
+            _configuration = configuration;
             _ingotResourceRepository = ingotResourceRepository;
+            _soundSystem = soundSystem;
         }
         #endregion
 
@@ -24,6 +30,11 @@ namespace CortezosWorkshop.Precios
         // -------------------------------------------------------------------------------------------------------
         private async void FormPreciosMain_Load(object sender, EventArgs e)
         {
+            string openDoorSoundFile = Path.Combine(Application.StartupPath,
+                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                    _configuration.Configuration["Constants:_SOUND_OPEN_DOOR"]);
+            _soundSystem.PlaySound(openDoorSoundFile);
+
             await Load_IngotResources();
             Load_Generic_Products();
             await Load_Prices(i => i.ToolPrice);
@@ -86,23 +97,84 @@ namespace CortezosWorkshop.Precios
         // -------------------------------------------------------------------------------------------------------
         // ----------------------------------- COPIAR PRECIOS AL PORTAPAPELES ------------------------------------
         // -------------------------------------------------------------------------------------------------------
-        private void btn_copiar1_Click(object sender, EventArgs e) { Clipboard.SetText(lbl_precio1.Text); }
-        private void btn_copiar2_Click(object sender, EventArgs e) { Clipboard.SetText(lbl_precio2.Text); }
-        private void btn_copiar3_Click(object sender, EventArgs e) { Clipboard.SetText(lbl_precio3.Text); }
-        private void btn_copiar4_Click(object sender, EventArgs e) { Clipboard.SetText(lbl_precio4.Text); }
-        private void btn_copiar5_Click(object sender, EventArgs e) { Clipboard.SetText(lbl_precio5.Text); }
-        private void btn_copiar6_Click(object sender, EventArgs e) { Clipboard.SetText(lbl_precio6.Text); }
-        private void btn_copiar7_Click(object sender, EventArgs e) { Clipboard.SetText(lbl_precio7.Text); }
-        private void btn_copiar8_Click(object sender, EventArgs e) { Clipboard.SetText(lbl_precio8.Text); }
-        private void btn_copiar9_Click(object sender, EventArgs e) { Clipboard.SetText(lbl_precio9.Text); }
+        private void btn_copiar_Click(object sender, EventArgs e)
+        {
+            btn_copiar1.Tag = "lbl_precio1";
+            btn_copiar2.Tag = "lbl_precio2";
+            btn_copiar3.Tag = "lbl_precio3";
+            btn_copiar4.Tag = "lbl_precio4";
+            btn_copiar5.Tag = "lbl_precio5";
+            btn_copiar6.Tag = "lbl_precio6";
+            btn_copiar7.Tag = "lbl_precio7";
+            btn_copiar8.Tag = "lbl_precio8";
+            btn_copiar9.Tag = "lbl_precio9";
+
+            var button = (Button)sender;
+            string labelName = button.Tag.ToString();
+
+            var label = this.Controls.Find(labelName, true).FirstOrDefault() as Label;
+
+            if (label != null)
+            {
+                string copyPriceSoundFile = Path.Combine(Application.StartupPath,
+                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                    _configuration.Configuration["Constants:_SOUND_COPY_PRICE"]);
+                _soundSystem.PlaySound(copyPriceSoundFile);
+
+                Clipboard.SetText(label.Text);
+            }
+        }
+
         #endregion
 
+        #region CopiarTodoAlPortapapeles
+        // -------------------------------------------------------------------------------------------------------
+        // ------------------------------------- COPIAR TODO AL PORTAPAPELES -------------------------------------
+        // -------------------------------------------------------------------------------------------------------
+        private void btn_copyAll_Click(object sender, EventArgs e)
+        {
+            var toolsTextArray = new string[]
+            {
+                "Herramientas-Dull", "Herramientas-Shadow", "Herramientas-Copper", "Herramientas-Bronze", "Herramientas-Gold",
+                "Herramientas-Agapite", "Herramientas-Verite", "Herramientas-Valorite", "Herramientas-Avarite"
+            };
+            var lockpicksTextArray = new string[]
+            {
+                "Lockpicks-Dull", "Lockpicks-Shadow", "Lockpicks-Copper", "Lockpicks-Bronze", "Lockpicks-Gold",
+                "Lockpicks-Agapite", "Lockpicks-Verite", "Lockpicks-Valorite", "Lockpicks-Avarite"
+            };
+
+            var ingotResourceArray = _ingotResources.ToArray();
+
+            var text = "# HERRAMIENTAS:\n";
+
+            for (int i = 0; i < toolsTextArray.Length; i++) 
+            { 
+                text += $"    setvar! {toolsTextArray[i]} '{ingotResourceArray[i].ToolPrice}'\n"; 
+            }
+
+            text += "\n# LOCKPICKS:\n";
+
+            for (int i = 0; i < lockpicksTextArray.Length; i++) 
+            { 
+                text += $"    setvar! {lockpicksTextArray[i]} '{ingotResourceArray[i].LockpicksPrice}'\n";
+            }
+
+            string copyAllSoundFile = Path.Combine(Application.StartupPath,
+                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                    _configuration.Configuration["Constants:_SOUND_COPY_ALL_PRICES"]);
+            _soundSystem.PlaySound(copyAllSoundFile);
+
+            Clipboard.SetText(text);
+        }
+
+        #endregion
         #region VolverAlMenuPrincipal
 
         // -------------------------------------------------------------------------------------------------------
         // --------------------------------------- VOLVER A MENU PRINCIPAL ---------------------------------------
         // -------------------------------------------------------------------------------------------------------
-        private void Form_Closing(object sender, FormClosingEventArgs e)
+        private async void Form_Closing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
@@ -112,6 +184,11 @@ namespace CortezosWorkshop.Precios
 
         private void btn_menu_principal_Click(object sender, EventArgs e)
         {
+            string openDoorSoundFile = Path.Combine(Application.StartupPath,
+                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                    _configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
+            _soundSystem.PlaySound(openDoorSoundFile);
+
             var frmMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
             frmMain.Location = new Point(this.Location.X, this.Location.Y); ;
 

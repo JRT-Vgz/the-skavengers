@@ -63,19 +63,9 @@ namespace CortezosWorkshop.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Backpack {
+        internal static System.Drawing.Bitmap Ankh {
             get {
-                object obj = ResourceManager.GetObject("Backpack", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Rune {
-            get {
-                object obj = ResourceManager.GetObject("Rune", resourceCulture);
+                object obj = ResourceManager.GetObject("Ankh", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

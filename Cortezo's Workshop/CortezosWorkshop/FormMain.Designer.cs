@@ -122,10 +122,10 @@
             // 
             // btn_portapapeles
             // 
-            btn_portapapeles.Image = Properties.Resources.Rune;
+            btn_portapapeles.Image = Properties.Resources.Ankh;
             btn_portapapeles.Location = new Point(12, 12);
             btn_portapapeles.Name = "btn_portapapeles";
-            btn_portapapeles.Size = new Size(44, 42);
+            btn_portapapeles.Size = new Size(44, 53);
             btn_portapapeles.TabIndex = 8;
             btn_portapapeles.UseVisualStyleBackColor = true;
             btn_portapapeles.Click += btn_portapapeles_Click;

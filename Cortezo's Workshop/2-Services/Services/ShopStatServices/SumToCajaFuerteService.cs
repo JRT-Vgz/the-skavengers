@@ -9,19 +9,22 @@ namespace _2___Servicios.Services.ShopStatServices
         private readonly IRepository<ShopStat> _shopStatsRepository;
         private readonly ConfigurationService _configurationService;
         private readonly ILogger _logger;
+        private readonly ISoundSystem _soundSystem;
 
         private string _logEntry;
 
         public SumToCajaFuerteService(IRepository<ShopStat> shopStatsRepository, 
             ConfigurationService configurationService,
-            ILogger logger)
+            ILogger logger,
+            ISoundSystem soundSystem)
         {
             _shopStatsRepository = shopStatsRepository;
             _configurationService = configurationService;
             _logger = logger;
+            _soundSystem = soundSystem;
         }
 
-        public async Task ExecuteAsync(int quantity)
+        public async Task ExecuteAsync(int quantity, string goldSoundFile)
         {
             var shopStatCajaFuerte = await _shopStatsRepository.GetByNameAsync(
                 _configurationService.Configuration["Constants:_SHOPSTAT_CAJA_FUERTE"]);
@@ -54,6 +57,8 @@ namespace _2___Servicios.Services.ShopStatServices
             }
 
             await _shopStatsRepository.SaveChanges();
+
+            _soundSystem.PlaySound(goldSoundFile);
 
             await _logger.WriteLogEntryAsync(_logEntry);
         }

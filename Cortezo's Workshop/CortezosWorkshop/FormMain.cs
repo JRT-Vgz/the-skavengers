@@ -1,4 +1,4 @@
-using _1___Entities;
+
 using _2___Servicios.Interfaces;
 using _2___Servicios.Services;
 using _2___Servicios.Services.ShopStatServices;
@@ -18,14 +18,17 @@ namespace CortezosWorkshop
         private readonly IServiceProvider _serviceProvider;
         private readonly ConfigurationService _configuration;
         private readonly GetFundsByNameService<FundsViewModel> _getFundsByNameService;
+        private readonly ISoundSystem _soundSystem;
         public FormMain(IServiceProvider serviceProvider,
             ConfigurationService configuration,
-            GetFundsByNameService<FundsViewModel> getFundsByNameService)
+            GetFundsByNameService<FundsViewModel> getFundsByNameService,
+            ISoundSystem soundSystem)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
             _configuration = configuration;
             _getFundsByNameService = getFundsByNameService;
+            _soundSystem = soundSystem;
         }
         #endregion
 
@@ -127,6 +130,11 @@ namespace CortezosWorkshop
         private void btn_portapapeles_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(_configuration.Configuration["Constants:_NOMBRE_RUNA_TIENDA"]);
+
+            string soundFile = Path.Combine(Application.StartupPath,
+                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                _configuration.Configuration["Constants:_SOUND_MARK_RUNE"]);
+            _soundSystem.PlaySound(soundFile);
         }
     }
 }

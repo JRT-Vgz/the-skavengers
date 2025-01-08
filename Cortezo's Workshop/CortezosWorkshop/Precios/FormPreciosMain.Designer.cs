@@ -58,6 +58,7 @@
             btn_copiar7 = new Button();
             btn_copiar8 = new Button();
             btn_copiar9 = new Button();
+            btn_copyAll = new Button();
             SuspendLayout();
             // 
             // btn_menu_principal
@@ -250,7 +251,7 @@
             btn_copiar1.TabIndex = 21;
             btn_copiar1.Text = "Copiar";
             btn_copiar1.UseVisualStyleBackColor = true;
-            btn_copiar1.Click += btn_copiar1_Click;
+            btn_copiar1.Click += btn_copiar_Click;
             // 
             // btn_copiar2
             // 
@@ -260,7 +261,7 @@
             btn_copiar2.TabIndex = 22;
             btn_copiar2.Text = "Copiar";
             btn_copiar2.UseVisualStyleBackColor = true;
-            btn_copiar2.Click += btn_copiar2_Click;
+            btn_copiar2.Click += btn_copiar_Click;
             // 
             // btn_copiar3
             // 
@@ -270,7 +271,7 @@
             btn_copiar3.TabIndex = 23;
             btn_copiar3.Text = "Copiar";
             btn_copiar3.UseVisualStyleBackColor = true;
-            btn_copiar3.Click += btn_copiar3_Click;
+            btn_copiar3.Click += btn_copiar_Click;
             // 
             // btn_copiar4
             // 
@@ -280,7 +281,7 @@
             btn_copiar4.TabIndex = 24;
             btn_copiar4.Text = "Copiar";
             btn_copiar4.UseVisualStyleBackColor = true;
-            btn_copiar4.Click += btn_copiar4_Click;
+            btn_copiar4.Click += btn_copiar_Click;
             // 
             // btn_copiar5
             // 
@@ -290,7 +291,7 @@
             btn_copiar5.TabIndex = 25;
             btn_copiar5.Text = "Copiar";
             btn_copiar5.UseVisualStyleBackColor = true;
-            btn_copiar5.Click += btn_copiar5_Click;
+            btn_copiar5.Click += btn_copiar_Click;
             // 
             // btn_copiar6
             // 
@@ -300,7 +301,7 @@
             btn_copiar6.TabIndex = 26;
             btn_copiar6.Text = "Copiar";
             btn_copiar6.UseVisualStyleBackColor = true;
-            btn_copiar6.Click += btn_copiar6_Click;
+            btn_copiar6.Click += btn_copiar_Click;
             // 
             // btn_copiar7
             // 
@@ -310,7 +311,7 @@
             btn_copiar7.TabIndex = 27;
             btn_copiar7.Text = "Copiar";
             btn_copiar7.UseVisualStyleBackColor = true;
-            btn_copiar7.Click += btn_copiar7_Click;
+            btn_copiar7.Click += btn_copiar_Click;
             // 
             // btn_copiar8
             // 
@@ -320,7 +321,7 @@
             btn_copiar8.TabIndex = 28;
             btn_copiar8.Text = "Copiar";
             btn_copiar8.UseVisualStyleBackColor = true;
-            btn_copiar8.Click += btn_copiar8_Click;
+            btn_copiar8.Click += btn_copiar_Click;
             // 
             // btn_copiar9
             // 
@@ -330,13 +331,24 @@
             btn_copiar9.TabIndex = 29;
             btn_copiar9.Text = "Copiar";
             btn_copiar9.UseVisualStyleBackColor = true;
-            btn_copiar9.Click += btn_copiar9_Click;
+            btn_copiar9.Click += btn_copiar_Click;
+            // 
+            // btn_copyAll
+            // 
+            btn_copyAll.Location = new Point(703, 405);
+            btn_copyAll.Name = "btn_copyAll";
+            btn_copyAll.Size = new Size(85, 33);
+            btn_copyAll.TabIndex = 30;
+            btn_copyAll.Text = "Copiar todo";
+            btn_copyAll.UseVisualStyleBackColor = true;
+            btn_copyAll.Click += btn_copyAll_Click;
             // 
             // FormPreciosMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btn_copyAll);
             Controls.Add(btn_copiar9);
             Controls.Add(btn_copiar8);
             Controls.Add(btn_copiar7);
@@ -409,5 +421,6 @@
         private Button btn_copiar7;
         private Button btn_copiar8;
         private Button btn_copiar9;
+        private Button btn_copyAll;
     }
 }

@@ -16,6 +16,7 @@ using _3_Mappers.ManualMappers;
 using _3_Mappers.MappingProfiles;
 using _3_Presenters.Presenters;
 using _3_Presenters.ViewModels;
+using _3_SoundSystem;
 using CortezosWorkshop.Configuracion;
 using CortezosWorkshop.Estadisticas;
 using CortezosWorkshop.Maps;
@@ -28,7 +29,7 @@ namespace CortezosWorkshop
 {
     internal static class Program
     {
-        public const string DATABASE_JSON_FILE = "appsettings.dev.json";
+        public const string DATABASE_JSON_FILE = "appsettings.prod.json";
 
         [STAThread]
         static void Main()
@@ -75,6 +76,9 @@ namespace CortezosWorkshop
 
             // LOGGERS
             services.AddTransient<ILogger, Logger>();
+
+            // SOUND SYSTEM
+            services.AddTransient<ISoundSystem, SoundSystem>();
 
             // INYECCION DE ARCHIVO DE CONSTANTES
             services.AddSingleton<ConfigurationService>();

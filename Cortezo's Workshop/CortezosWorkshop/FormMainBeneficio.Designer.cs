@@ -113,7 +113,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Beneficio";
+            Text = "8";
             Load += FormMainEditFunds_Load;
             Shown += FormMainEditFunds_Shown;
             ResumeLayout(false);

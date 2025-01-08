@@ -1,8 +1,10 @@
 ﻿
 using _2___Servicios.Exceptions;
+using _2___Servicios.Interfaces;
 using _2___Servicios.Services;
 using _2___Servicios.Services.ShopStatServices;
 using _3_Presenters.ViewModels;
+using _3_SoundSystem;
 
 namespace CortezosWorkshop
 {
@@ -13,17 +15,20 @@ namespace CortezosWorkshop
         private ConfigurationService _configuration;
         private readonly GetFundsByNameService<FundsViewModel> _getFundsByNameService;
         private readonly SumToBeneficioService _sumToBeneficioService;
+        private readonly ISoundSystem _soundSystem;
 
         private const int _MAX_LENGTH_TEXTBOX = 8;
 
         public FormMainBeneficio(ConfigurationService configuration,
             GetFundsByNameService<FundsViewModel> getFundsByNameService,
-            SumToBeneficioService sumToBeneficioService)
+            SumToBeneficioService sumToBeneficioService,
+            ISoundSystem soundSystem)
         {
             InitializeComponent();
             _configuration = configuration;
             _getFundsByNameService = getFundsByNameService;
             _sumToBeneficioService = sumToBeneficioService;
+            _soundSystem = soundSystem;
         }
         #endregion
 
@@ -34,6 +39,12 @@ namespace CortezosWorkshop
         private async void FormMainEditFunds_Load(object sender, EventArgs e)
         {
             this.Location = new Point(this.Location.X + 350, this.Location.Y + 165);
+
+            string soundFile = Path.Combine(Application.StartupPath,
+                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                _configuration.Configuration["Constants:_SOUND_OPEN_DRAWER"]);
+            _soundSystem.PlaySound(soundFile);
+
             await Load_CajaFuerte();
         }
         private async Task Load_CajaFuerte()
@@ -107,7 +118,12 @@ namespace CortezosWorkshop
             try
             {
                 var txtBoxQuantity = int.Parse(txtBox.Text);
-                await _sumToBeneficioService.ExecuteAsync(txtBoxQuantity);
+
+                string retrieveBenefitsSoundFile = Path.Combine(Application.StartupPath,
+                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                _configuration.Configuration["Constants:_SOUND_RETRIEVE_BENEFITS"]);
+
+                await _sumToBeneficioService.ExecuteAsync(txtBoxQuantity, retrieveBenefitsSoundFile);
             }
             catch (NotEnoughFundsException ex) { MessageBox.Show(ex.Message); }
             catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
@@ -121,6 +137,13 @@ namespace CortezosWorkshop
         // ----------------------------------------------- CERRAR ------------------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private void btn_Back_Click(object sender, EventArgs e)
-            => this.Close();  
+        {
+            string soundFile = Path.Combine(Application.StartupPath,
+                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                _configuration.Configuration["Constants:_SOUND_CLOSE_DRAWER"]);
+            _soundSystem.PlaySound(soundFile);
+
+            this.Close();
+        }
     }
 }

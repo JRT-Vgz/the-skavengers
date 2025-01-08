@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3-Presenters", "3-Presenter
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3-Mappers", "3-Mappers\3-Mappers.csproj", "{68182962-630A-4C64-9151-72E63A7D3044}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3-Loggers", "3-Loggers\3-Loggers.csproj", "{24FBFDBA-71AA-4DE6-8426-7F710A136F63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3-Loggers", "3-Loggers\3-Loggers.csproj", "{24FBFDBA-71AA-4DE6-8426-7F710A136F63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3-SoundSystem", "3-SoundSystem\3-SoundSystem.csproj", "{F8B1A74A-117A-4FD0-B62D-F099C289DE68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{24FBFDBA-71AA-4DE6-8426-7F710A136F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24FBFDBA-71AA-4DE6-8426-7F710A136F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24FBFDBA-71AA-4DE6-8426-7F710A136F63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8B1A74A-117A-4FD0-B62D-F099C289DE68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8B1A74A-117A-4FD0-B62D-F099C289DE68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8B1A74A-117A-4FD0-B62D-F099C289DE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8B1A74A-117A-4FD0-B62D-F099C289DE68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,6 @@
-﻿using _3___Repository.QueryObjects;
+﻿using _2___Servicios.Interfaces;
+using _2___Servicios.Services;
+using _3___Repository.QueryObjects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,15 +15,26 @@ namespace CortezosWorkshop.Estadisticas
 {
     public partial class FormLog : Form
     {
-        private readonly LogQuery _logQuery;
-        public FormLog(LogQuery logQuery)
+        private readonly ConfigurationService _configuration;
+        private readonly ISoundSystem _soundSystem;
+        private readonly LogQuery _logQuery;       
+        public FormLog(ConfigurationService configuration,
+            ISoundSystem soundSystem,
+            LogQuery logQuery)
         {
             InitializeComponent();
+            _configuration = configuration;
+            _soundSystem = soundSystem;
             _logQuery = logQuery;
         }
 
         private async void FormLogs_Load(object sender, EventArgs e)
         {
+            string openDoorSoundFile = Path.Combine(Application.StartupPath,
+                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                    _configuration.Configuration["Constants:_SOUND_OPEN_DOOR"]);
+            _soundSystem.PlaySound(openDoorSoundFile);
+
             await LoadLogs();
         }
 
@@ -55,6 +68,11 @@ namespace CortezosWorkshop.Estadisticas
 
         private void btn_volver_Click(object sender, EventArgs e)
         {
+            string openDoorSoundFile = Path.Combine(Application.StartupPath,
+                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                    _configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
+            _soundSystem.PlaySound(openDoorSoundFile);
+
             var frmMain = Application.OpenForms.OfType<FormEstadisticasMain>().FirstOrDefault();
             frmMain.Location = new Point(this.Location.X, this.Location.Y); ;
 

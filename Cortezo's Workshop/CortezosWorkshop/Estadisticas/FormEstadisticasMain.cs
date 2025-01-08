@@ -1,4 +1,6 @@
 ﻿
+using _2___Servicios.Interfaces;
+using _2___Servicios.Services;
 using _2___Servicios.Services.StatisticsServices;
 using _3_Presenters.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,14 +10,21 @@ namespace CortezosWorkshop.Estadisticas
 {
     public partial class FormEstadisticasMain : Form
     {
+        private readonly ConfigurationService _configuration;
         private readonly IServiceProvider _serviceProvider;
         private readonly CreateStatisticsService<StatisticsViewModel> _createStatisticsService;
-        public FormEstadisticasMain(IServiceProvider serviceProvider,
-        CreateStatisticsService<StatisticsViewModel> createStatisticsService)
+        private readonly ISoundSystem _soundSystem;
+
+        public FormEstadisticasMain(ConfigurationService configuration,
+            IServiceProvider serviceProvider,
+            CreateStatisticsService<StatisticsViewModel> createStatisticsService,
+            ISoundSystem soundSystem)
         {
             InitializeComponent();
+            _configuration = configuration;
             _serviceProvider = serviceProvider;
             _createStatisticsService = createStatisticsService;
+            _soundSystem = soundSystem;
         }
 
         // -------------------------------------------------------------------------------------------------------
@@ -23,6 +32,11 @@ namespace CortezosWorkshop.Estadisticas
         // -------------------------------------------------------------------------------------------------------
         private async void FormEstadisticasMain_Load(object sender, EventArgs e)
         {
+            string soundFile = Path.Combine(Application.StartupPath,
+                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                _configuration.Configuration["Constants:_SOUND_SHOW_STATISTICS"]);
+            _soundSystem.PlaySound(soundFile);
+
             var statisticsViewModel = await _createStatisticsService.ExecuteAsync();
 
             lbl_oroTotal.Text = statisticsViewModel.OroTotal;
@@ -63,6 +77,11 @@ namespace CortezosWorkshop.Estadisticas
 
         private void btn_menu_principal_Click(object sender, EventArgs e)
         {
+            string openDoorSoundFile = Path.Combine(Application.StartupPath,
+                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                    _configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
+            _soundSystem.PlaySound(openDoorSoundFile);
+
             var frmMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
             frmMain.Location = new Point(this.Location.X, this.Location.Y); ;
 

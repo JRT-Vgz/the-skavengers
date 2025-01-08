@@ -1,6 +1,8 @@
 ﻿using _1___Entities;
 using _2___Servicios.Interfaces;
+using _2___Servicios.Services;
 using _2___Servicios.Services.ProductServices;
+using _3_SoundSystem;
 
 namespace CortezosWorkshop.Configuracion
 {
@@ -14,6 +16,8 @@ namespace CortezosWorkshop.Configuracion
         private readonly UpdateFullPlatePriceService _updateFullPlatePriceService;
         private readonly UpdateToolPriceService _updateToolPriceService;
         private readonly UpdateLockpicksPriceService _updateLockpicksPriceService;
+        private readonly ConfigurationService _configuration;
+        private readonly ISoundSystem _soundSystem;
 
         private IEnumerable<GenericProduct> _genericProducts;
         private IEnumerable<IngotResource> _ingotResources;
@@ -37,7 +41,9 @@ namespace CortezosWorkshop.Configuracion
             UpdateConfiguredResourcesService updateConfiguredResourcesService,
             UpdateFullPlatePriceService updateFullPlatePriceService,
             UpdateToolPriceService updateToolPriceService,
-            UpdateLockpicksPriceService updateLockpicksPriceService)
+            UpdateLockpicksPriceService updateLockpicksPriceService,
+            ConfigurationService configuration,
+            ISoundSystem soundSystem)
         {
             InitializeComponent();
             _genericProductsRepository = genericProductsRepository;
@@ -46,6 +52,8 @@ namespace CortezosWorkshop.Configuracion
             _updateFullPlatePriceService = updateFullPlatePriceService;
             _updateToolPriceService = updateToolPriceService;
             _updateLockpicksPriceService = updateLockpicksPriceService;
+            _configuration = configuration;
+            _soundSystem = soundSystem;
         }
         #endregion
 
@@ -56,6 +64,11 @@ namespace CortezosWorkshop.Configuracion
         // -------------------------------------------------------------------------------------------------------
         private async void FormConfigMain_Load(object sender, EventArgs e)
         {
+            string openDoorSoundFile = Path.Combine(Application.StartupPath,
+                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                    _configuration.Configuration["Constants:_SOUND_OPEN_DOOR"]);
+            _soundSystem.PlaySound(openDoorSoundFile);
+
             await Load_Products();
             await Load_IngotResources();
 
@@ -231,7 +244,11 @@ namespace CortezosWorkshop.Configuracion
                 var quantityCrafted = int.Parse(txt_quantityCrafted.Text);
                 var materialGastado = int.Parse(txt_materialGastado.Text);
 
-                await _updateConfiguredResourcesService.ExecuteAsync(product, quantityCrafted, materialGastado);
+                string craftSoundFile = Path.Combine(Application.StartupPath,
+                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                _configuration.Configuration["Constants:_SOUND_CRAFT"]);
+
+                await _updateConfiguredResourcesService.ExecuteAsync(product, quantityCrafted, materialGastado, craftSoundFile);
             }
             catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 
@@ -319,6 +336,12 @@ namespace CortezosWorkshop.Configuracion
                     {
                         await Load_IngotResources();
                         var selectedResource = _ingotResources.ElementAt(cbo_product.SelectedIndex);
+
+                        string changePriceSoundFile = Path.Combine(Application.StartupPath,
+                        _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                        _configuration.Configuration["Constants:_SOUND_CHANGE_PRICE"]);
+                        _soundSystem.PlaySound(changePriceSoundFile);
+
                         await updatePriceServiceMethod(selectedResource, int.Parse(newPriceText));
                     }
                     catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
@@ -364,6 +387,11 @@ namespace CortezosWorkshop.Configuracion
         private async void btn_menu_principal_Click(object sender, EventArgs e)
         {
             if (_isTaskRunning) { while (_isTaskRunning) { await Task.Delay(100); } }
+
+            string openDoorSoundFile = Path.Combine(Application.StartupPath,
+                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
+                    _configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
+            _soundSystem.PlaySound(openDoorSoundFile);
 
             var frmMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
             frmMain.Location = new Point(this.Location.X, this.Location.Y); ;
