@@ -29,7 +29,7 @@ namespace CortezosWorkshop
 {
     internal static class Program
     {
-        public const string DATABASE_JSON_FILE = "appsettings.prod.json";
+        public const string DATABASE_JSON_FILE = "appsettings.dev.json";
 
         [STAThread]
         static void Main()

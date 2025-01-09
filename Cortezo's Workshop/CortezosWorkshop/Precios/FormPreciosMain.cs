@@ -30,10 +30,7 @@ namespace CortezosWorkshop.Precios
         // -------------------------------------------------------------------------------------------------------
         private async void FormPreciosMain_Load(object sender, EventArgs e)
         {
-            string openDoorSoundFile = Path.Combine(Application.StartupPath,
-                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                    _configuration.Configuration["Constants:_SOUND_OPEN_DOOR"]);
-            _soundSystem.PlaySound(openDoorSoundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_OPEN_DOOR"]);
 
             await Load_IngotResources();
             Load_Generic_Products();
@@ -116,10 +113,7 @@ namespace CortezosWorkshop.Precios
 
             if (label != null)
             {
-                string copyPriceSoundFile = Path.Combine(Application.StartupPath,
-                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                    _configuration.Configuration["Constants:_SOUND_COPY_PRICE"]);
-                _soundSystem.PlaySound(copyPriceSoundFile);
+                _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_COPY_PRICE"]);
 
                 Clipboard.SetText(label.Text);
             }
@@ -160,10 +154,7 @@ namespace CortezosWorkshop.Precios
                 text += $"    setvar! {lockpicksTextArray[i]} '{ingotResourceArray[i].LockpicksPrice}'\n";
             }
 
-            string copyAllSoundFile = Path.Combine(Application.StartupPath,
-                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                    _configuration.Configuration["Constants:_SOUND_COPY_ALL_PRICES"]);
-            _soundSystem.PlaySound(copyAllSoundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_COPY_ALL_PRICES"]);
 
             Clipboard.SetText(text);
         }
@@ -184,10 +175,7 @@ namespace CortezosWorkshop.Precios
 
         private void btn_menu_principal_Click(object sender, EventArgs e)
         {
-            string openDoorSoundFile = Path.Combine(Application.StartupPath,
-                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                    _configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
-            _soundSystem.PlaySound(openDoorSoundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
 
             var frmMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
             frmMain.Location = new Point(this.Location.X, this.Location.Y); ;

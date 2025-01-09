@@ -32,10 +32,7 @@ namespace CortezosWorkshop.Estadisticas
         // -------------------------------------------------------------------------------------------------------
         private async void FormEstadisticasMain_Load(object sender, EventArgs e)
         {
-            string soundFile = Path.Combine(Application.StartupPath,
-                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                _configuration.Configuration["Constants:_SOUND_SHOW_STATISTICS"]);
-            _soundSystem.PlaySound(soundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_SHOW_STATISTICS"]);
 
             var statisticsViewModel = await _createStatisticsService.ExecuteAsync();
 
@@ -77,10 +74,7 @@ namespace CortezosWorkshop.Estadisticas
 
         private void btn_menu_principal_Click(object sender, EventArgs e)
         {
-            string openDoorSoundFile = Path.Combine(Application.StartupPath,
-                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                    _configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
-            _soundSystem.PlaySound(openDoorSoundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
 
             var frmMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
             frmMain.Location = new Point(this.Location.X, this.Location.Y); ;

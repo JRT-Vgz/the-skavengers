@@ -162,7 +162,7 @@
             MinimumSize = new Size(816, 489);
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Cortezo's Workshop v1.2";
+            Text = "Cortezo's Workshop v1.3";
             Load += FormMain_Load;
             ResumeLayout(false);
             PerformLayout();

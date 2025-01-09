@@ -64,10 +64,7 @@ namespace CortezosWorkshop.Configuracion
         // -------------------------------------------------------------------------------------------------------
         private async void FormConfigMain_Load(object sender, EventArgs e)
         {
-            string openDoorSoundFile = Path.Combine(Application.StartupPath,
-                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                    _configuration.Configuration["Constants:_SOUND_OPEN_DOOR"]);
-            _soundSystem.PlaySound(openDoorSoundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_OPEN_DOOR"]);
 
             await Load_Products();
             await Load_IngotResources();
@@ -244,9 +241,7 @@ namespace CortezosWorkshop.Configuracion
                 var quantityCrafted = int.Parse(txt_quantityCrafted.Text);
                 var materialGastado = int.Parse(txt_materialGastado.Text);
 
-                string craftSoundFile = Path.Combine(Application.StartupPath,
-                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                _configuration.Configuration["Constants:_SOUND_CRAFT"]);
+                string craftSoundFile = _configuration.Configuration["Constants:_SOUND_CRAFT"];
 
                 await _updateConfiguredResourcesService.ExecuteAsync(product, quantityCrafted, materialGastado, craftSoundFile);
             }
@@ -337,10 +332,7 @@ namespace CortezosWorkshop.Configuracion
                         await Load_IngotResources();
                         var selectedResource = _ingotResources.ElementAt(cbo_product.SelectedIndex);
 
-                        string changePriceSoundFile = Path.Combine(Application.StartupPath,
-                        _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                        _configuration.Configuration["Constants:_SOUND_CHANGE_PRICE"]);
-                        _soundSystem.PlaySound(changePriceSoundFile);
+                        _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CHANGE_PRICE"]);
 
                         await updatePriceServiceMethod(selectedResource, int.Parse(newPriceText));
                     }
@@ -388,10 +380,7 @@ namespace CortezosWorkshop.Configuracion
         {
             if (_isTaskRunning) { while (_isTaskRunning) { await Task.Delay(100); } }
 
-            string openDoorSoundFile = Path.Combine(Application.StartupPath,
-                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                    _configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
-            _soundSystem.PlaySound(openDoorSoundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
 
             var frmMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
             frmMain.Location = new Point(this.Location.X, this.Location.Y); ;

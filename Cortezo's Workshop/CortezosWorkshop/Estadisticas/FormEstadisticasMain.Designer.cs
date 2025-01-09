@@ -121,27 +121,27 @@
             lbl_lockpicksCrafteados.AutoSize = true;
             lbl_lockpicksCrafteados.Location = new Point(246, 344);
             lbl_lockpicksCrafteados.Name = "lbl_lockpicksCrafteados";
-            lbl_lockpicksCrafteados.Size = new Size(128, 15);
+            lbl_lockpicksCrafteados.Size = new Size(119, 15);
             lbl_lockpicksCrafteados.TabIndex = 13;
-            lbl_lockpicksCrafteados.Text = "- Lockpicks crafteados:";
+            lbl_lockpicksCrafteados.Text = "- Datos de Lockpicks:";
             // 
             // lbl_herramientasCrafteadas
             // 
             lbl_herramientasCrafteadas.AutoSize = true;
             lbl_herramientasCrafteadas.Location = new Point(246, 309);
             lbl_herramientasCrafteadas.Name = "lbl_herramientasCrafteadas";
-            lbl_herramientasCrafteadas.Size = new Size(146, 15);
+            lbl_herramientasCrafteadas.Size = new Size(138, 15);
             lbl_herramientasCrafteadas.TabIndex = 12;
-            lbl_herramientasCrafteadas.Text = "- Herramientas crafteadas:";
+            lbl_herramientasCrafteadas.Text = "- Datos de Herramientas:";
             // 
             // lbl_armadurasCrafteadas
             // 
             lbl_armadurasCrafteadas.AutoSize = true;
             lbl_armadurasCrafteadas.Location = new Point(246, 273);
             lbl_armadurasCrafteadas.Name = "lbl_armadurasCrafteadas";
-            lbl_armadurasCrafteadas.Size = new Size(191, 15);
+            lbl_armadurasCrafteadas.Size = new Size(183, 15);
             lbl_armadurasCrafteadas.TabIndex = 11;
-            lbl_armadurasCrafteadas.Text = "- Armaduras completas crafteadas:";
+            lbl_armadurasCrafteadas.Text = "- Datos de Armaduras completas:";
             // 
             // FormEstadisticasMain
             // 

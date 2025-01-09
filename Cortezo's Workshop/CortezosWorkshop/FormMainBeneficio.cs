@@ -40,10 +40,7 @@ namespace CortezosWorkshop
         {
             this.Location = new Point(this.Location.X + 350, this.Location.Y + 165);
 
-            string soundFile = Path.Combine(Application.StartupPath,
-                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                _configuration.Configuration["Constants:_SOUND_OPEN_DRAWER"]);
-            _soundSystem.PlaySound(soundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_OPEN_DRAWER"]);
 
             await Load_CajaFuerte();
         }
@@ -118,12 +115,9 @@ namespace CortezosWorkshop
             try
             {
                 var txtBoxQuantity = int.Parse(txtBox.Text);
+                var sound = _configuration.Configuration["Constants:_SOUND_RETRIEVE_BENEFITS"];
 
-                string retrieveBenefitsSoundFile = Path.Combine(Application.StartupPath,
-                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                _configuration.Configuration["Constants:_SOUND_RETRIEVE_BENEFITS"]);
-
-                await _sumToBeneficioService.ExecuteAsync(txtBoxQuantity, retrieveBenefitsSoundFile);
+                await _sumToBeneficioService.ExecuteAsync(txtBoxQuantity, sound);
             }
             catch (NotEnoughFundsException ex) { MessageBox.Show(ex.Message); }
             catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
@@ -138,10 +132,7 @@ namespace CortezosWorkshop
         // -------------------------------------------------------------------------------------------------------
         private void btn_Back_Click(object sender, EventArgs e)
         {
-            string soundFile = Path.Combine(Application.StartupPath,
-                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                _configuration.Configuration["Constants:_SOUND_CLOSE_DRAWER"]);
-            _soundSystem.PlaySound(soundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DRAWER"]);
 
             this.Close();
         }

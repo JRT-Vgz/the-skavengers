@@ -30,10 +30,7 @@ namespace CortezosWorkshop.Estadisticas
 
         private async void FormLogs_Load(object sender, EventArgs e)
         {
-            string openDoorSoundFile = Path.Combine(Application.StartupPath,
-                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                    _configuration.Configuration["Constants:_SOUND_OPEN_DOOR"]);
-            _soundSystem.PlaySound(openDoorSoundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_OPEN_DOOR"]);
 
             await LoadLogs();
         }
@@ -68,10 +65,7 @@ namespace CortezosWorkshop.Estadisticas
 
         private void btn_volver_Click(object sender, EventArgs e)
         {
-            string openDoorSoundFile = Path.Combine(Application.StartupPath,
-                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                    _configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
-            _soundSystem.PlaySound(openDoorSoundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
 
             var frmMain = Application.OpenForms.OfType<FormEstadisticasMain>().FirstOrDefault();
             frmMain.Location = new Point(this.Location.X, this.Location.Y); ;

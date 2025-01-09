@@ -61,10 +61,7 @@ namespace CortezosWorkshop.Maps
         // -------------------------------------------------------------------------------------------------------
         private async void FormMapsMain_Load(object sender, EventArgs e)
         {
-            string openDoorSoundFile = Path.Combine(Application.StartupPath,
-                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                    _configuration.Configuration["Constants:_SOUND_OPEN_DOOR"]);
-            _soundSystem.PlaySound(openDoorSoundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_OPEN_DOOR"]);
 
             await Load_IngotResources();
             Load_AddMapDefaultData();
@@ -177,9 +174,7 @@ namespace CortezosWorkshop.Maps
                 var mapQuantity = (int)cbo_mapQuantity.SelectedItem;
                 var resourcesQuantity = int.Parse(txt_materialRecogido.Text);
 
-                string addMapSoundFile = Path.Combine(Application.StartupPath,
-                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                _configuration.Configuration["Constants:_SOUND_ADD_MAP"]);
+                string addMapSoundFile = _configuration.Configuration["Constants:_SOUND_ADD_MAP"];
 
                 await _addCompletedMapData.ExecuteAsync(ingotResource, mapQuantity, resourcesQuantity, addMapSoundFile);
             }
@@ -228,9 +223,7 @@ namespace CortezosWorkshop.Maps
                     await Load_IngotResources();
                     var ingotResource = _ingotResources.ElementAt(cbo_oreMapsPrices.SelectedIndex);
 
-                    string changePriceSoundFile = Path.Combine(Application.StartupPath,
-                        _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                        _configuration.Configuration["Constants:_SOUND_CHANGE_PRICE"]);
+                    string changePriceSoundFile = _configuration.Configuration["Constants:_SOUND_CHANGE_PRICE"];
 
                     await _updateRecommendedPrice.ExecuteAsync(ingotResource, newRecommendedPrice, changePriceSoundFile);
                 }
@@ -314,10 +307,7 @@ namespace CortezosWorkshop.Maps
                 else if (rb_ingots.Checked == true)
                 { buyResourceViewModel = await _ingotBuyService.ExecuteAsync(ingotResource, buyPrice); }
 
-                string searchSoundFile = Path.Combine(Application.StartupPath,
-                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                _configuration.Configuration["Constants:_SOUND_SEARCH"]);
-                _soundSystem.PlaySound(searchSoundFile);
+                _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_SEARCH"]);
 
                 lbl_mediaLingotes.Text = buyResourceViewModel.ResourceQuantity;
                 lbl_precioPorLingote.Text = buyResourceViewModel.PricePerResource;
@@ -356,10 +346,7 @@ namespace CortezosWorkshop.Maps
 
         private void btn_menu_principal_Click(object sender, EventArgs e)
         {
-            string openDoorSoundFile = Path.Combine(Application.StartupPath,
-                    _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                    _configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
-            _soundSystem.PlaySound(openDoorSoundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
 
             var frmMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
             frmMain.Location = new Point(this.Location.X, this.Location.Y); ;

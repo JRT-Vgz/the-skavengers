@@ -131,10 +131,7 @@ namespace CortezosWorkshop
         {
             Clipboard.SetText(_configuration.Configuration["Constants:_NOMBRE_RUNA_TIENDA"]);
 
-            string soundFile = Path.Combine(Application.StartupPath,
-                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                _configuration.Configuration["Constants:_SOUND_MARK_RUNE"]);
-            _soundSystem.PlaySound(soundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_MARK_RUNE"]);
         }
     }
 }

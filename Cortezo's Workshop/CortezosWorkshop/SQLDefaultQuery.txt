@@ -11,11 +11,11 @@ VALUES
 ('Tablones'),
 ('Cueros');
 
-INSERT INTO GenericProducts (Name, IdMaterial, Resources)
+INSERT INTO GenericProducts (Name, IdMaterial, MaterialUsed, QuantityCrafted)
 VALUES
-('Armadura Completa', 1, 116),
-('Herramientas', 1, 6),
-('Lockpicks', 1, 8);
+('Armadura Completa', 1, 0, 0),
+('Herramientas', 1, 0, 0),
+('Lockpicks', 1, 0, 0);
 
 INSERT INTO IngotResources (ResourceName, IdMaterial, MapName, MapQuantity, MapTotalOre, MapRecommendedPrice, CommodityName, FullPlatePrice, ToolPrice, LockpicksPrice)
 VALUES

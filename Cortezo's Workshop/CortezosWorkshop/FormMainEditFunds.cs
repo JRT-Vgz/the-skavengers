@@ -39,10 +39,7 @@ namespace CortezosWorkshop
         {          
             this.Location = new Point(this.Location.X - 350, this.Location.Y + 165);
 
-            string soundFile = Path.Combine(Application.StartupPath, 
-                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                _configuration.Configuration["Constants:_SOUND_OPEN_CHEST"]);
-            _soundSystem.PlaySound(soundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_OPEN_CHEST"]);
 
             await Load_Funds();
         }
@@ -123,9 +120,7 @@ namespace CortezosWorkshop
                 if (txtBoxQuantity > 0) { sound = _configuration.Configuration["Constants:_SOUND_ADD_FUNDS"]; }
                 else { sound = _configuration.Configuration["Constants:_SOUND_SPEND_FUNDS"]; }
 
-                string goldSoundFile = Path.Combine(Application.StartupPath, _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"], sound);
-
-                await _sumToCajaFuerteService.ExecuteAsync(txtBoxQuantity, goldSoundFile);
+                await _sumToCajaFuerteService.ExecuteAsync(txtBoxQuantity, sound);
             }
             catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 
@@ -139,10 +134,7 @@ namespace CortezosWorkshop
         // -------------------------------------------------------------------------------------------------------
         private void btn_Back_Click(object sender, EventArgs e)
         {
-            string soundFile = Path.Combine(Application.StartupPath,
-                _configuration.Configuration["Constants:_SOUNDS_DIRECTORY"],
-                _configuration.Configuration["Constants:_SOUND_CLOSE_CHEST"]);
-            _soundSystem.PlaySound(soundFile);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_CHEST"]);
 
             this.Close();
         }
