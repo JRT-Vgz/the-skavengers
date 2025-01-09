@@ -25,7 +25,7 @@ namespace _3_SoundSystem
                 using (var soundDevice = new WaveOutEvent())
                 {
                     soundDevice.Init(reader);
-                    soundDevice.Volume = 0.05f;
+                    soundDevice.Volume = 0.04f;
                     soundDevice.Play();
 
                     while (soundDevice.PlaybackState == PlaybackState.Playing) { await Task.Delay(10); }

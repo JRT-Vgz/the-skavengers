@@ -13,13 +13,17 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <IsPublishable>True</IsPublishable>
+    <DebugType>none</DebugType>
+    <Optimize>False</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <IsPublishable>True</IsPublishable>
+	<DebugType>none</DebugType>
+	<DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
-  <ItemGroup>
+	<ItemGroup>
     <None Remove="Resources\Sounds\anvil.wav" />
     <None Remove="Resources\Sounds\chstcls3.wav" />
     <None Remove="Resources\Sounds\chstopn2.wav" />
@@ -115,6 +119,7 @@
     <ProjectReference Include="..\1-Entities\1-Entities.csproj" />
     <ProjectReference Include="..\2-Services\2-Services.csproj" />
     <ProjectReference Include="..\3-Data\3-Data.csproj" />
+    <ProjectReference Include="..\3-Encrypters\3-Encrypters.csproj" />
     <ProjectReference Include="..\3-Loggers\3-Loggers.csproj" />
     <ProjectReference Include="..\3-Mappers\3-Mappers.csproj" />
     <ProjectReference Include="..\3-Presenters\3-Presenters.csproj" />
@@ -129,17 +134,26 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="appsettings.constants.json">
+    <None Update="Resources\AppSettings\appsettings.constants.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="appsettings.dev.json">
+    <None Update="Resources\AppSettings\appsettings.dev.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="appsettings.prod.json">
+    <None Update="Resources\AppSettings\appsettings.prod.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

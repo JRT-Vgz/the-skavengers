@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore;
+using _3_Encrypters;
 
 namespace _3___Data
 {
@@ -8,9 +9,11 @@ namespace _3___Data
     {
         public AppDbContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            var connectionString = "Connection string";
+            //var connectionString = "";
 
-            optionsBuilder.UseSqlServer("Connection string");
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            optionsBuilder.UseSqlServer(DBEncrypter.Decrypt(connectionString));
 
 
             return new AppDbContext(optionsBuilder.Options);

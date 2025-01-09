@@ -5,7 +5,13 @@
     <RootNamespace>_3_SoundSystem</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	  
+	<DebugType>none</DebugType>
+	<DebugSymbols>false</DebugSymbols>
+	  
   </PropertyGroup>
+
+
 
   <ItemGroup>
     <PackageReference Include="NAudio" Version="2.2.1" />

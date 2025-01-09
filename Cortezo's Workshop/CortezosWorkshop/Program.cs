@@ -11,6 +11,7 @@ using _3___Data;
 using _3___Data.Models;
 using _3___Repository;
 using _3___Repository.QueryObjects;
+using _3_Encrypters;
 using _3_Loggers;
 using _3_Mappers.ManualMappers;
 using _3_Mappers.MappingProfiles;
@@ -29,6 +30,7 @@ namespace CortezosWorkshop
 {
     internal static class Program
     {
+        public const string DATABASE_SETTINGS_DIR = @"Resources\AppSettings\";
         public const string DATABASE_JSON_FILE = "appsettings.dev.json";
 
         [STAThread]
@@ -45,15 +47,17 @@ namespace CortezosWorkshop
 
         private static void ConfigureServices(ServiceCollection services)
         {
+            var DbSettingsFullPath = DATABASE_SETTINGS_DIR + DATABASE_JSON_FILE;
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile(DATABASE_JSON_FILE, optional: false, reloadOnChange: true)
+                .AddJsonFile(DbSettingsFullPath, optional: false, reloadOnChange: true)
                 .Build();
 
             // INYECCION DE DEPENDENCIAS.          
             //ENTITY FRAMEWORK
+            string connectionString = DBEncrypter.Decrypt(configuration.GetConnectionString("DB"));
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DB")));
+                options.UseSqlServer(connectionString));
 
             // REPOSITORIOS
             services.AddTransient<IRepository<ShopStat>, ShopStatsRepository>();

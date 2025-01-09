@@ -5,6 +5,10 @@
     <RootNamespace>_2___Servicios</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+	<DebugType>none</DebugType>
+	<DebugSymbols>false</DebugSymbols>
+
   </PropertyGroup>
 
   <ItemGroup>

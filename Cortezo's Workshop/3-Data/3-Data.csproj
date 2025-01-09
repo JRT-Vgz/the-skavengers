@@ -5,6 +5,10 @@
     <RootNamespace>_3___Data</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+	<DebugType>none</DebugType>
+	<DebugSymbols>false</DebugSymbols>
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +18,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\3-Encrypters\3-Encrypters.csproj" />
   </ItemGroup>
 
 </Project>
