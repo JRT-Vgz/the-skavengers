@@ -7,29 +7,23 @@ namespace _2___Servicios.Services.StatisticsServices
     public class CreateStatisticsService<TViewModel>
     {
         private readonly ConfigurationService _configurationService;
-        private readonly IRepository<ShopStat> _shopStatsRepository;
-        private readonly IRepository<IngotResource> _ingotResourcesRepository;
-        private readonly IRepository<GenericProduct> _genericProductsRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IPresenter<Statistics, TViewModel> _presenter;
 
         public CreateStatisticsService(ConfigurationService configurationService,
-            IRepository<ShopStat> shopStatsRepository,
-            IRepository<IngotResource> ingotResourcesRepository,
-            IRepository<GenericProduct> genericProductsRepository,
+            IUnitOfWork unitOfWork,
             IPresenter<Statistics, TViewModel> presenter)
         {
             _configurationService = configurationService;
-            _shopStatsRepository = shopStatsRepository;
-            _ingotResourcesRepository = ingotResourcesRepository;
-            _genericProductsRepository = genericProductsRepository;
+            _unitOfWork = unitOfWork;
             _presenter = presenter;
         }
 
         public async Task<TViewModel> ExecuteAsync()
         {
-            var shopStats = await _shopStatsRepository.GetAllAsync();
-            var ingotResources = await _ingotResourcesRepository.GetAllAsync();
-            var genericProducts = await _genericProductsRepository.GetAllAsync();
+            var shopStats = await _unitOfWork.ShopStats.GetAllAsync();
+            var ingotResources = await _unitOfWork.IngotResources.GetAllAsync();
+            var genericProducts = await _unitOfWork.GenericProducts.GetAllAsync();
 
             var oroTotal = shopStats.FirstOrDefault(s => s.Name == _configurationService.Configuration["Constants:_SHOPSTAT_ORO_TOTAL"]);
             var cajaFuerte = shopStats.FirstOrDefault(s => s.Name == _configurationService.Configuration["Constants:_SHOPSTAT_CAJA_FUERTE"]);

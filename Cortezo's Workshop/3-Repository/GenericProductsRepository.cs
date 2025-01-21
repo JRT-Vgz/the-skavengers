@@ -22,10 +22,6 @@ namespace _3___Repository
             _mapper = mapper;
         }
         public async Task<IEnumerable<GenericProduct>> GetAllAsync()
-            //=> await _context.GenericProducts.Include("Material").Select(p => _mapper.Map<GenericProduct>(p))
-            //.AsNoTracking().ToListAsync();
-            //=> await _context.GenericProducts.Include("Material").Select(p => new GenericProduct(p.Id, p.Name, p.IdMaterial, p.QuantityCrafted,
-            //                                                                                     p.MaterialUsed, p.Material.Name)).ToListAsync();
             => await _context.GenericProducts.Include("Material").Select(p => _manualMapper.Map(p)).ToListAsync();
 
         public async Task<GenericProduct> GetByNameAsync(string name)

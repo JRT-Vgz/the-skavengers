@@ -1,5 +1,6 @@
 ﻿
 using _2___Servicios.Interfaces;
+using _2___Servicios.Services;
 using _3___Data;
 using _3___Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -9,9 +10,13 @@ namespace _3_Loggers
     public class Logger : ILogger
     {
         private readonly AppDbContext _context;
-        public Logger(AppDbContext context)
+        private readonly ConfigurationService _configuration;
+
+        public Logger(AppDbContext context, 
+            ConfigurationService configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public async Task WriteLogEntryAsync(string logEntry)
@@ -33,10 +38,13 @@ namespace _3_Loggers
         {
             var logs = await _context.Logs.ToListAsync();
 
-            if (logs.Count >= 200)
+            var _LOG_MAX_ENTRIES = _configuration.GetInt("Constants:_LOG_MAX_ENTRIES");
+            var _NUMBER_OF_ENTRIES_TO_DELETE = _configuration.GetInt("Constants:_LOG_DELETE_ENTRIES_WHEN_MAX_REACHED");
+
+            if (logs.Count >= _LOG_MAX_ENTRIES)
             {
                 var logsToDelete = logs.OrderBy(log => log.Date)
-                                       .Take(100);
+                                       .Take(_NUMBER_OF_ENTRIES_TO_DELETE);
 
                _context.Logs.RemoveRange(logsToDelete);
             }

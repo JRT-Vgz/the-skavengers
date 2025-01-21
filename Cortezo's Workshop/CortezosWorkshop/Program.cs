@@ -64,6 +64,9 @@ namespace CortezosWorkshop
             services.AddTransient<IRepository<GenericProduct>, GenericProductsRepository>();
             services.AddTransient<IRepository<IngotResource>, IngotResourcesRepository>();
 
+            // UNIT OF WORK
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
             // QUERY OBJECTS
             services.AddTransient<LogQuery>();
 
