@@ -19,6 +19,17 @@ namespace _3_Loggers
             _configuration = configuration;
         }
 
+        public async Task<IEnumerable<string>> GetLogEntriesAsync()
+        {
+            var logModelEntries = await _context.Logs.ToListAsync();
+
+            var logEntries = new List<string>();
+
+            foreach (var logEntry in logModelEntries) { logEntries.Add(logEntry.Entry); } 
+
+            return logEntries;
+        }
+
         public async Task WriteLogEntryAsync(string logEntry)
         {
             var logModel = new LogModel 
@@ -48,6 +59,18 @@ namespace _3_Loggers
 
                _context.Logs.RemoveRange(logsToDelete);
             }
+        }
+
+        // Genera un prefijo WRN para la linea de log si los datos nuevos superan un % de los datos actuales.
+        public string GenerateLogWarning(string logEntry, decimal actualData, decimal newData)
+        {
+            var _DEVIATION_PERCENTAGE_FOR_LOG_WARNING = _configuration.GetInt("Constants:_DEVIATION_PERCENTAGE_FOR_LOG_WARNING");
+
+            decimal deviationAllowed = actualData * _DEVIATION_PERCENTAGE_FOR_LOG_WARNING / 100;
+
+            if (Math.Abs(actualData - newData) > deviationAllowed) { return $"WRN: {logEntry}"; }
+
+            return logEntry;
         }
     }
 }

@@ -8,6 +8,7 @@ using CortezosWorkshop.Estadisticas;
 using CortezosWorkshop.Maps;
 using CortezosWorkshop.Precios;
 using Microsoft.Extensions.DependencyInjection;
+using System.Media;
 
 namespace CortezosWorkshop
 {
@@ -19,16 +20,21 @@ namespace CortezosWorkshop
         private readonly ConfigurationService _configuration;
         private readonly GetFundsByNameService<FundsViewModel> _getFundsByNameService;
         private readonly ISoundSystem _soundSystem;
+        private readonly ILogger _logger;
+
+        private IEnumerable<string> _logEntries;
         public FormMain(IServiceProvider serviceProvider,
             ConfigurationService configuration,
             GetFundsByNameService<FundsViewModel> getFundsByNameService,
-            ISoundSystem soundSystem)
+            ISoundSystem soundSystem,
+            ILogger logger)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
             _configuration = configuration;
             _getFundsByNameService = getFundsByNameService;
             _soundSystem = soundSystem;
+            _logger = logger;
         }
         #endregion
 
@@ -38,7 +44,22 @@ namespace CortezosWorkshop
         // --------------------------------------------- CARGAR DATOS --------------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private async void FormMain_Load(object sender, EventArgs e)
-            => await Load_Funds();
+        {
+            await CheckForLogWarnings();
+            await Load_Funds();
+        }
+
+        private async Task CheckForLogWarnings()
+        {
+            _logEntries = await _logger.GetLogEntriesAsync();
+
+            if (_logEntries.Any(entry => entry.Contains("WRN:")))
+            {
+                SystemSounds.Hand.Play();
+                MessageBox.Show("Se ha encontrado una entrada de datos sospechosamente sospechosa. Avisa a Vargath para que revise los logs. " +
+                    "\n\nPuedes continuar usando el programa sin miedo.", "- - -  AVISO  - - -");
+            }
+        }
 
         private async Task Load_Funds()
         {
