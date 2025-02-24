@@ -24,7 +24,7 @@ namespace _2___Servicios.Services.ProductServices
             ingotResource.LockpicksPrice = newLockpicksPrice;
             await _ingotResourceRepository.UpdateAsync(ingotResource);
 
-            await _ingotResourceRepository.SaveChanges();
+            await _ingotResourceRepository.SaveChangesAsync();
 
             _logEntry = $"Configurados Lockpicks de {ingotResource.ResourceName}. Antes: {FormatQuantity(oldPrice)} gp.";
             await _logger.WriteLogEntryAsync(_logEntry);

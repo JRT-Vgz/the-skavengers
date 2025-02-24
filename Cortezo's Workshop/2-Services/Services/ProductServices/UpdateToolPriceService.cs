@@ -24,7 +24,7 @@ namespace _2___Servicios.Services.ProductServices
             ingotResource.ToolPrice = newToolPrice;
             await _ingotResourceRepository.UpdateAsync(ingotResource);
 
-            await _ingotResourceRepository.SaveChanges();
+            await _ingotResourceRepository.SaveChangesAsync();
 
             _logEntry = $"Configuradas Herramientas de {ingotResource.ResourceName}. Antes: {FormatQuantity(oldPrice)} gp.";
             await _logger.WriteLogEntryAsync(_logEntry);

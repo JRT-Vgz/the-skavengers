@@ -38,7 +38,7 @@ namespace _3___Repository
             _context.ShopStats.Entry(shopStatModel).State = EntityState.Modified;
         }
 
-        public async Task SaveChanges()
+        public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
         }

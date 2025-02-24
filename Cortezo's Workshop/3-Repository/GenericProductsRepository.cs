@@ -31,7 +31,7 @@ namespace _3___Repository
             return _manualMapper.Map(genericProductModel);
         }
 
-        public async Task SaveChanges()
+        public async Task SaveChangesAsync()
             => await _context.SaveChangesAsync();
 
         public async Task UpdateAsync(GenericProduct product)

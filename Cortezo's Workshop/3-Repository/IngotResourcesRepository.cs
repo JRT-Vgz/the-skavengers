@@ -39,7 +39,7 @@ namespace _3___Repository
             _context.IngotResources.Entry(ingotResourceModel).State = EntityState.Modified;
         }
 
-        public async Task SaveChanges()
+        public async Task SaveChangesAsync()
         { 
             await _context.SaveChangesAsync();
         }

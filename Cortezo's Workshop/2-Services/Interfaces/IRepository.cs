@@ -6,6 +6,6 @@ namespace _2___Servicios.Interfaces
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> GetByNameAsync(string name);
         Task UpdateAsync(TEntity entity);
-        Task SaveChanges();
+        Task SaveChangesAsync();
     }
 }

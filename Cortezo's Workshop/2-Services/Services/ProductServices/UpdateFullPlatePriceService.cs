@@ -25,7 +25,7 @@ namespace _2___Servicios.Services.ProductServices
             ingotResource.FullPlatePrice = newFullPlatePrice;
             await _ingotResourceRepository.UpdateAsync(ingotResource);
 
-            await _ingotResourceRepository.SaveChanges();
+            await _ingotResourceRepository.SaveChangesAsync();
 
             _logEntry = $"Config Armadura Completa de {ingotResource.ResourceName}. Antes: {FormatQuantity(oldPrice)} gp.";
             await _logger.WriteLogEntryAsync(_logEntry);

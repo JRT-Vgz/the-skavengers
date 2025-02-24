@@ -30,7 +30,7 @@ namespace _2___Servicios.Services.OreMapServices
             ingotResource.MapQuantity += mapQuantity;
             ingotResource.MapTotalOre += resourcesQuantity;
             await _ingotResourcesRepository.UpdateAsync(ingotResource);
-            await _ingotResourcesRepository.SaveChanges();
+            await _ingotResourcesRepository.SaveChangesAsync();
 
             _soundSystem.PlaySound(addMapSoundFile);
 

@@ -9,6 +9,6 @@ namespace _2___Servicios.Interfaces
         public IRepository<GenericProduct> GenericProducts { get; }
         public IRepository<ShopStat> ShopStats { get; }
 
-        public Task SaveChanges();
+        public Task SaveChangesAsync();
     }
 }

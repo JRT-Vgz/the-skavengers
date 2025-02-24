@@ -56,7 +56,7 @@ namespace _2___Servicios.Services.ShopStatServices
                 _logEntry = $"Gastados {FormatQuantity(Math.Abs(quantity))} de oro de la caja fuerte en recursos.";
             }
 
-            await _shopStatsRepository.SaveChanges();
+            await _shopStatsRepository.SaveChangesAsync();
 
             _soundSystem.PlaySound(goldSoundFile);
 

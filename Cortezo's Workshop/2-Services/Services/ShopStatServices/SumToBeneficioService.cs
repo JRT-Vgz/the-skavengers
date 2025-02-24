@@ -43,7 +43,7 @@ namespace _2___Servicios.Services.ShopStatServices
             shopStatCajaFuerte.Quantity -= quantity;
             await _shopStatsRepository.UpdateAsync(shopStatCajaFuerte);
 
-            await _shopStatsRepository.SaveChanges();
+            await _shopStatsRepository.SaveChangesAsync();
 
             _soundSystem.PlaySound(retrieveBenefitsSoundFile);
 

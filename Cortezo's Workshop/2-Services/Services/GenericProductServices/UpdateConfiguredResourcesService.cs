@@ -28,7 +28,7 @@ namespace _2___Servicios.Services.ProductServices
             product.QuantityCrafted += quantityCrafted;
             product.MaterialUsed += materialUsed;
             await _genericProductsRepository.UpdateAsync(product);
-            await _genericProductsRepository.SaveChanges();
+            await _genericProductsRepository.SaveChangesAsync();
 
             _soundSystem.PlaySound(craftSoundFile);
                       

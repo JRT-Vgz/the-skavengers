@@ -1,8 +1,10 @@
 
 using _1___Entities;
 using _2___Servicios.Interfaces;
+using _2___Servicios.Services;
 using _3___Data;
 using _3___Data.Models;
+using _3_Loggers;
 using AutoMapper;
 
 namespace _3___Repository
@@ -15,6 +17,7 @@ namespace _3___Repository
         private IRepository<ShopStat> _shopStatRepository;
         private readonly IMapper _mapper;
         private readonly IManualMapper<GenericProductModel, GenericProduct> _manualMapper;
+        private readonly ConfigurationService _configuration;
 
         public IRepository<IngotResource> IngotResources 
         {
@@ -44,14 +47,16 @@ namespace _3___Repository
             }
         }
 
-        public UnitOfWork(AppDbContext context, IMapper mapper, IManualMapper<GenericProductModel, GenericProduct> manualMapper)
+        public UnitOfWork(AppDbContext context, IMapper mapper, IManualMapper<GenericProductModel, GenericProduct> manualMapper,
+            ConfigurationService configuration)
         {
             _context = context;
             _mapper = mapper;
             _manualMapper = manualMapper;
+            _configuration = configuration;
         }
 
-        public async Task SaveChanges()
-            => _context.SaveChangesAsync();
+        public async Task SaveChangesAsync()
+            => await _context.SaveChangesAsync();
     }
 }
