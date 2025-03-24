@@ -34,6 +34,7 @@ namespace _2___Servicios.Services.OreMapServices
 
             _soundSystem.PlaySound(addMapSoundFile);
 
+            _logEntry = string.Empty;
             if (mapQuantity == 1) { _logEntry += "Añadido "; } else { _logEntry += "Añadidos "; }
             _logEntry += $"{mapQuantity}x {ingotResource.MapName} con {resourcesQuantity} recursos.";
             _logEntry = _logger.GenerateLogWarning(_logEntry, actualResourcesPerMap, resourcesPerAddedMap);
