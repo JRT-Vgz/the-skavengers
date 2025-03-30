@@ -37,8 +37,9 @@
             lbl_Oro = new Label();
             btn_addFunds = new Button();
             btn_beneficio = new Button();
-            btn_portapapeles = new Button();
             btn_estadisticas = new Button();
+            btn_menu_principal = new Button();
+            btn_portapapeles = new Button();
             SuspendLayout();
             // 
             // btn_precios
@@ -120,16 +121,6 @@
             btn_beneficio.UseVisualStyleBackColor = true;
             btn_beneficio.Click += btn_beneficio_Click;
             // 
-            // btn_portapapeles
-            // 
-            btn_portapapeles.Image = Properties.Resources.Ankh;
-            btn_portapapeles.Location = new Point(12, 12);
-            btn_portapapeles.Name = "btn_portapapeles";
-            btn_portapapeles.Size = new Size(44, 53);
-            btn_portapapeles.TabIndex = 8;
-            btn_portapapeles.UseVisualStyleBackColor = true;
-            btn_portapapeles.Click += btn_portapapeles_Click;
-            // 
             // btn_estadisticas
             // 
             btn_estadisticas.Location = new Point(283, 303);
@@ -140,13 +131,34 @@
             btn_estadisticas.UseVisualStyleBackColor = true;
             btn_estadisticas.Click += btn_estadisticas_Click;
             // 
+            // btn_menu_principal
+            // 
+            btn_menu_principal.Location = new Point(12, 12);
+            btn_menu_principal.Name = "btn_menu_principal";
+            btn_menu_principal.Size = new Size(99, 23);
+            btn_menu_principal.TabIndex = 101;
+            btn_menu_principal.Text = "Volver";
+            btn_menu_principal.UseVisualStyleBackColor = true;
+            btn_menu_principal.Click += btn_menu_principal_Click;
+            // 
+            // btn_portapapeles
+            // 
+            btn_portapapeles.Image = Properties.Resources.Ankh;
+            btn_portapapeles.Location = new Point(744, 12);
+            btn_portapapeles.Name = "btn_portapapeles";
+            btn_portapapeles.Size = new Size(44, 53);
+            btn_portapapeles.TabIndex = 8;
+            btn_portapapeles.UseVisualStyleBackColor = true;
+            btn_portapapeles.Click += btn_portapapeles_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(btn_estadisticas);
             Controls.Add(btn_portapapeles);
+            Controls.Add(btn_menu_principal);
+            Controls.Add(btn_estadisticas);
             Controls.Add(btn_beneficio);
             Controls.Add(btn_addFunds);
             Controls.Add(lbl_Oro);
@@ -161,8 +173,9 @@
             MaximumSize = new Size(816, 489);
             MinimumSize = new Size(816, 489);
             Name = "FormMain";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.Manual;
             Text = "Cortezo's Workshop v1.4.1";
+            FormClosing += FormMain_FormClosing;
             Load += FormMain_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -178,7 +191,8 @@
         private Label lbl_Oro;
         private Button btn_addFunds;
         private Button btn_beneficio;
-        private Button btn_portapapeles;
         private Button btn_estadisticas;
+        private Button btn_menu_principal;
+        private Button btn_portapapeles;
     }
 }

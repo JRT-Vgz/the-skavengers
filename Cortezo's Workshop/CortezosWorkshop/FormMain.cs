@@ -45,6 +45,8 @@ namespace CortezosWorkshop
         // -------------------------------------------------------------------------------------------------------
         private async void FormMain_Load(object sender, EventArgs e)
         {
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_OPEN_DOOR"]);
+
             await CheckForLogWarnings();
             await Load_Funds();
         }
@@ -153,6 +155,27 @@ namespace CortezosWorkshop
             Clipboard.SetText(_configuration.Configuration["Constants:_NOMBRE_RUNA_TIENDA"]);
 
             _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_MARK_RUNE"]);
+        }
+
+        // -------------------------------------------------------------------------------------------------------
+        // --------------------------------------- VOLVER A MENU PRINCIPAL ---------------------------------------
+        // -------------------------------------------------------------------------------------------------------
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void btn_menu_principal_Click(object sender, EventArgs e)
+        {
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
+
+            var frmTheSkavengersMain = Application.OpenForms.OfType<FormTheSkavengersMain>().FirstOrDefault();
+            frmTheSkavengersMain.Location = new Point(this.Location.X, this.Location.Y); ;
+
+            this.Hide();
         }
     }
 }

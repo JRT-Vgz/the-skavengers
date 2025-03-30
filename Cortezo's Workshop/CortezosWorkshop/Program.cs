@@ -2,6 +2,7 @@ using _1___Entities;
 using _1___Entities.ResourcesBuyEntities;
 using _2___Servicios.Interfaces;
 using _2___Servicios.Services;
+using _2___Servicios.Services.ArmoryServices;
 using _2___Servicios.Services.OreMapServices;
 using _2___Servicios.Services.ProductServices;
 using _2___Servicios.Services.ResourcesBuyServices;
@@ -13,11 +14,13 @@ using _3___Repository;
 using _3___Repository.QueryObjects;
 using _3_Encrypters;
 using _3_Loggers;
+using _3_Mappers.Dtos;
 using _3_Mappers.ManualMappers;
 using _3_Mappers.MappingProfiles;
 using _3_Presenters.Presenters;
 using _3_Presenters.ViewModels;
 using _3_SoundSystem;
+using CortezosWorkshop.Armeria;
 using CortezosWorkshop.Configuracion;
 using CortezosWorkshop.Estadisticas;
 using CortezosWorkshop.Maps;
@@ -31,7 +34,7 @@ namespace CortezosWorkshop
     internal static class Program
     {
         public const string DATABASE_SETTINGS_DIR = @"Resources\AppSettings\";
-        public const string DATABASE_JSON_FILE = "appsettings.prod.json";
+        public const string DATABASE_JSON_FILE = "appsettings.dev.json";
 
         [STAThread]
         static void Main()
@@ -41,7 +44,7 @@ namespace CortezosWorkshop
 
             var serviceProvider = services.BuildServiceProvider();
 
-            var mainForm = serviceProvider.GetRequiredService<FormMain>();
+            var mainForm = serviceProvider.GetRequiredService<FormTheSkavengersMain>();
             Application.Run(mainForm);
         }
 
@@ -74,6 +77,7 @@ namespace CortezosWorkshop
             services.AddTransient<IPresenter<ShopStat, FundsViewModel>, FundsPresenter>();
             services.AddTransient<IPresenter<Statistics, StatisticsViewModel>, StatisticsPresenter>();
             services.AddTransient<IPresenter<BuyResourceEntity, BuyResourceViewModel>, BuyResourcePresenter>();
+            services.AddTransient<IPresenter<PlayerArmoryDataDto, string>, PlayerArmoryDataPresenter > ();
 
             // MANUAL MAPPERS
             services.AddTransient<IManualMapper<GenericProductModel, GenericProduct>, GenericProductModelToGenericProduct>();
@@ -104,8 +108,10 @@ namespace CortezosWorkshop
             services.AddTransient<MapBuyService<BuyResourceViewModel>>();
             services.AddTransient<CommodityBuyService<BuyResourceViewModel>>();
             services.AddTransient<IngotBuyService<BuyResourceViewModel>>();
+            services.AddTransient<CreateAutoEquipScriptTemplateService<PlayerArmoryDataDto>>();
 
             // INYECCIÓN DE FORMULARIOS
+            services.AddTransient<FormTheSkavengersMain>();
             services.AddTransient<FormMain>();
             services.AddTransient<FormMapsMain>();
             services.AddTransient<FormPreciosMain>();
@@ -114,6 +120,7 @@ namespace CortezosWorkshop
             services.AddTransient<FormMainBeneficio>();
             services.AddTransient<FormEstadisticasMain>();
             services.AddTransient<FormLog>();
+            services.AddTransient<FormArmeriaMain>();
         }
 
     }
