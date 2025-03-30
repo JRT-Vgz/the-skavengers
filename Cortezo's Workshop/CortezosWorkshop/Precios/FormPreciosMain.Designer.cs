@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPreciosMain));
-            btn_menu_principal = new Button();
+            btn_volver = new Button();
             cbo_producto = new ComboBox();
             lbl_material1 = new Label();
             lbl_material2 = new Label();
@@ -61,15 +61,15 @@
             btn_copyAll = new Button();
             SuspendLayout();
             // 
-            // btn_menu_principal
+            // btn_volver
             // 
-            btn_menu_principal.Location = new Point(12, 12);
-            btn_menu_principal.Name = "btn_menu_principal";
-            btn_menu_principal.Size = new Size(99, 23);
-            btn_menu_principal.TabIndex = 1;
-            btn_menu_principal.Text = "Menú principal";
-            btn_menu_principal.UseVisualStyleBackColor = true;
-            btn_menu_principal.Click += btn_menu_principal_Click;
+            btn_volver.Location = new Point(12, 12);
+            btn_volver.Name = "btn_volver";
+            btn_volver.Size = new Size(99, 23);
+            btn_volver.TabIndex = 1;
+            btn_volver.Text = "Volver";
+            btn_volver.UseVisualStyleBackColor = true;
+            btn_volver.Click += btn_volver_Click;
             // 
             // cbo_producto
             // 
@@ -377,7 +377,7 @@
             Controls.Add(lbl_material2);
             Controls.Add(lbl_material1);
             Controls.Add(cbo_producto);
-            Controls.Add(btn_menu_principal);
+            Controls.Add(btn_volver);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -392,7 +392,7 @@
 
         #endregion
 
-        private Button btn_menu_principal;
+        private Button btn_volver;
         private ComboBox cbo_producto;
         private Label lbl_material1;
         private Label lbl_material2;

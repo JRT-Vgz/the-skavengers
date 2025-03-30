@@ -8,5 +8,6 @@ namespace _3_Mappers.Dtos
         public int Hue { get; set; }
         public int Graphic { get; set; }
         public string ItemQuality { get; set; }
+        public string GenericHue { get; set; }
     }
 }

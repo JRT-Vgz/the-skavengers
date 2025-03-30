@@ -196,7 +196,7 @@ namespace CortezosWorkshop.Maps
             {
                 e.SuppressKeyPress = true;
                 await Save_New_Recommended_Price();
-                btn_menu_principal.Focus();
+                btn_volver.Focus();
             }
         }
 
@@ -274,7 +274,7 @@ namespace CortezosWorkshop.Maps
             {
                 e.SuppressKeyPress = true;
                 await Show_Info_For_Buy_Resources();
-                btn_menu_principal.Focus();
+                btn_volver.Focus();
             }
         }
 
@@ -321,10 +321,10 @@ namespace CortezosWorkshop.Maps
                 lbl_beneficioHerramienta.Text = buyResourceViewModel.ToolBenefit;
                 lbl_beneficioLockpicks.Text = buyResourceViewModel.LockpicksBenefit;
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 System.Media.SystemSounds.Beep.Play();
-                MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); 
+                MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez.");
             }
 
             _txt_buyResourcesPriceClick = false;
@@ -344,7 +344,7 @@ namespace CortezosWorkshop.Maps
             }
         }
 
-        private void btn_menu_principal_Click(object sender, EventArgs e)
+        private void btn_volver_Click(object sender, EventArgs e)
         {
             _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
 

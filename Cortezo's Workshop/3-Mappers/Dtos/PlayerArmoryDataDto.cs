@@ -19,6 +19,12 @@ namespace _3_Mappers.Dtos
 
         public List<ArmorPieceDataDto> ArmorPieces { get; set; }
 
+        public int GenericHueArmor { get; set; }
+        public int GenericHue1H { get; set; }
+        public int GenericHue2H { get; set; }
+        public int GenericHueSatchel { get; set; }
+        public int GenericHueQuiver { get; set; }
+
         public PlayerArmoryDataDto(string playerName, List<string> playerAlterEgos, string templateName, string echoSkillName, 
             double echoSkillLevel, bool activarAspecto, bool activarAspectoArma, bool activarAspectoLibro, bool activarAspectoArmadura,
             int idAspectoArma, int idAspectoLibro, int idAspectoArmadura, List<ArmorPieceDataDto> armorPieces) 
@@ -36,6 +42,18 @@ namespace _3_Mappers.Dtos
             IdAspectoLibro = idAspectoLibro;
             IdAspectoArmadura = idAspectoArmadura;
             ArmorPieces = armorPieces;
+        }
+
+        public void ConfigurePlayerGenericHueData()
+        {
+            foreach (var armorPiece in ArmorPieces)
+            {
+                if (armorPiece.LayerName == "ArmorChest") { GenericHueArmor = armorPiece.Hue; }
+                else if (armorPiece.LayerName == "OneHanded") { GenericHue1H = armorPiece.Hue; }
+                else if (armorPiece.LayerName == "TwoHanded") { GenericHue2H = armorPiece.Hue; }
+                else if (armorPiece.LayerName == "Outerbody") { GenericHueSatchel = armorPiece.Hue; }
+                else if (armorPiece.LayerName == "Quiver") { GenericHueQuiver = armorPiece.Hue; }
+            }
         }
     }
 }

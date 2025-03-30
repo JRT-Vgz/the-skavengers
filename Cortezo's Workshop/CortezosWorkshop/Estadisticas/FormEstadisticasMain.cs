@@ -72,7 +72,7 @@ namespace CortezosWorkshop.Estadisticas
             }
         }
 
-        private void btn_menu_principal_Click(object sender, EventArgs e)
+        private void btn_volver_Click(object sender, EventArgs e)
         {
             _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
 

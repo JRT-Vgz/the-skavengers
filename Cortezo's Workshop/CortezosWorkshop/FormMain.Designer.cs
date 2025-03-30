@@ -137,7 +137,7 @@
             btn_menu_principal.Name = "btn_menu_principal";
             btn_menu_principal.Size = new Size(99, 23);
             btn_menu_principal.TabIndex = 101;
-            btn_menu_principal.Text = "Volver";
+            btn_menu_principal.Text = "Menú principal";
             btn_menu_principal.UseVisualStyleBackColor = true;
             btn_menu_principal.Click += btn_menu_principal_Click;
             // 
@@ -174,7 +174,7 @@
             MinimumSize = new Size(816, 489);
             Name = "FormMain";
             StartPosition = FormStartPosition.Manual;
-            Text = "Cortezo's Workshop v1.4.1";
+            Text = "Cortezo's Workshop";
             FormClosing += FormMain_FormClosing;
             Load += FormMain_Load;
             ResumeLayout(false);

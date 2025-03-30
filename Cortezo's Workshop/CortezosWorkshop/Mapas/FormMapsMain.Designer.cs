@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMapsMain));
-            btn_menu_principal = new Button();
+            btn_volver = new Button();
             lbl_addMap = new Label();
             lbl_x = new Label();
             cbo_oreMaps = new ComboBox();
@@ -59,15 +59,15 @@
             lbl_beneficioHerramienta = new Label();
             SuspendLayout();
             // 
-            // btn_menu_principal
+            // btn_volver
             // 
-            btn_menu_principal.Location = new Point(12, 12);
-            btn_menu_principal.Name = "btn_menu_principal";
-            btn_menu_principal.Size = new Size(99, 23);
-            btn_menu_principal.TabIndex = 0;
-            btn_menu_principal.Text = "Menú principal";
-            btn_menu_principal.UseVisualStyleBackColor = true;
-            btn_menu_principal.Click += btn_menu_principal_Click;
+            btn_volver.Location = new Point(12, 12);
+            btn_volver.Name = "btn_volver";
+            btn_volver.Size = new Size(99, 23);
+            btn_volver.TabIndex = 0;
+            btn_volver.Text = "Volver";
+            btn_volver.UseVisualStyleBackColor = true;
+            btn_volver.Click += btn_volver_Click;
             // 
             // lbl_addMap
             // 
@@ -359,7 +359,7 @@
             Controls.Add(cbo_oreMaps);
             Controls.Add(lbl_x);
             Controls.Add(lbl_addMap);
-            Controls.Add(btn_menu_principal);
+            Controls.Add(btn_volver);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -376,7 +376,7 @@
 
         #endregion
 
-        private Button btn_menu_principal;
+        private Button btn_volver;
         private Label lbl_addMap;
         private Label lbl_x;
         private ComboBox cbo_oreMaps;

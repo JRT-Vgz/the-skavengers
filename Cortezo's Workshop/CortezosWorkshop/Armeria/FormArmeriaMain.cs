@@ -308,16 +308,16 @@ namespace CortezosWorkshop.Armeria
             foreach (var armorPiece in _armorPieceDataDtos)
             {
                 if (armorPiece.LayerName == "OneHanded" && armorPiece.Hue == 2606) { armorPiece.ItemQuality = "potent"; }
-                else if (armorPiece.LayerName == "OneHanded") { armorPiece.ItemQuality = "exceptional"; }
-                else if (armorPiece.LayerName == "TwoHanded") { armorPiece.ItemQuality = "exceptional"; }
-                else if (armorPiece.LayerName == "Outerbody") { armorPiece.ItemQuality = "exceptional"; }
-                else if (armorPiece.LayerName == "Quiver") { armorPiece.ItemQuality = "exceptional"; }
-                else if (armorPiece.LayerName == "ArmorHelm" && chk_helm.Checked) { armorPiece.ItemQuality = "exceptional"; }
-                else if (armorPiece.LayerName == "ArmorNeck" && chk_gorget.Checked) { armorPiece.ItemQuality = "exceptional"; }
-                else if (armorPiece.LayerName == "ArmorGloves" && chk_gloves.Checked) { armorPiece.ItemQuality = "exceptional"; }
-                else if (armorPiece.LayerName == "ArmorArms" && chk_shoulders.Checked) { armorPiece.ItemQuality = "exceptional"; }
-                else if (armorPiece.LayerName == "ArmorChest" && chk_chest.Checked) { armorPiece.ItemQuality = "exceptional"; }
-                else if (armorPiece.LayerName == "ArmorLegs" && chk_legs.Checked) { armorPiece.ItemQuality = "exceptional"; }
+                else if (armorPiece.LayerName == "OneHanded") { armorPiece.ItemQuality = "exceptional"; armorPiece.GenericHue = "HUE_1H"; }
+                else if (armorPiece.LayerName == "TwoHanded") { armorPiece.ItemQuality = "exceptional"; armorPiece.GenericHue = "HUE_2H"; }
+                else if (armorPiece.LayerName == "Outerbody") { armorPiece.ItemQuality = "exceptional"; armorPiece.GenericHue = "HUE_SATCHEL"; }
+                else if (armorPiece.LayerName == "Quiver") { armorPiece.ItemQuality = "exceptional"; armorPiece.GenericHue = "HUE_QUIVER"; }
+                else if (armorPiece.LayerName == "ArmorHelm" && chk_helm.Checked) { armorPiece.ItemQuality = "exceptional"; armorPiece.GenericHue = "HUE_ARMADURA"; }
+                else if (armorPiece.LayerName == "ArmorNeck" && chk_gorget.Checked) { armorPiece.ItemQuality = "exceptional"; armorPiece.GenericHue = "HUE_ARMADURA"; }
+                else if (armorPiece.LayerName == "ArmorGloves" && chk_gloves.Checked) { armorPiece.ItemQuality = "exceptional"; armorPiece.GenericHue = "HUE_ARMADURA"; }
+                else if (armorPiece.LayerName == "ArmorArms" && chk_shoulders.Checked) { armorPiece.ItemQuality = "exceptional"; armorPiece.GenericHue = "HUE_ARMADURA"; }
+                else if (armorPiece.LayerName == "ArmorChest" && chk_chest.Checked) { armorPiece.ItemQuality = "exceptional"; armorPiece.GenericHue = "HUE_ARMADURA"; }
+                else if (armorPiece.LayerName == "ArmorLegs" && chk_legs.Checked) { armorPiece.ItemQuality = "exceptional"; armorPiece.GenericHue = "HUE_ARMADURA"; }
                 else { armorPiece.ItemQuality = "blessed"; }
             }
         }
@@ -349,6 +349,7 @@ namespace CortezosWorkshop.Armeria
             var playerArmoryDataDto = new PlayerArmoryDataDto(playerName, _alterEgos, templateName, echoSkillName, echoSkillLevel,
                 activarAspecto, activarAspectoArma, activarAspectoLibro, activarAspectoArmadura,
                 idAspectoArma, idAspectoLibro, idAspectoArmadura, _armorPieceDataDtos);
+            playerArmoryDataDto.ConfigurePlayerGenericHueData();
 
             string scriptTemplate = _createAutoEquipScriptTemplateService.Execute(playerArmoryDataDto);
             Clipboard.SetText(scriptTemplate);

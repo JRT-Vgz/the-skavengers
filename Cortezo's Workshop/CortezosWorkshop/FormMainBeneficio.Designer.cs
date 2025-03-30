@@ -113,7 +113,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;
-            Text = "8";
+            Text = "Retirar fondos";
             Load += FormMainEditFunds_Load;
             Shown += FormMainEditFunds_Shown;
             ResumeLayout(false);

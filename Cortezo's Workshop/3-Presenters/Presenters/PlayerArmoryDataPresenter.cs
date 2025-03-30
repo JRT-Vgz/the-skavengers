@@ -35,10 +35,14 @@ namespace _3_Presenters.Presenters
 
             // VARIABLES
             autoEquipScript += "########################## VARIABLES: ##########################\n" +
-                "\t# Los hues genéricos se tienen que configurar manualmente si quieres usarlos. No son imprescindibles. Pregunta a Vargath.\n" +
-                $"\tsetvar! HUE_ARMADURA 0\n" +
-                $"\tsetvar! HUE_ARMA 0\n" +
-                $"\tsetvar! HUE_ESCUDO 0\n" +
+                "\t# Cambia el color de un hue genérico para cambiar el material de los objetos excepcionales de tu ficha.\n" +
+                "\t# Pregunta a Vargath si tienes dudas.\n" +
+                $"\tsetvar! HUE_ARMADURA {playerArmoryDataDto.GenericHueArmor}\n" +
+                $"\tsetvar! HUE_1H {playerArmoryDataDto.GenericHue1H}\n" +
+                $"\tsetvar! HUE_2H {playerArmoryDataDto.GenericHue2H}\n" +
+                $"\tsetvar! HUE_SATCHEL {playerArmoryDataDto.GenericHueSatchel}\n" +
+                $"\tsetvar! HUE_QUIVER {playerArmoryDataDto.GenericHueQuiver}\n" +
+                "\n" +
                 "\n" +
                 "\t# 1 = activar, 0 = no activar\n" +
                 $"\tsetvar! ACTIVAR_ASPECTO {Convert.ToInt32(playerArmoryDataDto.ActivarAspecto)}\n" +
@@ -60,14 +64,12 @@ namespace _3_Presenters.Presenters
 
                 autoEquipScript += $"########################## {armorPiece.LayerName}: ##########################\n";
 
-                if (armorPiece.LayerName == "Talisman") 
-                {
-                    autoEquipScript += $"\twhile findtype {armorPiece.Graphic} backpack {armorPiece.Hue} as item\n";
-                }
-                else 
-                {
-                    autoEquipScript += $"\twhile findtype '{armorPiece.ItemName}' backpack {armorPiece.Hue} as item\n"; 
-                }
+                if (armorPiece.LayerName == "Talisman") { autoEquipScript += $"\twhile findtype {armorPiece.Graphic} "; }
+                else { autoEquipScript += $"\twhile findtype '{armorPiece.ItemName}' "; }
+
+                if(armorPiece.GenericHue != null) { autoEquipScript += $"backpack {armorPiece.GenericHue} as item\n"; }
+                else { autoEquipScript += $"backpack {armorPiece.Hue} as item\n"; }
+                
 
                 autoEquipScript += "\t\tgetlabel item descripcion\n" +
                     $"\tif '{armorPiece.ItemQuality}' in descripcion\n" +

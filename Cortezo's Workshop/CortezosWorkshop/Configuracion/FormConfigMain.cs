@@ -296,7 +296,7 @@ namespace CortezosWorkshop.Configuracion
                     _isSavingByKeyPress = true;
                     e.SuppressKeyPress = true;
                     await SaveNewPrice();
-                    btn_menu_principal.Focus();
+                    btn_volver.Focus();
                 }
             };
 
@@ -376,7 +376,7 @@ namespace CortezosWorkshop.Configuracion
             }
         }
 
-        private async void btn_menu_principal_Click(object sender, EventArgs e)
+        private async void btn_volverl_Click(object sender, EventArgs e)
         {
             if (_isTaskRunning) { while (_isTaskRunning) { await Task.Delay(100); } }
 
@@ -388,6 +388,5 @@ namespace CortezosWorkshop.Configuracion
             this.Hide();
         }
         #endregion
-
     }
 }

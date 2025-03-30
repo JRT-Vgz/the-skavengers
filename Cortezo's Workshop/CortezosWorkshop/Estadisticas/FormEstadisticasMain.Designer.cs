@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEstadisticasMain));
-            btn_menu_principal = new Button();
+            btn_volver = new Button();
             lbl_oroTotal = new Label();
             lbl_cajafuerte = new Label();
             lbl_beneficio = new Label();
@@ -42,15 +42,15 @@
             lbl_armadurasCrafteadas = new Label();
             SuspendLayout();
             // 
-            // btn_menu_principal
+            // btn_volver
             // 
-            btn_menu_principal.Location = new Point(12, 12);
-            btn_menu_principal.Name = "btn_menu_principal";
-            btn_menu_principal.Size = new Size(99, 23);
-            btn_menu_principal.TabIndex = 2;
-            btn_menu_principal.Text = "Menú principal";
-            btn_menu_principal.UseVisualStyleBackColor = true;
-            btn_menu_principal.Click += btn_menu_principal_Click;
+            btn_volver.Location = new Point(12, 12);
+            btn_volver.Name = "btn_volver";
+            btn_volver.Size = new Size(99, 23);
+            btn_volver.TabIndex = 2;
+            btn_volver.Text = "Volver";
+            btn_volver.UseVisualStyleBackColor = true;
+            btn_volver.Click += btn_volver_Click;
             // 
             // lbl_oroTotal
             // 
@@ -158,7 +158,7 @@
             Controls.Add(lbl_beneficio);
             Controls.Add(lbl_cajafuerte);
             Controls.Add(lbl_oroTotal);
-            Controls.Add(btn_menu_principal);
+            Controls.Add(btn_volver);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -176,7 +176,7 @@
 
         #endregion
 
-        private Button btn_menu_principal;
+        private Button btn_volver;
         private Label lbl_oroTotal;
         private Label lbl_cajafuerte;
         private Label lbl_beneficio;

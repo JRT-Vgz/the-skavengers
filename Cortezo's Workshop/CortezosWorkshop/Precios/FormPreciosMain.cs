@@ -142,15 +142,15 @@ namespace CortezosWorkshop.Precios
 
             var text = "# HERRAMIENTAS:\n";
 
-            for (int i = 0; i < toolsTextArray.Length; i++) 
-            { 
-                text += $"    setvar! {toolsTextArray[i]} '{ingotResourceArray[i].ToolPrice}'\n"; 
+            for (int i = 0; i < toolsTextArray.Length; i++)
+            {
+                text += $"    setvar! {toolsTextArray[i]} '{ingotResourceArray[i].ToolPrice}'\n";
             }
 
             text += "\n# LOCKPICKS:\n";
 
-            for (int i = 0; i < lockpicksTextArray.Length; i++) 
-            { 
+            for (int i = 0; i < lockpicksTextArray.Length; i++)
+            {
                 text += $"    setvar! {lockpicksTextArray[i]} '{ingotResourceArray[i].LockpicksPrice}'\n";
             }
 
@@ -173,7 +173,7 @@ namespace CortezosWorkshop.Precios
             }
         }
 
-        private void btn_menu_principal_Click(object sender, EventArgs e)
+        private void btn_volver_Click(object sender, EventArgs e)
         {
             _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
 
@@ -183,6 +183,5 @@ namespace CortezosWorkshop.Precios
             this.Hide();
         }
         #endregion
-
     }
 }
