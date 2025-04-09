@@ -3,7 +3,7 @@ using _1_Domain.CortezosWorkshop.Interfaces;
 using _1_Domain.TheSkavengers.Interfaces;
 using _2_Application.TheSkavengers.Services;
 
-namespace CortezosWorkshop.Precios
+namespace TheSkavengers.Precios
 {
     public partial class FormPreciosMain : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace CortezosWorkshop
+﻿namespace TheSkavengers
 {
     partial class FormMainBeneficio
     {

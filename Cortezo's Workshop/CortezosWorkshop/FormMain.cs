@@ -4,14 +4,14 @@ using _1_Domain.TheSkavengers.Interfaces;
 using _2_Application.CortezosWorkshop.Services.ShopStatServices;
 using _2_Application.TheSkavengers.Services;
 using _3_Presenters.CortezosWorkshop.ViewModels;
-using CortezosWorkshop.Configuracion;
-using CortezosWorkshop.Estadisticas;
-using CortezosWorkshop.Maps;
-using CortezosWorkshop.Precios;
+using TheSkavengers.Configuracion;
+using TheSkavengers.Estadisticas;
+using TheSkavengers.Maps;
+using TheSkavengers.Precios;
 using Microsoft.Extensions.DependencyInjection;
 using System.Media;
 
-namespace CortezosWorkshop
+namespace TheSkavengers
 {
     public partial class FormMain : Form
     {

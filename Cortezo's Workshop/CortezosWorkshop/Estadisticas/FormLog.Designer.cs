@@ -1,4 +1,4 @@
-﻿namespace CortezosWorkshop.Estadisticas
+﻿namespace TheSkavengers.Estadisticas
 {
     partial class FormLog
     {

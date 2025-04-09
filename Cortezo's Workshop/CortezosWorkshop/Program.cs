@@ -22,16 +22,16 @@ using _3_Presenters.CortezosWorkshop.Presenters;
 using _3_Presenters.CortezosWorkshop.ViewModels;
 using _3_Repository.CortezosWorkshop.QueryObjects;
 using _3_SoundSystem;
-using CortezosWorkshop.Armeria;
-using CortezosWorkshop.Configuracion;
-using CortezosWorkshop.Estadisticas;
-using CortezosWorkshop.Maps;
-using CortezosWorkshop.Precios;
+using TheSkavengers.Armeria;
+using TheSkavengers.Configuracion;
+using TheSkavengers.Estadisticas;
+using TheSkavengers.Maps;
+using TheSkavengers.Precios;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CortezosWorkshop
+namespace TheSkavengers
 {
     internal static class Program
     {

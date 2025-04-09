@@ -1,5 +1,4 @@
-﻿using CortezosWorkshop.Armeria;
-using CortezosWorkshop.Maps;
+﻿using TheSkavengers.Armeria;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CortezosWorkshop
+namespace TheSkavengers
 {
     public partial class FormTheSkavengersMain : Form
     {

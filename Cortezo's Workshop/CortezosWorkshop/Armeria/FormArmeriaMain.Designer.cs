@@ -1,4 +1,4 @@
-﻿namespace CortezosWorkshop.Armeria
+﻿namespace TheSkavengers.Armeria
 {
     partial class FormArmeriaMain
     {

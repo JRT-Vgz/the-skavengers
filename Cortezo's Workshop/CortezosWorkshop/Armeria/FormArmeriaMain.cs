@@ -4,7 +4,7 @@ using _2_Application.TheSkavengers.Services;
 using _3_Mappers.Armory.Dtos;
 using System.Text.Json;
 
-namespace CortezosWorkshop.Armeria
+namespace TheSkavengers.Armeria
 {
     public partial class FormArmeriaMain : Form
     {

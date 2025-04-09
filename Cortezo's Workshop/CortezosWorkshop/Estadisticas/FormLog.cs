@@ -2,7 +2,7 @@
 using _2_Application.TheSkavengers.Services;
 using _3_Repository.CortezosWorkshop.QueryObjects;
 
-namespace CortezosWorkshop.Estadisticas
+namespace TheSkavengers.Estadisticas
 {
     public partial class FormLog : Form
     {

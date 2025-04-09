@@ -6,7 +6,7 @@ using _3_Presenters.CortezosWorkshop.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 
-namespace CortezosWorkshop.Estadisticas
+namespace TheSkavengers.Estadisticas
 {
     public partial class FormEstadisticasMain : Form
     {

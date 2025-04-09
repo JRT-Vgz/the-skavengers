@@ -1,4 +1,4 @@
-﻿namespace CortezosWorkshop.Precios
+﻿namespace TheSkavengers.Precios
 {
     partial class FormPreciosMain
     {

@@ -6,7 +6,7 @@ using _2_Application.CortezosWorkshop.Services.ResourcesBuyServices;
 using _2_Application.TheSkavengers.Services;
 using _3_Presenters.CortezosWorkshop.ViewModels;
 
-namespace CortezosWorkshop.Maps
+namespace TheSkavengers.Maps
 {
     public partial class FormMapsMain : Form
     {

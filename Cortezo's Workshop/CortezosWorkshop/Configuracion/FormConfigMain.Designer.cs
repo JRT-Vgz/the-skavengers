@@ -1,4 +1,4 @@
-﻿namespace CortezosWorkshop.Configuracion
+﻿namespace TheSkavengers.Configuracion
 {
     partial class FormConfigMain
     {

@@ -1,4 +1,4 @@
-﻿namespace CortezosWorkshop.Maps
+﻿namespace TheSkavengers.Maps
 {
     partial class FormMapsMain
     {

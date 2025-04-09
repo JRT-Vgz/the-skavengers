@@ -5,7 +5,7 @@ using _2_Application.CortezosWorkshop.Services.ShopStatServices;
 using _2_Application.TheSkavengers.Services;
 using _3_Presenters.CortezosWorkshop.ViewModels;
 
-namespace CortezosWorkshop
+namespace TheSkavengers
 {
     public partial class FormMainBeneficio : Form
     {

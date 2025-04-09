@@ -5,7 +5,7 @@ using _2_Application.CortezosWorkshop.Services.GenericProductServices;
 using _2_Application.CortezosWorkshop.Services.ProductServices;
 using _2_Application.TheSkavengers.Services;
 
-namespace CortezosWorkshop.Configuracion
+namespace TheSkavengers.Configuracion
 {
     public partial class FormConfigMain : Form
     {
