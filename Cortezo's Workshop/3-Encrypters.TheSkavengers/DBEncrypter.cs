@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace _3_Encrypters
+namespace _3_Encrypters.TheSkavengers
 {
     public class DBEncrypter
     {

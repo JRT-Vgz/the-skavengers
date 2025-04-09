@@ -12,7 +12,7 @@ using _2_Application.TheSkavengers.Services;
 using _3___Repository;
 using _3_Data.CortezosWorkshop;
 using _3_Data.CortezosWorkshop.Models;
-using _3_Encrypters;
+using _3_Encrypters.TheSkavengers;
 using _3_Loggers;
 using _3_Mappers.Armory.Dtos;
 using _3_Mappers.CortezosWorkshop.ManualMappers;

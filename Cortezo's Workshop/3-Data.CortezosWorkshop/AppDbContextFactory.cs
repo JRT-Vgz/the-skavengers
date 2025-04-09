@@ -1,7 +1,7 @@
 
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore;
-using _3_Encrypters;
+using _3_Encrypters.TheSkavengers;
 
 namespace _3_Data.CortezosWorkshop
 {
@@ -10,7 +10,7 @@ namespace _3_Data.CortezosWorkshop
         public AppDbContext CreateDbContext(string[] args)
         {
             var connectionString = "Connection string";
-            //var connectionString = "";
+            //var connectionString = "Encripted string";
 
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             optionsBuilder.UseSqlServer(DBEncrypter.Decrypt(connectionString));
