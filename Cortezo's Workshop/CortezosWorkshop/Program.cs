@@ -1,24 +1,26 @@
-using _1___Entities;
-using _1___Entities.ResourcesBuyEntities;
-using _2___Servicios.Interfaces;
-using _2___Servicios.Services;
-using _2___Servicios.Services.ArmoryServices;
-using _2___Servicios.Services.OreMapServices;
-using _2___Servicios.Services.ProductServices;
-using _2___Servicios.Services.ResourcesBuyServices;
-using _2___Servicios.Services.ShopStatServices;
-using _2___Servicios.Services.StatisticsServices;
-using _3___Data;
-using _3___Data.Models;
+using _1_Domain.CortezosWorkshop.Entities;
+using _1_Domain.CortezosWorkshop.Interfaces;
+using _1_Domain.TheSkavengers.Interfaces;
+using _2_Application.Armory.Services.AutoEquipServices;
+using _2_Application.CortezosWorkshop.Services.GenericProductServices;
+using _2_Application.CortezosWorkshop.Services.OreMapServices;
+using _2_Application.CortezosWorkshop.Services.ProductServices;
+using _2_Application.CortezosWorkshop.Services.ResourcesBuyServices;
+using _2_Application.CortezosWorkshop.Services.ShopStatServices;
+using _2_Application.CortezosWorkshop.Services.StatisticsServices;
+using _2_Application.TheSkavengers.Services;
 using _3___Repository;
-using _3___Repository.QueryObjects;
+using _3_Data.CortezosWorkshop;
+using _3_Data.CortezosWorkshop.Models;
 using _3_Encrypters;
 using _3_Loggers;
-using _3_Mappers.Dtos;
-using _3_Mappers.ManualMappers;
-using _3_Mappers.MappingProfiles;
-using _3_Presenters.Presenters;
-using _3_Presenters.ViewModels;
+using _3_Mappers.Armory.Dtos;
+using _3_Mappers.CortezosWorkshop.ManualMappers;
+using _3_Mappers.CortezosWorkshop.MappingProfiles;
+using _3_Presenters.Armory.Presenters;
+using _3_Presenters.CortezosWorkshop.Presenters;
+using _3_Presenters.CortezosWorkshop.ViewModels;
+using _3_Repository.CortezosWorkshop.QueryObjects;
 using _3_SoundSystem;
 using CortezosWorkshop.Armeria;
 using CortezosWorkshop.Configuracion;
@@ -34,11 +36,11 @@ namespace CortezosWorkshop
     internal static class Program
     {
         public const string DATABASE_SETTINGS_DIR = @"Resources\AppSettings\";
-        public const string DATABASE_JSON_FILE = "appsettings.prod.json";
+        public const string DATABASE_JSON_FILE = "appsettings.dev.json";
 
         [STAThread]
         static void Main()
-        {           
+        {
             var services = new ServiceCollection();
             ConfigureServices(services);
 
@@ -77,7 +79,7 @@ namespace CortezosWorkshop
             services.AddTransient<IPresenter<ShopStat, FundsViewModel>, FundsPresenter>();
             services.AddTransient<IPresenter<Statistics, StatisticsViewModel>, StatisticsPresenter>();
             services.AddTransient<IPresenter<BuyResourceEntity, BuyResourceViewModel>, BuyResourcePresenter>();
-            services.AddTransient<IPresenter<PlayerArmoryDataDto, string>, PlayerArmoryDataPresenter > ();
+            services.AddTransient<IPresenter<PlayerArmoryDataDto, string>, PlayerArmoryDataPresenter>();
 
             // MANUAL MAPPERS
             services.AddTransient<IManualMapper<GenericProductModel, GenericProduct>, GenericProductModelToGenericProduct>();

@@ -120,15 +120,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\1-Entities\1-Entities.csproj" />
-    <ProjectReference Include="..\2-Services\2-Services.csproj" />
-    <ProjectReference Include="..\3-Data\3-Data.csproj" />
-    <ProjectReference Include="..\3-Encrypters\3-Encrypters.csproj" />
-    <ProjectReference Include="..\3-Loggers\3-Loggers.csproj" />
-    <ProjectReference Include="..\3-Mappers\3-Mappers.csproj" />
-    <ProjectReference Include="..\3-Presenters\3-Presenters.csproj" />
-    <ProjectReference Include="..\3-Repository\3-Repository.csproj" />
-    <ProjectReference Include="..\3-SoundSystem\3-SoundSystem.csproj" />
+    <ProjectReference Include="..\1-Domain.CortezosWorkshop\1-Domain.CortezosWorkshop.csproj" />
+    <ProjectReference Include="..\2-Application.Armory\2-Application.Armory.csproj" />
+    <ProjectReference Include="..\2-Application.CortezosWorkshop\2-Application.CortezosWorkshop.csproj" />
+    <ProjectReference Include="..\2-Application.TheSkavengers\2-Application.TheSkavengers.csproj" />
+    <ProjectReference Include="..\3-Data.CortezosWorkshop\3-Data.CortezosWorkshop.csproj" />
+    <ProjectReference Include="..\3-Encrypters.TheSkavengers\3-Encrypters.TheSkavengers.csproj" />
+    <ProjectReference Include="..\3-Loggers.CortezosWorkshop\3-Loggers.CortezosWorkshop.csproj" />
+    <ProjectReference Include="..\3-Mappers.Armory\3-Mappers.Armory.csproj" />
+    <ProjectReference Include="..\3-Mappers.CortezosWorkshop\3-Mappers.CortezosWorkshop.csproj" />
+    <ProjectReference Include="..\3-Presenters.Armory\3-Presenters.Armory.csproj" />
+    <ProjectReference Include="..\3-Presenters.CortezosWorkshop\3-Presenters.CortezosWorkshop.csproj" />
+    <ProjectReference Include="..\3-Repository.CortezosWorkshop\3-Repository.CortezosWorkshop.csproj" />
+    <ProjectReference Include="..\3-SoundSystem.TheSkavengers\3-SoundSystem.TheSkavengers.csproj" />
   </ItemGroup>
 
   <ItemGroup>

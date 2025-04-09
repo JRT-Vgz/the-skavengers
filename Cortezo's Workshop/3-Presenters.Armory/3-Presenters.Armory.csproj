@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>_3_Presenters.Armory</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\1-Domain.TheSkavengers\1-Domain.TheSkavengers.csproj" />
+    <ProjectReference Include="..\3-Mappers.Armory\3-Mappers.Armory.csproj" />
+  </ItemGroup>
+
+</Project>

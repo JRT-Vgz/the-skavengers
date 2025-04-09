@@ -1,10 +1,9 @@
 ﻿
-using _2___Servicios.Exceptions;
-using _2___Servicios.Interfaces;
-using _2___Servicios.Services;
-using _2___Servicios.Services.ShopStatServices;
-using _3_Presenters.ViewModels;
-using _3_SoundSystem;
+using _1_Domain.TheSkavengers.Interfaces;
+using _2_Application.CortezosWorkshop.Exceptions;
+using _2_Application.CortezosWorkshop.Services.ShopStatServices;
+using _2_Application.TheSkavengers.Services;
+using _3_Presenters.CortezosWorkshop.ViewModels;
 
 namespace CortezosWorkshop
 {

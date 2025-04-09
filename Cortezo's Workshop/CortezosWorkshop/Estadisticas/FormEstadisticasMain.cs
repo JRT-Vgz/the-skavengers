@@ -1,8 +1,8 @@
 ﻿
-using _2___Servicios.Interfaces;
-using _2___Servicios.Services;
-using _2___Servicios.Services.StatisticsServices;
-using _3_Presenters.ViewModels;
+using _1_Domain.TheSkavengers.Interfaces;
+using _2_Application.CortezosWorkshop.Services.StatisticsServices;
+using _2_Application.TheSkavengers.Services;
+using _3_Presenters.CortezosWorkshop.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 

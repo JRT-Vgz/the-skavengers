@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>_2_Application.CortezosWorkshop</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+	<DebugType>none</DebugType>
+	<DebugSymbols>false</DebugSymbols>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\1-Domain.CortezosWorkshop\1-Domain.CortezosWorkshop.csproj" />
+    <ProjectReference Include="..\1-Domain.TheSkavengers\1-Domain.TheSkavengers.csproj" />
+    <ProjectReference Include="..\2-Application.TheSkavengers\2-Application.TheSkavengers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+</Project>

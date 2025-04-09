@@ -1,8 +1,9 @@
 
-using _2___Servicios.Interfaces;
-using _2___Servicios.Services;
-using _2___Servicios.Services.ShopStatServices;
-using _3_Presenters.ViewModels;
+using _1_Domain.CortezosWorkshop.Interfaces;
+using _1_Domain.TheSkavengers.Interfaces;
+using _2_Application.CortezosWorkshop.Services.ShopStatServices;
+using _2_Application.TheSkavengers.Services;
+using _3_Presenters.CortezosWorkshop.ViewModels;
 using CortezosWorkshop.Configuracion;
 using CortezosWorkshop.Estadisticas;
 using CortezosWorkshop.Maps;

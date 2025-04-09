@@ -1,9 +1,8 @@
 ﻿
-using _2___Servicios.Interfaces;
-using _2___Servicios.Services;
-using _2___Servicios.Services.ShopStatServices;
-using _3_Presenters.ViewModels;
-using _3_SoundSystem;
+using _1_Domain.TheSkavengers.Interfaces;
+using _2_Application.CortezosWorkshop.Services.ShopStatServices;
+using _2_Application.TheSkavengers.Services;
+using _3_Presenters.CortezosWorkshop.ViewModels;
 
 namespace CortezosWorkshop
 {
@@ -36,7 +35,7 @@ namespace CortezosWorkshop
         // -------------------------------------------- CARGAR DATOS ---------------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private async void FormMainEditFunds_Load(object sender, EventArgs e)
-        {          
+        {
             this.Location = new Point(this.Location.X - 350, this.Location.Y + 165);
 
             _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_OPEN_CHEST"]);
@@ -79,8 +78,8 @@ namespace CortezosWorkshop
                 if (textBox.Text.Length == 0) { btn_Back_Click(sender, e); return; }
 
                 int parsedValue;
-                if (int.TryParse(textBox.Text, out parsedValue)) 
-                { 
+                if (int.TryParse(textBox.Text, out parsedValue))
+                {
                     if (parsedValue == 0) { textBox.Text = ""; return; }
                 }
 

@@ -1,6 +1,7 @@
-﻿using _1___Entities;
-using _2___Servicios.Interfaces;
-using _2___Servicios.Services;
+﻿using _1_Domain.CortezosWorkshop.Entities;
+using _1_Domain.CortezosWorkshop.Interfaces;
+using _1_Domain.TheSkavengers.Interfaces;
+using _2_Application.TheSkavengers.Services;
 
 namespace CortezosWorkshop.Precios
 {

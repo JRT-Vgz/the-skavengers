@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>_3_Repository.CortezosWorkshop</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+	<DebugType>none</DebugType>
+	<DebugSymbols>false</DebugSymbols>
+
+  </PropertyGroup>
+
+  <ItemGroup>    
+	<ProjectReference Include="..\1-Domain.CortezosWorkshop\1-Domain.CortezosWorkshop.csproj" />    
+	<ProjectReference Include="..\1-Domain.TheSkavengers\1-Domain.TheSkavengers.csproj" />      
+	<ProjectReference Include="..\2-Application.CortezosWorkshop\2-Application.CortezosWorkshop.csproj" />    
+	<ProjectReference Include="..\2-Application.TheSkavengers\2-Application.TheSkavengers.csproj" />
+    <ProjectReference Include="..\3-Data.CortezosWorkshop\3-Data.CortezosWorkshop.csproj" />
+    <ProjectReference Include="..\3-Loggers.CortezosWorkshop\3-Loggers.CortezosWorkshop.csproj" />
+  </ItemGroup>
+
+</Project>

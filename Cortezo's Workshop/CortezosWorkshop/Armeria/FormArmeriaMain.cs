@@ -1,7 +1,7 @@
-﻿using _2___Servicios.Interfaces;
-using _2___Servicios.Services;
-using _2___Servicios.Services.ArmoryServices;
-using _3_Mappers.Dtos;
+﻿using _1_Domain.TheSkavengers.Interfaces;
+using _2_Application.Armory.Services.AutoEquipServices;
+using _2_Application.TheSkavengers.Services;
+using _3_Mappers.Armory.Dtos;
 using System.Text.Json;
 
 namespace CortezosWorkshop.Armeria

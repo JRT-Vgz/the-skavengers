@@ -1,15 +1,6 @@
-﻿using _2___Servicios.Interfaces;
-using _2___Servicios.Services;
-using _3___Repository.QueryObjects;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using _1_Domain.TheSkavengers.Interfaces;
+using _2_Application.TheSkavengers.Services;
+using _3_Repository.CortezosWorkshop.QueryObjects;
 
 namespace CortezosWorkshop.Estadisticas
 {
@@ -17,7 +8,7 @@ namespace CortezosWorkshop.Estadisticas
     {
         private readonly ConfigurationService _configuration;
         private readonly ISoundSystem _soundSystem;
-        private readonly LogQuery _logQuery;       
+        private readonly LogQuery _logQuery;
         public FormLog(ConfigurationService configuration,
             ISoundSystem soundSystem,
             LogQuery logQuery)
