@@ -4,9 +4,9 @@ using _2_Application.TheSkavengers.Services;
 using _3_Mappers.Armory.Dtos;
 using System.Text.Json;
 
-namespace TheSkavengers.Armeria
+namespace Forms.Armory.Forms
 {
-    public partial class FormArmeriaMain : Form
+    public partial class FormAutoEquipTemplate : Form
     {
         #region Constructor
 
@@ -23,7 +23,7 @@ namespace TheSkavengers.Armeria
 
         private bool _textEchoSkillClick = false;
 
-        public FormArmeriaMain(IServiceProvider serviceProvider,
+        public FormAutoEquipTemplate(IServiceProvider serviceProvider,
             ConfigurationService configuration,
             CreateAutoEquipScriptTemplateService<PlayerArmoryDataDto> createAutoEquipScriptTemplateService,
             ISoundSystem soundSystem)
@@ -148,7 +148,7 @@ namespace TheSkavengers.Armeria
             if (e.KeyChar == (char)13) // Enter
             {
                 e.Handled = true;
-                this.SelectNextControl((Control)sender, true, true, true, true); // Mover al siguiente control (simular Tab)
+                SelectNextControl((Control)sender, true, true, true, true); // Mover al siguiente control (simular Tab)
             }
         }
 
@@ -157,7 +157,7 @@ namespace TheSkavengers.Armeria
             if (e.KeyChar == (char)13) // Enter
             {
                 e.Handled = true;
-                this.SelectNextControl((Control)sender, true, true, true, true); // Mover al siguiente control (simular Tab)
+                SelectNextControl((Control)sender, true, true, true, true); // Mover al siguiente control (simular Tab)
             }
         }
 
@@ -166,7 +166,7 @@ namespace TheSkavengers.Armeria
             if (e.KeyChar == (char)13) // Enter
             {
                 e.Handled = true;
-                this.SelectNextControl((Control)sender, true, true, true, true); // Mover al siguiente control (simular Tab)
+                SelectNextControl((Control)sender, true, true, true, true); // Mover al siguiente control (simular Tab)
             }
         }
 
@@ -181,12 +181,12 @@ namespace TheSkavengers.Armeria
 
         private void txt_echoSkillLevel_KeyPress(object sender, KeyPressEventArgs e)
         {
-            var textBox = (sender as TextBox);
+            var textBox = sender as TextBox;
 
             if (e.KeyChar == (char)13) // Enter
             {
                 e.Handled = true;
-                this.SelectNextControl((Control)sender, true, true, true, true); // Mover al siguiente control (simular Tab)
+                SelectNextControl((Control)sender, true, true, true, true); // Mover al siguiente control (simular Tab)
             }
 
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
@@ -245,7 +245,7 @@ namespace TheSkavengers.Armeria
         private bool IsBasicLetter(char c)
         {
             // Comprobar si el carácter es una letra del alfabeto básico sin acento ni diéresis
-            return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ';
+            return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c == ' ';
         }
 
 
@@ -418,10 +418,7 @@ namespace TheSkavengers.Armeria
         {
             _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
 
-            var frmTheSkavengersMain = Application.OpenForms.OfType<FormTheSkavengersMain>().FirstOrDefault();
-            frmTheSkavengersMain.Location = new Point(this.Location.X, this.Location.Y); ;
-
-            this.Hide();
+            Hide();
         }
     }
 

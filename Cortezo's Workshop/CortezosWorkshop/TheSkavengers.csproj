@@ -133,6 +133,7 @@
     <ProjectReference Include="..\3-Presenters.CortezosWorkshop\3-Presenters.CortezosWorkshop.csproj" />
     <ProjectReference Include="..\3-Repository.CortezosWorkshop\3-Repository.CortezosWorkshop.csproj" />
     <ProjectReference Include="..\3-SoundSystem.TheSkavengers\3-SoundSystem.TheSkavengers.csproj" />
+    <ProjectReference Include="..\Forms.Armory\Forms.Armory.csproj" />
   </ItemGroup>
 
   <ItemGroup>

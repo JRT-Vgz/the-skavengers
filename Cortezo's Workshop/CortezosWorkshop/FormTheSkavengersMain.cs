@@ -1,4 +1,5 @@
-﻿using TheSkavengers.Armeria;
+﻿
+using Forms.Armory.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace TheSkavengers
             frm.Location = new Point(this.Location.X, this.Location.Y);
             frm.ShowDialog();
 
+            this.Location = new Point(frm.Location.X, frm.Location.Y);
             this.Show();
         }
 
@@ -37,10 +39,11 @@ namespace TheSkavengers
         {
             this.Hide();
 
-            var frm = _serviceProvider.GetRequiredService<FormArmeriaMain>();
+            var frm = _serviceProvider.GetRequiredService<FormAutoEquipTemplate>();
             frm.Location = new Point(this.Location.X, this.Location.Y);
             frm.ShowDialog();
 
+            this.Location = new Point(frm.Location.X, frm.Location.Y);
             this.Show();
         }
 

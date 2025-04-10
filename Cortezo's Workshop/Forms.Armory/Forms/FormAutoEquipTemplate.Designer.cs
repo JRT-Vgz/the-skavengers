@@ -1,6 +1,6 @@
-﻿namespace TheSkavengers.Armeria
+﻿namespace Forms.Armory.Forms
 {
-    partial class FormArmeriaMain
+    partial class FormAutoEquipTemplate
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormArmeriaMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAutoEquipTemplate));
             btn_menu_principal = new Button();
             btn_crearPlantilla = new Button();
             btn_pegarDatos = new Button();
