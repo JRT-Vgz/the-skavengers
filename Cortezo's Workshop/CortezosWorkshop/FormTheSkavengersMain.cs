@@ -1,5 +1,6 @@
 ﻿
 using Forms.Armory.Forms;
+using Forms.CortezosWorkshop;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace TheSkavengers
         {
             this.Hide();
 
-            var frm = _serviceProvider.GetRequiredService<FormMain>();
+            var frm = _serviceProvider.GetRequiredService<FormCortezosWorkshopMain>();
             frm.Location = new Point(this.Location.X, this.Location.Y);
             frm.ShowDialog();
 

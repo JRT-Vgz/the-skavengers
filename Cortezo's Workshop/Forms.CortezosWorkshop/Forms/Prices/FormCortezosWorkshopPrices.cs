@@ -3,9 +3,9 @@ using _1_Domain.CortezosWorkshop.Interfaces;
 using _1_Domain.TheSkavengers.Interfaces;
 using _2_Application.TheSkavengers.Services;
 
-namespace TheSkavengers.Precios
+namespace Forms.CortezosWorkshop.Forms.Prices
 {
-    public partial class FormPreciosMain : Form
+    public partial class FormCortezosWorkshopPrices : Form
     {
         #region Constructor
         private readonly ConfigurationService _configuration;
@@ -13,8 +13,11 @@ namespace TheSkavengers.Precios
         private readonly ISoundSystem _soundSystem;
 
         private IEnumerable<IngotResource> _ingotResources;
+        private bool _isClosing = false;
 
-        public FormPreciosMain(ConfigurationService configuration,
+        public bool IsClosing { get { return _isClosing; } }
+
+        public FormCortezosWorkshopPrices(ConfigurationService configuration,
             IRepository<IngotResource> ingotResourceRepository,
             ISoundSystem soundSystem)
         {
@@ -166,10 +169,11 @@ namespace TheSkavengers.Precios
         // -------------------------------------------------------------------------------------------------------
         // --------------------------------------- VOLVER A MENU PRINCIPAL ---------------------------------------
         // -------------------------------------------------------------------------------------------------------
-        private async void Form_Closing(object sender, FormClosingEventArgs e)
+        private void Form_Closing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
+                _isClosing = true;
                 Application.Exit();
             }
         }
@@ -177,9 +181,6 @@ namespace TheSkavengers.Precios
         private void btn_volver_Click(object sender, EventArgs e)
         {
             _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
-
-            var frmMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
-            frmMain.Location = new Point(this.Location.X, this.Location.Y); ;
 
             this.Hide();
         }

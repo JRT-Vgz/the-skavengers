@@ -5,9 +5,9 @@ using _2_Application.CortezosWorkshop.Services.GenericProductServices;
 using _2_Application.CortezosWorkshop.Services.ProductServices;
 using _2_Application.TheSkavengers.Services;
 
-namespace TheSkavengers.Configuracion
+namespace Forms.CortezosWorkshop.Forms.Configuration
 {
-    public partial class FormConfigMain : Form
+    public partial class FormCortezosWorkshopConfig : Form
     {
         #region Constructor
 
@@ -37,7 +37,11 @@ namespace TheSkavengers.Configuracion
         private const int _MAX_LENGTH_MATERIAL_GASTADO_TEXTBOX = 5;
         private const int _MAX_LENGTH_PRICE_PRODUCT = 7;
 
-        public FormConfigMain(IRepository<GenericProduct> genericProductsRepository,
+        private bool _isClosing = false;
+
+        public bool IsClosing { get { return _isClosing; } }
+
+        public FormCortezosWorkshopConfig(IRepository<GenericProduct> genericProductsRepository,
             IRepository<IngotResource> ingotResourceRepository,
             UpdateConfiguredResourcesService updateConfiguredResourcesService,
             UpdateFullPlatePriceService updateFullPlatePriceService,
@@ -373,6 +377,7 @@ namespace TheSkavengers.Configuracion
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
+                _isClosing = true;
                 Application.Exit();
             }
         }
@@ -382,9 +387,6 @@ namespace TheSkavengers.Configuracion
             if (_isTaskRunning) { while (_isTaskRunning) { await Task.Delay(100); } }
 
             _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
-
-            var frmMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
-            frmMain.Location = new Point(this.Location.X, this.Location.Y); ;
 
             this.Hide();
         }

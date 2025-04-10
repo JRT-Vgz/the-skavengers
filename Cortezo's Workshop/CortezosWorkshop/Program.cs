@@ -22,14 +22,15 @@ using _3_Presenters.CortezosWorkshop.Presenters;
 using _3_Presenters.CortezosWorkshop.ViewModels;
 using _3_Repository.CortezosWorkshop.QueryObjects;
 using _3_SoundSystem;
-using TheSkavengers.Configuracion;
-using TheSkavengers.Estadisticas;
-using TheSkavengers.Maps;
-using TheSkavengers.Precios;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Forms.Armory.Forms;
+using Forms.CortezosWorkshop;
+using Forms.CortezosWorkshop.Forms.Maps;
+using Forms.CortezosWorkshop.Forms.Prices;
+using Forms.CortezosWorkshop.Forms.Configuration;
+using Forms.CortezosWorkshop.Forms.Statistics;
 
 namespace TheSkavengers
 {
@@ -97,6 +98,7 @@ namespace TheSkavengers
             services.AddSingleton<ConfigurationService>();
 
             // INYECCIÓN DE SERVICIOS
+            // Cortezo's Workshop
             services.AddTransient<SumToCajaFuerteService>();
             services.AddTransient<SumToBeneficioService>();
             services.AddTransient<AddCompletedMapData>();
@@ -110,18 +112,22 @@ namespace TheSkavengers
             services.AddTransient<MapBuyService<BuyResourceViewModel>>();
             services.AddTransient<CommodityBuyService<BuyResourceViewModel>>();
             services.AddTransient<IngotBuyService<BuyResourceViewModel>>();
+            // Armory
             services.AddTransient<CreateAutoEquipScriptTemplateService<PlayerArmoryDataDto>>();
+
 
             // INYECCIÓN DE FORMULARIOS
             services.AddTransient<FormTheSkavengersMain>();
-            services.AddTransient<FormMain>();
-            services.AddTransient<FormMapsMain>();
-            services.AddTransient<FormPreciosMain>();
-            services.AddTransient<FormConfigMain>();
-            services.AddTransient<FormMainEditFunds>();
-            services.AddTransient<FormMainBeneficio>();
-            services.AddTransient<FormEstadisticasMain>();
-            services.AddTransient<FormLog>();
+            // Cortezo's Workshop
+            services.AddTransient<FormCortezosWorkshopMain>();
+            services.AddTransient<FormCortezosWorkshopEditFunds>();
+            services.AddTransient<FormCortezosWorkshopBenefit>();
+            services.AddTransient<FormCortezosWorkshopConfig>();
+            services.AddTransient<FormCortezosWorkshopMaps>();
+            services.AddTransient<FormCortezosWorkshopPrices>();
+            services.AddTransient<FormCortezosWorkShopStatistics>();
+            services.AddTransient<FormCortezosWorkshopLog>();
+            // Armory
             services.AddTransient<FormAutoEquipTemplate>();
         }
 

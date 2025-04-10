@@ -2,14 +2,14 @@
 using _2_Application.TheSkavengers.Services;
 using _3_Repository.CortezosWorkshop.QueryObjects;
 
-namespace TheSkavengers.Estadisticas
+namespace Forms.CortezosWorkshop.Forms.Statistics
 {
-    public partial class FormLog : Form
+    public partial class FormCortezosWorkshopLog : Form
     {
         private readonly ConfigurationService _configuration;
         private readonly ISoundSystem _soundSystem;
         private readonly LogQuery _logQuery;
-        public FormLog(ConfigurationService configuration,
+        public FormCortezosWorkshopLog(ConfigurationService configuration,
             ISoundSystem soundSystem,
             LogQuery logQuery)
         {
@@ -58,7 +58,7 @@ namespace TheSkavengers.Estadisticas
         {
             _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
 
-            var frmMain = Application.OpenForms.OfType<FormEstadisticasMain>().FirstOrDefault();
+            var frmMain = Application.OpenForms.OfType<FormCortezosWorkShopStatistics>().FirstOrDefault();
             frmMain.Location = new Point(this.Location.X, this.Location.Y); ;
 
             this.Hide();

@@ -6,9 +6,9 @@ using _2_Application.CortezosWorkshop.Services.ResourcesBuyServices;
 using _2_Application.TheSkavengers.Services;
 using _3_Presenters.CortezosWorkshop.ViewModels;
 
-namespace TheSkavengers.Maps
+namespace Forms.CortezosWorkshop.Forms.Maps
 {
-    public partial class FormMapsMain : Form
+    public partial class FormCortezosWorkshopMaps : Form
     {
         #region Constructor
 
@@ -30,7 +30,11 @@ namespace TheSkavengers.Maps
         private const int _MAX_LENGTH_PRECIO_RECOMENDADO_TEXTBOX = 11;
         private const int _MAX_LENGTH_COMPRAR_RECURSO_TEXTBOX = 8;
 
-        public FormMapsMain(ConfigurationService configuration,
+        private bool _isClosing = false;
+
+        public bool IsClosing { get { return _isClosing; } }
+
+        public FormCortezosWorkshopMaps(ConfigurationService configuration,
             IRepository<IngotResource> ingotResourcesRepository,
             AddCompletedMapData addCompletedMapData,
             UpdateRecommendedPrice updateRecommendedPrice,
@@ -341,6 +345,7 @@ namespace TheSkavengers.Maps
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
+                _isClosing = true;
                 Application.Exit();
             }
         }
@@ -348,9 +353,6 @@ namespace TheSkavengers.Maps
         private void btn_volver_Click(object sender, EventArgs e)
         {
             _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
-
-            var frmMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
-            frmMain.Location = new Point(this.Location.X, this.Location.Y); ;
 
             this.Hide();
         }

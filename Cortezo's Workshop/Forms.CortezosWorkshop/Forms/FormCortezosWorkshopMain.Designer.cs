@@ -1,6 +1,6 @@
-﻿namespace TheSkavengers
+﻿namespace Forms.CortezosWorkshop
 {
-    partial class FormMain
+    partial class FormCortezosWorkshopMain
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCortezosWorkshopMain));
             btn_precios = new Button();
             btn_mapas = new Button();
             btn_config = new Button();
@@ -151,7 +151,7 @@
             btn_portapapeles.UseVisualStyleBackColor = true;
             btn_portapapeles.Click += btn_portapapeles_Click;
             // 
-            // FormMain
+            // FormCortezosWorkshopMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -172,7 +172,7 @@
             MaximizeBox = false;
             MaximumSize = new Size(816, 489);
             MinimumSize = new Size(816, 489);
-            Name = "FormMain";
+            Name = "FormCortezosWorkshopMain";
             StartPosition = FormStartPosition.Manual;
             Text = "Cortezo's Workshop";
             FormClosing += FormMain_FormClosing;

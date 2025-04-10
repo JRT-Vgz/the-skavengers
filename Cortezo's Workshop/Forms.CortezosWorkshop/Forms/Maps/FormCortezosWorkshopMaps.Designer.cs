@@ -1,6 +1,6 @@
-﻿namespace TheSkavengers.Maps
+﻿namespace Forms.CortezosWorkshop.Forms.Maps
 {
-    partial class FormMapsMain
+    partial class FormCortezosWorkshopMaps
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMapsMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCortezosWorkshopMaps));
             btn_volver = new Button();
             lbl_addMap = new Label();
             lbl_x = new Label();

@@ -1,6 +1,6 @@
-﻿namespace TheSkavengers.Configuracion
+﻿namespace Forms.CortezosWorkshop.Forms.Configuration
 {
-    partial class FormConfigMain
+    partial class FormCortezosWorkshopConfig
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConfigMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCortezosWorkshopConfig));
             btn_volver = new Button();
             lbl_plateArMain = new Label();
             lbl_plateArMats = new Label();

@@ -6,16 +6,20 @@ using _3_Presenters.CortezosWorkshop.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 
-namespace TheSkavengers.Estadisticas
+namespace Forms.CortezosWorkshop.Forms.Statistics
 {
-    public partial class FormEstadisticasMain : Form
+    public partial class FormCortezosWorkShopStatistics : Form
     {
         private readonly ConfigurationService _configuration;
         private readonly IServiceProvider _serviceProvider;
         private readonly CreateStatisticsService<StatisticsViewModel> _createStatisticsService;
         private readonly ISoundSystem _soundSystem;
 
-        public FormEstadisticasMain(ConfigurationService configuration,
+        private bool _isClosing = false;
+
+        public bool IsClosing { get { return _isClosing; } }
+
+        public FormCortezosWorkShopStatistics(ConfigurationService configuration,
             IServiceProvider serviceProvider,
             CreateStatisticsService<StatisticsViewModel> createStatisticsService,
             ISoundSystem soundSystem)
@@ -54,7 +58,7 @@ namespace TheSkavengers.Estadisticas
         {
             this.Hide();
 
-            var frm = _serviceProvider.GetRequiredService<FormLog>();
+            var frm = _serviceProvider.GetRequiredService<FormCortezosWorkshopLog>();
             frm.Location = new Point(this.Location.X, this.Location.Y);
             frm.ShowDialog();
 
@@ -68,6 +72,7 @@ namespace TheSkavengers.Estadisticas
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
+                _isClosing = true;
                 Application.Exit();
             }
         }
@@ -75,9 +80,6 @@ namespace TheSkavengers.Estadisticas
         private void btn_volver_Click(object sender, EventArgs e)
         {
             _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
-
-            var frmMain = Application.OpenForms.OfType<FormMain>().FirstOrDefault();
-            frmMain.Location = new Point(this.Location.X, this.Location.Y); ;
 
             this.Hide();
         }

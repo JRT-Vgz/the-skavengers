@@ -1,49 +1,48 @@
 ﻿
 using _1_Domain.TheSkavengers.Interfaces;
-using _2_Application.CortezosWorkshop.Exceptions;
 using _2_Application.CortezosWorkshop.Services.ShopStatServices;
 using _2_Application.TheSkavengers.Services;
 using _3_Presenters.CortezosWorkshop.ViewModels;
 
-namespace TheSkavengers
+namespace Forms.CortezosWorkshop
 {
-    public partial class FormMainBeneficio : Form
+    public partial class FormCortezosWorkshopEditFunds : Form
     {
         #region Constructor
-
-        private ConfigurationService _configuration;
+        private readonly ConfigurationService _configuration;
         private readonly GetFundsByNameService<FundsViewModel> _getFundsByNameService;
-        private readonly SumToBeneficioService _sumToBeneficioService;
+        private readonly SumToCajaFuerteService _sumToCajaFuerteService;
         private readonly ISoundSystem _soundSystem;
 
         private const int _MAX_LENGTH_TEXTBOX = 8;
 
-        public FormMainBeneficio(ConfigurationService configuration,
+        public FormCortezosWorkshopEditFunds(ConfigurationService configuration,
             GetFundsByNameService<FundsViewModel> getFundsByNameService,
-            SumToBeneficioService sumToBeneficioService,
+            SumToCajaFuerteService sumToCajaFuerteService,
             ISoundSystem soundSystem)
         {
             InitializeComponent();
             _configuration = configuration;
             _getFundsByNameService = getFundsByNameService;
-            _sumToBeneficioService = sumToBeneficioService;
+            _sumToCajaFuerteService = sumToCajaFuerteService;
             _soundSystem = soundSystem;
         }
         #endregion
 
         #region CargarDatos
+
         // -------------------------------------------------------------------------------------------------------
         // -------------------------------------------- CARGAR DATOS ---------------------------------------------
         // -------------------------------------------------------------------------------------------------------
         private async void FormMainEditFunds_Load(object sender, EventArgs e)
         {
-            this.Location = new Point(this.Location.X + 350, this.Location.Y + 165);
+            this.Location = new Point(this.Location.X - 350, this.Location.Y + 165);
 
-            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_OPEN_DRAWER"]);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_OPEN_CHEST"]);
 
-            await Load_CajaFuerte();
+            await Load_Funds();
         }
-        private async Task Load_CajaFuerte()
+        private async Task Load_Funds()
         {
             var fundsViewModel = await _getFundsByNameService.ExecuteAsync(
                 _configuration.Configuration["Constants:_SHOPSTAT_CAJA_FUERTE"]);
@@ -91,10 +90,17 @@ namespace TheSkavengers
         private void txtBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             var textBox = (sender as TextBox);
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) { e.Handled = true; }
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                if (e.KeyChar == '-' && textBox.SelectionStart == 0) { return; }
 
-            if (textBox.Text.Length > _MAX_LENGTH_TEXTBOX && !char.IsControl(e.KeyChar)) { e.Handled = true; }
+                e.Handled = true;
+            }
 
+            if (textBox.Text.Length > _MAX_LENGTH_TEXTBOX && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
         #endregion
 
@@ -105,24 +111,20 @@ namespace TheSkavengers
         // -------------------------------------------------------------------------------------------------------
         private async void btn_Save_Click(object sender, EventArgs e)
         {
-            if (txtBox.Text.Contains('-'))
-            {
-                Reset_TextBox();
-                return;
-            }
-
             try
             {
                 var txtBoxQuantity = int.Parse(txtBox.Text);
-                var sound = _configuration.Configuration["Constants:_SOUND_RETRIEVE_BENEFITS"];
 
-                await _sumToBeneficioService.ExecuteAsync(txtBoxQuantity, sound);
+                string sound;
+                if (txtBoxQuantity > 0) { sound = _configuration.Configuration["Constants:_SOUND_ADD_FUNDS"]; }
+                else { sound = _configuration.Configuration["Constants:_SOUND_SPEND_FUNDS"]; }
+
+                await _sumToCajaFuerteService.ExecuteAsync(txtBoxQuantity, sound);
             }
-            catch (NotEnoughFundsException ex) { MessageBox.Show(ex.Message); }
             catch (Exception) { MessageBox.Show("Ha ocurrido un error inesperado. Prueba otra vez."); }
 
             Reset_TextBox();
-            await Load_CajaFuerte();
+            await Load_Funds();
         }
         #endregion
 
@@ -131,7 +133,7 @@ namespace TheSkavengers
         // -------------------------------------------------------------------------------------------------------
         private void btn_Back_Click(object sender, EventArgs e)
         {
-            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DRAWER"]);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_CHEST"]);
 
             this.Close();
         }

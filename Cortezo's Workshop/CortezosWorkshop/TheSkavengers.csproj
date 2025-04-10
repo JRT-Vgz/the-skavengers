@@ -134,10 +134,10 @@
     <ProjectReference Include="..\3-Repository.CortezosWorkshop\3-Repository.CortezosWorkshop.csproj" />
     <ProjectReference Include="..\3-SoundSystem.TheSkavengers\3-SoundSystem.TheSkavengers.csproj" />
     <ProjectReference Include="..\Forms.Armory\Forms.Armory.csproj" />
+    <ProjectReference Include="..\Forms.CortezosWorkshop\Forms.CortezosWorkshop.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="FormMainBeneficio.cs" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

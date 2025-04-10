@@ -1,6 +1,6 @@
-﻿namespace TheSkavengers.Precios
+﻿namespace Forms.CortezosWorkshop.Forms.Prices
 {
-    partial class FormPreciosMain
+    partial class FormCortezosWorkshopPrices
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPreciosMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCortezosWorkshopPrices));
             btn_volver = new Button();
             cbo_producto = new ComboBox();
             lbl_material1 = new Label();

@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3-Presenters.CortezosWorksh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3-Repository.CortezosWorkshop", "3-Repository.CortezosWorkshop\3-Repository.CortezosWorkshop.csproj", "{1CD52557-8E8E-4DFD-83E8-D439DA456F26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms.Armory", "Forms.Armory\Forms.Armory.csproj", "{DAD06E40-014D-4E9C-A698-9A0AACED030A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms.Armory", "Forms.Armory\Forms.Armory.csproj", "{DAD06E40-014D-4E9C-A698-9A0AACED030A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms.CortezosWorkshop", "Forms.CortezosWorkshop\Forms.CortezosWorkshop.csproj", "{CFC9C9A0-1E9F-4882-971E-D882A877BA66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,10 @@ Global
 		{DAD06E40-014D-4E9C-A698-9A0AACED030A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAD06E40-014D-4E9C-A698-9A0AACED030A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAD06E40-014D-4E9C-A698-9A0AACED030A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFC9C9A0-1E9F-4882-971E-D882A877BA66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFC9C9A0-1E9F-4882-971E-D882A877BA66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFC9C9A0-1E9F-4882-971E-D882A877BA66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFC9C9A0-1E9F-4882-971E-D882A877BA66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +138,7 @@ Global
 		{F0D4321A-7549-4F22-B689-67F486CA305A} = {DA1177B1-3BCB-4BEC-BD37-34460A5D5FC3}
 		{1CD52557-8E8E-4DFD-83E8-D439DA456F26} = {DA1177B1-3BCB-4BEC-BD37-34460A5D5FC3}
 		{DAD06E40-014D-4E9C-A698-9A0AACED030A} = {5B7FDF11-6B15-48CA-898B-6C1E40C3FC47}
+		{CFC9C9A0-1E9F-4882-971E-D882A877BA66} = {DA1177B1-3BCB-4BEC-BD37-34460A5D5FC3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFBD5A81-AC64-43E6-9E0F-198C09ACD65A}

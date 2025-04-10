@@ -4,16 +4,16 @@ using _1_Domain.TheSkavengers.Interfaces;
 using _2_Application.CortezosWorkshop.Services.ShopStatServices;
 using _2_Application.TheSkavengers.Services;
 using _3_Presenters.CortezosWorkshop.ViewModels;
-using TheSkavengers.Configuracion;
-using TheSkavengers.Estadisticas;
-using TheSkavengers.Maps;
-using TheSkavengers.Precios;
+using Forms.CortezosWorkshop.Forms.Configuration;
+using Forms.CortezosWorkshop.Forms.Maps;
+using Forms.CortezosWorkshop.Forms.Prices;
+using Forms.CortezosWorkshop.Forms.Statistics;
 using Microsoft.Extensions.DependencyInjection;
 using System.Media;
 
-namespace TheSkavengers
+namespace Forms.CortezosWorkshop
 {
-    public partial class FormMain : Form
+    public partial class FormCortezosWorkshopMain : Form
     {
         #region Constructor
 
@@ -24,7 +24,7 @@ namespace TheSkavengers
         private readonly ILogger _logger;
 
         private IEnumerable<string> _logEntries;
-        public FormMain(IServiceProvider serviceProvider,
+        public FormCortezosWorkshopMain(IServiceProvider serviceProvider,
             ConfigurationService configuration,
             GetFundsByNameService<FundsViewModel> getFundsByNameService,
             ISoundSystem soundSystem,
@@ -84,57 +84,73 @@ namespace TheSkavengers
         // -------------------------------------------------------------------------------------------------------
         // ----------------------------------------------- BOTONES -----------------------------------------------
         // -------------------------------------------------------------------------------------------------------
-        private async void btn_mapas_Click(object sender, EventArgs e)
+        private void btn_mapas_Click(object sender, EventArgs e)
         {
             this.Hide();
 
-            var frm = _serviceProvider.GetRequiredService<FormMapsMain>();
+            var frm = _serviceProvider.GetRequiredService<FormCortezosWorkshopMaps>();
             frm.Location = new Point(this.Location.X, this.Location.Y);
             frm.ShowDialog();
 
-            await Load_Funds();
+            if (!frm.IsClosing)
+            {
+                Load_Funds();
+            }
+            this.Location = new Point(frm.Location.X, frm.Location.Y);
             this.Show();
         }
 
-        private async void btn_precios_Click(object sender, EventArgs e)
+        private void btn_precios_Click(object sender, EventArgs e)
         {
             this.Hide();
 
-            var frm = _serviceProvider.GetRequiredService<FormPreciosMain>();
+            var frm = _serviceProvider.GetRequiredService<FormCortezosWorkshopPrices>();
             frm.Location = new Point(this.Location.X, this.Location.Y);
             frm.ShowDialog();
 
-            await Load_Funds();
+            if (!frm.IsClosing)
+            {
+                Load_Funds();
+            }
+            this.Location = new Point(frm.Location.X, frm.Location.Y);
             this.Show();
         }
 
-        private async void btn_config_Click(object sender, EventArgs e)
+        private void btn_config_Click(object sender, EventArgs e)
         {
             this.Hide();
 
-            var frm = _serviceProvider.GetRequiredService<FormConfigMain>();
+            var frm = _serviceProvider.GetRequiredService<FormCortezosWorkshopConfig>();
             frm.Location = new Point(this.Location.X, this.Location.Y);
             frm.ShowDialog();
 
-            await Load_Funds();
+            if (!frm.IsClosing)
+            {
+                Load_Funds();
+            }
+            this.Location = new Point(frm.Location.X, frm.Location.Y);
             this.Show();
         }
 
-        private async void btn_estadisticas_Click(object sender, EventArgs e)
+        private void btn_estadisticas_Click(object sender, EventArgs e)
         {
             this.Hide();
 
-            var frm = _serviceProvider.GetRequiredService<FormEstadisticasMain>();
+            var frm = _serviceProvider.GetRequiredService<FormCortezosWorkShopStatistics>();
             frm.Location = new Point(this.Location.X, this.Location.Y);
             frm.ShowDialog();
 
-            await Load_Funds();
+            if (!frm.IsClosing)
+            {
+                Load_Funds();
+            }
+            this.Location = new Point(frm.Location.X, frm.Location.Y);
             this.Show();
         }
 
         private void btn_addFunds_Click(object sender, EventArgs e)
         {
-            var frm = _serviceProvider.GetRequiredService<FormMainEditFunds>();
+            var frm = _serviceProvider.GetRequiredService<FormCortezosWorkshopEditFunds>();
             lbl_Oro.Text = "???";
             frm.ShowDialog();
 
@@ -143,7 +159,7 @@ namespace TheSkavengers
 
         private void btn_beneficio_Click(object sender, EventArgs e)
         {
-            var frm = _serviceProvider.GetRequiredService<FormMainBeneficio>();
+            var frm = _serviceProvider.GetRequiredService<FormCortezosWorkshopBenefit>();
             lbl_Oro.Text = "???";
             frm.ShowDialog();
 
@@ -172,9 +188,6 @@ namespace TheSkavengers
         private void btn_menu_principal_Click(object sender, EventArgs e)
         {
             _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
-
-            var frmTheSkavengersMain = Application.OpenForms.OfType<FormTheSkavengersMain>().FirstOrDefault();
-            frmTheSkavengersMain.Location = new Point(this.Location.X, this.Location.Y); ;
 
             this.Hide();
         }

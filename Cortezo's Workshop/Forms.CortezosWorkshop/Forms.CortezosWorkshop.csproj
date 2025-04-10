@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+	<OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\1-Domain.CortezosWorkshop\1-Domain.CortezosWorkshop.csproj" />
+    <ProjectReference Include="..\1-Domain.TheSkavengers\1-Domain.TheSkavengers.csproj" />
+    <ProjectReference Include="..\2-Application.CortezosWorkshop\2-Application.CortezosWorkshop.csproj" />
+    <ProjectReference Include="..\2-Application.TheSkavengers\2-Application.TheSkavengers.csproj" />
+    <ProjectReference Include="..\3-Presenters.CortezosWorkshop\3-Presenters.CortezosWorkshop.csproj" />
+    <ProjectReference Include="..\3-Repository.CortezosWorkshop\3-Repository.CortezosWorkshop.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Forms\Configuration\FormCortezosWorkshopConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormCortezosWorkshopMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormCortezosWorkshopEditFunds.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormCortezosWorkshopBenefit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Maps\FormCortezosWorkshopMaps.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Prices\FormCortezosWorkshopPrices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Statistics\FormCortezosWorkShopStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Statistics\FormCortezosWorkshopLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

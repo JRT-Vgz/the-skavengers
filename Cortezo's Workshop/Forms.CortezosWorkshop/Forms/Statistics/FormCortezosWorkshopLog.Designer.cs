@@ -1,6 +1,6 @@
-﻿namespace TheSkavengers.Estadisticas
+﻿namespace Forms.CortezosWorkshop.Forms.Statistics
 {
-    partial class FormLog
+    partial class FormCortezosWorkshopLog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCortezosWorkshopLog));
             btn_volver = new Button();
             lbl_log10 = new Label();
             lbl_log9 = new Label();
