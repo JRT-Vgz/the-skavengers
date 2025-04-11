@@ -7,10 +7,10 @@ namespace _2_Application.CortezosWorkshop.Services.ResourcesBuyServices
 {
     public class MapBuyService<TViewModel>
     {
-        private readonly ConfigurationService _configuration;
+        private readonly ConstantsConfigurationService _configuration;
         private readonly IRepository<GenericProduct> _genericProductsRepository;
         private readonly IPresenter<BuyResourceEntity, TViewModel> _presenter;
-        public MapBuyService(ConfigurationService configuration,
+        public MapBuyService(ConstantsConfigurationService configuration,
             IRepository<GenericProduct> genericProductsRepository,
             IPresenter<BuyResourceEntity, TViewModel> presenter)
         {

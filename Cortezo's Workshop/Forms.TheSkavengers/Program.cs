@@ -31,12 +31,13 @@ using Forms.CortezosWorkshop.Forms.Maps;
 using Forms.CortezosWorkshop.Forms.Prices;
 using Forms.CortezosWorkshop.Forms.Configuration;
 using Forms.CortezosWorkshop.Forms.Statistics;
+using System.Reflection;
 
 namespace Forms.TheSkavengers
 {
     internal static class Program
     {
-        public const string DATABASE_SETTINGS_DIR = @"Resources\AppSettings\";
+        public const string DATABASE_NAMESPACE = "Forms.TheSkavengers.Resources.AppSettings";
         public const string DATABASE_JSON_FILE = "appsettings.dev.json";
 
         [STAThread]
@@ -53,14 +54,10 @@ namespace Forms.TheSkavengers
 
         private static void ConfigureServices(ServiceCollection services)
         {
-            var DbSettingsFullPath = DATABASE_SETTINGS_DIR + DATABASE_JSON_FILE;
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile(DbSettingsFullPath, optional: false, reloadOnChange: true)
-                .Build();
+            var configuration = BuildConfiguration();
 
             // INYECCION DE DEPENDENCIAS.          
-            //ENTITY FRAMEWORK
+            // ENTITY FRAMEWORK
             string connectionString = DBEncrypter.Decrypt(configuration.GetConnectionString("DB"));
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
@@ -95,7 +92,7 @@ namespace Forms.TheSkavengers
             services.AddTransient<ISoundSystem, SoundSystem>();
 
             // INYECCION DE ARCHIVO DE CONSTANTES
-            services.AddSingleton<ConfigurationService>();
+            services.AddSingleton<ConstantsConfigurationService>();
 
             // INYECCIÓN DE SERVICIOS
             // Cortezo's Workshop
@@ -115,7 +112,6 @@ namespace Forms.TheSkavengers
             // Armory
             services.AddTransient<CreateAutoEquipScriptTemplateService<PlayerArmoryDataDto>>();
 
-
             // INYECCIÓN DE FORMULARIOS
             services.AddTransient<FormTheSkavengersMain>();
             // Cortezo's Workshop
@@ -131,5 +127,24 @@ namespace Forms.TheSkavengers
             services.AddTransient<FormAutoEquipTemplate>();
         }
 
+        private static IConfiguration BuildConfiguration()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            // Leer el archivo JSON como recurso incrustado
+            using (var stream = assembly.GetManifestResourceStream($"{DATABASE_NAMESPACE}.{DATABASE_JSON_FILE}"))
+            {
+                if (stream == null)
+                {
+                    throw new FileNotFoundException("El archivo de configuración no se encuentra como recurso incrustado.");
+                }
+
+                var configuration = new ConfigurationBuilder()
+                    .AddJsonStream(stream)
+                    .Build();
+
+                return configuration;
+            }
+        }
     }
 }

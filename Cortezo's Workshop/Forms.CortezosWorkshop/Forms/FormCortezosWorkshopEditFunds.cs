@@ -9,14 +9,14 @@ namespace Forms.CortezosWorkshop
     public partial class FormCortezosWorkshopEditFunds : Form
     {
         #region Constructor
-        private readonly ConfigurationService _configuration;
+        private readonly ConstantsConfigurationService _configuration;
         private readonly GetFundsByNameService<FundsViewModel> _getFundsByNameService;
         private readonly SumToCajaFuerteService _sumToCajaFuerteService;
         private readonly ISoundSystem _soundSystem;
 
         private const int _MAX_LENGTH_TEXTBOX = 8;
 
-        public FormCortezosWorkshopEditFunds(ConfigurationService configuration,
+        public FormCortezosWorkshopEditFunds(ConstantsConfigurationService configuration,
             GetFundsByNameService<FundsViewModel> getFundsByNameService,
             SumToCajaFuerteService sumToCajaFuerteService,
             ISoundSystem soundSystem)

@@ -7,11 +7,11 @@ namespace _2_Application.CortezosWorkshop.Services.StatisticsServices
 {
     public class CreateStatisticsService<TViewModel>
     {
-        private readonly ConfigurationService _configurationService;
+        private readonly ConstantsConfigurationService _configurationService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPresenter<Statistics, TViewModel> _presenter;
 
-        public CreateStatisticsService(ConfigurationService configurationService,
+        public CreateStatisticsService(ConstantsConfigurationService configurationService,
             IUnitOfWork unitOfWork,
             IPresenter<Statistics, TViewModel> presenter)
         {

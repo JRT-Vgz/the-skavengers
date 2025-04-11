@@ -6,8 +6,8 @@ namespace _3_SoundSystem
 {
     public class SoundSystem : ISoundSystem
     {
-        private readonly ConfigurationService _configuration;
-        public SoundSystem(ConfigurationService configuration)
+        private readonly ConstantsConfigurationService _configuration;
+        public SoundSystem(ConstantsConfigurationService configuration)
         {
             _configuration = configuration;
         }

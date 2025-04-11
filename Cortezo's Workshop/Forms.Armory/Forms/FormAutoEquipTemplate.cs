@@ -11,7 +11,7 @@ namespace Forms.Armory.Forms
         #region Constructor
 
         private readonly IServiceProvider _serviceProvider;
-        private readonly ConfigurationService _configuration;
+        private readonly ConstantsConfigurationService _configuration;
         private readonly CreateAutoEquipScriptTemplateService<PlayerArmoryDataDto> _createAutoEquipScriptTemplateService;
         private readonly ISoundSystem _soundSystem;
         private readonly JsonSerializerOptions _jsonSerializerOptions;
@@ -24,7 +24,7 @@ namespace Forms.Armory.Forms
         private bool _textEchoSkillClick = false;
 
         public FormAutoEquipTemplate(IServiceProvider serviceProvider,
-            ConfigurationService configuration,
+            ConstantsConfigurationService configuration,
             CreateAutoEquipScriptTemplateService<PlayerArmoryDataDto> createAutoEquipScriptTemplateService,
             ISoundSystem soundSystem)
         {

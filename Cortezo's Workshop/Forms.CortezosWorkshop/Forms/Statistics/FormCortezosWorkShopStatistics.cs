@@ -10,7 +10,7 @@ namespace Forms.CortezosWorkshop.Forms.Statistics
 {
     public partial class FormCortezosWorkShopStatistics : Form
     {
-        private readonly ConfigurationService _configuration;
+        private readonly ConstantsConfigurationService _configuration;
         private readonly IServiceProvider _serviceProvider;
         private readonly CreateStatisticsService<StatisticsViewModel> _createStatisticsService;
         private readonly ISoundSystem _soundSystem;
@@ -19,7 +19,7 @@ namespace Forms.CortezosWorkshop.Forms.Statistics
 
         public bool IsClosing { get { return _isClosing; } }
 
-        public FormCortezosWorkShopStatistics(ConfigurationService configuration,
+        public FormCortezosWorkShopStatistics(ConstantsConfigurationService configuration,
             IServiceProvider serviceProvider,
             CreateStatisticsService<StatisticsViewModel> createStatisticsService,
             ISoundSystem soundSystem)

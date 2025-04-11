@@ -17,7 +17,7 @@ namespace Forms.CortezosWorkshop.Forms.Configuration
         private readonly UpdateFullPlatePriceService _updateFullPlatePriceService;
         private readonly UpdateToolPriceService _updateToolPriceService;
         private readonly UpdateLockpicksPriceService _updateLockpicksPriceService;
-        private readonly ConfigurationService _configuration;
+        private readonly ConstantsConfigurationService _configuration;
         private readonly ISoundSystem _soundSystem;
 
         private IEnumerable<GenericProduct> _genericProducts;
@@ -47,7 +47,7 @@ namespace Forms.CortezosWorkshop.Forms.Configuration
             UpdateFullPlatePriceService updateFullPlatePriceService,
             UpdateToolPriceService updateToolPriceService,
             UpdateLockpicksPriceService updateLockpicksPriceService,
-            ConfigurationService configuration,
+            ConstantsConfigurationService configuration,
             ISoundSystem soundSystem)
         {
             InitializeComponent();

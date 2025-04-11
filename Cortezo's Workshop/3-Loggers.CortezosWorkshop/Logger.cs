@@ -10,10 +10,10 @@ namespace _3_Loggers
     public class Logger : ILogger
     {
         private readonly AppDbContext _context;
-        private readonly ConfigurationService _configuration;
+        private readonly ConstantsConfigurationService _configuration;
 
         public Logger(AppDbContext context, 
-            ConfigurationService configuration)
+            ConstantsConfigurationService configuration)
         {
             _context = context;
             _configuration = configuration;

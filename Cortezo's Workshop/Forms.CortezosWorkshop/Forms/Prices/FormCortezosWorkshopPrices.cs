@@ -8,7 +8,7 @@ namespace Forms.CortezosWorkshop.Forms.Prices
     public partial class FormCortezosWorkshopPrices : Form
     {
         #region Constructor
-        private readonly ConfigurationService _configuration;
+        private readonly ConstantsConfigurationService _configuration;
         private readonly IRepository<IngotResource> _ingotResourceRepository;
         private readonly ISoundSystem _soundSystem;
 
@@ -17,7 +17,7 @@ namespace Forms.CortezosWorkshop.Forms.Prices
 
         public bool IsClosing { get { return _isClosing; } }
 
-        public FormCortezosWorkshopPrices(ConfigurationService configuration,
+        public FormCortezosWorkshopPrices(ConstantsConfigurationService configuration,
             IRepository<IngotResource> ingotResourceRepository,
             ISoundSystem soundSystem)
         {

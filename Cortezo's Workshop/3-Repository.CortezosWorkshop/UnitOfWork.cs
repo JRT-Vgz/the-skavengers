@@ -16,7 +16,7 @@ namespace _3___Repository
         private IRepository<ShopStat> _shopStatRepository;
         private readonly IMapper _mapper;
         private readonly IManualMapper<GenericProductModel, GenericProduct> _manualMapper;
-        private readonly ConfigurationService _configuration;
+        private readonly ConstantsConfigurationService _configuration;
 
         public IRepository<IngotResource> IngotResources 
         {
@@ -47,7 +47,7 @@ namespace _3___Repository
         }
 
         public UnitOfWork(AppDbContext context, IMapper mapper, IManualMapper<GenericProductModel, GenericProduct> manualMapper,
-            ConfigurationService configuration)
+            ConstantsConfigurationService configuration)
         {
             _context = context;
             _mapper = mapper;

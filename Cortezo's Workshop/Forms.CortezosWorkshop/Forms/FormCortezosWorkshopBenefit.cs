@@ -11,14 +11,14 @@ namespace Forms.CortezosWorkshop
     {
         #region Constructor
 
-        private ConfigurationService _configuration;
+        private ConstantsConfigurationService _configuration;
         private readonly GetFundsByNameService<FundsViewModel> _getFundsByNameService;
         private readonly SumToBeneficioService _sumToBeneficioService;
         private readonly ISoundSystem _soundSystem;
 
         private const int _MAX_LENGTH_TEXTBOX = 8;
 
-        public FormCortezosWorkshopBenefit(ConfigurationService configuration,
+        public FormCortezosWorkshopBenefit(ConstantsConfigurationService configuration,
             GetFundsByNameService<FundsViewModel> getFundsByNameService,
             SumToBeneficioService sumToBeneficioService,
             ISoundSystem soundSystem)

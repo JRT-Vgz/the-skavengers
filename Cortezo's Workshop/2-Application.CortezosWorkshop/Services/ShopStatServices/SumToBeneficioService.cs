@@ -9,14 +9,14 @@ namespace _2_Application.CortezosWorkshop.Services.ShopStatServices
     public class SumToBeneficioService
     {
         private readonly IRepository<ShopStat> _shopStatsRepository;
-        private readonly ConfigurationService _configurationService;
+        private readonly ConstantsConfigurationService _configurationService;
         private readonly ILogger _logger;
         private readonly ISoundSystem _soundSystem;
 
         private string _logEntry;
 
         public SumToBeneficioService(IRepository<ShopStat> shopStatsRepository,
-            ConfigurationService configurationService,
+            ConstantsConfigurationService configurationService,
             ILogger logger,
             ISoundSystem soundSystem)
         {

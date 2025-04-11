@@ -6,10 +6,10 @@ namespace Forms.CortezosWorkshop.Forms.Statistics
 {
     public partial class FormCortezosWorkshopLog : Form
     {
-        private readonly ConfigurationService _configuration;
+        private readonly ConstantsConfigurationService _configuration;
         private readonly ISoundSystem _soundSystem;
         private readonly LogQuery _logQuery;
-        public FormCortezosWorkshopLog(ConfigurationService configuration,
+        public FormCortezosWorkshopLog(ConstantsConfigurationService configuration,
             ISoundSystem soundSystem,
             LogQuery logQuery)
         {

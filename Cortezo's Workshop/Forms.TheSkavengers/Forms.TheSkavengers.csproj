@@ -25,6 +25,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\AppSettings\appsettings.dev.json" />
+    <None Remove="Resources\AppSettings\appsettings.prod.json" />
     <None Remove="Resources\Sounds\anvil.wav" />
     <None Remove="Resources\Sounds\chstcls3.wav" />
     <None Remove="Resources\Sounds\chstopn2.wav" />
@@ -107,6 +109,15 @@
 	  </Content>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\AppSettings\appsettings.dev.json">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Resources\AppSettings\appsettings.prod.json">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	</ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11">
       <PrivateAssets>all</PrivateAssets>
@@ -146,15 +157,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Resources\AppSettings\appsettings.constants.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\AppSettings\appsettings.dev.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\AppSettings\appsettings.prod.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

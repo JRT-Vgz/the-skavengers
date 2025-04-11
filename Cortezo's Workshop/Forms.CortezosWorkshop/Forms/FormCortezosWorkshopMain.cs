@@ -18,14 +18,14 @@ namespace Forms.CortezosWorkshop
         #region Constructor
 
         private readonly IServiceProvider _serviceProvider;
-        private readonly ConfigurationService _configuration;
+        private readonly ConstantsConfigurationService _configuration;
         private readonly GetFundsByNameService<FundsViewModel> _getFundsByNameService;
         private readonly ISoundSystem _soundSystem;
         private readonly ILogger _logger;
 
         private IEnumerable<string> _logEntries;
         public FormCortezosWorkshopMain(IServiceProvider serviceProvider,
-            ConfigurationService configuration,
+            ConstantsConfigurationService configuration,
             GetFundsByNameService<FundsViewModel> getFundsByNameService,
             ISoundSystem soundSystem,
             ILogger logger)

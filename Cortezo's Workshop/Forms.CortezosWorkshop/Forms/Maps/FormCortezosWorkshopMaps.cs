@@ -12,7 +12,7 @@ namespace Forms.CortezosWorkshop.Forms.Maps
     {
         #region Constructor
 
-        private readonly ConfigurationService _configuration;
+        private readonly ConstantsConfigurationService _configuration;
         private readonly IRepository<IngotResource> _ingotResourcesRepository;
         private readonly AddCompletedMapData _addCompletedMapData;
         private readonly UpdateRecommendedPrice _updateRecommendedPrice;
@@ -34,7 +34,7 @@ namespace Forms.CortezosWorkshop.Forms.Maps
 
         public bool IsClosing { get { return _isClosing; } }
 
-        public FormCortezosWorkshopMaps(ConfigurationService configuration,
+        public FormCortezosWorkshopMaps(ConstantsConfigurationService configuration,
             IRepository<IngotResource> ingotResourcesRepository,
             AddCompletedMapData addCompletedMapData,
             UpdateRecommendedPrice updateRecommendedPrice,
