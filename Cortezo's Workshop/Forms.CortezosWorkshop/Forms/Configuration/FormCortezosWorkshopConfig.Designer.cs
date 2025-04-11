@@ -365,7 +365,7 @@
             txt_quantityCrafted.KeyDown += txt_quantityCrafted_KeyDown;
             txt_quantityCrafted.KeyPress += txt_quantityCrafted_KeyPress;
             // 
-            // FormConfigMain
+            // FormCortezosWorkshopConfig
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -409,7 +409,7 @@
             MaximumSize = new Size(816, 489);
             MinimizeBox = false;
             MinimumSize = new Size(816, 489);
-            Name = "FormConfigMain";
+            Name = "FormCortezosWorkshopConfig";
             StartPosition = FormStartPosition.Manual;
             Text = "Configuración";
             FormClosing += Form_Closing;

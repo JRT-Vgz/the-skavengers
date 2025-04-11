@@ -1,4 +1,4 @@
-﻿namespace TheSkavengers
+﻿namespace Forms.TheSkavengers
 {
     partial class FormTheSkavengersMain
     {

@@ -32,7 +32,7 @@ using Forms.CortezosWorkshop.Forms.Prices;
 using Forms.CortezosWorkshop.Forms.Configuration;
 using Forms.CortezosWorkshop.Forms.Statistics;
 
-namespace TheSkavengers
+namespace Forms.TheSkavengers
 {
     internal static class Program
     {

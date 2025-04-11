@@ -327,7 +327,7 @@
             lbl_beneficioHerramienta.TabIndex = 44;
             lbl_beneficioHerramienta.Text = "- Beneficio por herramienta:     0 %";
             // 
-            // FormMapsMain
+            // FormCortezosWorkshopMaps
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -365,7 +365,7 @@
             MaximizeBox = false;
             MaximumSize = new Size(816, 489);
             MinimumSize = new Size(816, 489);
-            Name = "FormMapsMain";
+            Name = "FormCortezosWorkshopMaps";
             StartPosition = FormStartPosition.Manual;
             Text = "Mapas y materiales";
             FormClosing += Form_Closing;

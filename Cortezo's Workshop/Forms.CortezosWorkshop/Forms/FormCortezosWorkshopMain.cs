@@ -31,6 +31,7 @@ namespace Forms.CortezosWorkshop
             ILogger logger)
         {
             InitializeComponent();
+
             _serviceProvider = serviceProvider;
             _configuration = configuration;
             _getFundsByNameService = getFundsByNameService;

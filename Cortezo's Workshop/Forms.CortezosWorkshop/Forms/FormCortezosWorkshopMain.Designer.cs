@@ -1,4 +1,5 @@
-﻿namespace Forms.CortezosWorkshop
+﻿
+namespace Forms.CortezosWorkshop
 {
     partial class FormCortezosWorkshopMain
     {
@@ -143,7 +144,7 @@
             // 
             // btn_portapapeles
             // 
-            btn_portapapeles.Image = Properties.Resources.Ankh;
+            btn_portapapeles.Image = (Image)resources.GetObject("btn_portapapeles.Image");
             btn_portapapeles.Location = new Point(744, 12);
             btn_portapapeles.Name = "btn_portapapeles";
             btn_portapapeles.Size = new Size(44, 53);

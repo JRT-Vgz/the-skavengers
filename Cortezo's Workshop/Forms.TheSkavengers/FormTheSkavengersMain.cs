@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TheSkavengers
+namespace Forms.TheSkavengers
 {
     public partial class FormTheSkavengersMain : Form
     {

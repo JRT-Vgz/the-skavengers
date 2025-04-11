@@ -491,7 +491,7 @@
             chk_itemsLoaded.TabIndex = 101;
             chk_itemsLoaded.UseVisualStyleBackColor = true;
             // 
-            // FormArmeriaMain
+            // FormAutoEquipTemplate
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -545,7 +545,7 @@
             MaximizeBox = false;
             MaximumSize = new Size(816, 489);
             MinimumSize = new Size(816, 489);
-            Name = "FormArmeriaMain";
+            Name = "FormAutoEquipTemplate";
             StartPosition = FormStartPosition.Manual;
             Text = "Armería";
             FormClosing += FormArmeriaMain_FormClosing;

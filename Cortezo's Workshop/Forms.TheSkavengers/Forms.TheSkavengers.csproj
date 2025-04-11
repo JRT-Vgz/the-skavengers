@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <SignAssembly>False</SignAssembly>
 	  <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
-	  <ApplicationIcon>Resources\Images\Logo.ico</ApplicationIcon>
+	  <ApplicationIcon>Logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -24,93 +24,8 @@
   </PropertyGroup>
 
 	<ItemGroup>
-    <None Remove="Resources\Images\Logo.ico" />
-    <None Remove="Resources\Sounds\anvil.wav" />
-    <None Remove="Resources\Sounds\chstcls3.wav" />
-    <None Remove="Resources\Sounds\chstopn2.wav" />
-    <None Remove="Resources\Sounds\collection_reward.wav" />
-    <None Remove="Resources\Sounds\cunning.wav" />
-    <None Remove="Resources\Sounds\drawercl.wav" />
-    <None Remove="Resources\Sounds\drawerop.wav" />
-    <None Remove="Resources\Sounds\dropgem2.wav" />
-    <None Remove="Resources\Sounds\dropmny1.wav" />
-    <None Remove="Resources\Sounds\dropmny3.wav" />
-    <None Remove="Resources\Sounds\leather1.wav" />
-    <None Remove="Resources\Sounds\lever03.wav" />
-    <None Remove="Resources\Sounds\lever04.wav" />
-    <None Remove="Resources\Sounds\mark.wav" />
-    <None Remove="Resources\Sounds\m_lock.wav" />
-    <None Remove="Resources\Sounds\m_yea.wav" />
-    <None Remove="Resources\Sounds\open01a.wav" />
-    <None Remove="Resources\Sounds\scribe.wav" />
-    <None Remove="Resources\Sounds\turnpage.wav" />
-    <None Remove="Resources\Sounds\usecloth.wav" />
-    <None Remove="Resources\Sounds\virtuecards_add_remove.wav" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Resources\Sounds\anvil.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\chstcls3.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\chstopn2.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\collection_reward.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\cunning.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\drawercl.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\drawerop.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\dropgem2.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\dropmny1.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\dropmny3.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\leather1.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\lever03.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\lever04.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\mark.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\m_lock.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\open01a.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\scribe.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\turnpage.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sounds\usecloth.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Resources\Images\Logo.ico" />
-  </ItemGroup>
+	  <Content Include="Logo.ico" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11">

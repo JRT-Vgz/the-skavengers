@@ -7,6 +7,10 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
 	<OutputType>Library</OutputType>
+
+	<DebugType>none</DebugType>
+	<DebugSymbols>false</DebugSymbols>
+	  
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,9 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Forms\FormAutoEquipTemplate.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Forms\FormAutoEquipTemplate.cs" />
   </ItemGroup>
 
 </Project>

@@ -143,7 +143,7 @@
             lbl_armadurasCrafteadas.TabIndex = 11;
             lbl_armadurasCrafteadas.Text = "- Datos de Armaduras completas:";
             // 
-            // FormEstadisticasMain
+            // FormCortezosWorkShopStatistics
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -165,7 +165,7 @@
             MaximumSize = new Size(816, 489);
             MinimizeBox = false;
             MinimumSize = new Size(816, 489);
-            Name = "FormEstadisticasMain";
+            Name = "FormCortezosWorkShopStatistics";
             StartPosition = FormStartPosition.Manual;
             Text = "Estadísticas";
             FormClosing += Form_Closing;

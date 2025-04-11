@@ -242,7 +242,7 @@
             lbl_log15.TabIndex = 21;
             lbl_log15.Text = "- Log 15";
             // 
-            // FormLog
+            // FormCortezosWorkshopLog
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -273,7 +273,7 @@
             MaximumSize = new Size(816, 489);
             MinimizeBox = false;
             MinimumSize = new Size(816, 489);
-            Name = "FormLog";
+            Name = "FormCortezosWorkshopLog";
             StartPosition = FormStartPosition.Manual;
             Text = "Log";
             FormClosing += Form_Closing;
