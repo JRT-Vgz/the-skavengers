@@ -81,6 +81,7 @@
             Name = "FormTheSkavengersMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "The Skavengers v1.0";
+            Load += FormTheSkavengersMain_Load;
             ResumeLayout(false);
             PerformLayout();
         }
