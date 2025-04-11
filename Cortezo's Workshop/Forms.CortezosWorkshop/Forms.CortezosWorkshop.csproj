@@ -20,7 +20,6 @@
     <ProjectReference Include="..\2-Application.TheSkavengers\2-Application.TheSkavengers.csproj" />
     <ProjectReference Include="..\3-Presenters.CortezosWorkshop\3-Presenters.CortezosWorkshop.csproj" />
     <ProjectReference Include="..\3-Repository.CortezosWorkshop\3-Repository.CortezosWorkshop.csproj" />
-    <ProjectReference Include="..\4-Resources.TheSkavengers\4-Resources.TheSkavengers.csproj" />
   </ItemGroup>
 
   <ItemGroup>
