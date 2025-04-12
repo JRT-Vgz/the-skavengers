@@ -22,15 +22,15 @@ using _3_Presenters.CortezosWorkshop.Presenters;
 using _3_Presenters.CortezosWorkshop.ViewModels;
 using _3_Repository.CortezosWorkshop.QueryObjects;
 using _3_SoundSystem;
+using Forms.Armory.Forms;
+using Forms.CortezosWorkshop;
+using Forms.CortezosWorkshop.Forms.Configuration;
+using Forms.CortezosWorkshop.Forms.Maps;
+using Forms.CortezosWorkshop.Forms.Prices;
+using Forms.CortezosWorkshop.Forms.Statistics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Forms.Armory.Forms;
-using Forms.CortezosWorkshop;
-using Forms.CortezosWorkshop.Forms.Maps;
-using Forms.CortezosWorkshop.Forms.Prices;
-using Forms.CortezosWorkshop.Forms.Configuration;
-using Forms.CortezosWorkshop.Forms.Statistics;
 using System.Reflection;
 
 namespace Forms.TheSkavengers
