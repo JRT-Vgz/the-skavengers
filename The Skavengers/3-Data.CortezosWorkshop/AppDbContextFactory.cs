@@ -9,8 +9,8 @@ namespace _3_Data.CortezosWorkshop
     {
         public AppDbContext CreateDbContext(string[] args)
         {
-            var connectionString = "Connection string";
             //var connectionString = "Encripted string";
+            var connectionString = "";
 
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             optionsBuilder.UseSqlServer(DBEncrypter.Decrypt(connectionString));

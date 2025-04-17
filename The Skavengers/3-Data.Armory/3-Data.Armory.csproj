@@ -16,4 +16,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\3-Encrypters.TheSkavengers\3-Encrypters.TheSkavengers.csproj" />
+  </ItemGroup>
+
 </Project>

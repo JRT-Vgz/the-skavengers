@@ -44,7 +44,7 @@ namespace Forms.TheSkavengers
         {
             this.Hide();
 
-            var frm = _serviceProvider.GetRequiredService<FormAutoEquipTemplate>();
+            var frm = _serviceProvider.GetRequiredService<FormArmoryMain>();
             frm.Location = new Point(this.Location.X, this.Location.Y);
             frm.ShowDialog();
 

@@ -126,10 +126,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\1-Domain.Armory\1-Domain.Armory.csproj" />
     <ProjectReference Include="..\1-Domain.CortezosWorkshop\1-Domain.CortezosWorkshop.csproj" />
     <ProjectReference Include="..\2-Application.Armory\2-Application.Armory.csproj" />
     <ProjectReference Include="..\2-Application.CortezosWorkshop\2-Application.CortezosWorkshop.csproj" />
     <ProjectReference Include="..\2-Application.TheSkavengers\2-Application.TheSkavengers.csproj" />
+    <ProjectReference Include="..\3-AuthZSystem\3-AuthZSystem.Armory.csproj" />
+    <ProjectReference Include="..\3-Data.Armory\3-Data.Armory.csproj" />
     <ProjectReference Include="..\3-Data.CortezosWorkshop\3-Data.CortezosWorkshop.csproj" />
     <ProjectReference Include="..\3-Encrypters.TheSkavengers\3-Encrypters.TheSkavengers.csproj" />
     <ProjectReference Include="..\3-Loggers.CortezosWorkshop\3-Loggers.CortezosWorkshop.csproj" />
@@ -137,8 +140,10 @@
     <ProjectReference Include="..\3-Mappers.CortezosWorkshop\3-Mappers.CortezosWorkshop.csproj" />
     <ProjectReference Include="..\3-Presenters.Armory\3-Presenters.Armory.csproj" />
     <ProjectReference Include="..\3-Presenters.CortezosWorkshop\3-Presenters.CortezosWorkshop.csproj" />
+    <ProjectReference Include="..\3-Repository.Armory\3-Repository.Armory.csproj" />
     <ProjectReference Include="..\3-Repository.CortezosWorkshop\3-Repository.CortezosWorkshop.csproj" />
     <ProjectReference Include="..\3-SoundSystem.TheSkavengers\3-SoundSystem.TheSkavengers.csproj" />
+    <ProjectReference Include="..\3-Validators\3-Validators.Armory.csproj" />
     <ProjectReference Include="..\Forms.Armory\Forms.Armory.csproj" />
     <ProjectReference Include="..\Forms.CortezosWorkshop\Forms.CortezosWorkshop.csproj" />
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using _1_Domain.TheSkavengers.Interfaces;
-using _2_Application.Armory.Services.AutoEquipServices;
+using _2_Application.Armory.Services.AutoEquip_Services;
 using _2_Application.TheSkavengers.Services;
 using _3_Mappers.Armory.Dtos;
 using System.Text.Json;
@@ -10,7 +10,6 @@ namespace Forms.Armory.Forms
     {
         #region Constructor
 
-        private readonly IServiceProvider _serviceProvider;
         private readonly ConstantsConfigurationService _configuration;
         private readonly CreateAutoEquipScriptTemplateService<PlayerArmoryDataDto> _createAutoEquipScriptTemplateService;
         private readonly ISoundSystem _soundSystem;
@@ -23,13 +22,11 @@ namespace Forms.Armory.Forms
 
         private bool _textEchoSkillClick = false;
 
-        public FormAutoEquipTemplate(IServiceProvider serviceProvider,
-            ConstantsConfigurationService configuration,
+        public FormAutoEquipTemplate(ConstantsConfigurationService configuration,
             CreateAutoEquipScriptTemplateService<PlayerArmoryDataDto> createAutoEquipScriptTemplateService,
             ISoundSystem soundSystem)
         {
             InitializeComponent();
-            _serviceProvider = serviceProvider;
             _configuration = configuration;
             _createAutoEquipScriptTemplateService = createAutoEquipScriptTemplateService;
             _soundSystem = soundSystem;
@@ -48,7 +45,7 @@ namespace Forms.Armory.Forms
 
         private void FormArmeriaMain_Load(object sender, EventArgs e)
         {
-            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_OPEN_DOOR"]);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_OPEN_DRAWER"]);
 
             InitializeAspectComboboxes();
             ApplyDefaultSettings();
@@ -414,9 +411,9 @@ namespace Forms.Armory.Forms
             }
         }
 
-        private void btn_menu_principal_Click(object sender, EventArgs e)
+        private void btn_volver_Click(object sender, EventArgs e)
         {
-            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DOOR"]);
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CLOSE_DRAWER"]);
 
             Hide();
         }

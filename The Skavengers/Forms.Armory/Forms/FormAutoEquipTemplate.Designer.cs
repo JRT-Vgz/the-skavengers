@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAutoEquipTemplate));
-            btn_menu_principal = new Button();
+            btn_volver = new Button();
             btn_crearPlantilla = new Button();
             btn_pegarDatos = new Button();
             txt_playerName = new TextBox();
@@ -75,15 +75,15 @@
             chk_itemsLoaded = new CheckBox();
             SuspendLayout();
             // 
-            // btn_menu_principal
+            // btn_volver
             // 
-            btn_menu_principal.Location = new Point(12, 12);
-            btn_menu_principal.Name = "btn_menu_principal";
-            btn_menu_principal.Size = new Size(99, 23);
-            btn_menu_principal.TabIndex = 100;
-            btn_menu_principal.Text = "Menú principal";
-            btn_menu_principal.UseVisualStyleBackColor = true;
-            btn_menu_principal.Click += btn_menu_principal_Click;
+            btn_volver.Location = new Point(12, 12);
+            btn_volver.Name = "btn_volver";
+            btn_volver.Size = new Size(99, 23);
+            btn_volver.TabIndex = 100;
+            btn_volver.Text = "Volver";
+            btn_volver.UseVisualStyleBackColor = true;
+            btn_volver.Click += btn_volver_Click;
             // 
             // btn_crearPlantilla
             // 
@@ -539,7 +539,7 @@
             Controls.Add(txt_playerName);
             Controls.Add(btn_pegarDatos);
             Controls.Add(btn_crearPlantilla);
-            Controls.Add(btn_menu_principal);
+            Controls.Add(btn_volver);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -547,7 +547,7 @@
             MinimumSize = new Size(816, 489);
             Name = "FormAutoEquipTemplate";
             StartPosition = FormStartPosition.Manual;
-            Text = "Armería";
+            Text = "Plantilla de Auto-Equipar";
             FormClosing += FormArmeriaMain_FormClosing;
             Load += FormArmeriaMain_Load;
             ResumeLayout(false);
@@ -556,7 +556,7 @@
 
         #endregion
 
-        private Button btn_menu_principal;
+        private Button btn_volver;
         private Button btn_crearPlantilla;
         private Button btn_pegarDatos;
         private TextBox txt_playerName;

@@ -2,19 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>_3_Mappers.Armory</RootNamespace>
+    <RootNamespace>_3_Validators.Armory</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
-	<DebugType>none</DebugType>
-	<DebugSymbols>false</DebugSymbols>
-	  
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\1-Domain.Armory\1-Domain.Armory.csproj" />
-    <ProjectReference Include="..\2-Application.Armory\2-Application.Armory.csproj" />
+    <ProjectReference Include="..\2-Application.TheSkavengers\2-Application.TheSkavengers.csproj" />
     <ProjectReference Include="..\3-Data.Armory\3-Data.Armory.csproj" />
+    <ProjectReference Include="..\3-Encrypters.TheSkavengers\3-Encrypters.TheSkavengers.csproj" />
+    <ProjectReference Include="..\3-Mappers.Armory\3-Mappers.Armory.csproj" />
   </ItemGroup>
 
 </Project>

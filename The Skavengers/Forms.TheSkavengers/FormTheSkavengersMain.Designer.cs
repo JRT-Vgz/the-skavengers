@@ -32,6 +32,7 @@
             lbl_Titulo = new Label();
             btn_armory = new Button();
             btn_workshop = new Button();
+            label1 = new Label();
             SuspendLayout();
             // 
             // lbl_Titulo
@@ -65,11 +66,22 @@
             btn_workshop.UseVisualStyleBackColor = true;
             btn_workshop.Click += btn_workshop_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(749, 420);
+            label1.Name = "label1";
+            label1.Size = new Size(39, 21);
+            label1.TabIndex = 14;
+            label1.Text = "v1.1";
+            // 
             // FormTheSkavengersMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
             Controls.Add(lbl_Titulo);
             Controls.Add(btn_armory);
             Controls.Add(btn_workshop);
@@ -80,7 +92,7 @@
             MinimumSize = new Size(816, 489);
             Name = "FormTheSkavengersMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "The Skavengers v1.0";
+            Text = "The Skavengers";
             Load += FormTheSkavengersMain_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -91,5 +103,6 @@
         private Label lbl_Titulo;
         private Button btn_armory;
         private Button btn_workshop;
+        private Label label1;
     }
 }

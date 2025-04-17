@@ -14,9 +14,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\1-Domain.TheSkavengers\1-Domain.TheSkavengers.csproj" />
     <ProjectReference Include="..\2-Application.Armory\2-Application.Armory.csproj" />
     <ProjectReference Include="..\2-Application.TheSkavengers\2-Application.TheSkavengers.csproj" />
+    <ProjectReference Include="..\3-Encrypters.TheSkavengers\3-Encrypters.TheSkavengers.csproj" />
     <ProjectReference Include="..\3-Mappers.Armory\3-Mappers.Armory.csproj" />
   </ItemGroup>
 

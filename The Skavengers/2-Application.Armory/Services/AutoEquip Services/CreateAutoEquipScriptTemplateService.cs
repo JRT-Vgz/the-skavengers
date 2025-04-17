@@ -1,7 +1,7 @@
 
 using _1_Domain.TheSkavengers.Interfaces;
 
-namespace _2_Application.Armory.Services.AutoEquipServices
+namespace _2_Application.Armory.Services.AutoEquip_Services
 {
     public class CreateAutoEquipScriptTemplateService<TDto>
     {
