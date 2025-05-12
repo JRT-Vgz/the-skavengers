@@ -1,6 +1,6 @@
 ﻿using _1_Domain.Armory.Entities;
 using _1_Domain.TheSkavengers.Interfaces;
-using _2_Application.Armory.Services.Armory_AuthZ_Services;
+using _2_Application.Armory.Services.Armory_AuthN_Services;
 using _2_Application.Armory.Services.Script_Services;
 using _2_Application.TheSkavengers.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +13,7 @@ namespace Forms.Armory.Forms
         private readonly GetAllScriptsService _getAllScriptsService;
         private readonly DeleteScriptService _deleteScriptService;
         private readonly ConstantsConfigurationService _configuration;
-        private readonly ArmoryAuthZService _armoryAuthZService;
+        private readonly ArmoryAuthNService _armoryAuthNService;
         private readonly ISoundSystem _soundSystem;
 
         private IEnumerable<Script> _scripts;
@@ -22,7 +22,7 @@ namespace Forms.Armory.Forms
             GetAllScriptsService getAllScriptsService,
             DeleteScriptService deleteScriptService,
             ConstantsConfigurationService configuration,
-            ArmoryAuthZService armoryAuthZService,
+            ArmoryAuthNService armoryAuthNService,
             ISoundSystem soundSystem)
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace Forms.Armory.Forms
             _getAllScriptsService = getAllScriptsService;
             _deleteScriptService = deleteScriptService;
             _configuration = configuration;
-            _armoryAuthZService = armoryAuthZService;
+            _armoryAuthNService = armoryAuthNService;
             _soundSystem = soundSystem;
         }
         #endregion
@@ -176,11 +176,11 @@ namespace Forms.Armory.Forms
 
                 if (frm.PasswordSet == null) { return; }
 
-                bool passwordAuthorize = _armoryAuthZService.Execute(frm.PasswordSet);
+                bool passwordAuthorize = _armoryAuthNService.Execute(frm.PasswordSet);
                 if (!passwordAuthorize)
                 {
                     _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_MAGIC_WORD"]);
-                    MessageBox.Show("No has dicho la palabra mágica");
+                    MessageBox.Show(_armoryAuthNService.invalidAuthNMessage);
                     return;
                 }
 

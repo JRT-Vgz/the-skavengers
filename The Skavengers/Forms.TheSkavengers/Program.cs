@@ -3,7 +3,7 @@ using _1_Domain.Armory.Interfaces;
 using _1_Domain.CortezosWorkshop.Entities;
 using _1_Domain.CortezosWorkshop.Interfaces;
 using _1_Domain.TheSkavengers.Interfaces;
-using _2_Application.Armory.Services.Armory_AuthZ_Services;
+using _2_Application.Armory.Services.Armory_AuthN_Services;
 using _2_Application.Armory.Services.AutoEquip_Services;
 using _2_Application.Armory.Services.Script_Services;
 using _2_Application.CortezosWorkshop.Services.GenericProductServices;
@@ -14,7 +14,7 @@ using _2_Application.CortezosWorkshop.Services.ShopStatServices;
 using _2_Application.CortezosWorkshop.Services.StatisticsServices;
 using _2_Application.TheSkavengers.Services;
 using _3___Repository;
-using _3_AuthZSystem.Armory;
+using _3_AuthNSystem.Armory;
 using _3_Data.Armory;
 using _3_Data.CortezosWorkshop;
 using _3_Data.CortezosWorkshop.Models;
@@ -109,7 +109,7 @@ namespace Forms.TheSkavengers
             services.AddTransient<IEntityValidator<Script>, ScriptValidator>();
 
             // AUTHZ:
-            services.AddTransient<IAuthZSystem, ArmoryAuthZSystem>();
+            services.AddTransient<IAuthNSystem, ArmoryAuthNSystem>();
 
             // SOUND SYSTEM
             services.AddTransient<ISoundSystem, SoundSystem>();
@@ -133,7 +133,7 @@ namespace Forms.TheSkavengers
             services.AddTransient<CommodityBuyService<BuyResourceViewModel>>();
             services.AddTransient<IngotBuyService<BuyResourceViewModel>>();
             // Armory
-            services.AddTransient<ArmoryAuthZService>();
+            services.AddTransient<ArmoryAuthNService>();
             services.AddTransient<GetAllScriptsService>();
             services.AddTransient<AddScriptService<ScriptDto>>();
             services.AddTransient<UpdateScriptService<ScriptDto>>();

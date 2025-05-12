@@ -51,7 +51,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3-Repository.Armory", "3-Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3-Validators.Armory", "3-Validators\3-Validators.Armory.csproj", "{73B62C92-4917-4E8A-8C65-4C8C3391FC4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3-AuthZSystem.Armory", "3-AuthZSystem\3-AuthZSystem.Armory.csproj", "{FF69B7A1-6819-4E95-9F24-FCFE68BB4AC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3-AuthNSystem.Armory", "3-AuthZSystem\3-AuthNSystem.Armory.csproj", "{FF69B7A1-6819-4E95-9F24-FCFE68BB4AC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

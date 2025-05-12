@@ -2,14 +2,14 @@
 using _2_Application.TheSkavengers.Services;
 using _3_Encrypters.TheSkavengers;
 
-namespace _3_AuthZSystem.Armory
+namespace _3_AuthNSystem.Armory
 {
-    public class ArmoryAuthZSystem : IAuthZSystem
+    public class ArmoryAuthNSystem : IAuthNSystem
     {
         private readonly ConstantsConfigurationService _configuration;
 
-        public string InvalidAuthZMessage { get; } = "No has dicho la palabra mágica.";
-        public ArmoryAuthZSystem(ConstantsConfigurationService configuration)
+        public string InvalidAuthNMessage { get; } = "No has dicho la palabra mágica.";
+        public ArmoryAuthNSystem(ConstantsConfigurationService configuration)
         {
             _configuration = configuration;
         }

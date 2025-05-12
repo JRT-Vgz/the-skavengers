@@ -1,9 +1,9 @@
 ﻿
 namespace _1_Domain.Armory.Interfaces
 {
-    public interface IAuthZSystem
+    public interface IAuthNSystem
     {
-        public string InvalidAuthZMessage { get; }
+        public string InvalidAuthNMessage { get; }
         bool Authorize(string password);
     }
 }

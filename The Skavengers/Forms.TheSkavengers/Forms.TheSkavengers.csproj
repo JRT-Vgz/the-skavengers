@@ -135,7 +135,7 @@
     <ProjectReference Include="..\2-Application.Armory\2-Application.Armory.csproj" />
     <ProjectReference Include="..\2-Application.CortezosWorkshop\2-Application.CortezosWorkshop.csproj" />
     <ProjectReference Include="..\2-Application.TheSkavengers\2-Application.TheSkavengers.csproj" />
-    <ProjectReference Include="..\3-AuthZSystem\3-AuthZSystem.Armory.csproj" />
+    <ProjectReference Include="..\3-AuthZSystem\3-AuthNSystem.Armory.csproj" />
     <ProjectReference Include="..\3-Data.Armory\3-Data.Armory.csproj" />
     <ProjectReference Include="..\3-Data.CortezosWorkshop\3-Data.CortezosWorkshop.csproj" />
     <ProjectReference Include="..\3-Encrypters.TheSkavengers\3-Encrypters.TheSkavengers.csproj" />

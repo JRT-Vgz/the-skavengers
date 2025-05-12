@@ -9,19 +9,19 @@ namespace _2_Application.Armory.Services.Script_Services
     public class UpdateScriptService<TDto>
     {
         private readonly IArmoryRepository<Script> _armorRepository;
-        private readonly IAuthZSystem _armoryAuthZSystem;
+        private readonly IAuthNSystem _armoryAuthNSystem;
         private readonly IFormValidator<TDto> _formValidator;
         private readonly IEntityValidator<Script> _entityValidator;
         private readonly IMapper _mapper;
 
         public UpdateScriptService(IArmoryRepository<Script> armorRepository,
-            IAuthZSystem armoryAuthZSystem,
+            IAuthNSystem armoryAuthNSystem,
             IFormValidator<TDto> formValidator,
             IEntityValidator<Script> entityValidator,
             IMapper mapper)
         {
             _armorRepository = armorRepository;
-            _armoryAuthZSystem = armoryAuthZSystem;
+            _armoryAuthNSystem = armoryAuthNSystem;
             _formValidator = formValidator;
             _entityValidator = entityValidator;
             _mapper = mapper;
@@ -32,8 +32,8 @@ namespace _2_Application.Armory.Services.Script_Services
             bool validForm = _formValidator.Validate(scriptDto);
             if (!validForm) { throw new FormValidationException(_formValidator.Error); }
 
-            bool validAuthZ = _armoryAuthZSystem.Authorize(password);
-            if (!validAuthZ) { throw new AuthZValidationException(_armoryAuthZSystem.InvalidAuthZMessage); }
+            bool validAuthN = _armoryAuthNSystem.Authorize(password);
+            if (!validAuthN) { throw new AuthNValidationException(_armoryAuthNSystem.InvalidAuthNMessage); }
 
             var script = _mapper.Map<Script>(scriptDto);
 

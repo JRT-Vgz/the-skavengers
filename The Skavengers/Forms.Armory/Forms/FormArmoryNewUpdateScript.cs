@@ -184,7 +184,7 @@ namespace Forms.Armory.Forms
 
                 btn_back_Click(sender, e);
             }
-            catch (AuthZValidationException ex)
+            catch (AuthNValidationException ex)
             {
                 _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_MAGIC_WORD"]);
                 MessageBox.Show(ex.Message);
