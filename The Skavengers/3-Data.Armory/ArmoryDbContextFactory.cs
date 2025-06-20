@@ -11,7 +11,7 @@ namespace _3_Data.Armory
         {
             //var connectionString = "Encripted string";
             var connectionString = "";
-
+            
             var optionsBuilder = new DbContextOptionsBuilder<ArmoryDbContext>();
             optionsBuilder.UseSqlServer(DBEncrypter.Decrypt(connectionString));
 

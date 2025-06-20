@@ -38,6 +38,7 @@ using Forms.CortezosWorkshop.Forms.Configuration;
 using Forms.CortezosWorkshop.Forms.Maps;
 using Forms.CortezosWorkshop.Forms.Prices;
 using Forms.CortezosWorkshop.Forms.Statistics;
+using Forms.TheSkavengers.Miscelanea_Forms;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -142,7 +143,7 @@ namespace Forms.TheSkavengers
 
             // INYECCIÓN DE FORMULARIOS
             services.AddTransient<FormTheSkavengersMain>();
-            services.AddTransient<FormTheSkavengersMain>();
+            services.AddTransient<FormLoadingDb>();
             // Cortezo's Workshop
             services.AddTransient<FormCortezosWorkshopMain>();
             services.AddTransient<FormCortezosWorkshopEditFunds>();

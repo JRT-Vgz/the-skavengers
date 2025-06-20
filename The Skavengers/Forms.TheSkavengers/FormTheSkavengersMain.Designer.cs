@@ -74,7 +74,7 @@
             label1.Name = "label1";
             label1.Size = new Size(39, 21);
             label1.TabIndex = 14;
-            label1.Text = "v1.1";
+            label1.Text = "v1.2";
             // 
             // FormTheSkavengersMain
             // 
@@ -93,7 +93,7 @@
             Name = "FormTheSkavengersMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "The Skavengers";
-            Load += FormTheSkavengersMain_Load;
+            Shown += FormTheSkavengersMain_Shown;
             ResumeLayout(false);
             PerformLayout();
         }
