@@ -77,6 +77,12 @@ namespace Forms.Armory.Forms
             _aspects.Add("Void", 20);
             _aspects.Add("War", 21);
             _aspects.Add("Water", 22);
+            _aspects.Add("Agorawave", 23);
+            _aspects.Add("Temporal", 24);
+
+            _aspects = _aspects
+                .OrderBy(a => a.Key)
+                .ToDictionary(a => a.Key, a => a.Value);
 
             cbo_weaponAspect.DataSource = new BindingSource(_aspects, null);
             cbo_weaponAspect.DisplayMember = "Key";
@@ -330,12 +336,14 @@ namespace Forms.Armory.Forms
             catch (FormatException) { }
 
             bool activarAspecto = chk_activateAspect.Checked;
-            bool activarAspectoArma = chk_activateWeaponAspect.Checked;
-            bool activarAspectoLibro = chk_activateSpellbookAspect.Checked;
-            bool activarAspectoArmadura = chk_activateArmorAspect.Checked;
-            int idAspectoArma = cbo_weaponAspect.SelectedIndex;
-            int idAspectoLibro = cbo_spellbookAspect.SelectedIndex;
-            int idAspectoArmadura = cbo_armorAspect.SelectedIndex;
+
+            bool activarAspectoArma = activarAspecto && chk_activateWeaponAspect.Checked;
+            bool activarAspectoLibro = activarAspecto && chk_activateSpellbookAspect.Checked;
+            bool activarAspectoArmadura = activarAspecto && chk_activateArmorAspect.Checked;
+
+            int idAspectoArma = activarAspectoArma ? (int)cbo_weaponAspect.SelectedValue : 0;
+            int idAspectoLibro = activarAspectoLibro ? (int)cbo_spellbookAspect.SelectedValue : 0;
+            int idAspectoArmadura = activarAspectoArmadura ? (int)cbo_armorAspect.SelectedValue : 0;
 
             bool validationSuccess = ValidateItemsLoadedCorrectly();
             if (!validationSuccess) { return; }

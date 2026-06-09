@@ -42,6 +42,7 @@
     <None Remove="Resources\Sounds\lever04.wav" />
     <None Remove="Resources\Sounds\magic_word.wav" />
     <None Remove="Resources\Sounds\mark.wav" />
+    <None Remove="Resources\Sounds\m_laugh.wav" />
     <None Remove="Resources\Sounds\m_lock.wav" />
     <None Remove="Resources\Sounds\open01a.wav" />
     <None Remove="Resources\Sounds\scribe.wav" />
@@ -94,6 +95,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Resources\Sounds\mark.wav">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Resources\Sounds\m_laugh.wav">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Resources\Sounds\m_lock.wav">

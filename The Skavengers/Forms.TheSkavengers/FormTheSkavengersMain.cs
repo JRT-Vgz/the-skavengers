@@ -1,4 +1,6 @@
-﻿using _3_Data.CortezosWorkshop;
+﻿using _1_Domain.TheSkavengers.Interfaces;
+using _2_Application.TheSkavengers.Services;
+using _3_Data.CortezosWorkshop;
 using Forms.Armory.Forms;
 using Forms.CortezosWorkshop;
 using Forms.TheSkavengers.Constants;
@@ -11,15 +13,21 @@ namespace Forms.TheSkavengers
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly AppDbContext _context;
+        private readonly ConstantsConfigurationService _configuration;
+        private readonly ISoundSystem _soundSystem;
 
         private bool _dbLoaded = false;
 
         public FormTheSkavengersMain(IServiceProvider serviceProvider,
-            AppDbContext context)
+            AppDbContext context,
+            ConstantsConfigurationService configuration,
+            ISoundSystem soundSystem)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
             _context = context;
+            _configuration = configuration;
+            _soundSystem = soundSystem;
         }
 
         // -------------------------------------------------------------------------------------------------------
@@ -77,14 +85,24 @@ namespace Forms.TheSkavengers
         {
             if (!_dbLoaded) { return; }
 
-            this.Hide();
+            _soundSystem.PlaySound(_configuration.Configuration["Constants:_SOUND_CORTEZO_LAUGH"]);
+            
+            MessageBox.Show(
+                "Cortezo está de vacaciones en la taberna de Cambria.",
+                "¡Cerrado temporalmente!",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.None
+            );
 
-            var frm = _serviceProvider.GetRequiredService<FormCortezosWorkshopMain>();
-            frm.Location = new Point(this.Location.X, this.Location.Y);
-            frm.ShowDialog();
+            // ESTE BLOQUE ABRE LA TIENDA DE CORTEZO. ACTUALMENTE CERRADA.
+            //this.Hide();
 
-            this.Location = new Point(frm.Location.X, frm.Location.Y);
-            this.Show();
+            //var frm = _serviceProvider.GetRequiredService<FormCortezosWorkshopMain>();
+            //frm.Location = new Point(this.Location.X, this.Location.Y);
+            //frm.ShowDialog();
+
+            //this.Location = new Point(frm.Location.X, frm.Location.Y);
+            //this.Show();
         }
 
         private void btn_armory_Click(object sender, EventArgs e)
@@ -99,6 +117,11 @@ namespace Forms.TheSkavengers
 
             this.Location = new Point(frm.Location.X, frm.Location.Y);
             this.Show();
+        }
+
+        private void FormTheSkavengersMain_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

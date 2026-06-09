@@ -49,7 +49,7 @@ namespace Forms.TheSkavengers
     internal static class Program
     {
         public const string DATABASE_NAMESPACE = "Forms.TheSkavengers.Resources.AppSettings";
-        public const string DATABASE_JSON_FILE = "appsettings.dev.json";
+        public const string DATABASE_JSON_FILE = "appsettings.prod.json";
 
         [STAThread]
         static void Main()
